@@ -109,7 +109,7 @@
                     type: '".$datos['type']."',
                     confirmButtonText: 'Aceptar'
                 }).then(function(){
-                    $('.FormularioAjax')[0].reset();
+                    $('.formulario-ajax')[0].reset();
                 }); 
             </script>
             ";
@@ -122,7 +122,7 @@
                     type: '".$datos['type']."',
                     confirmButtonText: 'Aceptar'
                 }).then(function(){
-                    $('.FormularioAjax')[0].reset();
+                    $('.formulario-ajax')[0].reset();
                 }); 
             </script>
             ";

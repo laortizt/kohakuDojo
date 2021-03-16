@@ -2,21 +2,18 @@
 
     <div class="nav-class">
         <a href=""  class="btn-kohaku">
-            <i class="fas fa-plus-circle fa-sm "></i> Agendar
+            <i class="fas fa-plus-circle fa-sm "></i> Clases
         </a>
         <a href="#" class="btn-kohaku">
             <i class="fas fa-download fa-sm "></i> Asistencia
         </a>
-        <a href="#" class="btn-kohaku">
+        <!-- <a href="#" class="btn-kohaku">
             <i class="fas fa-download fa-sm "></i> Registros
-        </a>
+        </a> -->
 
     </div>
 
 
     <!-- Content Row -->
-    <!-- <?php include "./views/modules/calendar.php"; ?> -->
-
-    <?php include "./views/modules/attendance.php"; ?>
-
+    <?php include "./views/modules/schedule.php"; ?>
 </div>

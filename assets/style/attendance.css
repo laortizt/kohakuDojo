@@ -1,0 +1,691 @@
+/* app_general.css */
+/************** 
+    General
+ **************/
+ html, body {
+    height: 100%;
+    width: 100%;
+    min-height: 100%;
+  }
+  a, a:hover, a:active, a:focus {
+    outline:0;
+    cursor: pointer; cursor: hand;
+  }
+  .page-container {
+    min-width:768px;
+  }
+  
+  /***********************************
+  TO Organize and To Do - From here down!
+  *************************************/
+  
+  
+  /* Side nav bar*/
+  #menu-item-simple{
+    margin-bottom: 3px;
+    width: 100%;
+    border-top: 3px;
+  }
+  
+  #menu-item-simple.nav-active {
+    height: 40px;
+    color: #29ACE4;
+    border: none;
+    background-color: #eee;
+  }
+  
+  .hide_this {
+    display:none;
+  }
+  
+  /* Grid element stuff */
+  .row {
+    border-bottom: 2px solid rgb(220,220,220);
+  }
+  
+  
+  .grid_element {
+    height: 50px;
+    line-height: 50px;
+    background-color: #ffffff;
+    clear: both;
+  }
+  
+  .grid_element_active {
+    border-left: 3px solid #29ace4;
+    background-color: #f0fbff;
+  }
+  
+  .grid_element:hover {
+    background-color: #f0fbff;
+  }
+  
+  
+  .delete-button {
+    background-color: #29AAE3;           
+    color: #ffffff;
+    font-variant: small-caps;
+    font-size: 14px;  
+    text-align: center;
+    padding-right: 5px;
+    webkit-transition: opacity .5s;
+    transition: opacity .5s;
+  }
+  
+  .edit-button {
+    background-color :#190066;
+    color: #ffffff;
+    font-variant: small-caps;
+    font-size: 14px;  
+    text-align: center;
+    padding-right: 5px;
+    webkit-transition: opacity .5s;
+    transition: opacity .5s;
+  }
+  .inactive_visibility {
+    visibility : hidden;
+    opacity:0; 
+  }
+  
+  
+  .details-title {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: rgb(245,245,245);
+    color: rgb(50,50,50);
+    
+  }
+  
+  .key {
+    float:left;
+    /*width: 100px;*/
+    color:rgb(40,40,40);
+    font-weight:400;
+    width: 30%;
+  }
+  
+  .value {
+    width:68%;
+    padding:0;
+    height:23px;
+    margin:0;
+  }
+  
+  .collapse-athlete input[type=text], .collapse-athlete input[type=email], .collapse-athlete input[type=date] {
+    width:200px;
+  }
+  
+  .collapse-athlete input[type=radio] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom:25px;
+  }
+  
+  .collapse-athlete input[type=number] {
+    display:inline-block;
+    width: 40px;
+    margin-bottom: 20px;
+    margin-right: 5px;
+  }
+  
+  .collapse-athlete input[name=weight] {
+    width:60px;
+  }
+  
+  .centered {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
+  
+  .group-square, .delete-button, .edit-button {
+    cursor: pointer;
+  }
+  
+  .row-title {
+  
+    background-color: #f7f7f7;
+    height: 45px;
+    font-variant: small-caps;
+    font-size: 16px;
+    font-weight: 700;
+    color: #4b4180;
+    line-height: 45px;
+    border-bottom: 1px solid #EAEAEA;
+  }
+  
+  
+  /* Collapsed Row stuff */
+  
+  .details-title {
+    height:40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: rgb(245,245,245);
+    color: rgb(50,50,50);
+  }
+  
+  .key {
+    float:left;
+    color:rgb(40,40,40);
+    font-weight:400;
+    width: 30%;
+  }
+  
+  .value {
+    width:68%;
+    padding:0;
+    height:23px;
+    margin:0;
+  }
+  
+  .row, #label-row {
+    border-bottom: 1px solid #EAEAEA;
+  }
+  
+  
+  /* Collapse Row stuff */
+  
+  
+  .label-row label {
+    font-weight:300;
+    color: rgb(60,60,60);
+    margin-bottom: 0px;
+  }
+  
+  .row.workout-form {
+    height:50px;
+    line-height: 50px;
+    border-bottom: 1px solid rgb(230,230,230);
+  
+  }
+  
+  .row.workout-form.label-row {
+    border-bottom: 1px solid rgb(210,210,210);
+  }
+  
+  .group-square {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #228DBD;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    color: #207296;
+    margin-right: 5px;
+    float: left;
+    margin-top: 5px;
+    opacity:.6;
+  }
+  
+  .group-square.checked {
+    border-color: #228DBD;
+    background-color: #228DBD;
+    color:white;
+    opacity:1;
+  }
+  
+  .row.workout-form::before {
+    content:'';
+    clear:both;
+  }
+  
+  .loop-number {
+    min-height:48px;
+    background-color:rgb(237,237,237);
+    color: rgb(80,80,80);
+  }
+  
+  .loop-top {
+    border-top: 2px solid rgb(210,210,210);
+  }
+  
+  .loop-bot {
+    border-bottom: 2px solid rgb(210,210,210);
+  }
+  
+  .loop-col {
+    width:5%;
+  }
+  
+  
+  input[type=date], input[type=time] {
+    width:150px;
+    margin-bottom:20px;
+  }
+  
+  .workout-form input {
+    min-width:50px;
+    margin-top: 13px;
+  }
+  
+  .button-container {
+    margin-left: 100px;
+  }
+  
+  .button-container button {
+    height:30px;
+    line-height:18px;
+    float: left;
+    margin-right:10px;
+    margin-top:-24px;
+  }
+  
+  .white {
+    background-color: white;
+  }
+  
+  .grid_element_active {
+    border-left: 3px solid #29ace4;
+    background-color: #f0fbff;
+  }
+  
+  .grid_element:hover {
+    background-color: #f0fbff;
+  }
+  
+  .select-set.bars {
+    border-top: 1px solid rgb(210,210,210);
+    border-bottom: 1px solid rgb(210,210,210);
+  }
+  .select-set:hover {
+    background-color: #f0fbff !important;
+  }
+  
+  .select-set_active {
+    border-left: 3px solid #29ace4;
+    background-color: #f0fbff;  
+  }
+  
+  .group-active {
+    border-color: #228DBD;
+    background-color: #228DBD;
+    color:white;
+    opacity:1;
+  }
+  /*practices.css*/
+  .practices {
+      margin-left: 0px;
+      margin-right: 0px;
+      padding-top: 6px;
+      padding-bottom:6px;
+  }
+  .practices > .container{
+      padding: 0;
+      min-width: 768px;
+  }
+  
+  
+  /*******************
+        Colors
+  ********************/
+  /*
+    !!!!NICO ADD THESE HERE !!!!!
+    dark blue:
+    light blue:
+    white:
+    light grey:
+    medium grey:
+    dark grey:
+    faded light blue hover:
+    black:
+    almost black:
+  */
+  
+  /**************************
+  Important Widths and what they are supposed to do
+  ****************************/
+  /*
+    !!!!NICO ADD THESE HERE !!!!!
+  */
+  
+  /*Generic Navbar style that should be universal */
+  .navbar {
+    margin: auto;
+    border-radius: 0;
+    border: none;
+    min-width: 768px;
+  }
+  /* Use as child class for custom navbar class to contain width */
+  .navbar-container {
+    max-width: 1240px;
+    min-width: 768px;
+    margin:auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-height:0px;
+  }
+  
+  /*****************************
+    Begin navbar-main styles here
+  *******************************/
+  
+  /* Basic font and background styles for un-contained navbar*/
+  .navbar-main {
+    font-weight: 600;
+    background-color: white;
+    color: #b2b2b2; 
+    height: 55px;
+  }
+  
+  /* Positioning Commit Swimming logo */
+  .navbar-main .navbar-header {
+    position: absolute;
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+  
+  /* Navigation positioning styles. padding-left exists to counter balance the commit swimming header*/
+  /* set font-size of inline-block space to 0 to give effect of list items being next to each other*/
+  .navbar-main .navbar-nav {
+    padding-left: 150px;
+    width: 100%;
+    text-align: center;
+    font-size: 0px;
+    margin: 0;  
+  }
+  
+  /* allow list elements to be free. Note: font size is included here to overwrite the parent's font size of 0 (See comment above)*/
+  /*ease out of border transition by setting bottom border back to 0 */
+  .navbar-main .navbar-nav > li {
+    float: none;
+    display: inline-block;
+    margin: 0px;
+    font-size: 14px;
+    border-bottom: 0px solid #29ACE4;
+    transition: all .15s ease-in-out;  
+    height:55px;
+    border-top: 2px solid transparent;  
+  }
+  .navbar-main .navbar-nav li.nav-active { 
+    border-bottom: 4px solid #29ace4;
+    height:55px;
+  }
+  .navbar-main .navbar-nav > li:hover {
+    border-bottom: 4px solid #29ACE4;
+    transition: all .15s ease-in-out;
+  }
+  
+  /* specific text styling for middle navbar links*/
+  .navbar-main .navbar-nav li a {
+    font-variant: small-caps;
+    letter-spacing: .05em;
+    font-size: 1.18em;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  
+  /* reduce padding left and right of links to 5px when we breach 959*/
+  @media only screen and (max-width:959px) {
+    .navbar-main .navbar-nav li a {
+      padding-left:5px;
+      padding-right:5px;
+    }
+  }
+  
+  /* Navbar text color when active, hover, focus should be dark blue*/
+  .navbar-main .navbar-nav li.nav-active a {
+    color: #190066;
+  }
+  .navbar-main .navbar-nav li a:hover, .navbar-main .navbar-nav li a:focus {
+    color: #190066;
+  }
+  
+  /*Overwrite hover style for navbar-right list elements and force it to the right to overwrite bootstrap's 768 magic*/
+  .navbar-main .navbar-nav li.navbar-right:hover {
+    border-bottom: 0px solid #29ACE4;
+  }
+  .navbar-main .navbar-nav li.navbar-right{
+    float:right;
+  }
+  /*begin Settings dropdown styling */
+  .navbar-main .navbar-right .dropdown-toggle {
+      position: relative;
+      padding: 13px 10px 10px 10px;
+      margin-right: 15px;
+      margin-top: 4px;
+      border: 0;
+      font-size: 1.3em;
+      height: 45px;
+      color: #190066;
+    }
+  .navbar-main .navbar-right .btn .caret{
+    margin-bottom: 3px;
+    color: #190066;
+  }
+  .navbar-main .navbar-right .dropdown-menu .settings-menu {
+    width: 100%;
+    padding:0px;
+    margin:0px;
+  }
+  .navbar-main .navbar-right .dropdown-menu .settings-menu > a, .navbar-main .navbar-right .dropdown-menu .settings-menu > a:hover {
+    color: #333;
+  }
+  .navbar-main .navbar-right .dropdown-menu .settings-menu:hover {
+    background-color: #f0fbff;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  .navbar-main .navbar-right .dropdown-menu .settings-menu > a:hover {
+    background-color: #f0fbff;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  /**************
+  End navbar-main
+  ****************/
+  
+  /*****************************
+    Begin navbar-specific styles here
+  *******************************/
+  /* General styles for page spcific navbar*/
+  .navbar-specific{
+    background-color: #b2b2b2;
+    height: 65px;
+    color: #190066;
+    line-height: 65px;
+  }
+  .navbar-specific .navbar-header {
+    position: absolute;
+  }
+  
+  .navbar-specific .navbar-nav {
+    text-align: left;
+    margin: 0;
+    width: 100%;
+    padding-left:250px;
+  }
+  
+  .navbar-specific .navbar-nav > li {
+    float: none;
+    display: inline-block;
+    height:65px;
+    margin:0px;
+  }
+  
+  /*create slanted icon-background*/
+  .navbar-specific .navbar-header > .icon-background {
+    line-height: 0%;
+    width: 88px;
+    border-top: 65px solid #29ace4;
+    border-right: 24px solid transparent;
+    padding: 0;
+  }
+  /* Jam image over the icon-background */
+  .navbar-specific .navbar-header > .icon-background > img {  
+    margin-top: -65px;
+    padding-left: 22px;
+  }
+  .navbar-specific .navbar-nav li.navbar-right{
+    float:right;
+  }
+  
+  /* styles used in navbar-specific that could be used elsewhere */
+  .large-title {
+    font-variant: small-caps;
+    font-size: 30px;
+    line-height: 60px;
+    margin-right: 20px;
+  }
+  .blend-nav-button, .blend-nav-button:hover, .blend-nav-button:focus {
+    background-color:inherit;
+    border: 0px;
+    font-weight: 200;
+    margin-top: 3px;
+    float: right;
+    font-variant:small-caps;
+    font-size: 18px;  
+  }
+  /**************
+  End navbar-spcific
+  **********************************************************************************/
+  body {background-color: white}
+  
+  .row-title {
+    background-color: white;
+    color: grey;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding-left: 8px;
+    padding-top: 2px;
+    height: 50px;
+  }
+  
+  .form-group {
+      padding-top: 8px;
+      margin-bottom: 0px;
+  }
+  
+  input.form-control {
+      text-transform: uppercase;
+      font-size: 16px;
+      color: inherit;
+      width: 100%;
+  }
+  
+  .course {
+      text-transform: uppercase;
+      font-size: 16px;
+      color: inherit;
+      width: 100%;
+  }
+  
+  .new-practice .btn {
+      float: right;
+      padding: 7px 50px;
+      margin-top: 5px;
+      text-transform: uppercase;
+  }
+  
+  /***********ROSTER STUFF*************/
+  
+  .roster-column {
+      margin: 10px -15px;
+      float: left;
+      width: 60%;
+  }
+  
+  .row .fa {
+      padding-top: .3em;
+      margin: 0px;
+  }
+  
+  /****HEADING****/
+  
+  .row.attendance-header {
+      background-color: #dbdbdb;
+      padding: 15px 10px;
+      margin: 0px;
+      font-size: 1.5em;
+      width: 100%;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+  }
+  
+  .attendance-header .right {
+      text-align: right
+  }
+  
+  /*****ATHLETES*****/
+  
+  .row.attendance-names {
+      padding: 15px 10px;
+      font-size: 1.2em;
+      margin: 0px;
+      width: 100%;
+  }
+  
+  .row .name.fa {
+      padding-top: .75em;
+      margin: 0px;
+  }
+  
+  .attendance-names .right {
+      font-size: 1.5em;
+      text-align: right;
+  }
+  
+  
+  /********SETS THEY DID DO*******/
+  
+  .assigned-sets {
+      margin: 10px -15px;
+      float: right;
+      width: 40%;
+  }
+  
+  .assigned-sets .attendance-sets {
+      margin: 0px;
+      padding: 5px 10px;
+  }
+  
+  .assigned-sets .btn.btn-default {
+      margin: 5px;
+      width: 12%;
+      text-align: center;
+      padding: 10px 5px; 
+  }
+  
+  .attendance-sets .set {
+      padding: 3px 10px;
+      margin: 0px;
+  }
+  
+  
+  /********SETS THEY DIDN'T DO*******/
+  
+  .unassigned-sets {
+      margin: 0px -15px;
+      float: right;
+      width: 40%;
+  }
+  
+  
+  .row.set-movers {
+      border-bottom: 0px;
+  }
+  
+  .set-movers .fa {
+      font-size: 3em;
+      padding: 0px 40px;
+      padding-bottom: 10px;
+  }
+  
+  .fa-chevron-down {
+      text-align: right;
+  }
+  
+  .unassigned-sets .attendance-sets {
+      margin: 0px;
+      padding: 5px 10px;
+  }
+  
+  

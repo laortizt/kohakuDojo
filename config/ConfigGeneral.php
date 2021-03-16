@@ -6,3 +6,4 @@
     const SERVERURL ="http://localhost/kohakuDojo/";
 //se crea una constate con el nombre de la compañaia o sistema 
     const COMPANY="Kohaku";
+    date_default_timezone_set("America/Bogota");

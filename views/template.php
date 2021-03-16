@@ -1,3 +1,9 @@
+<?php
+	//peticion ajax
+	session_start();
+	$petitionAjax=false;
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,29 +14,28 @@
 	<title><?php echo COMPANY; ?></title>
 	<!-- Import lib -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
-	
 	<link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>/assets/fontawesome-free - copia/css/all.min.css">
 
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-	
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
 	<!-- End import lib -->
     <link href="<?php echo SERVERURL; ?>assets/style/dashboard.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/calendar.css" rel="stylesheet">
-	
+	<link href="<?php echo SERVERURL; ?>assets/style/schedule.css" rel="stylesheet">
+	<link href="<?php echo SERVERURL; ?>assets/style/attendance.css" rel="stylesheet">
+	<link href="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.css" rel="stylesheet">
 
 	<?php include "views/modules/script.php"; ?>
+	
 </head>
 <body class="overlay-scrollbar">
 
 <?php
-        //peticion ajax
-        $petitionAjax=false;
-        
         //se incluye el archivo vista controlador
         require_once "./controller/viewsController.php";
 
         $noTemplateViews = ["forgot-password", "register"];
-
         //se instancia la vista controlado vistas o vt
         $vt = new viewsController();
         //queremos utilizar la funcion  obtener vista controlador
@@ -42,7 +47,7 @@
             // if($vtA=="login" ||  $vtA=="404"):
             require_once "./views/pages/".$vtA.".php";
         elseif($vtA=="login"):
-            require_once "./views/pages/login.php";
+            require_once "./views/pages/login-view.php";
             //si no, me incluye todo el contenida de la página
         else:
             //iniciar seión
@@ -234,6 +239,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 	
 	<script src="<?php echo SERVERURL; ?>assets/script/index.js"></script>
+
 	<!-- end import script -->
 	<?php endif; ?>
 </body>
+<html>

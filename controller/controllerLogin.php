@@ -12,16 +12,17 @@
         public function start_controller_session(){
             //se limpian los espacios que se piden en login por si traian partes de cadena anterior 
             //y luego se usa la nueva cadena en las variables
-            
+
             $email=mainModel::clean_string($_POST['emailSignIn']);
-            $password=mainModel::clean_string($_POST['paswordSignIn']);
+            $password=mainModel::clean_string($_POST['passwordSignIn']);
 
             //se encripta la contraseña
             $password=mainModel::encryption($password);
+
             //se pasan los datos del login a una variable para usarlos en el modelo
             $logindata=[
                 "email"=>$email,
-                "pasword"=>$password,
+                "password"=>$password,
             ];
             
             //se pasan los datos del login al modelo
@@ -29,23 +30,23 @@
             
             if($accountdata->rowCount()==1){
                 $userrow=$accountdata->fetch();
-                
+               
                 @session_start(['name'=>'SK']);
-                $_SESSION['User_sk']=$userrow['accountUser'];
-                $_SESSION['Email_sk']=$userrow['accountEmail'];
-                $_SESSION['Role_sk']=$userrow['accountRole'];
-                $_SESSION['Privilegio_sk']=$userrow['accountPrivileges'];
+
+                $_SESSION['email_sk']=$userrow['accountEmail'];
+                $_SESSION['role_sk']=$userrow['accountRole'];
                 $_SESSION['token_sk']=md5(uniqid(mt_rand(),true));
-                $_SESSION['Codigo_sk']=$userrow['accountCode'];
+                $_SESSION['code_sk']=$userrow['accountCode'];
                 
                 //Se agrega este código para acceder a las vistasdependiendo el tipo de usuario
-                if($userrow['Role']=="Administrador"){
+                if($userrow['accountRole']==="Administrador"){
                     $url=SERVERURL."admin";
                 }else{
-                    $url=SERVERURL."class";
+                    $url=SERVERURL."admin";
                 }
                 
-                return '<script>window.location=" '.$url.'"</script>';//redireccionar el usuario
+                return $urlLocation=' <script> window.location= " '.$url.'" </script>';
+               
             } else{
                 $alert=[
                     "alert"=>"simple",

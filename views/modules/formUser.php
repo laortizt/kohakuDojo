@@ -12,7 +12,7 @@
         <div class="row">
             <!-- RUTA PARA ENVIAR LOS DATOS AJAX -->
             <form action="<?php echo SERVERURL; ?>ajax/userAjax.php"
-                method="POST" data-form="save" class="FormularioAjax" autocomplete="off"
+                method="POST" data-form="save" class="formulario-ajax" autocomplete="off"
                 enctype="multipart/form-data">
 
                 <div class="text-danger h5">Datos Personales</div>

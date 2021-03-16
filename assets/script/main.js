@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('.FormularioAjax').submit(function(e){
+    $('.formulario-ajax').submit(function(e){
         e.preventDefault();
     
         var form=$(this);

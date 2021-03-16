@@ -190,14 +190,14 @@ form.sign-in-form {
   
 }
 
-.btn-kohaku {
+.btn-kohaku-login {
   margin-top: 10px;
   background-color: transparent;
   background-image: url(./../img/btnGris.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   color: var(--black);
-  font-size: 1rem;
+  font-size: 2rem;
   outline: none;
   border: none;
   border-radius: 0;
@@ -205,12 +205,14 @@ form.sign-in-form {
   padding: 0.5rem 1rem;
 }
 
-.btn-kohaku:hover{
+
+
+.btn-kohaku-login:hover{
   background-image: url(./../img/btnRojo.png);
-  color: var(--white);
+  color: white
 }
 
-.btn-kohaku:focus {
+.btn-kohaku-login:focus {
   box-shadow: none;
 }
 
@@ -226,6 +228,7 @@ form.sign-in-form {
 .left-panel {
   pointer-events: all;
   padding: 3rem 17% 2rem 12%;
+  align-items: center;
 }
 
 .right-panel {
@@ -242,11 +245,11 @@ form.sign-in-form {
 .panel h3 {
   font-weight: 600;
   line-height: 1;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .panel p {
-  font-size: 0.95rem;
+  font-size: 1.5rem;
   padding: 0.7rem 0;
 }
 
