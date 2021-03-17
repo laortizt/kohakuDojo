@@ -13,17 +13,24 @@
         public function get_views_controller(){
             //con la condicional vamos a idenificar si la variable isset viene deinida
             //viewAcces es la variable del archivo .htaccess
+
             if(isset($_GET['page'])){
                 //se crea una vaiable con la ruta 
                 //(explode) permite divir una vaiable en partes con un delimitador
                 $route=explode("/", $_GET['page']);
                 //self :: hacer referencia a la clase heredada
-                //::ignifica acceder al método
-                $answer=viewsModel::get_views_model($route[0]);
+                //::significa acceder al método
+
+                if ($route[0] === "login") {
+                    $answer = "login";
+                } else {
+                    $answer=viewsModel::get_views_model($route[0]);
+                }
             } else {
                 //si la variable no está definida envía al login
                 $answer="login";
             }
+
             return $answer;
         }
     }

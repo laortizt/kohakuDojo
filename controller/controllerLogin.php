@@ -30,23 +30,29 @@
             
             if($accountdata->rowCount()==1){
                 $userrow=$accountdata->fetch();
-               
-                @session_start(['name'=>'SK']);
 
+                @session_start(['name'=>'SK']);
+                
                 $_SESSION['email_sk']=$userrow['accountEmail'];
-                $_SESSION['role_sk']=$userrow['accountRole'];
                 $_SESSION['token_sk']=md5(uniqid(mt_rand(),true));
                 $_SESSION['code_sk']=$userrow['accountCode'];
-                
-                //Se agrega este código para acceder a las vistasdependiendo el tipo de usuario
-                if($userrow['accountRole']==="Administrador"){
-                    $url=SERVERURL."admin";
-                }else{
-                    $url=SERVERURL."admin";
+
+                if ($userrow['accountRole'] == 1) {
+                    $_SESSION['role_sk']="Administrador";
+                } else if ($userrow['accountRole'] == 2) {
+                    $_SESSION['role_sk']="Instructor";
+                } else {
+                    $_SESSION['role_sk']="Usuario";
                 }
                 
+                //Se agrega este código para acceder a las vistasdependiendo el tipo de usuario
+                if($_SESSION['role_sk']==="Administrador"){
+                    $url=SERVERURL."?page=admin";
+                }else{
+                    $url=SERVERURL."?page=class";
+                }
+
                 return $urlLocation=' <script> window.location= " '.$url.'" </script>';
-               
             } else{
                 $alert=[
                     "alert"=>"simple",
@@ -57,6 +63,10 @@
                 return mainModel::sweet_alert($alert);
             }
         }
-        
+        // función para cerrar sesión
+        public  function force_logout(){
+            session_destroy();
+            return header("Location: ".SERVERURL."login");
+        }
     }
 ?>

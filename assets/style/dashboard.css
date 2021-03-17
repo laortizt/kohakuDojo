@@ -580,14 +580,14 @@ table th {
 	margin-bottom: 10px;
 }
 
-.btn-kohaku {
+.btn-kohaku{
 	margin-top: 10px;
 	background-color: transparent;
 	background-image: url(./../img/btnGris.png);
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	color: var(--black);
-	font-size: 1rem;
+	font-size: 1.5rem;
 	outline: none;
 	border: none;
 	border-radius: 0;

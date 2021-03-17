@@ -17,17 +17,21 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>/assets/fontawesome-free - copia/css/all.min.css">
 
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+	
+	<!-- LINKS datatable -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+
 	<!-- End import lib -->
     <link href="<?php echo SERVERURL; ?>assets/style/dashboard.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/calendar.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/schedule.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/attendance.css" rel="stylesheet">
+	<link href="<?php echo SERVERURL; ?>assets/style/privileges.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.css" rel="stylesheet">
+	<link href="<?php echo SERVERURL; ?>assets/glyphicons/glyphicons.css" rel="stylesheet">
 
 	<?php include "views/modules/script.php"; ?>
-	
 </head>
 <body class="overlay-scrollbar">
 
@@ -44,14 +48,21 @@
         // si vt trae el valor del login se muestra el login
 
         if(in_array($vtA, $noTemplateViews)):
-            // if($vtA=="login" ||  $vtA=="404"):
             require_once "./views/pages/".$vtA.".php";
         elseif($vtA=="login"):
-            require_once "./views/pages/login-view.php";
             //si no, me incluye todo el contenida de la página
+            require_once "./views/pages/login-view.php";
         else:
-            //iniciar seión
+            //iniciar sesión
             @session_start(['name'=>'SK']);
+			@require_once"./controller/controllerLogin.php";
+			//  se instancia la  funcion forzar sesión
+			$lc = new controllerLogin();
+
+			// si una de estas dos condiciones no viene definida el usuario no ha iniciado sesion bien 
+			if(!isset($_SESSION['token_sk']) || !isset($_SESSION['email_sk'])){
+				$lc->force_logout();
+			}
     ?>
 	<!-- navbar -->
 	<div class="navbar">

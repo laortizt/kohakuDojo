@@ -33,6 +33,7 @@ class viewsModel{
         }else {
             $content="login";
         }
+
         return $content;
     }
 }

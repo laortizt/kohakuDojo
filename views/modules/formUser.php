@@ -3,7 +3,7 @@
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
         <div class="form-group row mb-0">    
-            <h1 class="h4 mb-0 text-white-800 text-center text-dark">Perfil Usuario</h1>
+            <h1 class="h4 mb-0 text-white-800 text-center text-dark">Admistraciòn de permisos</h1>
         </div>
     </div>
 
@@ -15,8 +15,7 @@
                 method="POST" data-form="save" class="formulario-ajax" autocomplete="off"
                 enctype="multipart/form-data">
 
-                <div class="text-danger h5">Datos Personales</div>
-
+                
                 <div class="form-group row">
                     
                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -27,6 +26,7 @@
                             <option>Pasaporte</option>
                         </select>
                     </div>
+                    
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" class="form-control form-control-user" id="dni"
                         name="dni" placeholder="Número de documento" required="" pattern="[0-9-]{1,30}">
@@ -80,7 +80,7 @@
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="radio" class="" name="Genere" id="Genere" value="Masculino" checked="">
-                         <i ></i> &nbsp; Masculino
+                         <i ></i> &nbsp; Másculino
                     </div> 
 
                     <div class="col-sm-6 mb-3 mb-sm-0">

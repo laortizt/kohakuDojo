@@ -17,6 +17,6 @@
     <!-- Content Row -->
     <!-- <?php include "./views/modules/calendar.php"; ?> -->
 
-    <?php include "./views/modules/attendance.php"; ?>
+    <!-- <?php include "./views/modules/attendance.php"; ?> -->
 
 </div>
