@@ -21,7 +21,7 @@
                         </div>
                     
                         <div class="row attendance-names">
-                            <p class="col-xs-6 name fa fa-user"> Nico Gimenez </p>
+                            <p class="col-xs-6 name fa fa-user"> Nico Jiménez </p>
                             <p class="col-xs-3 right fa fa-times"></p>
                             <p class="col-xs-3 right fa fa-check"></p>
                         </div>

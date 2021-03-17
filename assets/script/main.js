@@ -23,7 +23,6 @@ $(document).ready(function() {
         }else{
             textoAlerta="Quieres realizar la operación solicitada";
         }
-    
 
         swal({
             title: "¿Estás seguro?",   

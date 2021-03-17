@@ -1,7 +1,7 @@
 <?php
 // funcion para cerrar sesión 
 $petitionAjax =true;
-require_once " ../config/ConfigGeneral.php";
+require_once "../config/ConfigGeneral.php";
 if(isset($_GET['token'])){
     require_once "../controller/controllerLogin.php";
     $logout= new ControllerLogin();

@@ -1,16 +1,16 @@
 <?php
     //CONTROLADOR PARA CREAR ADMINISTRADOR
     if($petitionAjax){
-        require_once "../models/modelUser.php";
+        require_once "../models/modelAdmin.php";
     }else{
         // si la Peticion ajax es false aceder a la configuración DB
-        require_once "./models/modelUser.php";
+        require_once "./models/modelAdmin.php";
     }
 
 //clase heredada de modelo administrador
-    class controllerUser extends modelUser{
-
-        public function add_controller_User(){
+    class controllerAdmin extends modelAdmin{
+        //controlador para agregar administrador
+        public function add_controller_Admin(){
             $typeDocument= mainModel::clean_string($_POST['dni']);
             $Dni= mainModel::clean_string($_POST['dni']);
             $firstName= mainModel::clean_string($_POST['FirstName']); 
@@ -105,8 +105,8 @@
                                     "Phone"=>$phone,
                                     "Code"=>$code,
                                 ];
-                                $saveUser=modelUser::add_modelUser($dataAD);
-                                if($saveUser->rowCount()>=1){
+                                $saveAdmin=modelAdmin::add_modelAdmin($dataAD);
+                                if($saveAdmin->rowCount()>=1){
                                     $alert=[
                                         "alert"=>"limpiar",
                                         "title"=>"Administrador registrado",
@@ -139,7 +139,7 @@
             return mainModel::sweet_alert($alert);
         }
     
-        public function add_user_incomplete_data() {
+        public function add_admin_incomplete_data() {
             $alert=[
                 "alert"=>"simple",
                 "title"=>"Información incompleta",
@@ -150,5 +150,29 @@
             return mainModel::sweet_alert($alert);
         }
 
-    
+         //controlador para páginar administrador
+        public function pages_admin_controller($pages,$register,$role,$code){
+            $pages=mainModel::clean_string($pages);
+            $register=mainModel::clean_string($register);
+            $role=mainModel::clean_string($role);
+            $code=mainModel::clean_string($code);
+            $table="";
+
+            $page=(isset($page)&& $page>0) ? (int) $page :1;
+            $start=($pages>0)? (($pages*$register)-$register) :0;
+            $conexion= mainModel::connect();
+            //cálcula cúantos registros hay en la consutla
+            //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
+            $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM admin 
+            WHERE accountCode!='$code' AND id!='1' ORDERBY adminNombre ASC LIMIT $start, $register
+            ");
+            $datos=$datos->fetchAll();
+            $total=$conexion->query("SELECT FOUND_ROWS");
+            $total=(int) $total->fetchColumn();
+
+            //calcular el otal de páginas
+            $Npages= ceil($total/$register);
+        return $table;
+        }
+       
     }

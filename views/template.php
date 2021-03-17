@@ -177,8 +177,8 @@
 								<span>Projects</span>
 							</a>
 						</li>
-						<li  class="dropdown-menu-item">
-							<a href="#" class="dropdown-menu-link">
+						<li class="dropdown-menu-item">
+							<a href="<?php echo $lc->encryption($_SESSION['token_sk']);?>" class="dropdown-menu-link btn-logout">
 								<div>
 									<i class="fas fa-sign-out-alt"></i>
 								</div>
@@ -252,6 +252,12 @@
 	<script src="<?php echo SERVERURL; ?>assets/script/index.js"></script>
 
 	<!-- end import script -->
-	<?php endif; ?>
+	<?php 
+	include  "./views/modules/logoutScript.php";
+	endif; ?>
+	
+	<script>
+	$material.init();
+	</script>
 </body>
 <html>

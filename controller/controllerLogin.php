@@ -63,7 +63,21 @@
                 return mainModel::sweet_alert($alert);
             }
         }
-        // función para cerrar sesión
+        public function close_controller_session($datos){
+            session_start(['email'=>'SBP']);
+            $token=mainModel::decryption($_GET['token']);
+            $datos=[
+                "email"=>$_SESSION['email_sk'],
+                "token_s"=>$_SESSION['token_sk'],
+                "token"=>$token,
+                "Code"=>$_SESSION['code'],
+            ];
+            return modelLogin::close_model_session($datos);
+        }
+
+
+
+        // función para forzar cerrar sesión
         public  function force_logout(){
             session_destroy();
             return header("Location: ".SERVERURL."login");
