@@ -588,8 +588,7 @@
   /***********ROSTER STUFF*************/
   
   .roster-column {
-      margin: 10px -15px;
-      float: left;
+      margin: 10px 15px;
       width: 60%;
   }
   

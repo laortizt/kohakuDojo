@@ -6,6 +6,7 @@
         // si la eticion ajax es fale aceder a la configuración DB
         require_once "./models/modelLogin.php";
     }
+
     class controllerLogin extends modelLogin{
         // Funcion para iniciar sesion
 
@@ -24,7 +25,7 @@
                 "email"=>$email,
                 "password"=>$password,
             ];
-            
+
             //se pasan los datos del login al modelo
             $accountdata= modelLogin::start_model_session($logindata);
             
@@ -44,7 +45,7 @@
                 } else {
                     $_SESSION['role_sk']="Usuario";
                 }
-                
+
                 //Se agrega este código para acceder a las vistasdependiendo el tipo de usuario
                 if($_SESSION['role_sk']==="Administrador"){
                     $url=SERVERURL."admin";
@@ -63,6 +64,7 @@
                 return mainModel::sweet_alert($alert);
             }
         }
+
         public function close_controller_session($datos){
             session_start(['email'=>'SBP']);
             $token=mainModel::decryption($_GET['token']);
@@ -72,13 +74,12 @@
                 "token"=>$token,
                 "Code"=>$_SESSION['code'],
             ];
+
             return modelLogin::close_model_session($datos);
         }
 
-
-
         // función para forzar cerrar sesión
-        public  function force_logout(){
+        public function force_logout(){
             session_destroy();
             return header("Location: ".SERVERURL."login");
         }

@@ -130,4 +130,4 @@
     </div>
 </div>
 
-<script src="<?php echo SERVERURL; ?>assets/script/calendar.js"></script>
+<!-- <script src="<?php echo SERVERURL; ?>assets/script/calendar.js"></script> -->
