@@ -19,7 +19,7 @@
         }
 
         protected function close_model_session($datos){
-            if($datos['email']!="" && $datos['token_s'] ==$datos['token']){
+            if($datos['email']!="" && $datos['token_s'] == $datos['token']){
                 session_unset();
                 session_destroy();
                 $answer="true";

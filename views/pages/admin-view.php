@@ -1,4 +1,3 @@
-<!-- ESTABA AQUI O EN PRIVILEGES???? -->
 <?php
 	require_once"./controller/controllerAdmin.php";
 	$insAdmin= new controllerAdmin();
@@ -19,11 +18,6 @@
 		</a>
 	</div>
 
-    <!-- Content Row -->
-    <div class="row">	
-		<!-- Privileges chart -->
-		<div class="col-xl-8 col-lg-7">
-			<?php include "./views/modules/privileges.php"; ?>
-		</div>
-	</div>  
+    <!-- Privileges section -->
+	<?php include "./views/modules/privileges.php"; ?>
 </div>

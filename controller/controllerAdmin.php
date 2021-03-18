@@ -151,46 +151,47 @@
         }
 
          //controlador para páginar administrador
-        public function pages_admin_controller($pages,$register,$role,$code){
+        public function pages_admin_controller($pages, $register, $role, $code){
             $pages=mainModel::clean_string($pages);
             $register=mainModel::clean_string($register);
             $role=mainModel::clean_string($role);
             $code=mainModel::clean_string($code);
+
             $table="";
 
-            $page=(isset($page)&& $page>0) ? (int) $page :1;
-            $start=($pages>0)? (($pages*$register)-$register) :0;
+            $page=(isset($page)&& $page>0) ? (int) $page : 1;
+            $start=($pages>0)? (($pages*$register)-$register) : 0;
             $conexion= mainModel::connect();
-            //cálcula cúantos registros hay en la consutla
+
+            //Calcula cúantos registros hay en la consutla
             //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
+            // $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM users 
+            //     WHERE Code!='$code' AND idUser!='1' ORDER BY usersFisrtName ASC LIMIT $start, $register");
             $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM users 
-            WHERE Code!='$code' AND id!='1' ORDERBY adminNombre ASC LIMIT $start, $register
-            ");
+                WHERE idUser!='1' ORDER BY usersFisrtName ASC LIMIT $start, $register");
             $datos=$datos->fetchAll();
-            $total=$conexion->query("SELECT FOUND_ROWS");
+            $total=$conexion->query("SELECT found_rows()");
             $total=(int) $total->fetchColumn();
 
             //calcular el otal de páginas
             $Npages= ceil($total/$register);
             $table.='<div>
             <table>
-            <thead> 
-                <td>Id</td>
-                <td>Tipo Documento</td>
-                <td>Número documento</td>
-                <td>Nombres</td>
-                <td>Apellidos</td>
-                <td>Dirección</td>
-                <td>Teléfono</td>
-                <td>Género</td>
-                <td>Cuenta</td>
-                <td>Correo</td>
-                <td>Contraseña</td>
-                <td>Rol</td>
-                <td>Estado</td>
-                <td colspan="2">Acciónes</td>
-            </head> 
-            <tbody>
+                <thead> 
+                    <td>Id</td>
+                    <td>Tipo Documento</td>
+                    <td>Número documento</td>
+                    <td>Nombres</td>
+                    <td>Apellidos</td>
+                    <td>Dirección</td>
+                    <td>Teléfono</td>
+                    <td>Género</td>
+                    <td>Correo</td>
+                    <td>Rol</td>
+                    <td>Estado</td>
+                    <td colspan="2">Acciones</td>
+                </thead>
+                <tbody>
             ';
             
             if($total>=1 && $pages<=$Npages){
@@ -198,20 +199,19 @@
                 foreach($datos as $rows){
                     $table.='
                     <tr> 
-                        <td>'.$count.'<td> 
-                        <td>'.$rows['usersTypeDocument'].'<td>
-                        <td>'.$rows['usersDni'].'<td>
-                        <td>'.$rows['usersName'].'<td>
-                        <td>'.$rows['usersLastName'].'<td>
-                        <td>'.$rows['usersAdrres'].'<td>
-                        <td>'.$rows['usersPhone'].'<td>
-                        <td>'.$rows['usersGenre'].'<td>
-                        <td>'.$rows['accountEmail'].'<td>
-                        <td>'.$rows['accountPassword'].'<td>
-                        <td>'.$rows['accountRole'].'<td>
-                        <td>'.$rows['accountState'].'<td>
-                        <td>'.$rows['']."Editar".'<td>
-                        <td>'.$rows['']."Eliminar".'<td>
+                        <td>'.$count.'</td> 
+                        <td>'.$rows['usersTypeDocument'].'</td>
+                        <td>'.$rows['usersDni'].'</td>
+                        <td>'.$rows['usersName'].'</td>
+                        <td>'.$rows['usersLastName'].'</td>
+                        <td>'.$rows['usersAdrres'].'</td>
+                        <td>'.$rows['usersPhone'].'</td>
+                        <td>'.$rows['usersGenre'].'</td>
+                        <td>'.$rows['accountEmail'].'</td>
+                        <td>'.$rows['accountRole'].'</td>
+                        <td>'.$rows['accountState'].'</td>
+                        <td>'.'<a href="#">Editar</a>'.
+                        '<a href="#">Eliminar</a>'.'</td>
                     </tr>
                     ';
                     $count++;
@@ -219,10 +219,11 @@
             } else {
                 $table.='
                     <tr>
-                        <td colspan="5"> No hay registros en el sistema</td>
+                        <td colspan="15"> No hay registros en el sistema</td>
                     </tr>';
             }
             $table.='</tbody> </table> </div>';
+
             return $table;
     }
 }
