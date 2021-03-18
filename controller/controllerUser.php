@@ -63,7 +63,7 @@
                         ];
                     }else{
                         //validación de usuario
-                        $consult3=mainModel::run_simple_query("SELECT Usuario
+                        $consult3=mainModel::run_simple_query("SELECT *
                         FROM cuenta WHERE Usuario = '$user'");
 
                         if($consult3->rowCount()>=1){

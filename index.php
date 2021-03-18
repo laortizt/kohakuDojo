@@ -9,6 +9,3 @@
     $template = new viewsController();
     //llamamos la función de la clase vistas contolador
     $template->get_template_controller();
-
-
-

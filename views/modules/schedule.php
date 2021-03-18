@@ -1,12 +1,9 @@
 <div class="row">
     <div class="col-12 col-m-12 col-sm-12">
         <div class="card">
-
-            <!-- <div class="card-header">
-                Agendar clase
-            </div> -->
             <div class="card-content">
                 <label for="">Horario de Clases</label>
+
                 <div class="cd-schedule loading">
                     <div class="timeline">
                         <ul>
@@ -30,12 +27,14 @@
                             <li><span>17:30</span></li>
                             <li><span>18:00</span></li>
                         </ul>
-                    </div> <!-- .timeline -->
+                    </div>
+                    <!-- .timeline -->
 
                     <div class="events">
                         <ul class="wrap">
                             <li class="events-group">
                                 <div class="top-info"><span>Lunes</span></div>
+
                                 <ul>
                                     <li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
                                         <a href="#0">
@@ -170,9 +169,10 @@
                                     </li>
                                 </ul>
                             </li>
-                    <!--        -->
-                    <li class="events-group">
+
+                            <li class="events-group">
                                 <div class="top-info"><span>Sábado</span></div>
+
                                 <ul>
                                     <li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
                                         <a href="#0">
@@ -193,11 +193,10 @@
                                     </li>
                                 </ul>
                             </li>
-                <!--        -->
-                    
-                    <!--        -->
-                    <li class="events-group">
+
+                            <li class="events-group">
                                 <div class="top-info"><span>Domingo</span></div>
+
                                 <ul>
                                     <li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
                                         <a href="#0">
@@ -218,7 +217,6 @@
                                     </li>
                                 </ul>
                             </li>
-                <!--        -->
                         </ul>
                     </div>
 
@@ -241,10 +239,11 @@
                     </div>
 
                     <div class="cover-layer"></div>
-                </div> <!-- .cd-schedule -->
-                        
+                </div>
+                <!-- .cd-schedule -->
             </div>
         </div>
     </div>
 </div>
+
 <script src="<?php echo SERVERURL; ?>assets/script/schedule.js"></script>

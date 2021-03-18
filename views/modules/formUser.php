@@ -1,5 +1,5 @@
 <!-- Card Content -->
-<div class="card shadow mb-4 ">
+<div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
         <div class="form-group row mb-0">    
@@ -15,9 +15,7 @@
                 method="POST" data-form="save" class="formulario-ajax" autocomplete="off"
                 enctype="multipart/form-data">
 
-                
                 <div class="form-group row">
-                    
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <select class="form-control" id="tipeDni" name="tipoDni" >
                             <option>Identificación</option>
@@ -38,6 +36,7 @@
                         <input type="text" class="form-control form-control-user" id="FirstName"
                         name="FirstName" required="" placeholder="Nombres" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}">
                     </div>
+
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" class="form-control form-control-user" id="LastName"
                         name="LastName" placeholder="Apellidos" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}">
@@ -50,6 +49,7 @@
                          id="Adress"
                         placeholder="Dirección">
                     </div>
+
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="phone" class="form-control form-control-user" id="Phone"
                         name="Phone" required="" placeholder="Telefono" pattern="[0-9+]{1,15}">
@@ -63,6 +63,7 @@
                         <input type="text" class="form-control form-control-user" id="User"
                         name="User" required placeholder="Usuario" required="" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]{1,15}">
                     </div>
+
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="email" class="form-control form-control-user" id="Email"
                         name="Email" required="" placeholder="Correo">
@@ -74,18 +75,17 @@
                         <input type="password" class="form-control form-control-user"
                         name="Password" required="" id="Pass1" placeholder="Contraseña">
                     </div>
-
-                    
+                </div>
 
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="radio" class="" name="Genere" id="Genere" value="Masculino" checked="">
-                         <i ></i> &nbsp; Másculino
+                        <i></i> &nbsp; Masculino
                     </div> 
 
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="radio" class=" " name="Genere" id="Genere" value="Femenino" checked="">
-                         <i ></i> &nbsp; Femenino
+                        <i></i> &nbsp; Femenino
                     </div>
                 </div>
 

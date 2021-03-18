@@ -47,9 +47,9 @@
                 
                 //Se agrega este código para acceder a las vistasdependiendo el tipo de usuario
                 if($_SESSION['role_sk']==="Administrador"){
-                    $url=SERVERURL."?page=admin";
+                    $url=SERVERURL."admin";
                 }else{
-                    $url=SERVERURL."?page=class";
+                    $url=SERVERURL."class";
                 }
 
                 return $urlLocation=' <script> window.location= " '.$url.'" </script>';
