@@ -11,7 +11,7 @@
         protected function start_model_session($datos){
             // $statu=1;
             //comparcion de los datos recibidos en el login y los datos guardados en la base de datos
-            $sql=mainModel::connect()->prepare("SELECT * FROM account WHERE accountEmail=:Email AND accountPassword=:Password AND accountState = 1");
+            $sql=mainModel::connect()->prepare("SELECT * FROM accounts WHERE accountEmail=:Email AND accountPassword=:Password AND accountState = 1");
             $sql->bindParam(':Email',$datos['email']);
             $sql->bindParam(':Password',$datos['password']);
             $sql->execute();
@@ -29,3 +29,4 @@
             return $answer;
         }
     }
+    

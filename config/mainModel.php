@@ -25,9 +25,9 @@
         }
 
         //crear cuenta
-        protected function add_account ($datos){
-            $sql=self::connect()->prepare("INSERT INTO account(accountCode,accountEmail,accountPassword,accountRole,accountState,)
-                VALUES (:Code,:Email,:Password,:Role,:State)");
+        protected function add_account($datos) {
+            $sql=self::connect()->prepare("INSERT INTO accounts (accountCode, accountEmail, accountPassword, accountRole, accountState)
+                VALUES (:Code, :Email, :Password, :Role, :State)");
             $sql->bindParam(":Code",$datos['Code']);
             $sql->bindParam(":Email",$datos['Email']);
             $sql->bindParam(":Password",$datos['Password']);
@@ -41,7 +41,7 @@
 
         //eliminar cuenta
         protected function delete_account ($code){
-            $sql=self::connect()->prepare("DELETE FROM account WHERE accountCode=:Code");
+            $sql=self::connect()->prepare("DELETE FROM accounts WHERE accountCode=:Code");
             $sql->bindParam(":Code",$code);
             $sql->execute();
 

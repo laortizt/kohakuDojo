@@ -47,7 +47,7 @@
                     //validación correo
                     if($password!=""){
                         $consult2=mainModel::run_simple_query("SELECT accountEmail
-                        FROM account WHERE accountEmail= '$password'");  
+                        FROM accounts WHERE accountEmail= '$password'");  
                         //variable correo-cuenta- columnas afectadas
                         $cc=$consult2->rowCount();
                     }else{
@@ -76,7 +76,7 @@
                         }else{
                             //validación cuantos registros tengo
                             $consult4=mainModel::run_simple_query("SELECT idAccount
-                            FROM account");
+                            FROM accounts");
                               //variable para guardar la consulta
                             $num=($consult4->rowCount())+1;
                              // generar código aletaorio de 10 cifras AC: Account

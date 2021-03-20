@@ -5,15 +5,15 @@ $petitionAjax=true;
 require_once "../config/ConfigGeneral.php";
 
 //Condicion para comprobar si se reciben los datos del formulario
-if(isset($_POST['Dni'])){
-    require_once"../controller/controllerAdmin.php";
-    $insUser= new controllerAdmin();
+if(isset($_POST['emailSignUp'])){
+    require_once "../controller/controllerSignUp.php";
+    $insUser= new controllerSignUp();
 
-    if(isset($_POST['Dni'])&& 
-        isset($_POST['FirstName'])&&
-        isset($_POST['LastName'])&&
-        isset($_POST['User'])){
-            echo $insAdmin->add_controller_Admin();
+    if(isset($_POST['emailSignUp'])&& 
+        isset($_POST['firstname'])&&
+        isset($_POST['lastname'])&&
+        isset($_POST['passwordSignUp'])){
+            echo $insUser->add_controller_User();
     } else {
         // echo $insUser->add_User_incomplete_data();  ERROR EN ESTÁ LINEA OOOOOJOOOOOOOO
     }
@@ -23,5 +23,5 @@ if(isset($_POST['Dni'])){
     session_destroy();
 
     //NO ME SALE EL LOGIN CON LOS ESTILOS?????
-    echo'<script> window.location.href="'.SERVERURL.'login" </script>';
+   // echo'<script> window.location.href="'.SERVERURL.'login" </script>';
 } 

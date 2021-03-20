@@ -14,7 +14,7 @@
 	<title><?php echo COMPANY; ?></title>
 	<!-- Import lib -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>/assets/fontawesome-free - copia/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>/assets/fontawesome-free/css/all.min.css">
 
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 	
@@ -28,6 +28,8 @@
 	<link href="<?php echo SERVERURL; ?>assets/style/schedule.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/attendance.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/privileges.css" rel="stylesheet">
+	<link href="<?php echo SERVERURL; ?>assets/style/progress.css" rel="stylesheet">
+	
 	<link href="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/glyphicons/glyphicons.css" rel="stylesheet">
 
