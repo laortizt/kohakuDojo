@@ -26,13 +26,16 @@
 
         //crear cuenta
         protected function add_account($datos) {
-            $sql=self::connect()->prepare("INSERT INTO accounts (accountCode, accountEmail, accountPassword, accountRole, accountState)
-                VALUES (:Code, :Email, :Password, :Role, :State)");
+            $sql=self::connect()->prepare("INSERT INTO accounts 
+                (accountCode, accountEmail, accountPassword, accountRole, accountState, accountFirstName, accountLastName)
+                VALUES (:Code, :Email, :Password, :Role, :State, :FirstName, :LastName)");
             $sql->bindParam(":Code",$datos['Code']);
             $sql->bindParam(":Email",$datos['Email']);
             $sql->bindParam(":Password",$datos['Password']);
             $sql->bindParam(":Role",$datos['Role']);
             $sql->bindParam(":State",$datos['State']);
+            $sql->bindParam(":FirstName",$datos['FirstName']);
+            $sql->bindParam(":LastName",$datos['LastName']);
             
             $sql->execute();
 

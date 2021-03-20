@@ -33,8 +33,8 @@
                 ];
             }else{
                 //validación documento registrado
-                $consult1=mainModel::run_simple_query("SELECT usersDni
-                 FROM users WHERE usersDni ='$Dni'");
+                $consult1=mainModel::run_simple_query("SELECT accountDni
+                    FROM accounts WHERE accountDni ='$Dni'");
 
                 if($consult1->rowCount()>=1){
                     $alert=[
@@ -63,8 +63,8 @@
                         ];
                     }else{
                         //validación de usuario
-                        $consult3=mainModel::run_simple_query("SELECT user
-                        FROM users WHERE Usuario = '$user'");
+                        $consult3=mainModel::run_simple_query("SELECT accountEmail
+                            FROM accounts WHERE accountEmail = '$user'");
 
                         if($consult3->rowCount()>=1){
                             // $alert=[
@@ -76,7 +76,7 @@
                         }else{
                             //validación cuantos registros tengo
                             $consult4=mainModel::run_simple_query("SELECT idAccount
-                            FROM accounts");
+                                FROM accounts");
                               //variable para guardar la consulta
                             $num=($consult4->rowCount())+1;
                              // generar código aletaorio de 10 cifras AC: Account
@@ -90,40 +90,22 @@
                                 "Code"=>$code,
                                 "Email"=>$email,
                                 "Pasword"=>$password,
-                                "Role"=>"Administrador",
-                                "State"=>"Activo",
+                                "Role"=>1,
+                                "State"=>1,
+                                "FirstName"=>$firstName,
+                                "LastName"=>$lastName
                             ];
-                            $saveAccount=mainModel::add_account($dataAC);
+                            $saveAccount=modelAdmin::add_admin_account($dataAC);
                             // Comprobar si se registro la cuenta
 
                             if($saveAccount->rowCount()>=1){
-                                $dataAD=[
-                                    "Dni"=>$Dni,
-                                    "FirstName"=>$firstName,
-                                    "LastName"=>$lastName,
-                                    "Addres"=>$addres, 
-                                    "Phone"=>$phone,
-                                    "Code"=>$code,
+                                $alert=[
+                                    "alert"=>"limpiar",
+                                    "title"=>"Administrador registrado",
+                                    "text"=>"El administrador se creo con Éxito",
+                                    "type"=>"success"
                                 ];
-                                $saveAdmin=modelAdmin::add_modelAdmin($dataAD);
-                                if($saveAdmin->rowCount()>=1){
-                                    $alert=[
-                                        "alert"=>"limpiar",
-                                        "title"=>"Administrador registrado",
-                                        "text"=>"El administrador se creo con Éxito",
-                                        "type"=>"success"
-                                    ];
-                                }else{
-                                    mainModel::delete_account($code);
-                                    $alert=[
-                                        "alert"=>"simple",
-                                        "title"=>"Ocurrio un error inesperado",
-                                        "text"=>"No se pudo registrar el administrador",
-                                        "type"=>"error"
-                                    ];
-                                }
-
-                                }else{
+                            } else {
                                 $alert=[
                                     "alert"=>"simple",
                                     "title"=>"Ocurrio un error inesperado",
@@ -165,10 +147,8 @@
 
             //Calcula cúantos registros hay en la consutla
             //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
-            // $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM users 
-            //     WHERE Code!='$code' AND idUser!='1' ORDER BY usersFisrtName ASC LIMIT $start, $register");
-            $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM users 
-                WHERE idUser!='1' ORDER BY usersFisrtName ASC LIMIT $start, $register");
+            $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM accounts 
+                WHERE idAccount!='1' ORDER BY accountFirstName ASC LIMIT $start, $register");
             $datos=$datos->fetchAll();
             $total=$conexion->query("SELECT found_rows()");
             $total=(int) $total->fetchColumn();
@@ -200,17 +180,17 @@
                     $table.='
                     <tr> 
                         <td>'.$count.'</td> 
-                        <td>'.$rows['usersTypeDocument'].'</td>
-                        <td>'.$rows['usersDni'].'</td>
-                        <td>'.$rows['usersName'].'</td>
-                        <td>'.$rows['usersLastName'].'</td>
-                        <td>'.$rows['usersAdrres'].'</td>
-                        <td>'.$rows['usersPhone'].'</td>
-                        <td>'.$rows['usersGenre'].'</td>
+                        <td>'.$rows['accountDocumentType'].'</td>
+                        <td>'.$rows['accountDni'].'</td>
+                        <td>'.$rows['accountFirstName'].'</td>
+                        <td>'.$rows['accountLastName'].'</td>
+                        <td>'.$rows['accountAddress'].'</td>
+                        <td>'.$rows['accountPhone'].'</td>
+                        <td>'.$rows['accountGenre'].'</td>
                         <td>'.$rows['accountEmail'].'</td>
                         <td>'.$rows['accountRole'].'</td>
                         <td>'.$rows['accountState'].'</td>
-                        <td>'.'<a href="#">Editar</a>'.
+                        <td>'.'<a href="#">Editar</a>&nbsp;'.
                         '<a href="#">Eliminar</a>'.'</td>
                     </tr>
                     ';

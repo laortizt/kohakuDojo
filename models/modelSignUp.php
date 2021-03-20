@@ -8,16 +8,11 @@
     }
 
     //MODELO PARA CREAR USUARIO completar info usuario
-    class modelSignUp extends mainModel{
-        public function add_modelSignUp($datos){
-            $sql=mainModel::connect()->prepare("INSERT INTO users (usersFirstName, usersLastName,) OUTPUT inserted.accountEmail, inserted.accountPassword INTO accounts VALUES(:FirstName,:LastName)(:Email, :Password)");
-            $sql->bindParam(":FirstName", $datos['FirstName']);
-            $sql->bindParam(":LastName", $datos['LastName']);
-            $sql->bindParam(":Email", $datos['Email']);
-            $sql->bindParam(":Password", $datos['Password']);
-           
-            $sql->execute();
+    class modelSignUp extends mainModel {
 
-            return $sql;
+        public function add_account($datos) {
+            $datos["Role"] = 3;
+            $datos["State"] = 1;
+            return mainModel::add_account($datos);
         }
-}
+    }

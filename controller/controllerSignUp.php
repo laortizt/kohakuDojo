@@ -61,38 +61,19 @@
                         "Code"=>$code,
                         "Email"=>$email,
                         "Password"=>$password,
-                        "Role"=>3,
-                        "State"=>1,
+                        "FirstName"=>$firstName,
+                        "LastName"=>$lastName,
                     ];
-                    $saveAccount=mainModel::add_account($dataAC);
+                    $saveAccount=modelSignUp::add_account($dataAC);
                     // Comprobar si se registro la cuenta
 
                     if($saveAccount->rowCount()>=1){
-                        // $dataAD=[
-                        //     "FirstName"=>$firstName,
-                        //     "LastName"=>$lastName,
-                        //     "Email"=>$email, 
-                        //     "Password"=>$password,
-                        //     "Code"=>$code,
-                        // ];
-                        // $saveAdmin=modelSignUp::add_modelSignUp($dataAD);
-
-                        // if($saveAdmin->rowCount()>=1){
-                            $alert=[
-                                "alert"=>"limpiar",
-                                "title"=>"Usuario registrado",
-                                "text"=>"El usuario se creo con Éxito",
-                                "type"=>"success"
-                            ];
-                        // }else{
-                        //     mainModel::delete_account($code);
-                        //     $alert=[
-                        //         "alert"=>"simple",
-                        //         "title"=>"Ocurrio un error inesperado",
-                        //         "text"=>"No se pudo registrar el Usuario",
-                        //         "type"=>"error"
-                        //     ];
-                        // }
+                        $alert=[
+                            "alert"=>"limpiar",
+                            "title"=>"Usuario registrado",
+                            "text"=>"El usuario se creo con Éxito",
+                            "type"=>"success"
+                        ];
                     } else {
                         $alert=[
                             "alert"=>"simple",

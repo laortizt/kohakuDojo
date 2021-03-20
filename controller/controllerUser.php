@@ -33,14 +33,14 @@
                 ];
             }else{
                 //validación documento registrado
-                $consult1=mainModel::run_simple_query("SELECT usersDni
-                 FROM users WHERE usersDni ='$Dni'");
+                $consult1=mainModel::run_simple_query("SELECT accountDni
+                 FROM accounts WHERE accountDni ='$Dni'");
 
                 if($consult1->rowCount()>=1){
                     $alert=[
                         "alert"=>"simple",
                         "title"=>"Ocurrio un error inesperado",
-                        "text"=>"El número de Identificación ya está registrado",
+                        "text"=>"El número de identificación ya está registrado",
                         "type"=>"error"
                     ];
                 }else{
@@ -64,7 +64,7 @@
                     }else{
                         //validación de usuario
                         $consult3=mainModel::run_simple_query("SELECT *
-                        FROM cuenta WHERE Usuario = '$user'");
+                            FROM accounts WHERE accountEmail = '$user'");
 
                         if($consult3->rowCount()>=1){
                             // $alert=[
@@ -76,7 +76,7 @@
                         }else{
                             //validación cuantos registros tengo
                             $consult4=mainModel::run_simple_query("SELECT idAccount
-                            FROM accounts");
+                                FROM accounts");
                               //variable para guardar la consulta
                             $num=($consult4->rowCount())+1;
                              // generar código aletaorio de 10 cifras AC: Account
@@ -90,40 +90,22 @@
                                 "Code"=>$code,
                                 "Email"=>$email,
                                 "Pasword"=>$password,
-                                "Role"=>"Administrador",
-                                "State"=>"Activo",
+                                "Role"=>3,
+                                "State"=>1,
+                                "FirstName"=>$firstName,
+                                "LastName"=>$lastName,
                             ];
-                            $saveAccount=mainModel::add_account($dataAC);
+                            $saveAccount=modelUser::add_user_account($dataAC);
+                            
                             // Comprobar si se registro la cuenta
-
                             if($saveAccount->rowCount()>=1){
-                                $dataAD=[
-                                    "Dni"=>$Dni,
-                                    "FirstName"=>$firstName,
-                                    "LastName"=>$lastName,
-                                    "Addres"=>$addres, 
-                                    "Phone"=>$phone,
-                                    "Code"=>$code,
+                                $alert=[
+                                    "alert"=>"limpiar",
+                                    "title"=>"Administrador registrado",
+                                    "text"=>"El administrador se creo con Éxito",
+                                    "type"=>"success"
                                 ];
-                                $saveUser=modelUser::add_modelUser($dataAD);
-                                if($saveUser->rowCount()>=1){
-                                    $alert=[
-                                        "alert"=>"limpiar",
-                                        "title"=>"Administrador registrado",
-                                        "text"=>"El administrador se creo con Éxito",
-                                        "type"=>"success"
-                                    ];
-                                }else{
-                                    mainModel::delete_account($code);
-                                    $alert=[
-                                        "alert"=>"simple",
-                                        "title"=>"Ocurrio un error inesperado",
-                                        "text"=>"No se pudo registrar el administrador",
-                                        "type"=>"error"
-                                    ];
-                                }
-
-                                }else{
+                            }else{
                                 $alert=[
                                     "alert"=>"simple",
                                     "title"=>"Ocurrio un error inesperado",
