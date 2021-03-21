@@ -10,7 +10,7 @@
     class controllerLogin extends modelLogin{
         // Funcion para iniciar sesion
 
-        public function start_controller_session(){
+        public function start_session_controller(){
             //se limpian los espacios que se piden en login por si traian partes de cadena anterior 
             //y luego se usa la nueva cadena en las variables
 
@@ -27,17 +27,16 @@
             ];
 
             //se pasan los datos del login al modelo
-            $accountdata= modelLogin::start_model_session($logindata);
+            $accountdata= modelLogin::start_session_model($logindata);
             
             if($accountdata->rowCount()==1){
                 $userrow=$accountdata->fetch();
 
-                @session_start(['name'=>'SK']);
+                session_start(['name'=>'SK']);
                 
                 $_SESSION['email_sk']=$userrow['accountEmail'];
-                $_SESSION['token_sk']=md5(uniqid(mt_rand(),true));
                 $_SESSION['code_sk']=$userrow['accountCode'];
-
+                
                 if ($userrow['accountRole'] == 1) {
                     $_SESSION['role_sk']="Administrador";
                 } else if ($userrow['accountRole'] == 2) {
@@ -46,6 +45,9 @@
                     $_SESSION['role_sk']="Usuario";
                 }
 
+                // Identificador único de la sesión, se usa al cerrar la sesión
+                $_SESSION['token_sk']=md5(uniqid(mt_rand(),true));    
+
                 //Se agrega este código para acceder a las vistasdependiendo el tipo de usuario
                 if($_SESSION['role_sk']==="Administrador"){
                     $url=SERVERURL."admin";
@@ -53,7 +55,7 @@
                     $url=SERVERURL."class";
                 }
 
-                return $urlLocation=' <script> window.location= " '.$url.'" </script>';
+                return '<script> window.location= " '.$url.'" </script>';
             } else{
                 $alert=[
                     "alert"=>"simple",
@@ -65,17 +67,18 @@
             }
         }
 
-        public function close_controller_session($datos){
-            session_start(['email'=>'SBP']);
+        public function close_session_controller() {
+            session_start(['name'=>'SK']);
+            
             $token=mainModel::decryption($_GET['token']);
+
             $datos=[
                 "email"=>$_SESSION['email_sk'],
                 "token_s"=>$_SESSION['token_sk'],
-                "token"=>$token,
-                "Code"=>$_SESSION['code'],
+                "token"=>$token
             ];
 
-            return modelLogin::close_model_session($datos);
+            return modelLogin::close_session_model($datos);
         }
 
         // función para forzar cerrar sesión

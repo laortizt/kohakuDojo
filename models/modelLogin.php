@@ -8,8 +8,7 @@
     }
     class modelLogin extends mainModel{
         //funcion que recibe los  datos del login para verificrlos con la base de datos
-        protected function start_model_session($datos){
-            // $statu=1;
+        protected function start_session_model($datos){
             //comparcion de los datos recibidos en el login y los datos guardados en la base de datos
             $sql=mainModel::connect()->prepare("SELECT * FROM accounts WHERE accountEmail=:Email AND accountPassword=:Password AND accountState = 1");
             $sql->bindParam(':Email',$datos['email']);
@@ -18,7 +17,7 @@
             return $sql;
         }
 
-        protected function close_model_session($datos){
+        protected function close_session_model($datos){
             if($datos['email']!="" && $datos['token_s'] == $datos['token']){
                 session_unset();
                 session_destroy();

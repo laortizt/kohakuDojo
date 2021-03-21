@@ -21,11 +21,12 @@
           url:'<?php echo SERVERURL; ?>ajax/loginAjax.php?token=' + token,
           success: function(data) {
             if(data=="true") {
-              window.location.href="<?php echo SERVERURL; ?> login/";
+              window.location.href="<?php echo SERVERURL; ?>login";
             } else {
               swal(
                 "Ocurrió un error", 
-                "No se pudo cerrar la sesión"
+                "No se pudo cerrar la sesión",
+                "error"
               );
             }
           }

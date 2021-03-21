@@ -7,7 +7,7 @@ if(isset($_GET['token'])){
     require_once "../controller/controllerLogin.php";
     $logout= new ControllerLogin();
 
-    echo $logout->force_logout();
+    echo $logout->close_session_controller();
 } else{
     session_start();
     session_destroy();

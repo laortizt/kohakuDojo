@@ -1,7 +1,8 @@
 <?php
-	//peticion ajax
-	session_start();
-	$petitionAjax=false;
+//peticion ajax
+$petitionAjax=false;
+
+session_start(['name'=>'SK']);
 ?>
 
 <!DOCTYPE html>
@@ -41,23 +42,25 @@
         //se incluye el archivo vista controlador
         require_once "./controller/viewsController.php";
 
-        $noTemplateViews = ["forgot-password", "register"];
-        //se instancia la vista controlado vistas o vt
+        // $noTemplateViews = ["forgot-password", "register"];
+
+		//Se instancia la vista controlado vistas o vt
         $vt = new viewsController();
         //queremos utilizar la funcion  obtener vista controlador
         //se crea una NUEVA variala $vtA para poder hacer el iclud de la variabl en el conenido SN ERROR
         $vtA=$vt->get_views_controller();
         // si vt trae el valor del login se muestra el login
 
-        if (in_array($vtA, $noTemplateViews)):
-            require_once "./views/pages/".$vtA.".php";
-        elseif ($vtA=="login"):
+        // if (in_array($vtA, $noTemplateViews)):
+        //     require_once "./views/pages/".$vtA.".php";
+        // elseif ($vtA=="login"):
+        if ($vtA=="login"):
             //si no, me incluye todo el contenida de la página
             require_once "./views/pages/login-view.php";
         else:
             //iniciar sesión
-            @session_start(['name'=>'SK']);
-			@require_once"./controller/controllerLogin.php";
+            // session_start(['name'=>'SK']);
+			require_once "./controller/controllerLogin.php";
 			//  se instancia la  funcion forzar sesión
 			$lc = new controllerLogin();
 
@@ -214,6 +217,7 @@
 			<!-- sidebar -->
 			<div class="sidebar">
 				<ul class="sidebar-nav">
+					<?php if(isset($_SESSION['role_sk']) && $_SESSION['role_sk']==="Administrador"): ?>
 					<li class="sidebar-nav-item">
 						<a href="<?php echo SERVERURL; ?>admin" class="sidebar-nav-link active">
 							<div>
@@ -222,6 +226,7 @@
 							<span>Admin</span>
 						</a>
 					</li>
+					<?php endif; ?>
 					
 					<li  class="sidebar-nav-item">
 						<a href="<?php echo SERVERURL; ?>class" class="sidebar-nav-link">
@@ -273,12 +278,12 @@
 			<script src="<?php echo SERVERURL; ?>assets/script/index.js"></script>
 			<!-- end import script -->
 	<?php 
-		include "./views/modules/logoutScript.php";
+			include "./views/modules/logoutScript.php";
 		endif;
 	?>
 	
 	<script>
-		if (!(typeof $material)) {
+		if (!(typeof $material === "undefined")) {
 			$material.init();
 		}
 	</script>

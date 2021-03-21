@@ -22,13 +22,13 @@
             <label for="">Usuario</label>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" name="emailSignIn"/>
+              <input type="text" name="emailSignIn" required=""/>
             </div>
 
             <label for="">Contraseña</label>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" name="passwordSignIn"/>
+              <input type="password" name="passwordSignIn" required=""/>
             </div>
 
             <input type="submit" value="Entrar" class="btn-kohaku-login"/>
@@ -41,25 +41,25 @@
             <label class="label">Nombres</label>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" name="firstname" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}"/>
+              <input type="text" name="firstname" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}"/>
             </div>
 
             <label class="label">Apellidos</label>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" name="lastname" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}"/>
+              <input type="text" name="lastname" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}"/>
             </div>
 
             <label class="label">Correo</label>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" name="emailSignUp"/>
+              <input type="email" required="" name="emailSignUp"/>
             </div>
 
             <label class="label">Contraseña</label>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" name="passwordSignUp"/>
+              <input type="password" required="" name="passwordSignUp"/>
             </div>
 
             <input type="submit" class="btn-kohaku-login" value="Guardar" />
@@ -67,28 +67,6 @@
 
             <div class="social-media"></div>
           </form>
-
-          <?php
-            if(isset($_POST['emailSignIn'])&& isset($_POST['passwordSignIn']) && $_POST['emailSignIn']!=""&&$_POST['passwordSignIn']!="" ){
-              require_once "./controller/controllerLogin.php";
-              $login = new controllerLogin();
-              echo $login->start_controller_session();
-            }
-            elseif (isset($_POST['emailSignUp'])) {
-              require_once "./controller/controllerSignUp.php";
-              $insUser= new controllerSignUp();
-          
-              if(isset($_POST['emailSignUp'])&& 
-                  isset($_POST['firstname'])&&
-                  isset($_POST['lastname'])&&
-                  isset($_POST['passwordSignUp'])){
-                      echo $insUser->add_controller_User();
-              } else {
-                
-                // echo $insUser->add_User_incomplete_data();  ERROR EN ESTÁ LINEA OOOOOJOOOOOOOO
-              }
-            }
-          ?>
         </div>
       </div>
 
@@ -124,11 +102,25 @@
     <script src="<?php echo SERVERURL; ?>assets/Script/app.js"></script>
   </body>
 
-  <?php 
-    // if(isset($_POST['emailSignIn']) && isset($_POST['passwordSignIn'])){
-    //     require_once "./controller/controllerLogin.php";
-    //     $login = new ControllerLogin();
-    //     echo $login->start_controller_session();
-    // }
+  <?php
+    if(isset($_POST['emailSignIn'])&& isset($_POST['passwordSignIn']) && $_POST['emailSignIn']!=""&&$_POST['passwordSignIn']!="" ){
+      require_once "./controller/controllerLogin.php";
+      $login = new controllerLogin();
+      echo $login->start_session_controller();
+    }
+    elseif (isset($_POST['emailSignUp'])) {
+      require_once "./controller/controllerSignUp.php";
+      $insUser= new controllerSignUp();
+  
+      if(isset($_POST['emailSignUp'])&& 
+          isset($_POST['firstname'])&&
+          isset($_POST['lastname'])&&
+          isset($_POST['passwordSignUp'])){
+              echo $insUser->add_controller_User();
+      } else {
+        
+        // echo $insUser->add_User_incomplete_data();  ERROR EN ESTÁ LINEA OOOOOJOOOOOOOO
+      }
+    }
   ?>
 </html>
