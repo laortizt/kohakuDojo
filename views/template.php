@@ -30,6 +30,7 @@ session_start(['name'=>'SK']);
 	<link href="<?php echo SERVERURL; ?>assets/style/attendance.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/privileges.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/progress.css" rel="stylesheet">
+	<link href="<?php echo SERVERURL; ?>assets/style/profile.css" rel="stylesheet">
 	
 	<link href="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/glyphicons/glyphicons.css" rel="stylesheet">
@@ -163,40 +164,17 @@ session_start(['name'=>'SK']);
 
 							<ul id="user-menu" class="dropdown-menu">
 								<li  class="dropdown-menu-item">
-									<a class="dropdown-menu-link">
+									<a href="<?php echo SERVERURL; ?>profile" class="dropdown-menu-link">
 										<div>
 											<i class="fas fa-user-tie"></i>
+											
 										</div>
-										<span>Perfil</span>
+   
+										<span >Perfil</span> 
 									</a>
 								</li>
 
-								<li class="dropdown-menu-item">
-									<a href="#" class="dropdown-menu-link">
-										<div>
-											<i class="fas fa-cog"></i>
-										</div>
-										<span>Ajustes</span>
-									</a>
-								</li>
-
-								<li class="dropdown-menu-item">
-									<a href="#" class="dropdown-menu-link">
-										<div>
-											<i class="far fa-credit-card"></i>
-										</div>
-										<span>Pagos</span>
-									</a>
-								</li>
-
-								<li class="dropdown-menu-item">
-									<a href="#" class="dropdown-menu-link">
-										<div>
-											<i class="fas fa-spinner"></i>
-										</div>
-										<span>Proyectos</span>
-									</a>
-								</li>
+								
 
 								<li class="dropdown-menu-item">
 									<a href="<?php echo $lc->encryption($_SESSION['token_sk']);?>" class="dropdown-menu-link btn-logout">
