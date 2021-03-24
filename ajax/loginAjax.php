@@ -12,5 +12,5 @@ if(isset($_GET['token'])){
     session_start();
     session_destroy();
 
-    echo'<script> windows.location.href="'.SERVERURL.'login/" </script>';
+    echo'<script> windows.location.href="'.SERVERURL.'login" </script>';
 }

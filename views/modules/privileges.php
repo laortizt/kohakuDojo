@@ -3,7 +3,7 @@
 	$insAdmin = new controllerAdmin();
 ?>
 
-<div class="row">
+<div class="row privileges">
     <div class="col-12 col-m-12 col-sm-12">
         <div class="card">
 			<div class="card-content">
@@ -25,18 +25,6 @@
 					// echo $insAdmin->pages_admin_controller($pages[1], 10, $_SESSION['role_sk'], $_SESSION['code']);
 					echo $insAdmin->pages_admin_controller(0, 10, $_SESSION['role_sk'], 'code');
 				?>
-				<!-- <table>					
-					<tr>
-						<td><?php echo $fila['id']; ?></td>
-						<td><?php echo $fila['nombre']; ?></td>
-						<td><?php echo $fila['apellidos']; ?></td>
-						<td><?php echo $fila['telefono']; ?></td>
-						<td><?php echo $fila['ciudad']; ?></td>
-						<td><?php echo $fila['correo']; ?></td>
-						<td><a href="update.php?id=<?php echo $fila['id']; ?>" class="btn__update">Editar</a></td>
-						<td><a href="delete.php?id=<?php echo $fila['id']; ?>" class="btn__delete">Eliminar</a></td>
-					</tr>
-				</table> -->
 			</div>
 		</div>
     </div>

@@ -12,20 +12,8 @@
         public function get_profile_controller(){
             $profile = modelProfile::get_profile_model($_SESSION['code_sk']);
             return $profile;
-
-            // $typeDocument= mainModel::clean_string($_POST['']);
-            // $Dni= mainModel::clean_string($_POST['dni']);
-            // $firstName= mainModel::clean_string($_POST['FirstName']); 
-            // $lastName= mainModel::clean_string($_POST['LastName']);
-            // $addres= mainModel::clean_string($_POST['Adress']); 
-            // $phone= mainModel::clean_string($_POST['Phone']);
-            // $user= mainModel::clean_string($_POST['User']);
-            // $email= mainModel::clean_string($_POST['Email']);
-            // $password= mainModel::clean_string($_POST['Pass1']);
-            // $genre= mainModel::clean_string($_POST['Genere']);
-            // $privilegio= mainModel::clean_string($_POST['Privileges']);
-        }
-
+        }  
+       
         public function list_typeDocument_controller($userCurrentDocType){
             $documentTypes = modelProfile::list_typeDocuments_model();
 
@@ -55,7 +43,7 @@
         public function list_genres_controller($userCurrentGenre) {
             $genres = modelProfile::list_genres_model();
 
-            $select = '<select class="input-field" name="genere-profile" required="">';
+            $select = '<select class="input-field" name="genre-profile" required="">';
             
             foreach($genres as $genre){
                 if ($genre['idGenre'] == $userCurrentGenre) {
@@ -79,6 +67,63 @@
         }
 
         public function save_profile(){
-            
+            // Limpiar la información diligenciada
+            $typeDocument= mainModel::clean_string($_POST['typeDocument-profile']);
+            $Dni= mainModel::clean_string($_POST['dni-profile']);
+            $firstName= mainModel::clean_string($_POST['firstname-profile']); 
+            $lastName= mainModel::clean_string($_POST['lastname-profile']);
+            $address= mainModel::clean_string($_POST['adress-profile']); 
+            $email= mainModel::clean_string($_POST['email-profile']);
+            $phone= mainModel::clean_string($_POST['phone-profile']);
+            $genre= mainModel::clean_string($_POST['genre-profile']);
+
+            // Validar condiciones
+            $profilesByDni=modelProfile::find_dni($Dni);
+
+            if (count($profilesByDni) > 1 || 
+                (count($profilesByDni) == 1 && $profilesByDni[0]['accountDni'] != $Dni) )
+            {
+                $alert=[
+                    "alert"=>"simple",
+                    "title"=>"Ocurrio un error inesperado",
+                    "text"=>"El número de Identificación ya está registrado",
+                    "type"=>"error"
+                ];
+            }else {
+                $id = $profilesByDni[0]['idAccount'];
+
+                // Si todas se cumplen, llamar al modelo para que ejecute el cambio, enviando la info en un arreglo
+                $dataProfile = [
+                    "Id"=>$id,
+                    "DocumentType"=>$typeDocument,
+                    "Dni"=>$Dni,
+                    "FirstName"=>$firstName,
+                    "LastName"=>$lastName,
+                    "Address"=>$address,
+                    "Phone"=>$phone,
+                    "Genre"=>$genre
+                ];
+
+                $saveProfile = modelProfile::update_profile_model($dataProfile);
+
+                // Verificar si el cambió se aplico e informar al usuario
+                if($saveProfile->rowCount() >= 1){
+                    $alert=[
+                        "alert"=>"limpiar",
+                        "title"=>"Actualizar perfil",
+                        "text"=>"El perfil se ha actualizado exitósamente.",
+                        "type"=>"success"
+                    ];
+                } else {
+                    $alert=[
+                        "alert"=>"simple",
+                        "title"=>"Actualizar perfil",
+                        "text"=>"No se pudo actualizar el perfil, verifique los campos e intente de nuevo.",
+                        "type"=>"error"
+                    ];
+                }
+            }
+
+            return mainModel::sweet_alert($alert);
         }
     }

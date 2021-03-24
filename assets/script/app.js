@@ -25,3 +25,5 @@ $('.btn-logout').on('click', function (e){
     window.location.href="index.php"
   });
 });
+
+// Guardar perfil

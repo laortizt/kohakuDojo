@@ -30,8 +30,9 @@ session_start(['name'=>'SK']);
 	<link href="<?php echo SERVERURL; ?>assets/style/attendance.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/privileges.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/progress.css" rel="stylesheet">
-	<link href="<?php echo SERVERURL; ?>assets/style/profile.css" rel="stylesheet">
-	
+	<link href="<?php echo SERVERURL; ?>assets/style/profile.css" rel="stylesheet">	
+	<link href="<?php echo SERVERURL; ?>assets/style/kohaku.css" rel="stylesheet">
+
 	<link href="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/glyphicons/glyphicons.css" rel="stylesheet">
 

@@ -1,27 +1,5 @@
-*{
-    padding: 0;
-    margin: 0px;
-    box-sizing: border-box;
-}
 
-body{
-    font-family: 'Arial',sans-serif;
-    font-size: 16px;
-    background: #f2f2f2;
-}
-
-a{
-    text-decoration: none;
-}
-.contenedor{
-    width: 80%;
-    max-width: 1000px;
-    margin: 30px auto;
-    overflow: hidden;
-
-}
-
-h2{
+.privileges h2{
     display: block;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -75,7 +53,7 @@ form .form-group .input__text{
 }
 
 
-form .btn{
+.privileges .btn {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
@@ -89,35 +67,38 @@ form .btn{
     outline: medium none;
     cursor: pointer;
 }
-.btn__nuevo{
+
+.privileges .btn__nuevo{
     float: right;
     background: #1b743c !important;
 }
 
-.btn__group{
+.privileges .btn__group{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
-.btn__primary{
+
+.privileges .btn__primary{
     background: rgb(3, 113, 163);
 }
-.btn__danger{
+
+.privileges .btn__danger{
     background: #8a0505 !important;
 }
 
 
 /* table */
-table{
+.privileges table{
     width: 100%;
     border-collapse: collapse;
 }
 
-table .head{
+.privileges table .head{
     background: rgb(3, 113, 163);
 }
-table .head td{
+.privileges table .head td{
     color: #fff;
     font-family: 'Arial',sans-serif;
     font-weight: bold;
@@ -125,23 +106,24 @@ table .head td{
     text-align: center;
 }
 
-table tr td{
+.privileges table tr td{
     border:1px solid #ccc;
     padding: 7px;
     font-size: 14px;
     color: #555;
 }
 
-.btn__update{
+.privileges .btn__update {
     display: inline-block;
     font-size: 14px;
     background: #1b743c;
     color: #fff;
     border-radius: 5px;
     padding: 5px 10px;
+    border: 1px solid #ccc;    
 }
 
-.btn__delete{
+.privileges .btn__delete {
     display: inline-block;
     font-size: 14px;
     background: #8a0505;
@@ -149,4 +131,3 @@ table tr td{
     border-radius: 5px;
     padding: 5px 10px;
 }
-

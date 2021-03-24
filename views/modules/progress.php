@@ -18,8 +18,8 @@
 
             </div>
 
-            <button class="btn" id="prev" disabled>Prev</button>
-            <button class="btn" id="next">Next</button>
+            <button class="btn-progress" id="next">Next</button>
+            <button class="btn-progress" id="prev" disabled>Prev</button>
         </div>
              
         </div>

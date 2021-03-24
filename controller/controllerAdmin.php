@@ -22,6 +22,9 @@
             $password= mainModel::clean_string($_POST['Pass1']);
             $genre= mainModel::clean_string($_POST['Genere']);
             $privilegio= mainModel::clean_string($_POST['Privileges']);
+            
+             
+                    
 
             //validación contraseñas
             if($password!=$password){
@@ -190,8 +193,8 @@
                         <td>'.$rows['accountEmail'].'</td>
                         <td>'.$rows['accountRole'].'</td>
                         <td>'.$rows['accountState'].'</td>
-                        <td>'.'<a href="#">Editar</a>&nbsp;'.
-                        '<a href="#">Eliminar</a>'.'</td>
+                        <td>'.'<button class="btn btn__update"><a href="#">Editar</a></button>&nbsp;'.
+                        '<button class="btn btn__delete"><a href="#">Eliminar</a></button>'.'</td>
                     </tr>
                     ';
                     $count++;

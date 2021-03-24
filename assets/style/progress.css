@@ -4,7 +4,6 @@
 }
 
 
-
 .container-progress {
   margin: auto;
   text-align: center;
@@ -60,7 +59,7 @@
   border-color: var(--line-border-fill);
 }
 
-.btn {
+.btn-progress {
   background-color: var(--line-border-fill);
   color: #fff;
   border: 0;
@@ -72,15 +71,15 @@
   font-size: 14px;
 }
 
-.btn:active {
+.btn-progress:active {
   transform: scale(0.98);
 }
 
-.btn:focus {
+.btn-progress:focus {
   outline: 0;
 }
 
-.btn:disabled {
+.btn-progress:disabled {
   background-color: var(--line-border-empty);
   cursor: not-allowed;
 }
