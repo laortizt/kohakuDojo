@@ -12,6 +12,9 @@ if(isset($_POST['dni-profile'])){
         isset($_POST['firstname-profile'])&&
         isset($_POST['lastname-profile'])&&
         isset($_POST['email-profile'])){
+
+        session_start(['name'=>'SK']);
+
         echo $insProfile->save_profile();
         echo '<script>window.location.href="'.SERVERURL.'profile"</script>';
     } else {

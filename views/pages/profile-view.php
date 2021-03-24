@@ -17,12 +17,14 @@
                     <h2 class="title">Mi Perfil</h2>
 
                     <div class="profile">
+
                         <div class="input-container">
                             <label class="label">Tipo Documento</label>
                             <?php echo $insProfile->list_typeDocument_controller($profile['accountDocumentType'])?>
                         </div>
 
                         <div class="input-container">
+
                             <label class="label">Número Documento</label>
                             <div class="input-field">
                                 <i class="far fa-address-card"></i>
@@ -66,7 +68,7 @@
                             <label class="label">Telefono</label>
                             <div class="input-field">
                                 <i class="fas fa-phone-alt"></i>
-                                <input type="number" value="<?php echo $profile['accountPhone']?>" name="phone-profile" required="" pattern="{1,30}"/>
+                                <input type="text" value="<?php echo $profile['accountPhone']?>" name="phone-profile" required="" pattern="[0-9]{7,20}"/>
                             </div>
                         </div>  
 

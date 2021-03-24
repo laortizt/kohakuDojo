@@ -62,4 +62,12 @@
                 FROM accounts WHERE accountDni ='$dni'");
             return $datos->fetchAll();
         }
+
+        public function find_email($email) {
+            //Obtiene los correos que coincidan con el dni enviado
+            $datos=mainModel::connect()->query("SELECT idAccount, accountDni, accountCode
+            FROM accounts WHERE accountEmail = '$email'");
+
+            return $datos->fetchAll();
+        }
     }

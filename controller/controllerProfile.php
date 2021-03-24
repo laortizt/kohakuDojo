@@ -90,38 +90,55 @@
                     "type"=>"error"
                 ];
             }else {
-                $id = $profilesByDni[0]['idAccount'];
-
-                // Si todas se cumplen, llamar al modelo para que ejecute el cambio, enviando la info en un arreglo
-                $dataProfile = [
-                    "Id"=>$id,
-                    "DocumentType"=>$typeDocument,
-                    "Dni"=>$Dni,
-                    "FirstName"=>$firstName,
-                    "LastName"=>$lastName,
-                    "Address"=>$address,
-                    "Phone"=>$phone,
-                    "Genre"=>$genre
-                ];
-
-                $saveProfile = modelProfile::update_profile_model($dataProfile);
-
-                // Verificar si el cambió se aplico e informar al usuario
-                if($saveProfile->rowCount() >= 1){
-                    $alert=[
-                        "alert"=>"limpiar",
-                        "title"=>"Actualizar perfil",
-                        "text"=>"El perfil se ha actualizado exitósamente.",
-                        "type"=>"success"
-                    ];
-                } else {
+                 // Buscar por correo
+                $profilesByEmail=modelProfile::find_email($email);
+            
+                // Si existe uno, verificar si su account code coincide con el usuario actual
+                if(count($profilesByEmail) != 1 || $profilesByEmail[0]['accountCode'] != $_SESSION['code_sk']){
+                    // Si no coincide, error
                     $alert=[
                         "alert"=>"simple",
-                        "title"=>"Actualizar perfil",
-                        "text"=>"No se pudo actualizar el perfil, verifique los campos e intente de nuevo.",
+                        "title"=>"Ocurrio un error inesperado",
+                        "text"=>"Usuario no encontrado",
                         "type"=>"error"
+                    ];                         
+                }else{
+                    // Si coincide, proceder con la actualización
+                    $id = $profilesByEmail[0]['idAccount'];
+    
+                    // Si todas se cumplen, llamar al modelo para que ejecute el cambio, enviando la info en un arreglo
+                    $dataProfile = [
+                        "Id"=>$id,
+                        "DocumentType"=>$typeDocument,
+                        "Dni"=>$Dni,
+                        "FirstName"=>$firstName,
+                        "LastName"=>$lastName,
+                        "Address"=>$address,
+                        "Phone"=>$phone,
+                        "Genre"=>$genre
                     ];
+    
+                    $saveProfile = modelProfile::update_profile_model($dataProfile);
+    
+                    // Verificar si el cambió se aplico e informar al usuario
+                    if($saveProfile->rowCount() >= 1){
+                        $alert=[
+                            "alert"=>"limpiar",
+                            "title"=>"Actualizar perfil",
+                            "text"=>"El perfil se ha actualizado exitósamente.",
+                            "type"=>"success"
+                        ];
+                    } else {
+                        $alert=[
+                            "alert"=>"simple",
+                            "title"=>"Actualizar perfil",
+                            "text"=>"No se pudo actualizar el perfil, verifique los campos e intente de nuevo.",
+                            "type"=>"error"
+                        ];
+                    }
                 }
+                
+
             }
 
             return mainModel::sweet_alert($alert);
