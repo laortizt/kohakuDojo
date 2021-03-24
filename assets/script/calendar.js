@@ -7,11 +7,13 @@ app.controller('dateTimeCtrl', function ($scope) {
 	ctrl.selected_date.setHours(10);
 	ctrl.selected_date.setMinutes(0);
 	
-	ctrl.updateDate = function (newdate) {
-		
-		// Do something with the returned date here.
-		
-		console.log(newdate);
+	ctrl.updateDate = function (newdate) {		
+		// Set the date field to be sent to the backend
+        var dateField = document.getElementById('class-date');
+
+        if (dateField) {
+            dateField.value = new Date(newdate).toISOString();
+        }
 	};
 });
 
@@ -45,22 +47,22 @@ app.directive('datePicker', function ($timeout, $window) {
             }
 
             scope.days = [
-                { "long":"Sunday","short":"Sun" },
-                { "long":"Monday","short":"Mon" },
-                { "long":"Tuesday","short":"Tue" },
-                { "long":"Wednesday","short":"Wed" },
-                { "long":"Thursday","short":"Thu" },
-                { "long":"Friday","short":"Fri" },
-                { "long":"Saturday","short":"Sat" },
+                { "long":"Domingo","short":"Dom" },
+                { "long":"Lunes","short":"Lun" },
+                { "long":"Martes","short":"Mar" },
+                { "long":"Miércoles","short":"Mie" },
+                { "long":"Jueves","short":"Jue" },
+                { "long":"Viernes","short":"Vie" },
+                { "long":"Sábado","short":"Sab" },
             ];
 			if (scope.mondayfirst == 'true') {
-				var sunday = scope.days[0];
+				var domingo = scope.days[0];
 				scope.days.shift();
-				scope.days.push(sunday);
+				scope.days.push(domingo);
 			}
 
             scope.monthNames = [
-                "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
             ];
 
             function getSelected() {

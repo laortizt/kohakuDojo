@@ -11,16 +11,13 @@
 }
 
 .buttons-container {
-  position: absolute;
-  bottom: 15px;
-  right: 0;
-  height: 40px;
   font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .cancel-button,
 .save-button {
-  float: left;
   height: 40px;
   line-height: 40px;
   padding: 0 15px;
@@ -28,6 +25,10 @@
   margin-right: 15px;
   cursor: pointer;
   transition: all 0.15s ease;
+  margin-top: 20px;
+  outline: none;
+  appearance: none;
+  border: none;
 }
 
 .cancel-button {
