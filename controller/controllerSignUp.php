@@ -71,7 +71,7 @@
                         $alert=[
                             "alert"=>"limpiar",
                             "title"=>"Usuario registrado",
-                            "text"=>"El usuario se creo con Éxito",
+                            "text"=>"El usuario se creo con Éxito, por favor inicie sesión",
                             "type"=>"success"
                         ];
                     } else {

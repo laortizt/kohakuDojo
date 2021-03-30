@@ -17,4 +17,6 @@
 <script src="<?php echo SERVERURL; ?>assets/script/schedule.js"></script>
 <script src="<?php echo SERVERURL; ?>assets/script/privileges.js"></script>
 <script src="<?php echo SERVERURL; ?>assets/script/progress.js"></script>
+<script src="<?php echo SERVERURL; ?>assets/script/assistance.js"></script>
+<script src="<?php echo SERVERURL; ?>assets/script/payments.js"></script>
 

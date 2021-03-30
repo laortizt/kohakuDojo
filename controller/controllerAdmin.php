@@ -162,8 +162,8 @@
             <table>
                 <thead> 
                     <td>Id</td>
-                    <td>Tipo Documento</td>
-                    <td>Número documento</td>
+                    <td>Documento</td>
+                    <td>Número</td>
                     <td>Nombres</td>
                     <td>Apellidos</td>
                     <td>Dirección</td>
@@ -193,8 +193,8 @@
                         <td>'.$rows['accountEmail'].'</td>
                         <td>'.$rows['accountRole'].'</td>
                         <td>'.$rows['accountState'].'</td>
-                        <td>'.'<button class="btn btn__update"><a href="#">Editar</a></button>&nbsp;'.
-                        '<button class="btn btn__delete"><a href="#">Eliminar</a></button>'.'</td>
+                        <td>'.'<button class="btn btn__update"><a href="#"><i class="fas fa-edit"></i></a></button>&nbsp;'.
+                        '<button class="btn btn__delete"><a href="#"><i class="fas fa-trash-alt"></i></a></button>'.'</td>
                     </tr>
                     ';
                     $count++;

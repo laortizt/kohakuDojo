@@ -1,0 +1,59 @@
+.header-class{
+    background: #0dad83;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    padding-left: 15px;
+    margin-bottom: 25px;
+    
+  }
+  
+  
+  .container-class{
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    padding: 8px 16px;
+    font-size: 1.5rem;
+    gap: 16px;
+  }
+  
+  .container-class > p {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-class, input[type="date"].input-class, input[type="time"].input-class {
+    max-width: none;
+    width: 100%;
+    background-color: white;
+    margin: 10px 0;
+    height: 55px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    /* position: relative; */
+    align-items: center;
+  }
+  
+  .input-class i {
+    text-align: center;
+    line-height: 55px;
+    color: #0aebcd;
+    transition: 0.5s;
+    font-size: 1.1rem;
+    
+  }
+  .input-class input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
