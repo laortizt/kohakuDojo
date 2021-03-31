@@ -52,7 +52,7 @@
                 if($_SESSION['role_sk']==="Administrador"){
                     $url=SERVERURL."admin";
                 }else{
-                    $url=SERVERURL."class";
+                    $url=SERVERURL."calendar";
                 }
 
                 return '<script> window.location= " '.$url.'" </script>';

@@ -103,15 +103,15 @@ session_start(['name' => 'SK']);
 			<!-- nav right -->
 			<ul class="navbar-nav nav-right">
 				<li class="nav-item mode">
+					<span><?php echo $_SESSION['role_sk'] ?></span>
+				</li>
+
+				<li class="nav-item mode">
 					<a class="nav-link" href="#" onclick="switchTheme()">
 						<i class="fas fa-moon dark-icon"></i>
 						<i class="fas fa-sun light-icon"></i>
 					</a>
-				
-				<div>
-					<label for="Role">Role</label>
-				</div>
-
+				</li>
 
 				<li class="nav-item avt-wrapper">
 					<div class="avt dropdown">
