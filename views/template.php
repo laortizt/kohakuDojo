@@ -24,9 +24,12 @@ session_start(['name' => 'SK']);
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
 
+	<!-- Estilos calendario -->
+	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
+	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css" />
+
 	<!-- End import lib -->
 	<link href="<?php echo SERVERURL; ?>assets/style/dashboard.css" rel="stylesheet">
-	<link href="<?php echo SERVERURL; ?>assets/style/allClass.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/calendar.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/schedule.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/assistence.css" rel="stylesheet">

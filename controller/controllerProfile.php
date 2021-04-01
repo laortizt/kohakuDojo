@@ -8,12 +8,12 @@
     }
 
     class controllerProfile extends modelProfile{
-        //controlador para agregar administrador
+        //funciòn que me trae la informaciòn de la cuenta
         public function get_profile_controller(){
             $profile = modelProfile::get_profile_model($_SESSION['code_sk']);
             return $profile;
         }  
-       
+        //funciòn que llama la lista de tipos de documento de model
         public function list_typeDocument_controller($userCurrentDocType){
             $documentTypes = modelProfile::list_typeDocuments_model();
 
@@ -39,7 +39,7 @@
 
             return $select;
         }
-
+        //funciòn que llama la lista de generos de model
         public function list_genres_controller($userCurrentGenre) {
             $genres = modelProfile::list_genres_model();
 
@@ -66,6 +66,7 @@
             return $select;
         }
 
+        //funciòn que guarda la informaciòn del perfil
         public function save_profile(){
             // Limpiar la información diligenciada
             $typeDocument= mainModel::clean_string($_POST['typeDocument-profile']);

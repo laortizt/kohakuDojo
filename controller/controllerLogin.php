@@ -51,8 +51,10 @@
                 //Se agrega este código para acceder a las vistasdependiendo el tipo de usuario
                 if($_SESSION['role_sk']==="Administrador"){
                     $url=SERVERURL."admin";
-                }else{
+                }else if($_SESSION['role_sk']==="Instructor") {
                     $url=SERVERURL."calendar";
+                } else{
+                    $url=SERVERURL."schedule";
                 }
 
                 return '<script> window.location= " '.$url.'" </script>';

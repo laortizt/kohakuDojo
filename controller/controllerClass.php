@@ -71,14 +71,14 @@
                 if($saveClass->rowCount() >= 1){
                     $alert=[
                         "alert"=>"limpiar",
-                        "title"=>"Actualizar Clase",
+                        "title"=>"Registrar Clase",
                         "text"=>"La Clase se ha creado exitósamente.",
                         "type"=>"success"
                     ];
                 } else {
                     $alert=[
                         "alert"=>"simple",
-                        "title"=>"Actualizar clase",
+                        "title"=>"Clase no registrada",
                         "text"=>"No se pudo crear la clase, verifique que no hay más clases en ese horario.",
                         "type"=>"error"
                     ];

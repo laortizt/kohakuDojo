@@ -13,7 +13,7 @@ $insClass = new controllerClass();
             <div class="card">
                 <div class="card-content">
 
-                    <form action="ajax/classAjax.php" method="post" autocomplete="off" class="formulario-ajax">
+                    <form action="ajax/classAjax.php" method="post" autocomplete="off" class="formulario-ajax" data-form="save">
                         <div class="app-container" ng-app="dateTimeApp" ng-controller="dateTimeCtrl as ctrl" ng-cloak>
                             <div date-picker datepicker-title="Crear Clases" picktime="true" pickdate="true" pickpast="false" mondayfirst="false" custom-message="Ha seleccionado," selecteddate="ctrl.selected_date" updatefn="ctrl.updateDate(newdate)">
                                 <div class="datepicker" ng-class="{

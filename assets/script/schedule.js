@@ -1,381 +1,442 @@
-jQuery(document).ready(function($){
-	var transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
-	var transitionsSupported = ( $('.csstransitions').length > 0 );
-	//if browser does not support transitions - use a different event to trigger them
-	if( !transitionsSupported ) transitionEnd = 'noTransition';
-	
-	//should add a loding while the events are organized 
 
-	function SchedulePlan( element ) {
-		this.element = element;
-		this.timeline = this.element.find('.timeline');
-		this.timelineItems = this.timeline.find('li');
-		this.timelineItemsNumber = this.timelineItems.length;
-		this.timelineStart = getScheduleTimestamp(this.timelineItems.eq(0).text());
-		//need to store delta (in our case half hour) timestamp
-		this.timelineUnitDuration = getScheduleTimestamp(this.timelineItems.eq(1).text()) - getScheduleTimestamp(this.timelineItems.eq(0).text());
+'use strict';
 
-		this.eventsWrapper = this.element.find('.events');
-		this.eventsGroup = this.eventsWrapper.find('.events-group');
-		this.singleEvents = this.eventsGroup.find('.single-event');
-		this.eventSlotHeight = this.eventsGroup.eq(0).children('.top-info').outerHeight();
+var CalendarList = [];
 
-		this.modal = this.element.find('.event-modal');
-		this.modalHeader = this.modal.find('.header');
-		this.modalHeaderBg = this.modal.find('.header-bg');
-		this.modalBody = this.modal.find('.body'); 
-		this.modalBodyBg = this.modal.find('.body-bg'); 
-		this.modalMaxWidth = 800;
-		this.modalMaxHeight = 480;
+function CalendarInfo() {
+    this.id = null;
+    this.name = null;
+    this.checked = true;
+    this.color = null;
+    this.bgColor = null;
+    this.borderColor = null;
+    this.dragBgColor = null;
+}
 
-		this.animating = false;
+function addCalendar(calendar) {
+    CalendarList.push(calendar);
+}
 
-		this.initSchedule();
-	}
+function findCalendar(id) {
+    var found;
 
-	SchedulePlan.prototype.initSchedule = function() {
-		this.scheduleReset();
-		this.initEvents();
-	};
+    CalendarList.forEach(function(calendar) {
+        if (calendar.id === id) {
+            found = calendar;
+        }
+    });
 
-	SchedulePlan.prototype.scheduleReset = function() {
-		var mq = this.mq();
-		if( mq == 'desktop' && !this.element.hasClass('js-full') ) {
-			//in this case you are on a desktop version (first load or resize from mobile)
-			this.eventSlotHeight = this.eventsGroup.eq(0).children('.top-info').outerHeight();
-			this.element.addClass('js-full');
-			this.placeEvents();
-			this.element.hasClass('modal-is-open') && this.checkEventModal();
-		} else if(  mq == 'mobile' && this.element.hasClass('js-full') ) {
-			//in this case you are on a mobile version (first load or resize from desktop)
-			this.element.removeClass('js-full loading');
-			this.eventsGroup.children('ul').add(this.singleEvents).removeAttr('style');
-			this.eventsWrapper.children('.grid-line').remove();
-			this.element.hasClass('modal-is-open') && this.checkEventModal();
-		} else if( mq == 'desktop' && this.element.hasClass('modal-is-open')){
-			//on a mobile version with modal open - need to resize/move modal window
-			this.checkEventModal('desktop');
-			this.element.removeClass('loading');
-		} else {
-			this.element.removeClass('loading');
-		}
-	};
+    return found || CalendarList[0];
+}
 
-	SchedulePlan.prototype.initEvents = function() {
-		var self = this;
+function hexToRGBA(hex) {
+    var radix = 16;
+    var r = parseInt(hex.slice(1, 3), radix),
+        g = parseInt(hex.slice(3, 5), radix),
+        b = parseInt(hex.slice(5, 7), radix),
+        a = parseInt(hex.slice(7, 9), radix) / 255 || 1;
+    var rgba = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
 
-		this.singleEvents.each(function(){
-			//create the .event-date element for each event
-			var durationLabel = '<span class="event-date">'+$(this).data('start')+' - '+$(this).data('end')+'</span>';
-			$(this).children('a').prepend($(durationLabel));
+    return rgba;
+}
 
-			//detect click on the event and open the modal
-			$(this).on('click', 'a', function(event){
-				event.preventDefault();
-				if( !self.animating ) self.openModal($(this));
-			});
-		});
+(function() {
+    var calendar;
+    var id = 0;
 
-		//close modal window
-		this.modal.on('click', '.close', function(event){
-			event.preventDefault();
-			if( !self.animating ) self.closeModal(self.eventsGroup.find('.selected-event'));
-		});
-		this.element.on('click', '.cover-layer', function(event){
-			if( !self.animating && self.element.hasClass('modal-is-open') ) self.closeModal(self.eventsGroup.find('.selected-event'));
-		});
-	};
+    calendar = new CalendarInfo();
+    id += 1;
+    calendar.id = String(id);
+    calendar.name = 'Post';
+    calendar.color = '#624AC0';
+    calendar.bgColor = '#F0EFF6';
+    calendar.dragBgColor = '#F0EFF6';
+    calendar.borderColor = '#F0EFF6';
+    addCalendar(calendar);
 
-	SchedulePlan.prototype.placeEvents = function() {
-		var self = this;
-		this.singleEvents.each(function(){
-			//place each event in the grid -> need to set top position and height
-			var start = getScheduleTimestamp($(this).attr('data-start')),
-				duration = getScheduleTimestamp($(this).attr('data-end')) - start;
+    calendar = new CalendarInfo();
+    id += 1;
+    calendar.id = String(id);
+    calendar.name = 'Events';
+    calendar.color = '#FF8C1A';
+    calendar.bgColor = '#FDF8F3';
+    calendar.dragBgColor = '#FDF8F3';
+    calendar.borderColor = '#FDF8F3';
+    addCalendar(calendar);
 
-			var eventTop = self.eventSlotHeight*(start - self.timelineStart)/self.timelineUnitDuration,
-				eventHeight = self.eventSlotHeight*duration/self.timelineUnitDuration;
-			
-			$(this).css({
-				top: (eventTop -1) +'px',
-				height: (eventHeight+1)+'px'
-			});
-		});
+    calendar = new CalendarInfo();
+    id += 1;
+    calendar.id = String(id);
+    calendar.name = 'Offer';
+    calendar.color = '#578E1C';
+    calendar.bgColor = '#EEF8F0';
+    calendar.dragBgColor = '#EEF8F0';
+    calendar.borderColor = '#EEF8F0';
+    addCalendar(calendar);
+})();
 
-		this.element.removeClass('loading');
-	};
 
-	SchedulePlan.prototype.openModal = function(event) {
-		var self = this;
-		var mq = self.mq();
-		this.animating = true;
 
-		//update event name and time
-		this.modalHeader.find('.event-name').text(event.find('.event-name').text());
-		this.modalHeader.find('.event-date').text(event.find('.event-date').text());
-		this.modal.attr('data-event', event.parent().attr('data-event'));
+(function(window, Calendar) {
 
-		//update event content
-		this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.html .event-info > *', function(data){
-			//once the event content has been loaded
-			self.element.addClass('content-loaded');
-		});
+    var cal, resizeThrottled;
+    var useCreationPopup = true;
+    var useDetailPopup = true;
+    var datePicker, selectedCalendar;
 
-		this.element.addClass('modal-is-open');
+    cal = new Calendar('#calendar', {
+        defaultView: 'month',
+        useCreationPopup: useCreationPopup,
+        useDetailPopup: useDetailPopup,
+        calendars: CalendarList,
+        template: {
+            milestone: function(model) {
+                return '<span class="calendar-font-icon ic-milestone-b"></span> <span style="background-color: ' + model.bgColor + '">' + model.title + '</span>';
+            },
+            allday: function(schedule) {
+                return getTimeTemplate(schedule, true);
+            },
+            time: function(schedule) {
+                return getTimeTemplate(schedule, false);
+            }
+        }
+    });
 
-		setTimeout(function(){
-			//fixes a flash when an event is selected - desktop version only
-			event.parent('li').addClass('selected-event');
-		}, 10);
+    // event handlers
+    cal.on({
+        'clickMore': function(e) {
+            console.log('clickMore', e);
+        },
+        'clickSchedule': function(e) {
+            // var topValue;
+            // var leftValue;
+            // topValue = (e.event.clientY/2)+45;
+            // leftValue = e.event.clientX;
+            // if ( e.schedule.calendarId === '1' ) {
+            //     console.log('clickSchedule', e.schedule.calendarId);
+            // 				$("#post").fadeIn();
+            // $("#offer").fadeOut();
+            // $("#event").fadeOut();
+            // $("#create").fadeOut();
+            //     $(".promo_card").css({
+            //         top: topValue,
+            //         left: leftValue
+            //     })
+            //     return;
+            // }
+            // if ( e.schedule.calendarId === '2' ) {
+            //     console.log('clickSchedule', e.schedule.calendarId);
+            // 				$("#event").fadeIn();
+            // $("#post").fadeOut();
+            // $("#offer").fadeOut();
+            // $("#create").fadeOut();
+            //     $(".promo_card").css({
+            //         top: topValue,
+            //         left: leftValue
+            //     })
+            //     return;
+            // }
+            // if ( e.schedule.calendarId === '3' ) {
+            //     console.log('clickSchedule', e.schedule.calendarId);
+            // 				$("#offer").fadeIn();
+            // $("#post").fadeOut();
+            // $("#event").fadeOut();
+            // $("#create").fadeOut();
+            //     $(".promo_card").css({
+            //         top: topValue,
+            //         left: leftValue
+            //     })
+            //     return;
+            // }
+            // console.log('ada ', e.event.clientX)
+            // if( e.event.clientX > (window.windth - 200) ) {
+            // }
+            // console.log('clickSchedule', e);
+        },
+        'clickDayname': function(date) {
+            console.log('clickDayname', date);
+        },
+        'beforeCreateSchedule': function(e) {
 
-		if( mq == 'mobile' ) {
-			self.modal.one(transitionEnd, function(){
-				self.modal.off(transitionEnd);
-				self.animating = false;
-			});
-		} else {
-			var eventTop = event.offset().top - $(window).scrollTop(),
-				eventLeft = event.offset().left,
-				eventHeight = event.innerHeight(),
-				eventWidth = event.innerWidth();
+            // $("#create").fadeIn();
+									
+            saveNewSchedule(e);
+        },
+        'beforeUpdateSchedule': function(e) {
+            var schedule = e.schedule;
+            var changes = e.changes;
 
-			var windowWidth = $(window).width(),
-				windowHeight = $(window).height();
+            console.log('beforeUpdateSchedule', e);
 
-			var modalWidth = ( windowWidth*.8 > self.modalMaxWidth ) ? self.modalMaxWidth : windowWidth*.8,
-				modalHeight = ( windowHeight*.8 > self.modalMaxHeight ) ? self.modalMaxHeight : windowHeight*.8;
+            cal.updateSchedule(schedule.id, schedule.calendarId, changes);
+            refreshScheduleVisibility();
+        },
+        'beforeDeleteSchedule': function(e) {
+            console.log('beforeDeleteSchedule', e);
+            cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
+        },
+        'afterRenderSchedule': function(e) {
+            var schedule = e.schedule;
+            // var element = cal.getElement(schedule.id, schedule.calendarId);
+            // console.log('afterRenderSchedule', element);
+        },
+        'clickTimezonesCollapseBtn': function(timezonesCollapsed) {
+            console.log('timezonesCollapsed', timezonesCollapsed);
 
-			var modalTranslateX = parseInt((windowWidth - modalWidth)/2 - eventLeft),
-				modalTranslateY = parseInt((windowHeight - modalHeight)/2 - eventTop);
-			
-			var HeaderBgScaleY = modalHeight/eventHeight,
-				BodyBgScaleX = (modalWidth - eventWidth);
+            if (timezonesCollapsed) {
+                cal.setTheme({
+                    'week.daygridLeft.width': '77px',
+                    'week.timegridLeft.width': '77px'
+                });
+            } else {
+                cal.setTheme({
+                    'week.daygridLeft.width': '60px',
+                    'week.timegridLeft.width': '60px'
+                });
+            }
 
-			//change modal height/width and translate it
-			self.modal.css({
-				top: eventTop+'px',
-				left: eventLeft+'px',
-				height: modalHeight+'px',
-				width: modalWidth+'px',
-			});
-			transformElement(self.modal, 'translateY('+modalTranslateY+'px) translateX('+modalTranslateX+'px)');
+            return true;
+        }
+    });
 
-			//set modalHeader width
-			self.modalHeader.css({
-				width: eventWidth+'px',
-			});
-			//set modalBody left margin
-			self.modalBody.css({
-				marginLeft: eventWidth+'px',
-			});
+    function getTimeTemplate(schedule, isAllDay) {
+        var html = [];
+        var start = moment(schedule.start.toUTCString());
+        if (!isAllDay) {
+            html.push('<strong>' + start.format('HH:mm') + '</strong> ');
+        }
+        if (schedule.isPrivate) {
+            html.push('<span class="calendar-font-icon ic-lock-b"></span>');
+            html.push(' Private');
+        } else {
+            if (schedule.isReadOnly) {
+                html.push('<span class="calendar-font-icon ic-readonly-b"></span>');
+            } else if (schedule.recurrenceRule) {
+                html.push('<span class="calendar-font-icon ic-repeat-b"></span>');
+            } else if (schedule.attendees.length) {
+                html.push('<span class="calendar-font-icon ic-user-b"></span>');
+            } else if (schedule.location) {
+                html.push('<span class="calendar-font-icon ic-location-b"></span>');
+            }
+            html.push(' ' + schedule.title);
+        }
 
-			//change modalBodyBg height/width ans scale it
-			self.modalBodyBg.css({
-				height: eventHeight+'px',
-				width: '1px',
-			});
-			transformElement(self.modalBodyBg, 'scaleY('+HeaderBgScaleY+') scaleX('+BodyBgScaleX+')');
+        return html.join('');
+    }
 
-			//change modal modalHeaderBg height/width and scale it
-			self.modalHeaderBg.css({
-				height: eventHeight+'px',
-				width: eventWidth+'px',
-			});
-			transformElement(self.modalHeaderBg, 'scaleY('+HeaderBgScaleY+')');
-			
-			self.modalHeaderBg.one(transitionEnd, function(){
-				//wait for the  end of the modalHeaderBg transformation and show the modal content
-				self.modalHeaderBg.off(transitionEnd);
-				self.animating = false;
-				self.element.addClass('animation-completed');
-			});
-		}
+    function onClickNavi(e) {
+        var action = getDataAction(e.target);
 
-		//if browser do not support transitions -> no need to wait for the end of it
-		if( !transitionsSupported ) self.modal.add(self.modalHeaderBg).trigger(transitionEnd);
-	};
+        switch (action) {
+            case 'move-prev':
+                cal.prev();
+                break;
+            case 'move-next':
+                cal.next();
+                break;
+            case 'move-today':
+                cal.today();
+                break;
+            default:
+                return;
+        }
 
-	SchedulePlan.prototype.closeModal = function(event) {
-		var self = this;
-		var mq = self.mq();
+        setRenderRangeText();
+        setSchedules();
+    }
 
-		this.animating = true;
+    function onNewSchedule() {
+        var title = $('#new-schedule-title').val();
+        var location = $('#new-schedule-location').val();
+        var isAllDay = document.getElementById('new-schedule-allday').checked;
+        var start = datePicker.getStartDate();
+        var end = datePicker.getEndDate();
+        var calendar = selectedCalendar ? selectedCalendar : CalendarList[0];
 
-		if( mq == 'mobile' ) {
-			this.element.removeClass('modal-is-open');
-			this.modal.one(transitionEnd, function(){
-				self.modal.off(transitionEnd);
-				self.animating = false;
-				self.element.removeClass('content-loaded');
-				event.removeClass('selected-event');
-			});
-		} else {
-			var eventTop = event.offset().top - $(window).scrollTop(),
-				eventLeft = event.offset().left,
-				eventHeight = event.innerHeight(),
-				eventWidth = event.innerWidth();
+        if (!title) {
+            return;
+        }
 
-			var modalTop = Number(self.modal.css('top').replace('px', '')),
-				modalLeft = Number(self.modal.css('left').replace('px', ''));
+        console.log('calendar.id ', calendar.id)
+        cal.createSchedules([{
+            id: '1',
+            calendarId: calendar.id,
+            title: title,
+            isAllDay: isAllDay,
+            start: start,
+            end: end,
+            category: isAllDay ? 'allday' : 'time',
+            dueDateClass: '',
+            color: calendar.color,
+            bgColor: calendar.bgColor,
+            dragBgColor: calendar.bgColor,
+            borderColor: calendar.borderColor,
+            raw: {
+                location: location
+            },
+            state: 'Busy'
+        }]);
 
-			var modalTranslateX = eventLeft - modalLeft,
-				modalTranslateY = eventTop - modalTop;
+        $('#modal-new-schedule').modal('hide');
+    }
 
-			self.element.removeClass('animation-completed modal-is-open');
+    function onChangeNewScheduleCalendar(e) {
+        var target = $(e.target).closest('a[role="menuitem"]')[0];
+        var calendarId = getDataAction(target);
+        changeNewScheduleCalendar(calendarId);
+    }
 
-			//change modal width/height and translate it
-			this.modal.css({
-				width: eventWidth+'px',
-				height: eventHeight+'px'
-			});
-			transformElement(self.modal, 'translateX('+modalTranslateX+'px) translateY('+modalTranslateY+'px)');
-			
-			//scale down modalBodyBg element
-			transformElement(self.modalBodyBg, 'scaleX(0) scaleY(1)');
-			//scale down modalHeaderBg element
-			transformElement(self.modalHeaderBg, 'scaleY(1)');
+    function changeNewScheduleCalendar(calendarId) {
+        var calendarNameElement = document.getElementById('calendarName');
+        var calendar = findCalendar(calendarId);
+        var html = [];
 
-			this.modalHeaderBg.one(transitionEnd, function(){
-				//wait for the  end of the modalHeaderBg transformation and reset modal style
-				self.modalHeaderBg.off(transitionEnd);
-				self.modal.addClass('no-transition');
-				setTimeout(function(){
-					self.modal.add(self.modalHeader).add(self.modalBody).add(self.modalHeaderBg).add(self.modalBodyBg).attr('style', '');
-				}, 10);
-				setTimeout(function(){
-					self.modal.removeClass('no-transition');
-				}, 20);
+        html.push('<span class="calendar-bar" style="background-color: ' + calendar.bgColor + '; border-color:' + calendar.borderColor + ';"></span>');
+        html.push('<span class="calendar-name">' + calendar.name + '</span>');
 
-				self.animating = false;
-				self.element.removeClass('content-loaded');
-				event.removeClass('selected-event');
-			});
-		}
+        calendarNameElement.innerHTML = html.join('');
 
-		//browser do not support transitions -> no need to wait for the end of it
-		if( !transitionsSupported ) self.modal.add(self.modalHeaderBg).trigger(transitionEnd);
-	}
+        selectedCalendar = calendar;
+    }
 
-	SchedulePlan.prototype.mq = function(){
-		//get MQ value ('desktop' or 'mobile') 
-		var self = this;
-		return window.getComputedStyle(this.element.get(0), '::before').getPropertyValue('content').replace(/["']/g, '');
-	};
+    function createNewSchedule(event) {
+        var start = event.start ? new Date(event.start.getTime()) : new Date();
+        var end = event.end ? new Date(event.end.getTime()) : moment().add(1, 'hours').toDate();
 
-	SchedulePlan.prototype.checkEventModal = function(device) {
-		this.animating = true;
-		var self = this;
-		var mq = this.mq();
+        if (useCreationPopup) {
+            cal.openCreationPopup({
+                start: start,
+                end: end
+            });
+        }
+    }
+    function saveNewSchedule(scheduleData) {
+        console.log('scheduleData ', scheduleData)
+        var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
+        var schedule = {
+            id: '1',
+            title: scheduleData.title,
+            // isAllDay: scheduleData.isAllDay,
+            start: scheduleData.start,
+            end: scheduleData.end,
+            category: 'allday',
+            // category: scheduleData.isAllDay ? 'allday' : 'time',
+            // dueDateClass: '',
+            color: calendar.color,
+            bgColor: calendar.bgColor,
+            dragBgColor: calendar.bgColor,
+            borderColor: calendar.borderColor,
+            location: scheduleData.location,
+            // raw: {
+            //     class: scheduleData.raw['class']
+            // },
+            // state: scheduleData.state
+        };
+        if (calendar) {
+            schedule.calendarId = calendar.id;
+            schedule.color = calendar.color;
+            schedule.bgColor = calendar.bgColor;
+            schedule.borderColor = calendar.borderColor;
+        }
 
-		if( mq == 'mobile' ) {
-			//reset modal style on mobile
-			self.modal.add(self.modalHeader).add(self.modalHeaderBg).add(self.modalBody).add(self.modalBodyBg).attr('style', '');
-			self.modal.removeClass('no-transition');	
-			self.animating = false;	
-		} else if( mq == 'desktop' && self.element.hasClass('modal-is-open') ) {
-			self.modal.addClass('no-transition');
-			self.element.addClass('animation-completed');
-			var event = self.eventsGroup.find('.selected-event');
+        cal.createSchedules([schedule]);
 
-			var eventTop = event.offset().top - $(window).scrollTop(),
-				eventLeft = event.offset().left,
-				eventHeight = event.innerHeight(),
-				eventWidth = event.innerWidth();
+        refreshScheduleVisibility();
+    }
 
-			var windowWidth = $(window).width(),
-				windowHeight = $(window).height();
 
-			var modalWidth = ( windowWidth*.8 > self.modalMaxWidth ) ? self.modalMaxWidth : windowWidth*.8,
-				modalHeight = ( windowHeight*.8 > self.modalMaxHeight ) ? self.modalMaxHeight : windowHeight*.8;
+    function refreshScheduleVisibility() {
+        var calendarElements = Array.prototype.slice.call(document.querySelectorAll('#calendarList input'));
 
-			var HeaderBgScaleY = modalHeight/eventHeight,
-				BodyBgScaleX = (modalWidth - eventWidth);
+        CalendarList.forEach(function(calendar) {
+            cal.toggleSchedules(calendar.id, !calendar.checked, false);
+        });
 
-			setTimeout(function(){
-				self.modal.css({
-					width: modalWidth+'px',
-					height: modalHeight+'px',
-					top: (windowHeight/2 - modalHeight/2)+'px',
-					left: (windowWidth/2 - modalWidth/2)+'px',
-				});
-				transformElement(self.modal, 'translateY(0) translateX(0)');
-				//change modal modalBodyBg height/width
-				self.modalBodyBg.css({
-					height: modalHeight+'px',
-					width: '1px',
-				});
-				transformElement(self.modalBodyBg, 'scaleX('+BodyBgScaleX+')');
-				//set modalHeader width
-				self.modalHeader.css({
-					width: eventWidth+'px',
-				});
-				//set modalBody left margin
-				self.modalBody.css({
-					marginLeft: eventWidth+'px',
-				});
-				//change modal modalHeaderBg height/width and scale it
-				self.modalHeaderBg.css({
-					height: eventHeight+'px',
-					width: eventWidth+'px',
-				});
-				transformElement(self.modalHeaderBg, 'scaleY('+HeaderBgScaleY+')');
-			}, 10);
+        cal.render(true);
 
-			setTimeout(function(){
-				self.modal.removeClass('no-transition');
-				self.animating = false;	
-			}, 20);
-		}
-	};
+        calendarElements.forEach(function(input) {
+            var span = input.nextElementSibling;
+            span.style.backgroundColor = input.checked ? span.style.borderColor : 'transparent';
+        });
+    }
 
-	var schedules = $('.cd-schedule');
-	var objSchedulesPlan = [],
-		windowResize = false;
-	
-	if( schedules.length > 0 ) {
-		schedules.each(function(){
-			//create SchedulePlan objects
-			objSchedulesPlan.push(new SchedulePlan($(this)));
-		});
-	}
 
-	$(window).on('resize', function(){
-		if( !windowResize ) {
-			windowResize = true;
-			(!window.requestAnimationFrame) ? setTimeout(checkResize) : window.requestAnimationFrame(checkResize);
-		}
-	});
+    function setRenderRangeText() {
+        var renderRange = document.getElementById('renderRange');
+        var options = cal.getOptions();
+        var viewName = cal.getViewName();
+        var html = [];
+        if (viewName === 'day') {
+            html.push(moment(cal.getDate().getTime()).format('MMM YYYY DD'));
+        } else if (viewName === 'month' &&
+            (!options.month.visibleWeeksCount || options.month.visibleWeeksCount > 4)) {
+            html.push(moment(cal.getDate().getTime()).format('MMM YYYY'));
+        } else {
+            html.push(moment(cal.getDateRangeStart().getTime()).format('MMM YYYY DD'));
+            html.push(' ~ ');
+            html.push(moment(cal.getDateRangeEnd().getTime()).format(' MMM DD'));
+        }
+        renderRange.innerHTML = html.join('');
+    }
 
-	$(window).keyup(function(event) {
-		if (event.keyCode == 27) {
-			objSchedulesPlan.forEach(function(element){
-				element.closeModal(element.eventsGroup.find('.selected-event'));
-			});
-		}
-	});
+    function setSchedules() {
+        cal.clear();
+        var schedules = [
+            {id: 489273, title: 'Workout for 2020-04-05', isAllDay: false, start: '2020-03-03T11:30:00+09:00', end: '2020-03-03T12:00:00+09:00', goingDuration: 30, comingDuration: 30, color: '#ffffff', isVisible: true, bgColor: '#69BB2D', dragBgColor: '#69BB2D', borderColor: '#69BB2D', calendarId: '1', category: 'allday', dueDateClass: '', customStyle: 'cursor: default;', isPending: false, isFocused: false, isReadOnly: false, isPrivate: false, location: '', attendees: '', recurrenceRule: '', state: ''},
+            {id: 489273, title: 'Workout for 2020-04-05', isAllDay: false, start: '2020-03-11T11:30:00+09:00', end: '2020-03-11T12:00:00+09:00', goingDuration: 30, comingDuration: 30, color: '#ffffff', isVisible: true, bgColor: '#69BB2D', dragBgColor: '#69BB2D', borderColor: '#69BB2D', calendarId: '2', category: 'allday', dueDateClass: '', customStyle: 'cursor: default;', isPending: false, isFocused: false, isReadOnly: false, isPrivate: false, location: '', attendees: '', recurrenceRule: '', state: ''},
+            {id: 18073, title: 'completed with blocks', isAllDay: false, start: '2020-03-20T09:00:00+09:00', end: '2020-03-20T10:00:00+09:00', color: '#ffffff', isVisible: true, bgColor: '#54B8CC', dragBgColor: '#54B8CC', borderColor: '#54B8CC', calendarId: '1', category: 'allday', dueDateClass: '', customStyle: '', isPending: false, isFocused: false, isReadOnly: false, isPrivate: false, location: '', attendees: '', recurrenceRule: '', state: ''},
+            {id: 18073, title: 'completed with blocks', isAllDay: false, start: '2020-03-25T09:00:00+09:00', end: '2020-03-25T10:00:00+09:00', color: '#ffffff', isVisible: true, bgColor: '#54B8CC', dragBgColor: '#54B8CC', borderColor: '#54B8CC', calendarId: '1', category: 'allday', dueDateClass: '', customStyle: '', isPending: false, isFocused: false, isReadOnly: false, isPrivate: false, location: '', attendees: '', recurrenceRule: '', state: ''},
+            {id: 18073, title: 'completed with blocks', isAllDay: false, start: '2020-01-28T09:00:00+09:00', end: '2020-01-28T10:00:00+09:00', color: '#ffffff', isVisible: true, bgColor: '#54B8CC', dragBgColor: '#54B8CC', borderColor: '#54B8CC', calendarId: '1', category: 'allday', dueDateClass: '', customStyle: '', isPending: false, isFocused: false, isReadOnly: false, isPrivate: false, location: '', attendees: '', recurrenceRule: '', state: ''},
+            {id: 18073, title: 'completed with blocks', isAllDay: false, start: '2020-03-07T09:00:00+09:00', end: '2020-03-07T10:00:00+09:00', color: '#ffffff', isVisible: true, bgColor: '#54B8CC', dragBgColor: '#54B8CC', borderColor: '#54B8CC', calendarId: '1', category: 'allday', dueDateClass: '', customStyle: '', isPending: false, isFocused: false, isReadOnly: false, isPrivate: false, location: '', attendees: '', recurrenceRule: '', state: ''},
+            {id: 18073, title: 'Time Schedule Need BGCOLOR', isAllDay: false, start: '2020-03-28T09:00:00+09:00', end: '2020-03-28T10:00:00+09:00', color: '#ffffff', isVisible: true, bgColor: '#54B8CC', dragBgColor: '#54B8CC', borderColor: '#54B8CC', calendarId: '1', category: 'time', dueDateClass: '', customStyle: '', isPending: false, isFocused: false, isReadOnly: false, isPrivate: false, location: '', attendees: '', recurrenceRule: '', state: ''},
+            {id: 18073, title: 'Time Schedule Need BGCOLOR', isAllDay: false, start: '2020-03-17T09:00:00+09:00', end: '2020-03-17T10:00:00+09:00', color: '#ffffff', isVisible: true, bgColor: '#54B8CC', dragBgColor: '#54B8CC', borderColor: '#54B8CC', calendarId: '3', category: 'time', dueDateClass: '', customStyle: '', isPending: false, isFocused: false, isReadOnly: false, isPrivate: false, location: '', attendees: '', recurrenceRule: '', state: ''}
+        ];
+        // generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
+        cal.createSchedules(schedules);
+        // cal.createSchedules(schedules);
+        refreshScheduleVisibility();
+    }
 
-	function checkResize(){
-		objSchedulesPlan.forEach(function(element){
-			element.scheduleReset();
-		});
-		windowResize = false;
-	}
+    function setEventListener() {
+        $('#menu-navi').on('click', onClickNavi);
+        // $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
+        // $('#lnb-calendars').on('change', onChangeCalendars);
 
-	function getScheduleTimestamp(time) {
-		//accepts hh:mm format - convert hh:mm to timestamp
-		time = time.replace(/ /g,'');
-		var timeArray = time.split(':');
-		var timeStamp = parseInt(timeArray[0])*60 + parseInt(timeArray[1]);
-		return timeStamp;
-	}
+        $('#btn-save-schedule').on('click', onNewSchedule);
+        $('#btn-new-schedule').on('click', createNewSchedule);
 
-	function transformElement(element, value) {
-		element.css({
-		    '-moz-transform': value,
-		    '-webkit-transform': value,
-			'-ms-transform': value,
-			'-o-transform': value,
-			'transform': value
-		});
-	}
-});
+        $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
+
+        window.addEventListener('resize', resizeThrottled);
+    }
+
+    function getDataAction(target) {
+        return target.dataset ? target.dataset.action : target.getAttribute('data-action');
+    }
+
+    resizeThrottled = tui.util.throttle(function() {
+        cal.render();
+    }, 50);
+
+    window.cal = cal;
+
+    // setDropdownCalendarType();
+    setRenderRangeText();
+    setSchedules();
+    setEventListener();
+})(window, tui.Calendar);
+
+// set calendars
+(function() {
+    // var calendarList = document.getElementById('calendarList');
+    // var html = [];
+    // CalendarList.forEach(function(calendar) {
+    //     html.push('<div class="lnb-calendars-item"><label>' +
+    //         '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
+    //         '<span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span>' +
+    //         '<span>' + calendar.name + '</span>' +
+    //         '</label></div>'
+    //     );
+    // });
+    // calendarList.innerHTML = html.join('\n');
+})();

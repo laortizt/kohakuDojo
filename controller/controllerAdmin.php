@@ -11,6 +11,7 @@
     class controllerAdmin extends modelAdmin{
         //controlador para agregar administrador
         public function add_controller_Admin(){
+            //+++estos datos era del primer formulario y se modifico,s se estan usando estos datos???
             $typeDocument= mainModel::clean_string($_POST['dni']);
             $Dni= mainModel::clean_string($_POST['dni']);
             $firstName= mainModel::clean_string($_POST['FirstName']); 
@@ -21,11 +22,10 @@
             $email= mainModel::clean_string($_POST['Email']);
             $password= mainModel::clean_string($_POST['Pass1']);
             $genre= mainModel::clean_string($_POST['Genere']);
-            $privilegio= mainModel::clean_string($_POST['Privileges']);
-            
+            $privileges= mainModel::clean_string($_POST['Privileges']);
+            //cambiar el contenido de la última fila
+            ;
              
-                    
-
             //validación contraseñas
             if($password!=$password){
                 $alert=[
@@ -150,8 +150,9 @@
 
             //Calcula cúantos registros hay en la consutla
             //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
-            $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM accounts 
-                WHERE idAccount!='1' ORDER BY accountFirstName ASC LIMIT $start, $register");
+            $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM accounts a
+                LEFT JOIN genre g ON (a.accountGenre = g.idGenre)
+                WHERE a.idAccount!='1' ORDER BY a.accountFirstName ASC LIMIT $start, $register");
             $datos=$datos->fetchAll();
             $total=$conexion->query("SELECT found_rows()");
             $total=(int) $total->fetchColumn();
@@ -172,7 +173,7 @@
                     <td>Correo</td>
                     <td>Rol</td>
                     <td>Estado</td>
-                    <td colspan="2">Acciones</td>
+                    <td colspan="1">Acciones</td>
                 </thead>
                 <tbody>
             ';
@@ -189,17 +190,17 @@
                         <td>'.$rows['accountLastName'].'</td>
                         <td>'.$rows['accountAddress'].'</td>
                         <td>'.$rows['accountPhone'].'</td>
-                        <td>'.$rows['accountGenre'].'</td>
+                        <td>'.(isset($rows['nameGenre']) ? $rows['nameGenre'] : "Pendiente").'</td>
                         <td>'.$rows['accountEmail'].'</td>
                         <td>'.$rows['accountRole'].'</td>
-                        <td>'.$rows['accountState'].'</td>
-                        <td>'.'<button class="btn btn__update"><a href="#"><i class="fas fa-edit"></i></a></button>&nbsp;'.
-                        '<button class="btn btn__delete"><a href="#"><i class="fas fa-trash-alt"></i></a></button>'.'</td>
+                        <td>'.($rows['accountState'] == 1 ? "Activo" : "Inactivo").'</td>
+                        <td>'.'<button class="btn btn__update"><a href=""><i class="far fa-check-circle"></i></a></button>&nbsp;'.
+                        '<button class="btn btn__delete"><a href="#"><i class="far fa-times-circle"></i></a></button>'.'</td>
                     </tr>
                     ';
                     $count++;
                 }
-            } else {
+            }else{
                 $table.='
                     <tr>
                         <td colspan="15"> No hay registros en el sistema</td>
@@ -209,4 +210,92 @@
 
             return $table;
     }
+
+
+    public function update_admin_controller() {
+        // Limpiar info del formulario
+        $typeDocument= mainModel::clean_string($_POST['typeDocument-profile']);
+        $Dni= mainModel::clean_string($_POST['dni-profile']);
+        $firstName= mainModel::clean_string($_POST['firstname-profile']); 
+        $lastName= mainModel::clean_string($_POST['lastname-profile']);
+        $address= mainModel::clean_string($_POST['adress-profile']); 
+        $email= mainModel::clean_string($_POST['email-profile']);
+        $phone= mainModel::clean_string($_POST['phone-profile']);
+        $genre= mainModel::clean_string($_POST['genre-profile']);
+
+        // Validar la info que llega
+        $profilesByDni=modelAdmin::find_dni($Dni);
+
+        if (count($profilesByDni) > 1 || 
+            (count($profilesByDni) == 1 && $profilesByDni[0]['accountDni'] != $Dni) )
+        {
+            $alert=[
+                "alert"=>"simple",
+                "title"=>"Ocurrio un error inesperado",
+                "text"=>"El número de Identificación ya está registrado",
+                "type"=>"error"
+            ];
+        } else {
+            // Buscar por correo
+            $profilesByEmail=modelAdmin::find_email($email);
+        
+            // Si existe uno, verificar si su account code coincide con el usuario actual
+            if(count($profilesByEmail) != 1){
+                // Si no coincide, error
+                $alert=[
+                    "alert"=>"simple",
+                    "title"=>"Ocurrio un error inesperado",
+                    "text"=>"Usuario no encontrado",
+                    "type"=>"error"
+                ];
+            } else if ($_SESSION['role_sk'] != "Administrador") {
+                // El usuario logueado no es Admin, no puede editar otros usuarios
+                $alert=[
+                    "alert"=>"simple",
+                    "title"=>"Acción no permitida",
+                    "text"=>"No tiene privilegios suficientes para editar usuarios",
+                    "type"=>"error"
+                ];
+            } else {
+                // Si coincide, proceder con la actualización
+                $id = $profilesByEmail[0]['idAccount'];
+
+                // Construir el objeto que se envía al modelo
+                // Si todas se cumplen, llamar al modelo para que ejecute el cambio, enviando la info en un arreglo
+                $data = [
+                    "Id"=>$id,
+                    "DocumentType"=>$typeDocument,
+                    "Dni"=>$Dni,
+                    "FirstName"=>$firstName,
+                    "LastName"=>$lastName,
+                    "Address"=>$address,
+                    "Phone"=>$phone,
+                    "Genre"=>$genre
+                ];
+
+                // LLamar al modelo
+                $saveAdmin = modelAdmin::update_admin_model($data);
+
+                // Verificar respuesta del modelo y construir la respuesta para la vista
+                if($saveAdmin->rowCount() >= 1){
+                    $alert=[
+                        "alert"=>"limpiar",
+                        "title"=>"Actualizar perfil",
+                        "text"=>"El perfil se ha actualizado exitósamente.",
+                        "type"=>"success"
+                    ];
+                }else {
+                    $alert=[
+                        "alert"=>"simple",
+                        "title"=>"Actualizar perfil",
+                        "text"=>"No se pudo actualizar el perfil, verifique los campos e intente de nuevo.",
+                        "type"=>"error"
+                    ];
+                }
+            }
+        }
+
+        return mainModel::sweet_alert($alert);
+    }
+
 }
