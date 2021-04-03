@@ -1,85 +1,113 @@
-:root {
-  --line-border-fill: #3498db;
-  --line-border-empty: #e0e0e0;
-}
-
-
-.container-progress {
-  margin: auto;
-  text-align: center;
-}
-
-.progress-container {
-  display: flex;
-  justify-content: space-between;
+@charset "UTF-8";
+.stepper .nav-tabs {
   position: relative;
-  margin-bottom: 30px;
-  max-width: 100%;
-  width: 350px;
 }
-
-.progress-container::before {
-  content: '';
-  background-color: var(--line-border-empty);
+.stepper .nav-tabs > li {
+  width: 25%;
+  position: relative;
+}
+.stepper .nav-tabs > li:after {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  height: 4px;
+  background: #f1f1f1;
+  display: block;
   width: 100%;
-  z-index: -1;
+  height: 5px;
+  top: 30px;
+  left: 50%;
+  z-index: 1;
 }
-
-.progress {
-  background-color: var(--line-border-fill);
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  height: 4px;
-  width: 0%;
-  z-index: -1;
-  transition: 0.4s ease;
-  
+.stepper .nav-tabs > li.completed::after {
+  background: #34bc9b;
 }
-
-.circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid var(--line-border-empty);
-  transition: 0.4s ease;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  background-color:white;
+.stepper .nav-tabs > li:last-child::after {
+  background: transparent;
 }
-
-.circle.active {
-  border-color: var(--line-border-fill);
+.stepper .nav-tabs > li.active:last-child .round-tab {
+  background: #34bc9b;
 }
-
-.btn-progress {
-  background-color: var(--line-border-fill);
+.stepper .nav-tabs > li.active:last-child .round-tab::after {
+  content: "✔";
   color: #fff;
-  border: 0;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: inherit;
-  padding: 8px 30px;
-  margin: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 0;
+  display: block;
+}
+.stepper .nav-tabs [data-toggle="tab"] {
+  width: 25px;
+  height: 25px;
+  margin: 20px auto;
+  border-radius: 100%;
+  border: none;
+  padding: 0;
+  color: #f1f1f1;
+}
+.stepper .nav-tabs [data-toggle="tab"]:hover {
+  background: transparent;
+  border: none;
+}
+.stepper .nav-tabs > .active > [data-toggle="tab"],
+.stepper .nav-tabs > .active > [data-toggle="tab"]:hover,
+.stepper .nav-tabs > .active > [data-toggle="tab"]:focus {
+  color: #34bc9b;
+  cursor: default;
+  border: none;
+}
+.stepper .tab-pane {
+  position: relative;
+  padding-top: 50px;
+}
+.stepper .round-tab {
+  width: 25px;
+  height: 25px;
+  line-height: 22px;
+  display: inline-block;
+  border-radius: 25px;
+  background: #fff;
+  border: 2px solid #34bc9b;
+  color: #34bc9b;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  text-align: center;
   font-size: 14px;
 }
-
-.btn-progress:active {
-  transform: scale(0.98);
+.stepper .completed .round-tab {
+  background: #34bc9b;
 }
-
-.btn-progress:focus {
-  outline: 0;
+.stepper .completed .round-tab::after {
+  content: "✔";
+  color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 0;
+  display: block;
 }
-
-.btn-progress:disabled {
-  background-color: var(--line-border-empty);
-  cursor: not-allowed;
+.stepper .active .round-tab {
+  background: #fff;
+  border: 2px solid #34bc9b;
+}
+.stepper .active .round-tab:hover {
+  background: #fff;
+  border: 2px solid #34bc9b;
+}
+.stepper .active .round-tab::after {
+  display: none;
+}
+.stepper .disabled .round-tab {
+  background: #fff;
+  color: #f1f1f1;
+  border-color: #f1f1f1;
+}
+.stepper .disabled .round-tab:hover {
+  color: #4dd3b6;
+  border: 2px solid #a6dfd3;
+}
+.stepper .disabled .round-tab::after {
+  display: none;
 }

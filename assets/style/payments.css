@@ -1,59 +1,70 @@
 .header-class{
-    background: #0dad83;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    color: white;
-    font-size: 2rem;
-    padding-left: 15px;
-    margin-bottom: 25px;
-    
+  background: #0dad83;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  padding-left: 15px;
+  margin-bottom: 25px
+}
+
+table {
+  border: 1px solid #ccc;
+  width: 100%;
+  margin:0;
+  padding:0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table tr {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+table th, table td {
+  padding: 10px;
+  text-align: center;
+}
+
+table th {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+@media screen and (max-width: 600px) {
+
+  table {
+    border: 0;
   }
-  
-  
-  .container-class{
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
-    padding: 8px 16px;
-    font-size: 1.5rem;
-    gap: 16px;
+
+  table thead {
+    display: none;
   }
-  
-  .container-class > p {
-    flex: 1;
-    max-width: 50%;
-    display: flex;
-    flex-direction: column;
+
+  table tr {
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px solid #ddd;
   }
-  
-  .input-class, input[type="date"].input-class, input[type="time"].input-class {
-    max-width: none;
-    width: 100%;
-    background-color: white;
-    margin: 10px 0;
-    height: 55px;
-    border-radius: 55px;
-    display: grid;
-    grid-template-columns: 15% 85%;
-    padding: 0 0.4rem;
-    /* position: relative; */
-    align-items: center;
+
+  table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    border-bottom: 1px dotted #ccc;
   }
-  
-  .input-class i {
-    text-align: center;
-    line-height: 55px;
-    color: #0aebcd;
-    transition: 0.5s;
-    font-size: 1.1rem;
-    
+
+  table td:last-child {
+    border-bottom: 0;
   }
-  .input-class input {
-    background: none;
-    outline: none;
-    border: none;
-    line-height: 1;
-    font-weight: 600;
-    font-size: 1.1rem;
+
+  table td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
   }
+}

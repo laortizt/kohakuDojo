@@ -1,59 +1,86 @@
-.header-class{
-    background: #0dad83;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    color: white;
-    font-size: 2rem;
-    padding-left: 15px;
-    margin-bottom: 25px;
+.text-center{
+  text-align:center;
+}
+.container{
+  width:1200px;
+  margin:auto;
+}
+.Plans {
+    /* padding: 80px 0; */
+    background-color: #58CA7E;
+    color:#fff;
+}
+.Plans h1{
     
-  }
+    font-size: 37px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+.Plans .items-plan{
+    margin-top: 40px;  /*  New  (overflow--removed)*/
+}
+.Plans .items-plan .PlaneName{
+    width: 32.3333%;
+    float: left;
+    margin-right: 10px;  /*  Changed  */
+    color: #999;
+    background-color: #fff;
+    width: 320px;
+    /* height: 410px; */
+    padding: 25px ;
+}
+.Plans .items-plan .PlaneName.active{  /*  New  */
+    transform: scale(1.1);
+   -webkit-transform: scale(1.1);
+   -moz-transform: scale(1.1);
   
+    z-index: 154564;
   
-  .container-class{
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
-    padding: 8px 16px;
-    font-size: 1.5rem;
-    gap: 16px;
-  }
-  
-  .container-class > p {
-    flex: 1;
-    max-width: 50%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .input-class, input[type="date"].input-class, input[type="time"].input-class {
-    max-width: none;
-    width: 100%;
-    background-color: white;
-    margin: 10px 0;
-    height: 55px;
-    border-radius: 55px;
-    display: grid;
-    grid-template-columns: 15% 85%;
-    padding: 0 0.4rem;
-    /* position: relative; */
-    align-items: center;
-  }
-  
-  .input-class i {
-    text-align: center;
-    line-height: 55px;
-    color: #0aebcd;
-    transition: 0.5s;
-    font-size: 1.1rem;
-    
-  }
-  .input-class input {
-    background: none;
-    outline: none;
-    border: none;
-    line-height: 1;
+    box-shadow: 0 1px 20px #afafaf,0 1px 20px #afafaf;
+  -webkit-box-shadow: 0 1px 20px #afafaf,0 1px 20px #afafaf;
+  -moz-box-shadow: 0 1px 20px #afafaf,0 1px 20px #afafaf;
+}
+.Plans .items-plan .PlaneName .title{
+    color: #262626;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.Plans .items-plan .PlaneName h3{
+    font-size: 16px;
+}
+.Plans .items-plan .PlaneName h1{
+    color: #45c46f;
+    font-size:4em;
+    font-weight: 800;
+    margin: 0;
+}
+.Plans .items-plan .PlaneName span{
+    color: #ccc;
+    font-size: 17px;
+    margin-left: 13px;
+}
+.Plans .items-plan .PlaneName p{
+    font-size: 16px;
     font-weight: 600;
-    font-size: 1.1rem;
-  }
+    line-height: 1.8;
+    color: #262626;
+}
+.Plans .items-plan .PlaneName button{
+    background-color: transparent;
+    border: 2px solid #45c46f;
+    border-radius:5px;
+    padding: 10px 30px;
+    color: #45c46f;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 25px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;   
+}
+.Plans .items-plan .PlaneName button:hover{
+    background-color: #45c46f;
+    border: 2px solid #45c46f;
+    color: #fff;
+}
+

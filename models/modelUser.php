@@ -24,17 +24,17 @@
         }
 
         public function list_typeDocuments_model() {
-            //Obtiene los géneros registrados
+            //Obtiene los tipos de documentos registrados
             $datos = mainModel::connect()->query("SELECT * FROM documenttype");
             return $datos->fetchAll();
         }
         public function list_roles_model() {
-            //Obtiene los géneros registrados
+            //Obtiene los roles registrados
             $datos = mainModel::connect()->query("SELECT * FROM role");
             return $datos->fetchAll();
         }
         public function list_states_model() {
-            //Obtiene los géneros registrados
+            //Obtiene los estados registrados
             $datos = mainModel::connect()->query("SELECT * FROM status");
             return $datos->fetchAll();
         }

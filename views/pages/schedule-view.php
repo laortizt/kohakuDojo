@@ -12,33 +12,27 @@ $insAdmin = new controllerClass();
             <div class="card">
                 <div class="card-content">
                     <div class="header-class">
-                        <h1>Horario de Clasers</h1>
+                        <h1>Horario de Clases</h1>
                     </div>
-                  
-                    <span id="menu-navi">
-                        <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Hoy</button>
-                        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
-                            <i class="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
-                        </button>
-                        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
-                            <i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
-                        </button>
-                    </span>
-                    <span id="renderRange" class="render-range"></span>
 
-                    <div class="promo_card" id="post">
-                        <h2>Custom popUp Post </h2>
+                    <div class="container">
+                        <div id="menu">
+                            <span id="menu-navi">
+                                <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+                                <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
+                                    <i class="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
+                                    <i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
+                                </button>
+                            </span>
+                            <span id="renderRange" class="render-range"></span>
+                        </div>
+
+                        <div id="calendar" style="height: 800px;"></div>
                     </div>
-                    <div class="promo_card" id="event">
-                        <h2>Custom popUp Event </h2>
-                    </div>
-                    <div class="promo_card" id="offer">
-                        <h2>Custom popUp Offer </h2>
-                    </div>
-                    <div class="promo_card" id="create">
-                        <h2>Custom Create Schedule popUp </h2>
-                    </div>
-                    
+
+
                     <div id="calendar"></div>
                 </div>
             </div>

@@ -1,0 +1,94 @@
+.container.newPay-container {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .newPay-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .newPay {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .input-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  .input-field {
+    max-width: 380px;
+    width: 100%;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    height: 40px;
+    border-radius: 55px;
+    padding: 0 16px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  
+  .input-field i {
+    text-align: center;
+    line-height: 40px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1.1rem;
+    padding: 0 4px;
+  }
+  
+  .input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    flex: 1;
+  }
+  .btn-kohaku-newPay {
+    margin-top: 10px;
+    background-color: transparent;
+    background-image: url(./../img/btnGris.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: var(--black);
+    font-size: 2rem;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    color:black;
+    padding: 0.5rem 1rem;
+  }
+  
+  
+  
+  .btn-kohaku-newPay:hover{
+    background-image: url(./../img/btnRojo.png);
+    color: white
+  }
+  
+  .btn-kohaku-newPay:focus {
+    box-shadow: none;
+  }
+  .title {
+    font-size: 2.5rem;
+    color: rgb(255, 16, 16);
+    margin-bottom: 10px;
+    font-family: 'Anton', sans-serif;
+    
+  }

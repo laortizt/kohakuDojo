@@ -31,7 +31,7 @@
 
             return $sql;
         }
-
+        //Eliminar clase
         protected function delete_class($idClass){
             $sql=mainModel::connect()->prepare("DELETE FROM class WHERE idClass=:idClass");
             $sql->bindParam(":idClass",$idClass);
@@ -47,4 +47,5 @@
             //     FROM class WHERE classTopic ='$Topic'");
             // return $datos->fetchAll();
         }
+        
     }

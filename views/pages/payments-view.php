@@ -12,7 +12,7 @@ $insAdmin = new controllerAdmin();
 
 <div class="container-fluid">
 
-	<?php include "./views/modules/menuPayments.php"; ?>
+	
 
 
 	<div class="row">
@@ -23,28 +23,61 @@ $insAdmin = new controllerAdmin();
 					<form action="ajax/classAjax.php" class="form-class" method="post" autocomplete="off" class="formulario-ajax">
 						<div class="header-class">
 							<h1>Lista de Pagos</h1>
+							<a href="<?php echo SERVERURL; ?>newPay/" class="btn-kohaku">
+                            <i></i> Nuevo
+                        </a>
+                        <a href="<?php echo SERVERURL; ?>calendar/" class="btn-kohaku">
+                            <i></i> Eliminar
+                        </a>
+                        <a href="<?php echo SERVERURL; ?>payments/" class="btn-kohaku">
+                            <i></i> Lista
+                        </a>
 						</div>
+						
 
-						<div class="card-content">
-							<p>Seleciona una fecha: <input class="input-class" type="date" name="fechaesperada"></p>
+						<table>
+							<thead>
+								<tr>
+									<th>Pagos</th>
+									<th>Fecha de Pago</th>
+									<th>Concepto</th>
+									<th>Monto</th>
+									<th>Estado</th>
+									<td colspan="2">Acciones</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td data-label="Pagos">Pago #1</td>
+									<td data-label="Fecha de Pago">02/01/2015</td>
+									<td data-label="Concepto">Membresía</td>
+									<td data-label="Monto">$2,311</td>
+									<td data-label="Estado">Pagado</td>
+								</tr>
+								<tr>
+								<td data-label="Pagos">Pago #2</td>
+									<td data-label="Fecha de Pago">02/01/2015</td>
+									<td data-label="Concepto">Clases Enero</td>
+									<td data-label="Monto">$2,311</td>
+									<td data-label="Estado">Pendiente</td>
+								</tr>
+							</tbody>
+						</table>
 
 					</form>
-					<div class="container-class">
-						<button>Exportar</button>
-					</div>
 				</div>
 
-				<?php
-				$pages = explode("/", $_GET['page']);
-				// echo $insAdmin->pages_admin_controller($pages[1], 10, $_SESSION['role_sk'], $_SESSION['code']);
-				echo $insAdmin->pages_admin_controller(0, 10, $_SESSION['role_sk'], 'code');
-				?>
+
+
 			</div>
 
-			<div class="RespuestaAjax"></div>
-			</form>
+
 		</div>
+
+		<div class="RespuestaAjax"></div>
+		</form>
 	</div>
+</div>
 </div>
 
 <script src="<?php echo SERVERURL; ?>assets/script/assistance.js"></script>

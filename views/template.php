@@ -25,8 +25,15 @@ session_start(['name' => 'SK']);
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
 
 	<!-- Estilos calendario -->
+	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css" />
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css" />
+	
+	<!-- Estilos progesso -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	
+	<!-- Estilos calendario -->
 
 	<!-- End import lib -->
 	<link href="<?php echo SERVERURL; ?>assets/style/dashboard.css" rel="stylesheet">
@@ -38,6 +45,7 @@ session_start(['name' => 'SK']);
 	<link href="<?php echo SERVERURL; ?>assets/style/profile.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/plans.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/payments.css" rel="stylesheet">
+	<link href="<?php echo SERVERURL; ?>assets/style/newPay.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/kohaku.css" rel="stylesheet">
 
 	<link href="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.css" rel="stylesheet">
@@ -173,9 +181,25 @@ session_start(['name' => 'SK']);
 					
 					</a>
 				</li>
-
+				<li class="sidebar-nav-item">
+					<a href="<?php echo SERVERURL; ?>assistance" class="sidebar-nav-link">
+						<div>
+							<i class="far fa-calendar-alt"></i>
+						</div>
+						<span>Asistencia</span>
+					
+					</a>
+				</li>
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>plans" class="sidebar-nav-link">
+						<div>
+							<i class="fas fa-cash-register"></i>
+						</div>
+						<span>Planes</span>
+					</a>
+				</li>
+				<li class="sidebar-nav-item">
+					<a href="<?php echo SERVERURL; ?>payments" class="sidebar-nav-link">
 						<div>
 							<i class="fas fa-cash-register"></i>
 						</div>
@@ -184,7 +208,7 @@ session_start(['name' => 'SK']);
 				</li>
 
 				<li class="sidebar-nav-item">
-					<a href="#" class="sidebar-nav-link">
+					<a href="<?php echo SERVERURL; ?>progress"  class="sidebar-nav-link">
 						<div>
 							<i class="fas fa-check-circle"></i>
 						</div>

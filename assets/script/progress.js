@@ -1,53 +1,63 @@
-$(document).ready(() => {
-    const progress = document.getElementById('progress')
-    const prev = document.getElementById('prev')
-    const next = document.getElementById('next')
-    const circles = document.querySelectorAll('.circle')
-    
-    let currentActive = 1
-    if (next){
-        next.addEventListener('click', () => {
-            currentActive++
-        
-            if(currentActive > circles.length) {
-        
-            }
-        
-            update()
-        })
-    }
-    if(prev) {
-        prev.addEventListener('click', () => {
-            currentActive--
-        
-            if(currentActive < 1) {
-                currentActive = 1 //aqui
-            }
-        
-            update()
-        })
-    }
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
+(function($) {
+    'use strict';
 
-    function update() {
-        circles.forEach((circle, idx) => {
-            if(idx < currentActive) {
-                circle.classList.add('active')
-            } else {
-                circle.classList.remove('active')
+    $(function() {
+
+        $(document).ready(function() {
+            function triggerClick(elem) {
+                $(elem).click();
             }
-        })
-    
-        const actives = document.querySelectorAll('.active')
-    
-        progress.style.width = (actives.length - 1) / (circles.length - 1) * 100 + '%'
-    
-        if(currentActive === 1) {
-            prev.disabled = true  //aqui
-        } else if(currentActive === circles.length) {
-            next.disabled = true  //aqui
-        } else {
-            prev.disabled = false // aqui
-            next.disabled = false // aqui
-        }
-    }
-});
+            var $progressWizard = $('.stepper'),
+                $tab_active,
+                $tab_prev,
+                $tab_next,
+                $btn_prev = $progressWizard.find('.prev-step'),
+                $btn_next = $progressWizard.find('.next-step'),
+                $tab_toggle = $progressWizard.find('[data-toggle="tab"]'),
+                $tooltips = $progressWizard.find('[data-toggle="tab"][title]');
+
+            // To do:
+            // Disable User select drop-down after first step.
+            // Add support for payment type switching.
+
+            //Initialize tooltips
+            $tooltips.tooltip();
+
+            //Wizard
+            $tab_toggle.on('show.bs.tab', function(e) {
+                var $target = $(e.target);
+
+                if (!$target.parent().hasClass('active, disabled')) {
+                    $target.parent().prev().addClass('completed');
+                }
+                if ($target.parent().hasClass('disabled')) {
+                    return false;
+                }
+            });
+
+            // $tab_toggle.on('click', function(event) {
+            //     event.preventDefault();
+            //     event.stopPropagation();
+            //     return false;
+            // });
+
+            $btn_next.on('click', function() {
+                $tab_active = $progressWizard.find('.active');
+
+                $tab_active.next().removeClass('disabled');
+
+                $tab_next = $tab_active.next().find('a[data-toggle="tab"]');
+                triggerClick($tab_next);
+
+            });
+            $btn_prev.click(function() {
+                $tab_active = $progressWizard.find('.active');
+                $tab_prev = $tab_active.prev().find('a[data-toggle="tab"]');
+                triggerClick($tab_prev);
+            });
+        });
+    });
+
+}(jQuery, this));
