@@ -14,12 +14,10 @@ $insAdmin = new controllerAdmin();
 
 	<?php include "./views/modules/menuClass.php"; ?>
 
-
 	<div class="row">
 		<div class="col-12 col-m-12 col-sm-12">
-			<div class="card">
+			<div class="card attendance">
 				<div class="card-content">
-
 					<form action="ajax/classAjax.php" class="form-class" method="post" autocomplete="off" class="formulario-ajax">
 						<div class="header-class">
 							<h1>Asistencia</h1>
@@ -47,4 +45,4 @@ $insAdmin = new controllerAdmin();
 	</div>
 </div>
 
-<script src="<?php echo SERVERURL; ?>assets/script/assistance.js"></script>
+<script src="<?php echo SERVERURL; ?>assets/script/attendance.js"></script>

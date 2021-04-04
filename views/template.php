@@ -28,18 +28,12 @@ session_start(['name' => 'SK']);
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css" />
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css" />
-	
-	<!-- Estilos progesso -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	
-	<!-- Estilos calendario -->
 
 	<!-- End import lib -->
 	<link href="<?php echo SERVERURL; ?>assets/style/dashboard.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/calendar.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/schedule.css" rel="stylesheet">
-	<link href="<?php echo SERVERURL; ?>assets/style/assistence.css" rel="stylesheet">
+	<link href="<?php echo SERVERURL; ?>assets/style/attendance.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/privileges.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/progress.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/profile.css" rel="stylesheet">
@@ -182,7 +176,7 @@ session_start(['name' => 'SK']);
 					</a>
 				</li>
 				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>assistance" class="sidebar-nav-link">
+					<a href="<?php echo SERVERURL; ?>attendance" class="sidebar-nav-link">
 						<div>
 							<i class="far fa-calendar-alt"></i>
 						</div>
@@ -193,7 +187,7 @@ session_start(['name' => 'SK']);
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>plans" class="sidebar-nav-link">
 						<div>
-							<i class="fas fa-cash-register"></i>
+						<i class="fas fa-money-check-alt"></i>
 						</div>
 						<span>Planes</span>
 					</a>

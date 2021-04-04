@@ -152,6 +152,8 @@
             //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
             $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM accounts a
                 LEFT JOIN genre g ON (a.accountGenre = g.idGenre)
+                LEFT JOIN documenttype dt ON (a.accountDocumentType = dt.idDocumentType)
+                LEFT JOIN `role` r ON (a.accountRole = r.idRole)
                 WHERE a.idAccount!='1' ORDER BY a.accountFirstName ASC LIMIT $start, $register");
             $datos=$datos->fetchAll();
             $total=$conexion->query("SELECT found_rows()");
@@ -162,7 +164,6 @@
             $table.='<div>
             <table>
                 <thead> 
-                    <td>Id</td>
                     <td>Documento</td>
                     <td>Número</td>
                     <td>Nombres</td>
@@ -182,9 +183,8 @@
                 $count=$start+1;
                 foreach($datos as $rows){
                     $table.='
-                    <tr> 
-                        <td>'.$count.'</td> 
-                        <td>'.$rows['accountDocumentType'].'</td>
+                    <tr>
+                        <td>'.$rows['nameDocumentType'].'</td>
                         <td>'.$rows['accountDni'].'</td>
                         <td>'.$rows['accountFirstName'].'</td>
                         <td>'.$rows['accountLastName'].'</td>
@@ -192,7 +192,7 @@
                         <td>'.$rows['accountPhone'].'</td>
                         <td>'.(isset($rows['nameGenre']) ? $rows['nameGenre'] : "Pendiente").'</td>
                         <td>'.$rows['accountEmail'].'</td>
-                        <td>'.$rows['accountRole'].'</td>
+                        <td>'.$rows['roleName'].'</td>
                         <td>'.($rows['accountState'] == 1 ? "Activo" : "Inactivo").'</td>
                         <td>'.'<button class="btn btn__update"><a href=""><i class="far fa-check-circle"></i></a></button>&nbsp;'.
                         '<button class="btn btn__delete"><a href="#"><i class="far fa-times-circle"></i></a></button>'.'</td>

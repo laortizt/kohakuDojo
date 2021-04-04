@@ -1,7 +1,7 @@
-.container.newPay-container {
+/* .container.newPay-container {
     padding: 0;
     max-width: 100%;
-  }
+  } */
 
   .newPay-form{
     display: flex;
@@ -61,7 +61,7 @@
     flex: 1;
   }
   .btn-kohaku-newPay {
-    margin-top: 10px;
+    /* margin-top: 10px; */
     background-color: transparent;
     background-image: url(./../img/btnGris.png);
     background-size: 100% 100%;
@@ -73,6 +73,7 @@
     border-radius: 0;
     color:black;
     padding: 0.5rem 1rem;
+    
   }
   
   

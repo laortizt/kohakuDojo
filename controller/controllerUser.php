@@ -23,7 +23,7 @@
             $Role= mainModel::clean_string($_POST['Role']);
             $State= mainModel::clean_string($_POST['State']);
             
-            $privilegio= mainModel::clean_string($_POST['Privileges']);
+            
 
             //validación contraseñas
         

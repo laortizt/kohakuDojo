@@ -8,9 +8,9 @@
     }
 
     //MODELO PARA  LLAMAR LA LISTA DE USUARIOS
-    class modelAssistance extends mainModel{
+    class modelAttendance extends mainModel{
 
-        public function get_listAssistance($data) {
+        public function get_listAttendance($data) {
             $sql=mainModel::connect()->prepare("UPDATE class 
             SET classDate=:Date, classTeacher=:Teacher, classTopic=:Topic
             WHERE idClass=:IdClass");
@@ -22,6 +22,5 @@
         $sql->execute();
 
         return $sql;      
-        }
-        
-}
+        }    
+    }

@@ -98,18 +98,18 @@ form .form-group .input__text{
 .privileges table .head{
     background: rgb(3, 113, 163);
 }
-.privileges table .head td{
+.privileges table thead td{
     color: #fff;
     font-family: 'Arial',sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
 }
 
 .privileges table tr td{
     border:1px solid #ccc;
     padding: 7px;
-    font-size: 14px;
+    font-size: 10px;
     color: #555;
 }
 

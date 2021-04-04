@@ -20,12 +20,11 @@
     margin-top: 40px;  /*  New  (overflow--removed)*/
 }
 .Plans .items-plan .PlaneName{
-    width: 32.3333%;
+    width: 32%;
     float: left;
     margin-right: 10px;  /*  Changed  */
     color: #999;
     background-color: #fff;
-    width: 320px;
     /* height: 410px; */
     padding: 25px ;
 }

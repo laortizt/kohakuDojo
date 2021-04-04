@@ -18,8 +18,8 @@
             return $datos->fetchAll();
         }
 
-        //Actualizar clase
-        public function update_class_model($datos) {
+        //crear clase
+        public function craete_class_model($datos) {
             $sql=mainModel::connect()->prepare("INSERT INTO class 
                 (classDate, classTeacher, classTopic)
                 VALUES (:Date, :Teacher, :Topic)");

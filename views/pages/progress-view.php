@@ -15,13 +15,13 @@ $insAdmin = new controllerAdmin();
                 <div class="card-content">
                     <div class="header-class">
                         <h1>Seguimiento</h1>
-                        <a href="<?php echo SERVERURL; ?>newPay/" class="btn-kohaku">
+                        <a href="<?php echo SERVERURL; ?>newPay" class="btn-kohaku">
                             <i></i> Nuevo
                         </a>
-                        <a href="<?php echo SERVERURL; ?>calendar/" class="btn-kohaku">
+                        <a href="<?php echo SERVERURL; ?>calendar" class="btn-kohaku">
                             <i></i> Eliminar
                         </a>
-                        <a href="<?php echo SERVERURL; ?>calendar/" class="btn-kohaku">
+                        <a href="<?php echo SERVERURL; ?>calendar" class="btn-kohaku">
                             <i></i> Listar
                         </a>
                     </div>

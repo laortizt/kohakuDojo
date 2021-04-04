@@ -4,7 +4,6 @@
     'use strict';
 
     $(function() {
-
         $(document).ready(function() {
             function triggerClick(elem) {
                 $(elem).click();
@@ -23,7 +22,7 @@
             // Add support for payment type switching.
 
             //Initialize tooltips
-            $tooltips.tooltip();
+            // $tooltips.tooltip();
 
             //Wizard
             $tab_toggle.on('show.bs.tab', function(e) {
