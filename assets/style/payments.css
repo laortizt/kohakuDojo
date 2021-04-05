@@ -72,4 +72,15 @@ table th {
     text-transform: uppercase;
     font-weight: bold;
   }
+  
+}
+.btn__update{
+  background-color: #46aafc;
+  color: white;
+  border: none;
+}
+.btn__delete{
+  background-color: #fa3636;
+  color: white;
+  border: none;
 }

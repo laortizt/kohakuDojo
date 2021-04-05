@@ -19,15 +19,16 @@ $insPayment = new controllerPayment();
 					</div>
 				</div>
 						
-				<form action="ajax/newPayAjax.php" class="payment-form" method="post" autocomplete="off" class="formulario-ajax">
+				<!-- <form action="ajax/newPayAjax.php" class="payment-form" method="post" autocomplete="off" class="formulario-ajax">
 					<table>
 						<thead>
 							<tr>
-								<th>Pagos</th>
 								<th>Fecha de Pago</th>
-								<th>Concepto</th>
+								<th>Documento</th>
 								<th>Monto</th>
-								<th>Estado</th>
+								<th>Trámite</th>
+								<th>Valor</th>
+								<th>Observaciones</th>
 								<td colspan="2">Acciones</td>
 								
 							</tr>
@@ -40,7 +41,7 @@ $insPayment = new controllerPayment();
 								<td data-label="Concepto">Membresía</td>
 								<td data-label="Monto">$2,311</td>
 								<td data-label="Estado">Pagado</td>
-								
+
 							</tr>
 
 							<tr>
@@ -54,7 +55,13 @@ $insPayment = new controllerPayment();
 					</table>
 
 					<div class="RespuestaAjax"></div>
-				</form>
+				</form> -->
+				<?php
+					$pages = explode("/", $_GET['page']);
+					
+					echo $insPayment->pages_payment_controller(0, 10, $_SESSION['role_sk'], 'code');
+					?>
+				
 			</div>
 		</div>
 	</div>

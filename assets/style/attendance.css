@@ -16,12 +16,12 @@
 
 .input-class, input[type="date"].input-class, input[type="time"].input-class {
   max-width: none;
-  width: 100%;
+
   background-color: white;
   margin: 10px 0;
-  height: 55px;
+  height: 40px;
   border-radius: 55px;
-  display: grid;
+  /* display: grid; */
   grid-template-columns: 15% 85%;
   padding: 0 0.4rem;
   /* position: relative; */

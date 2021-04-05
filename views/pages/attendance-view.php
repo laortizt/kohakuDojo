@@ -18,18 +18,17 @@ $insAdmin = new controllerAdmin();
 		<div class="col-12 col-m-12 col-sm-12">
 			<div class="card attendance">
 				<div class="card-content">
-					<form action="ajax/classAjax.php" class="form-class" method="post" autocomplete="off" class="formulario-ajax">
-						<div class="header-class">
-							<h1>Asistencia</h1>
+					<div class="header-class">
+						<h1>Asistencia</h1>
+						<div class="container-class">
+							<button class="btn-kohaku"> Exportar</button>
 						</div>
-
+					</div>
+					<form action="ajax/classAjax.php" class="form-class" method="post" autocomplete="off" class="formulario-ajax">
 						<div class="card-content">
 							<p>Seleciona una fecha: <input class="input-class" type="date" name="fechaesperada"></p>
-
-					</form>
-					<div class="container-class">
-						<button>Exportar</button>
-					</div>
+							
+					
 				</div>
 
 				<?php
