@@ -10,7 +10,7 @@ $insPayment = new controllerPayment();
 		<div class="card">
 			<div class="card-content">
 				<div class="header-class">
-					<h1>Lista de Pagos</h1>
+					<h1 class="title">Lista de Pagos</h1>
 
 					<div>
 						<a href="<?php echo SERVERURL; ?>newPay" class="btn-kohaku">

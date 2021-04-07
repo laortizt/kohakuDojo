@@ -20,37 +20,36 @@
     flex-wrap: wrap;
   }
 
-  .input-container {
+  .input-container-profile {
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: start;
   }
 
-  .input-field {
+  .input-field-profile {
     max-width: 380px;
     width: 100%;
     background-color: #f0f0f0;
     margin: 10px 0;
-    height: 40px;
-    border-radius: 55px;
-    padding: 0 16px;
+    border-radius: 15px;
+    padding: 1.3rem 1rem;
     position: relative;
     display: flex;
     justify-content: space-between;
     gap: 8px;
   }
   
-  .input-field i {
+  .input-field-profile i {
     text-align: center;
-    line-height: 40px;
+    line-height: 24px;
     color: #acacac;
     transition: 0.5s;
     font-size: 1.1rem;
     padding: 0 4px;
   }
   
-  .input-field input {
+  .input-field-profile input {
     background: none;
     outline: none;
     border: none;
@@ -60,6 +59,7 @@
     color: #333;
     flex: 1;
   }
+
   .btn-kohaku-profile {
     margin-top: 10px;
     background-color: transparent;
@@ -73,9 +73,8 @@
     border-radius: 0;
     color:black;
     padding: 0.5rem 1rem;
+    align-self: flex-end;
   }
-  
-  
   
   .btn-kohaku-profile:hover{
     background-image: url(./../img/btnRojo.png);
@@ -85,10 +84,11 @@
   .btn-kohaku-profile:focus {
     box-shadow: none;
   }
+
   .title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: rgb(255, 16, 16);
-    margin-bottom: 10px;
+    margin-bottom: 24px;
     font-family: 'Anton', sans-serif;
-    
+    align-self: flex-start;    
   }

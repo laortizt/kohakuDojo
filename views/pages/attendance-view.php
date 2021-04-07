@@ -12,24 +12,22 @@ $insAdmin = new controllerAdmin();
 
 <div class="container-fluid">
 
-	<?php include "./views/modules/menuClass.php"; ?>
-
+	
 	<div class="row">
 		<div class="col-12 col-m-12 col-sm-12">
 			<div class="card attendance">
 				<div class="card-content">
 					<div class="header-class">
-						<h1>Asistencia</h1>
-						<div class="container-class">
-							<button class="btn-kohaku"> Exportar</button>
-						</div>
+						<h1>Lista de Asistencia</h1>
+						<?php include "./views/modules/menuClass.php"; ?>
 					</div>
 					<form action="ajax/classAjax.php" class="form-class" method="post" autocomplete="off" class="formulario-ajax">
 						<div class="card-content">
+						<!-- <div class="container-class">
+							<button class="btn-kohaku"> Exportar</button>
+						</div> -->
 							<p>Seleciona una fecha: <input class="input-class" type="date" name="fechaesperada"></p>
-							
-					
-				</div>
+						</div>
 
 				<?php
 				$pages = explode("/", $_GET['page']);

@@ -45,8 +45,8 @@ input {
 
 form {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  justify-content: center; 
   flex-direction: column;
   padding: 0rem 5rem;
   transition: all 0.2s 0.7s;
@@ -69,27 +69,59 @@ form.sign-in-form {
   color: rgb(255, 16, 16);
   margin-bottom: 10px;
   font-family: 'Anton', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .input-field {
   max-width: 380px;
-  width: 100%;
-  background-color: #f0f0f0;
+  width: 60%;
+  background-color: #383838;
   margin: 10px 0;
   height: 55px;
   border-radius: 55px;
   display: grid;
   grid-template-columns: 15% 85%;
-  padding: 0 0.4rem;
-  position: relative;
+  padding: 1.3rem 1rem;
+  margin: 10px 0;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  margin-left: 90px;
+  
 }
 
+/* .input-field {
+  width: 60%;
+  margin-top: 10px;
+  background-color: transparent;
+  background-image: url(./../img/btnGris.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: var(--black);
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  color: white;
+  padding: 1.3rem 1rem;
+  margin: 10px 0;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  margin-left: 70px;
+ 
+} */
+
 .input-field i {
+  
   text-align: center;
-  line-height: 55px;
-  color: #acacac;
+  line-height: 24px;
+  color: white;
   transition: 0.5s;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
+}
+.label-login {
+  margin-left: 90px;
+  
 }
 
 .input-field input {
@@ -98,8 +130,8 @@ form.sign-in-form {
   border: none;
   line-height: 1;
   font-weight: 600;
-  font-size: 1.1rem;
-  color: #333;
+  font-size: 1.5rem;
+  color: rgb(252, 252, 253);
 }
 
 .input-field input::placeholder {
@@ -190,7 +222,7 @@ form.sign-in-form {
   
 }
 
-.btn-kohaku-login {
+/* .btn-kohaku-login {
   margin-top: 10px;
   background-color: transparent;
   background-image: url(./../img/btnGris.png);
@@ -203,15 +235,69 @@ form.sign-in-form {
   border-radius: 0;
   color:black;
   padding: 0.5rem 1rem;
+} */
+
+.btn-kohaku-login {
+  width: 60%;
+  padding: 1.3rem 1rem;
+  margin-top: 10px;
+  background-color: transparent;
+  background-image: url(./../img/btnGris.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: var(--black);
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  color: white;
+  margin-left: 90px;
 }
-
-
+.btn-kohaku-signIn{
+  width: 100%;
+  padding: 1.3rem 1rem;
+  margin-top: 10px;
+  background-color: transparent;
+  background-image: url(./../img/btnGris.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: var(--black);
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  /* color:black;
+  color: white; */
+}
+.btn-kohaku-record{
+  width: 100%;
+  padding: 1.3rem 1rem;
+  margin-top: 10px;
+  background-color: transparent;
+  background-image: url(./../img/btnGris.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: var(--black);
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  border-radius: 0;
+}
 
 .btn-kohaku-login:hover{
   background-image: url(./../img/btnRojo.png);
   color: white
 }
 
+.btn-kohaku-signIn:hover{
+  background-image: url(./../img/btnRojo.png);
+  color: white
+}
+
+.btn-kohaku-record:hover{
+  background-image: url(./../img/btnRojo.png);
+  color: white
+}
 .btn-kohaku-login:focus {
   box-shadow: none;
 }
@@ -247,6 +333,8 @@ form.sign-in-form {
   line-height: 1;
   font-size: 2rem;
 }
+
+
 
 .panel p {
   font-size: 1.5rem;

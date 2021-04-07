@@ -6,24 +6,19 @@ $insAdmin = new controllerAdmin();
 
 <div class="container-fluid">
 
-    <?php include "./views/modules/menuProgress.php"; ?>
-
+    <!-- <?php include "./views/modules/menuProgress.php"; ?> -->
 
     <div class="row">
         <div class="col-12 col-m-12 col-sm-12">
             <div class="card">
                 <div class="card-content">
                     <div class="header-class">
-                        <h1>Seguimiento</h1>
-                        <a href="<?php echo SERVERURL; ?>newPay" class="btn-kohaku">
-                            <i></i> Nuevo
-                        </a>
-                        <a href="<?php echo SERVERURL; ?>calendar" class="btn-kohaku">
-                            <i></i> Eliminar
-                        </a>
-                        <a href="<?php echo SERVERURL; ?>calendar" class="btn-kohaku">
-                            <i></i> Listar
-                        </a>
+                        <h1 class="title">Listado Ascensos</h1>
+                         <div>
+						<!-- <a href="<?php echo SERVERURL; ?>newProgress" class="btn-kohaku">
+							<i class="fas fa-plus-circle"></i> Nuevo -->
+						</a> 
+					    </div> 
                     </div>
 
                     <table>

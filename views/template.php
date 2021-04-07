@@ -25,7 +25,7 @@ session_start(['name' => 'SK']);
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
 
 	<!-- Estilos calendario -->
-	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>/assets/tui-calendar/tui-calendar.min.css" />
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css" />
 
@@ -178,7 +178,7 @@ session_start(['name' => 'SK']);
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>attendance" class="sidebar-nav-link">
 						<div>
-							<i class="far fa-calendar-alt"></i>
+						<i class="fas fa-clipboard-list"></i>
 						</div>
 						<span>Asistencia</span>
 					

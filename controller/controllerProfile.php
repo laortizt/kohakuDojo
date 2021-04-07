@@ -17,7 +17,7 @@
         public function list_typeDocument_controller($userCurrentDocType){
             $documentTypes = modelProfile::list_typeDocuments_model();
 
-            $select = '<select class="input-field" name="typeDocument-profile" required="">';
+            $select = '<select class="input-field-profile" name="typeDocument-profile" required="">';
             
             foreach($documentTypes as $documentType){
                 if ($documentType['idDocumentType'] == $userCurrentDocType) {
@@ -43,7 +43,7 @@
         public function list_genres_controller($userCurrentGenre) {
             $genres = modelProfile::list_genres_model();
 
-            $select = '<select class="input-field" name="genre-profile" required="">';
+            $select = '<select class="input-field-profile" name="genre-profile" required="">';
             
             foreach($genres as $genre){
                 if ($genre['idGenre'] == $userCurrentGenre) {

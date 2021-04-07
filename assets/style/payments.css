@@ -84,3 +84,10 @@ table th {
   color: white;
   border: none;
 }
+.title {
+  font-size: 2.2rem;
+  color: rgb(255, 16, 16);
+  margin-bottom: 24px;
+  font-family: 'Anton', sans-serif;
+  align-self: flex-start;    
+}

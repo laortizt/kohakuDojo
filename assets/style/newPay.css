@@ -32,9 +32,8 @@
     width: 100%;
     background-color: #f0f0f0;
     margin: 10px 0;
-    height: 40px;
-    border-radius: 55px;
-    padding: 0 16px;
+    border-radius: 15px;
+    padding: 1.3rem 1rem;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -43,7 +42,7 @@
   
   .input-field i {
     text-align: center;
-    line-height: 40px;
+    line-height: 24px;
     color: #acacac;
     transition: 0.5s;
     font-size: 1.1rem;
@@ -60,6 +59,7 @@
     color: #333;
     flex: 1;
   }
+
   .btn-kohaku-newPay {
     /* margin-top: 10px; */
     background-color: transparent;
@@ -73,10 +73,9 @@
     border-radius: 0;
     color:black;
     padding: 0.5rem 1rem;
+    align-self: flex-end;
     
   }
-  
-  
   
   .btn-kohaku-newPay:hover{
     background-image: url(./../img/btnRojo.png);
@@ -86,10 +85,17 @@
   .btn-kohaku-newPay:focus {
     box-shadow: none;
   }
+
   .title {
-    font-size: 2.5rem;
-    color: rgb(255, 16, 16);
-    margin-bottom: 10px;
-    font-family: 'Anton', sans-serif;
     
+    font-size: 2.2rem;
+    color: rgb(255, 16, 16);
+    margin-bottom: 24px;
+    font-family: 'Anton', sans-serif;
+    align-self: flex-start;    
+
+  }
+
+  .label-login {
+    text-align: left;
   }

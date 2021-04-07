@@ -79,11 +79,11 @@ body{
 }
 /* ---HEADER PAGINAS--- */
 .header-class {
-  background: #0dad83;
+  /* background: #0dad83; */
   height: 60px;
   display: flex;
   align-items: center;
-  color: white;
+  color: black;
   font-size: 2rem;
   padding: 0 15px;
   margin-bottom: 25px;
