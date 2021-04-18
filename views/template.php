@@ -12,11 +12,12 @@ session_start(['name' => 'SK']);
 	<title>Kohaku</title>
 
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="icon" type="image/png" href="<?php echo SERVERURL; ?>/assets/img/favicon/favicon.ico" />
+	<link rel="icon" type="image/png" href="<?php echo SERVERURL; ?>assets/img/favicon/favicon.ico" />
 	<title><?php echo COMPANY; ?></title>
+	<script src="https://kit.fontawesome.com/a7ccf0be94.js" crossorigin="anonymous"></script>
 	<!-- Import lib -->
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>/assets/fontawesome-free/css/all.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>assets/fontawesome-free/css/all.min.css"> -->
 
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
@@ -25,7 +26,7 @@ session_start(['name' => 'SK']);
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
 
 	<!-- Estilos calendario -->
-	<link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>/assets/tui-calendar/tui-calendar.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>assets/tui-calendar/tui-calendar.min.css" />
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css" />
 
@@ -33,7 +34,6 @@ session_start(['name' => 'SK']);
 	<link href="<?php echo SERVERURL; ?>assets/style/dashboard.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/calendar.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/schedule.css" rel="stylesheet">
-	<link href="<?php echo SERVERURL; ?>assets/style/attendance.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/privileges.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/progress.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/profile.css" rel="stylesheet">
@@ -43,7 +43,6 @@ session_start(['name' => 'SK']);
 	<link href="<?php echo SERVERURL; ?>assets/style/kohaku.css" rel="stylesheet">
 
 	<link href="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.css" rel="stylesheet">
-	<link href="<?php echo SERVERURL; ?>assets/glyphicons/glyphicons.css" rel="stylesheet">
 
 	<?php include "views/modules/script.php"; ?>
 </head>
@@ -87,13 +86,12 @@ session_start(['name' => 'SK']);
 			<!-- nav left -->
 			<ul class="navbar-nav">
 				<li class="nav-item">
+					<img src="<?php echo SERVERURL; ?>assets/img/logokhk.png" class="image-logo" alt="">
+				</li>
+				<li class="nav-item">
 					<a class="nav-link">
 						<i class="fas fa-bars" onclick="collapseSidebar()"></i>
 					</a>
-				</li>
-
-				<li class="nav-item">
-					<img src="<?php echo SERVERURL; ?>assets/img/logokohaku.png" class="image-logo" alt="">
 				</li>
 			</ul>
 			<!-- end nav left -->
@@ -108,19 +106,31 @@ session_start(['name' => 'SK']);
 			<!-- nav right -->
 			<ul class="navbar-nav nav-right">
 				<li class="nav-item mode">
-					<span><?php echo $_SESSION['role_sk'] ?></span>
+					<span class="rol"><?php echo $_SESSION['role_sk'] ?></span>
 				</li>
 
-				<li class="nav-item mode">
+				<!-- <li class="nav-item mode">
 					<a class="nav-link" href="#" onclick="switchTheme()">
 						<i class="fas fa-moon dark-icon"></i>
 						<i class="fas fa-sun light-icon"></i>
 					</a>
-				</li>
+				</li> -->
 
 				<li class="nav-item avt-wrapper">
 					<div class="avt dropdown">
-						<img src="./assets/img/undraw_profile.svg" alt="User image" class="dropdown-toggle" data-toggle="user-menu">
+						<?php
+
+						if ($_SESSION['role_sk'] == "Administrador" || $_SESSION['role_sk'] == "Instructor") :
+						?>
+							<img src="./assets/img/BujinShodan.png" alt="User image" class="dropdown-toggle" data-toggle="user-menu">
+
+						<?php
+						elseif ($_SESSION['role_sk'] == "Usuario") :
+						?>
+							<img src="./assets/img/Bujinkyu.png" alt="User image" class="dropdown-toggle" data-toggle="user-menu">
+						<?php
+						endif;
+						?>
 
 						<ul id="user-menu" class="dropdown-menu">
 							<li class="dropdown-menu-item">
@@ -172,22 +182,22 @@ session_start(['name' => 'SK']);
 							<i class="far fa-calendar-alt"></i>
 						</div>
 						<span>Clases</span>
-					
+
 					</a>
 				</li>
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>attendance" class="sidebar-nav-link">
 						<div>
-						<i class="fas fa-clipboard-list"></i>
+							<i class="fas fa-clipboard-list"></i>
 						</div>
 						<span>Asistencia</span>
-					
+
 					</a>
 				</li>
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>plans" class="sidebar-nav-link">
 						<div>
-						<i class="fas fa-money-check-alt"></i>
+							<i class="fas fa-money-check-alt"></i>
 						</div>
 						<span>Planes</span>
 					</a>
@@ -202,7 +212,7 @@ session_start(['name' => 'SK']);
 				</li>
 
 				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>progress"  class="sidebar-nav-link">
+					<a href="<?php echo SERVERURL; ?>progress" class="sidebar-nav-link">
 						<div>
 							<i class="fas fa-check-circle"></i>
 						</div>
@@ -229,7 +239,6 @@ session_start(['name' => 'SK']);
 
 		<!-- end main content -->
 		<!-- import script -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 		<script src="<?php echo SERVERURL; ?>assets/script/index.js"></script>
 		<!-- end import script -->
 	<?php

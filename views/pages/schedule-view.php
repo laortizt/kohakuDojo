@@ -4,15 +4,16 @@ $insAdmin = new controllerClass();
 ?>
 
 
-<div class="container-fluid">
-    <?php include "./views/modules/menuClass.php"; ?>
+
+    
 
     <div class="row">
         <div class="col-12 col-m-12 col-sm-12">
             <div class="card">
                 <div class="card-content">
                     <div class="header-class">
-                        <h1>Horario de Clases</h1>
+                        <h1 class="title">Horario de Clases</h1>
+                        <?php include "./views/modules/menuClass.php"; ?>
                     </div>
 
                     <div class="container">
@@ -39,5 +40,5 @@ $insAdmin = new controllerClass();
         </div>
     </div>
 
-</div>
+
 <script src="<?php echo SERVERURL; ?>assets/script/schedule.js"></script>

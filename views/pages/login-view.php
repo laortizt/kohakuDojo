@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Balsamiq+Sans&family=Fjalla+One&family=Fredoka+One&family=Ranchers&family=Roboto:wght@500&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Balsamiq+Sans&family=Fjalla+One&family=Fredoka+One&family=Ranchers&family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style/login.css"/>
     <title>Kohaku - Login</title>
   </head>

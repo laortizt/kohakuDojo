@@ -9,13 +9,28 @@
     font-weight: bold;
     color: #555;
 }
-
+.text-search{
+    border-radius: 14px;
+    text-align: center;
+    height: 40px;
+    width: 250px;
+    
+}
+.btn-search{
+    height: 40px;
+    width: 40px;
+    background-color: rgb(38, 38, 39);
+    font-size: 1.5rem;
+}
 .barra__buscador{
     width: 100%;
     margin-top: 50px;
     margin-bottom: 10px;
+  
 }
-
+.input-date{
+    border-radius: 44px;
+}
 .formulario{
     display: flex;
     width: 100%;
@@ -53,12 +68,13 @@ form .form-group .input__text{
 }
 
 
+
 .privileges .btn {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     color: #fff;
-    display: block;
+    /* display: block; */
     font-size: 14px;
     background: rgb(3, 113, 163);
     margin-bottom: 15px;
@@ -113,21 +129,4 @@ form .form-group .input__text{
     color: #555;
 }
 
-.privileges .btn__update {
-    display: inline-block;
-    font-size: 14px;
-    background: #1b743c;
-    color: #fff;
-    border-radius: 5px;
-    padding: 5px 10px;
-    border: 1px solid #ccc;    
-}
 
-.privileges .btn__delete {
-    display: inline-block;
-    font-size: 14px;
-    background: #8a0505;
-    color: #fff;
-    border-radius: 5px;
-    padding: 5px 10px;
-}

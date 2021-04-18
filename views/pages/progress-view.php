@@ -4,7 +4,7 @@ $insAdmin = new controllerAdmin();
 ?>
 
 
-<div class="container-fluid">
+
 
     <!-- <?php include "./views/modules/menuProgress.php"; ?> -->
 
@@ -98,6 +98,6 @@ $insAdmin = new controllerAdmin();
     </div>
 
     <div class="RespuestaAjax"></div>
-</div>
+
 
 <script src="<?php echo SERVERURL; ?>assets/script/progress.js"></script>

@@ -4,14 +4,14 @@ $insAdmin = new controllerClass();
 ?>
 
 
-<div class="container-fluid">
+
     <div class="row">
         <div class="col-12 col-m-12 col-sm-12">
             <div class="card">
                 <div class="card-content">
                     <div class="header-class">
                         <h1 class="title">Horario de Clases</h1>
-                        <!-- <?php include "./views/modules/menuClass.php"; ?> -->
+                        <?php include "./views/modules/menuClass.php"; ?>
                     </div>
 
                     <div class="container container-calendar">
@@ -34,5 +34,5 @@ $insAdmin = new controllerClass();
             </div>
         </div>
     </div>
-</div>
+
 <script src="<?php echo SERVERURL; ?>assets/script/calendar.js"></script>

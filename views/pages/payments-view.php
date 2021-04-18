@@ -7,16 +7,12 @@ $insPayment = new controllerPayment();
 
 <div class="row">
 	<div class="col-12 col-m-12 col-sm-12">
-		<div class="card">
+		<div class="card attendance">
 			<div class="card-content">
 				<div class="header-class">
 					<h1 class="title">Lista de Pagos</h1>
-
-					<div>
-						<a href="<?php echo SERVERURL; ?>newPay" class="btn-kohaku">
-							<i class="fas fa-plus-circle"></i> Nuevo
-						</a>
-					</div>
+					<?php include "./views/modules/menuPayments.php"; ?>
+					
 				</div>
 						
 				<!-- <form action="ajax/newPayAjax.php" class="payment-form" method="post" autocomplete="off" class="formulario-ajax">

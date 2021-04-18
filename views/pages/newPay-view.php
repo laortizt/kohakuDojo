@@ -9,15 +9,8 @@
 			<div class="card-content">
                 <div class="header-class">
                     <h1 class="title">Registar Pago</h1>
-                    <div>
-                        <!-- <a href="<?php echo SERVERURL; ?>calendar" class="btn-kohaku">
-                            <i class="fas fa-trash-alt"></i> Eliminar
-                        </a> -->
-
-                        <a href="<?php echo SERVERURL; ?>payments" class="btn-kohaku">
-                            <i class="far fa-file"></i> Registros
-                        </a>
-                    </div>
+                    <?php include "./views/modules/menuPayments.php"; ?>
+                    
                 </div>
 
                 <!-- se crea la ruta que conecta con el ajax,  -->

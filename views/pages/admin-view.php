@@ -3,25 +3,28 @@ require_once "./controller/controllerAdmin.php";
 $insAdmin = new controllerAdmin();
 ?>
 
-<div class="container-fluid">
-	<?php include "./views/modules/menuAdmin.php"; ?>
+
+	
 
 	<!-- Privileges section -->
 	<div class="row privileges">
 		<div class="col-12 col-m-12 col-sm-12">
 			<div class="card">
 				<div class="card-content">
-					<h2>Lista de usuarios</h2>
+					<div class="header-class">
+						<h1 class="title">Lista de usuarios</h1>
+						<?php include "./views/modules/menuAdmin.php"; ?>
+					</div>
 					<!-- DESDE AQUI -->
 				
 
 					<div class="barra__buscador">
 						<form action="" class="formulario" method="post" form-data="dafault" form-data="default"> 
-							<input type="text" name="search_user" placeholder="Buscar nombre o apellidos" value="" class="input__text" >
+							<div>
+								<input type="text" name="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search" >
+								<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fas fa-search"></i></button>
+							</div>
 
-
-							<a href="#" type="submit" value="Buscar" name="btn_buscar" class="btn"><i class="fas fa-search"></i></a>
-							<!-- <a href="#" class="btn btn__nuevo"><i class="fas fa-user-plus"></i></a> -->
 						</form>
 					</div>
 					
@@ -36,4 +39,3 @@ $insAdmin = new controllerAdmin();
 		</div>
 	</div>
 		
-</div>

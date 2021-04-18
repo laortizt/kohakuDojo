@@ -10,9 +10,9 @@ $insAdmin = new controllerAdmin();
 		$insClass = new controllerClass();
 		?> -->
 
-<div class="container-fluid">
 
-	<?php include "./views/modules/menuPayments.php"; ?>
+
+	
 
 
 	<div class="row">
@@ -20,7 +20,8 @@ $insAdmin = new controllerAdmin();
 			<div class="card">
 				<div class="card-content">
 					<div class="header-class">
-						<h1>Editar Planes</h1>
+						<h1 class="title">Editar Planes</h1>
+						<?php include "./views/modules/menuPayments.php"; ?>
 					</div>
 
 					<div class="Plans text-center">

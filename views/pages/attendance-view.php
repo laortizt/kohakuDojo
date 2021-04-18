@@ -10,36 +10,32 @@ $insAdmin = new controllerAdmin();
 		$insClass = new controllerClass();
 		?> -->
 
-<div class="container-fluid">
+<div class="row">
+	<div class="col-12 col-m-12 col-sm-12">
+		<div class="card attendance">
+			<div class="card-content">
+				<div class="header-class">
+					<h1 class="title">Lista de Asistencia</h1>
+					<!-- <?php include "./views/modules/menuClass.php"; ?> -->
+				</div>
 
-	
-	<div class="row">
-		<div class="col-12 col-m-12 col-sm-12">
-			<div class="card attendance">
-				<div class="card-content">
-					<div class="header-class">
-						<h1>Lista de Asistencia</h1>
-						<?php include "./views/modules/menuClass.php"; ?>
+				<form action="ajax/classAjax.php" class="form-class" method="post" autocomplete="off" class="formulario-ajax">
+					<div class="barra__buscador">
+						<p>Seleciona una fecha: <input class="text-fecha" type="date" name="fechaesperada"></p>
+						<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fas fa-search"></i></button>
 					</div>
-					<form action="ajax/classAjax.php" class="form-class" method="post" autocomplete="off" class="formulario-ajax">
-						<div class="card-content">
-						<!-- <div class="container-class">
-							<button class="btn-kohaku"> Exportar</button>
-						</div> -->
-							<p>Seleciona una fecha: <input class="input-class" type="date" name="fechaesperada"></p>
-						</div>
 
-				<?php
-				$pages = explode("/", $_GET['page']);
-				// echo $insAdmin->pages_admin_controller($pages[1], 10, $_SESSION['role_sk'], $_SESSION['code']);
-				echo $insAdmin->pages_admin_controller(0, 10, $_SESSION['role_sk'], 'code');
-				?>
+					<?php
+					$pages = explode("/", $_GET['page']);
+					// echo $insAdmin->pages_admin_controller($pages[1], 10, $_SESSION['role_sk'], $_SESSION['code']);
+					echo $insAdmin->pages_admin_controller(0, 10, $_SESSION['role_sk'], 'code');
+					?>
 			</div>
 
 			<div class="RespuestaAjax"></div>
 			</form>
 		</div>
 	</div>
-</div>
 
-<script src="<?php echo SERVERURL; ?>assets/script/attendance.js"></script>
+
+	<script src="<?php echo SERVERURL; ?>assets/script/attendance.js"></script>
