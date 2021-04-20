@@ -14,6 +14,7 @@
             $datos["Role"] = 3;
             return mainModel::add_account($datos);
         }
+
         //DESDE AQUI
         public function list_genres_model() {
             $conexion= mainModel::connect();
@@ -28,11 +29,13 @@
             $datos = mainModel::connect()->query("SELECT * FROM documenttype");
             return $datos->fetchAll();
         }
+
         public function list_roles_model() {
             //Obtiene los roles registrados
             $datos = mainModel::connect()->query("SELECT * FROM role");
             return $datos->fetchAll();
         }
+
         public function list_states_model() {
             //Obtiene los estados registrados
             $datos = mainModel::connect()->query("SELECT * FROM status");

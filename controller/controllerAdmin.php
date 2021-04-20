@@ -22,7 +22,7 @@
             $email= mainModel::clean_string($_POST['Email']);
             $password= mainModel::clean_string($_POST['Pass1']);
             $genre= mainModel::clean_string($_POST['Genere']);
-            $privileges= mainModel::clean_string($_POST['Privileges']);
+            
             //cambiar el contenido de la última fila
             ;
              
@@ -194,9 +194,16 @@
                         <td>'.$rows['accountEmail'].'</td>
                         <td>'.$rows['roleName'].'</td>
                         <td>'.($rows['accountState'] == 1 ? "Activo" : "Inactivo").'</td>
-                        <td>'.'<button class="btn btn__update"><a href=""><i class="far fa-check-circle"></i></a></button>&nbsp;'.
-                        '<button class="btn btn__delete"><a href="#"><i class="far fa-times-circle"></i></a></button>'.'</td>
-                    </tr>
+                        
+                        <td>
+                            <form action="'.SERVERURL.'ajax/adminAjax.php" method="POST" class="formulario-ajax" data-form="delete" enctype="multipart/form-data">
+                                <input type="hidden" name="userToDelete" value="'.mainModel::encryption($rows['accountCode']).'">
+                                <button type="submit" class=" btn__delete">
+                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                </button>
+                                <div class="RespuestaAjax"></div>
+                            </form>
+                        </td>
                     ';
                     $count++;
                 }
@@ -209,93 +216,150 @@
             $table.='</tbody> </table> </div>';
 
             return $table;
-    }
+        }
 
+        public function delete_user_controller() {
+            // Desencriptar el code del usuario a borrar
+            $code=mainModel::decryption($_POST['userToDelete']);
 
-    public function update_admin_controller() {
-        // Limpiar info del formulario
-        $typeDocument= mainModel::clean_string($_POST['typeDocument-profile']);
-        $Dni= mainModel::clean_string($_POST['dni-profile']);
-        $firstName= mainModel::clean_string($_POST['firstname-profile']); 
-        $lastName= mainModel::clean_string($_POST['lastname-profile']);
-        $address= mainModel::clean_string($_POST['adress-profile']); 
-        $email= mainModel::clean_string($_POST['email-profile']);
-        $phone= mainModel::clean_string($_POST['phone-profile']);
-        $genre= mainModel::clean_string($_POST['genre-profile']);
+            // Limpiar el resultado desencriptado
+            $code=mainModel::clean_String($code);            
 
-        // Validar la info que llega
-        $profilesByDni=modelAdmin::find_dni($Dni);
-
-        if (count($profilesByDni) > 1 || 
-            (count($profilesByDni) == 1 && $profilesByDni[0]['accountDni'] != $Dni) )
-        {
-            $alert=[
-                "alert"=>"simple",
-                "title"=>"Ocurrio un error inesperado",
-                "text"=>"El número de Identificación ya está registrado",
-                "type"=>"error"
-            ];
-        } else {
-            // Buscar por correo
-            $profilesByEmail=modelAdmin::find_email($email);
-        
-            // Si existe uno, verificar si su account code coincide con el usuario actual
-            if(count($profilesByEmail) != 1){
-                // Si no coincide, error
-                $alert=[
+           
+            // Verificar si el usuario actual es Admin
+            if (!isset($_SESSION) || !isset($_SESSION['role_sk']) || $_SESSION['role_sk'] != "Administrador") {
+                // Si no, informar del error
+                $alert=[ 
                     "alert"=>"simple",
-                    "title"=>"Ocurrio un error inesperado",
-                    "text"=>"Usuario no encontrado",
-                    "type"=>"error"
-                ];
-            } else if ($_SESSION['role_sk'] != "Administrador") {
-                // El usuario logueado no es Admin, no puede editar otros usuarios
-                $alert=[
-                    "alert"=>"simple",
-                    "title"=>"Acción no permitida",
-                    "text"=>"No tiene privilegios suficientes para editar usuarios",
+                    "title"=>"No autorizado",
+                    "text"=>"No tiene permisos para borrar usuarios.",
                     "type"=>"error"
                 ];
             } else {
-                // Si coincide, proceder con la actualización
-                $id = $profilesByEmail[0]['idAccount'];
+                // Buscar si existe
+                $user = modelAdmin::find_code($code);
 
-                // Construir el objeto que se envía al modelo
-                // Si todas se cumplen, llamar al modelo para que ejecute el cambio, enviando la info en un arreglo
-                $data = [
-                    "Id"=>$id,
-                    "DocumentType"=>$typeDocument,
-                    "Dni"=>$Dni,
-                    "FirstName"=>$firstName,
-                    "LastName"=>$lastName,
-                    "Address"=>$address,
-                    "Phone"=>$phone,
-                    "Genre"=>$genre
-                ];
-
-                // LLamar al modelo
-                $saveAdmin = modelAdmin::update_admin_model($data);
-
-                // Verificar respuesta del modelo y construir la respuesta para la vista
-                if($saveAdmin->rowCount() >= 1){
-                    $alert=[
-                        "alert"=>"limpiar",
-                        "title"=>"Actualizar perfil",
-                        "text"=>"El perfil se ha actualizado exitósamente.",
-                        "type"=>"success"
-                    ];
-                }else {
-                    $alert=[
+                // Si existe
+                if (isset($user['idAccount'])) {
+                    // Pedir borrarlo
+                    $result = modelAdmin::delete_admin_model($user['idAccount']);
+                    
+                    // Verificar borrado
+                    if ($result->rowCount() >= 1) {
+                        // Si lo borró, informar que se pudo borrar
+                        $alert=[ 
+                            "alert"=>"simple",
+                            "title"=>"Usuario eliminado",
+                            "text"=>"El usuario se ha borrado exitósamente.",
+                            "type"=>"success"
+                        ];
+                    } else {
+                        // Si no, notificar que no se pudo borrar
+                        $alert=[ 
+                            "alert"=>"simple",
+                            "title"=>"Error al borrar",
+                            "text"=>"No se pudo borrar el usuario solicitado.",
+                            "type"=>"error"
+                        ];
+                    }
+                } else {
+                    // Si no existe, informar que no existe
+                    $alert=[ 
                         "alert"=>"simple",
-                        "title"=>"Actualizar perfil",
-                        "text"=>"No se pudo actualizar el perfil, verifique los campos e intente de nuevo.",
+                        "title"=>"Operación fallida",
+                        "text"=>"No se pudo borrar el usuario solicitado.",
                         "type"=>"error"
                     ];
                 }
             }
+
+            return mainModel::sweet_alert($alert);
         }
 
-        return mainModel::sweet_alert($alert);
-    }
+        public function update_admin_controller() {
+            // Limpiar info del formulario
+            $typeDocument= mainModel::clean_string($_POST['typeDocument-profile']);
+            $Dni= mainModel::clean_string($_POST['dni-profile']);
+            $firstName= mainModel::clean_string($_POST['firstname-profile']); 
+            $lastName= mainModel::clean_string($_POST['lastname-profile']);
+            $address= mainModel::clean_string($_POST['adress-profile']); 
+            $email= mainModel::clean_string($_POST['email-profile']);
+            $phone= mainModel::clean_string($_POST['phone-profile']);
+            $genre= mainModel::clean_string($_POST['genre-profile']);
+
+            // Validar la info que llega
+            $profilesByDni=modelAdmin::find_dni($Dni);
+
+            if (count($profilesByDni) > 1 || 
+                (count($profilesByDni) == 1 && $profilesByDni[0]['accountDni'] != $Dni) )
+            {
+                $alert=[
+                    "alert"=>"simple",
+                    "title"=>"Ocurrio un error inesperado",
+                    "text"=>"El número de Identificación ya está registrado",
+                    "type"=>"error"
+                ];
+            } else {
+                // Buscar por correo
+                $profilesByEmail=modelAdmin::find_email($email);
+            
+                // Si existe uno, verificar si su account code coincide con el usuario actual
+                if(count($profilesByEmail) != 1){
+                    // Si no coincide, error
+                    $alert=[
+                        "alert"=>"simple",
+                        "title"=>"Ocurrio un error inesperado",
+                        "text"=>"Usuario no encontrado",
+                        "type"=>"error"
+                    ];
+                } else if ($_SESSION['role_sk'] != "Administrador") {
+                    // El usuario logueado no es Admin, no puede editar otros usuarios
+                    $alert=[
+                        "alert"=>"simple",
+                        "title"=>"Acción no permitida",
+                        "text"=>"No tiene privilegios suficientes para editar usuarios",
+                        "type"=>"error"
+                    ];
+                } else {
+                    // Si coincide, proceder con la actualización
+                    $id = $profilesByEmail[0]['idAccount'];
+
+                    // Construir el objeto que se envía al modelo
+                    // Si todas se cumplen, llamar al modelo para que ejecute el cambio, enviando la info en un arreglo
+                    $data = [
+                        "Id"=>$id,
+                        "DocumentType"=>$typeDocument,
+                        "Dni"=>$Dni,
+                        "FirstName"=>$firstName,
+                        "LastName"=>$lastName,
+                        "Address"=>$address,
+                        "Phone"=>$phone,
+                        "Genre"=>$genre
+                    ];
+
+                    // LLamar al modelo
+                    $saveAdmin = modelAdmin::update_admin_model($data);
+
+                    // Verificar respuesta del modelo y construir la respuesta para la vista
+                    if($saveAdmin->rowCount() >= 1){
+                        $alert=[
+                            "alert"=>"limpiar",
+                            "title"=>"Actualizar perfil",
+                            "text"=>"El perfil se ha actualizado exitósamente.",
+                            "type"=>"success"
+                        ];
+                    }else {
+                        $alert=[
+                            "alert"=>"simple",
+                            "title"=>"Actualizar perfil",
+                            "text"=>"No se pudo actualizar el perfil, verifique los campos e intente de nuevo.",
+                            "type"=>"error"
+                        ];
+                    }
+                }
+            }
+
+            return mainModel::sweet_alert($alert);
+        }
 
 }

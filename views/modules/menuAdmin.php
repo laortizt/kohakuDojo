@@ -1,7 +1,4 @@
 <div class="nav-class">
-	<a href="<?php echo SERVERURL; ?>admin" class="btn-normal">
-		<i></i> Gestión de usuarios
-	</a>
 	
 	<a href="<?php echo SERVERURL; ?>attendance" class="btn-normal">
 		<i></i> Reporte de Clases
