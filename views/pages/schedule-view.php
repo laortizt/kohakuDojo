@@ -32,13 +32,9 @@ $insAdmin = new controllerClass();
 
                         <div id="calendar" style="height: 800px;"></div>
                     </div>
-
-
-                    <div id="calendar"></div>
                 </div>
             </div>
         </div>
     </div>
 
-
-<script src="<?php echo SERVERURL; ?>assets/script/schedule.js"></script>
+    <script defer src="<?php echo SERVERURL; ?>assets/script/schedule.js"></script>

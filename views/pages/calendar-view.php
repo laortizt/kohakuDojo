@@ -35,4 +35,4 @@ $insAdmin = new controllerClass();
         </div>
     </div>
 
-<script src="<?php echo SERVERURL; ?>assets/script/calendar.js"></script>
+    <script defer src="<?php echo SERVERURL; ?>assets/script/calendar.js"></script>

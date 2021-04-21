@@ -123,7 +123,8 @@
                         type: '".$datos['type']."',
                         confirmButtonText: 'Aceptar'
                     }).then(function(){
-                        $('.formulario-ajax')[0].reset();
+                        if ($('.formulario-ajax').length > 0)
+                            $('.formulario-ajax')[0].reset();
                     }); 
                 </script>
                 ";
@@ -136,7 +137,8 @@
                         type: '".$datos['type']."',
                         confirmButtonText: 'Aceptar'
                     }).then(function(){
-                        $('.formulario-ajax')[0].reset();
+                        if ($('.formulario-ajax').length > 0)
+                            $('.formulario-ajax')[0].reset();
                     }); 
                 </script>
                 ";

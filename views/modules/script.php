@@ -24,10 +24,8 @@
 
 
 <!-- Page level custom scripts -->
-<script defer src="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.min.js"></script>
+<script src="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.min.js"></script>
 <script defer src="<?php echo SERVERURL; ?>assets/script/main.js"></script>
-<script defer src="<?php echo SERVERURL; ?>assets/script/calendar.js"></script>
-<script defer src="<?php echo SERVERURL; ?>assets/script/schedule.js"></script>
 <script defer src="<?php echo SERVERURL; ?>assets/script/privileges.js"></script>
 <script defer src="<?php echo SERVERURL; ?>assets/script/progress.js"></script>
 <script defer src="<?php echo SERVERURL; ?>assets/script/attendance.js"></script>
