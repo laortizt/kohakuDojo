@@ -1,6 +1,7 @@
 <?php
-	require_once"./controller/controllerProfile.php";
-	$insProfile= new controllerProfile();
+	require_once"./controller/controllerAdmin.php";
+    
+	$insProfile = new controllerAdmin();
 ?>
 
 <div class="row">
@@ -9,25 +10,29 @@
 			<div class="card-content">
             
                 <?php
-                    $profile=$insProfile->get_profile_controller();
+                    $profile=$insProfile->get_user_admin_controller();
                 ?>
 
                 <!-- se crea la ruta que conecta con el ajax,  -->
-                <form action="ajax/profileAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
-                    <h2 class="title">Mi Perfil</h2>
+                <form action="ajax/adminAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
+                    <h2 class="title">Editar Usuario</h2>
 
                     <div class="profile">
+                        <input type="hidden" value="<?php echo $insProfile->encryption($profile['accountCode']) ?>" name="userToEdit">
+
                         <div class="input-container-profile">
                             <label class="label">Tipo Documento</label>
-                            <?php echo $insProfile->list_typeDocument_controller($profile['accountDocumentType'])?>
+                            <div class="input-field-profile">
+                                <i class="far fa-address-card"></i>
+                                <input type="text" value="<?php echo $profile['nameDocumentType']?>" name="dni-profile" required="" readonly/>
+                            </div>
                         </div>
 
                         <div class="input-container-profile">
-
                             <label class="label">Número Documento</label>
                             <div class="input-field-profile">
                                 <i class="far fa-address-card"></i>
-                                <input type="text" value="<?php echo $profile['accountDni']?>" name="dni-profile" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{1,30}"/>
+                                <input type="text" value="<?php echo $profile['accountDni']?>" name="dni-profile" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{1,30}" readonly/>
                             </div>
                         </div>
 
@@ -55,14 +60,6 @@
                             </div>
                         </div>
 
-                        <div class="input-container-profile">
-                            <label class="label">Correo</label>
-                            <div class="input-field-profile">
-                                <i class="fas fa-envelope"></i>
-                                <input type="email" value="<?php echo $profile['accountEmail']?>" required="" name="email-profile" readonly=""/>
-                            </div>
-                        </div>
-    
                         <div class="input-container-profile">                        
                             <label class="label">Telefono</label>
                             <div class="input-field-profile">
@@ -72,9 +69,31 @@
                         </div>  
 
                         <div class="input-container-profile">
+                            <label class="label">Correo</label>
+                            <div class="input-field-profile">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" value="<?php echo $profile['accountEmail']?>" required="" name="email-profile" readonly=""/>
+                            </div>
+                        </div>
+
+                        <div class="input-container-profile">
                             <label class="label">Género</label>
-                            <?php echo $insProfile->list_genres_controller($profile['accountGenre'])?>
+                            <div class="input-field-profile">
+                                <i class="far fa-address-card"></i>
+                                <input type="text" value="<?php echo $profile['nameGenre']?>" name="dni-profile" required="" readonly/>
+                            </div>
                         </div> 
+
+                        <div class="input-container-profile">
+                            <label class="label">Rol</label>
+                            <?php echo $insProfile-> list_role_controller($profile['accountRole'] ? $profile['accountRole'] : null)?>
+                        </div> 
+
+                        <div class="input-container-profile">
+                            <label class="label">Estado</label>
+                            <?php echo $insProfile-> list_state_controller($profile['accountState'] ? $profile['accountState'] : null)?>
+                        </div>
+                        
                     </div>
 
                     <input type="submit" class="btn-kohaku-profile" value="Guardar" />

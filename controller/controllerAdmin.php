@@ -124,15 +124,69 @@
             return mainModel::sweet_alert($alert);
         }
     
-        public function add_admin_incomplete_data() {
-            $alert=[
-                "alert"=>"simple",
-                "title"=>"Información incompleta",
-                "text"=>"Diligencie todos los campos",
-                "type"=>"error"
-            ];
+        public function get_user_admin_controller(){
+            $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $parts = parse_url($url);
+            parse_str($parts['query'], $query);
+            $code = $query['c'];
+            
+            // Desencriptar y Limpiar el código
+            $code=mainModel::decryption($code);
+            $code=mainModel::clean_string($code);
 
-            return mainModel::sweet_alert($alert);
+            $profile = modelAdmin::get_profile_model($code);
+            return $profile;
+        }
+        public function list_role_controller($userCurrentRole) {
+            $roles = modelAdmin::list_role_model();
+
+            $select = '<select class="input-field-profile" name="role-profile" required="">';
+            
+            foreach($roles as $rol){
+                if ($rol['idRole'] == $userCurrentRole) {
+                    $select.='
+                        <option value="'.$rol['idRole'].'" selected="">'
+                        .$rol['roleName'].
+                        '</option>
+                    ';
+                } else {
+                    $select.='
+                        <option value="'.$rol['idRole'].'">'
+                        .$rol['roleName'].
+                        '</option>
+                    ';
+                }
+            }
+
+            $select.='</select>';
+
+            return $select;
+        }
+        
+        public function list_state_controller($userCurrentState) {
+            $states = modelAdmin::list_state_model();
+
+            $select = '<select class="input-field-profile" name="state-profile" required="">';
+            
+            foreach($states as $state){
+                if ($state['idState'] == $userCurrentState) {
+                    $select.='
+                        <option value="'.$state['idState'].'" selected="">'
+                        .$state['stateName'].
+                        '</option>
+                    ';
+                } else {
+                    $select.='
+                        <option value="'.$state['idState'].'">'
+                        .$state['stateName'].
+                        '</option>
+                    ';
+                }
+            }
+
+            $select.='</select>';
+
+            return $select;
         }
 
          //controlador para páginar administrador
@@ -174,7 +228,8 @@
                     <td>Correo</td>
                     <td>Rol</td>
                     <td>Estado</td>
-                    <td colspan="1">Acciones</td>
+                    <td colspan="1">Eliminar</td>
+                    <td colspan="1">Editar</td>
                 </thead>
                 <tbody>
             ';
@@ -198,12 +253,23 @@
                         <td>
                             <form action="'.SERVERURL.'ajax/adminAjax.php" method="POST" class="formulario-ajax" data-form="delete" enctype="multipart/form-data">
                                 <input type="hidden" name="userToDelete" value="'.mainModel::encryption($rows['accountCode']).'">
-                                <button type="submit" class=" btn__delete">
-                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                <button type="submit" class="btn-general">
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
+
                                 <div class="RespuestaAjax"></div>
                             </form>
+
                         </td>
+
+                        <td>
+                            <a href="'.SERVERURL.'editAdmin?c='.mainModel::encryption($rows['accountCode']).'" type="submit" class="btn-general">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        
+                        <div class="RespuestaAjax"></div>
+                        
                     ';
                     $count++;
                 }
@@ -223,7 +289,7 @@
             $code=mainModel::decryption($_POST['userToDelete']);
 
             // Limpiar el resultado desencriptado
-            $code=mainModel::clean_String($code);            
+            $code=mainModel::clean_string($code);            
 
            
             // Verificar si el usuario actual es Admin
@@ -277,89 +343,126 @@
         }
 
         public function update_admin_controller() {
+            $code = mainModel::decryption($_POST['userToEdit']);
+            $code = mainModel::clean_string($code);  
+
             // Limpiar info del formulario
-            $typeDocument= mainModel::clean_string($_POST['typeDocument-profile']);
-            $Dni= mainModel::clean_string($_POST['dni-profile']);
-            $firstName= mainModel::clean_string($_POST['firstname-profile']); 
-            $lastName= mainModel::clean_string($_POST['lastname-profile']);
-            $address= mainModel::clean_string($_POST['adress-profile']); 
-            $email= mainModel::clean_string($_POST['email-profile']);
-            $phone= mainModel::clean_string($_POST['phone-profile']);
-            $genre= mainModel::clean_string($_POST['genre-profile']);
-
-            // Validar la info que llega
-            $profilesByDni=modelAdmin::find_dni($Dni);
-
-            if (count($profilesByDni) > 1 || 
-                (count($profilesByDni) == 1 && $profilesByDni[0]['accountDni'] != $Dni) )
-            {
-                $alert=[
+            $role = mainModel::clean_string($_POST['role-profile']);
+            $state = mainModel::clean_string($_POST['state-profile']);
+            
+            // Verificar si el usuario actual es Admin
+            if (!isset($_SESSION) || !isset($_SESSION['role_sk']) || $_SESSION['role_sk'] != "Administrador") {
+                // Si no, informar del error
+                $alert=[ 
                     "alert"=>"simple",
-                    "title"=>"Ocurrio un error inesperado",
-                    "text"=>"El número de Identificación ya está registrado",
+                    "title"=>"No autorizado",
+                    "text"=>"No tiene permisos para borrar usuarios.",
                     "type"=>"error"
                 ];
             } else {
-                // Buscar por correo
-                $profilesByEmail=modelAdmin::find_email($email);
-            
-                // Si existe uno, verificar si su account code coincide con el usuario actual
-                if(count($profilesByEmail) != 1){
-                    // Si no coincide, error
-                    $alert=[
-                        "alert"=>"simple",
-                        "title"=>"Ocurrio un error inesperado",
-                        "text"=>"Usuario no encontrado",
-                        "type"=>"error"
-                    ];
-                } else if ($_SESSION['role_sk'] != "Administrador") {
-                    // El usuario logueado no es Admin, no puede editar otros usuarios
-                    $alert=[
-                        "alert"=>"simple",
-                        "title"=>"Acción no permitida",
-                        "text"=>"No tiene privilegios suficientes para editar usuarios",
-                        "type"=>"error"
-                    ];
-                } else {
-                    // Si coincide, proceder con la actualización
-                    $id = $profilesByEmail[0]['idAccount'];
+                // Buscar si existe
+                $user = modelAdmin::get_profile_model($code);
 
+                // Si existe
+                if (isset($user['idAccount'])) {        
                     // Construir el objeto que se envía al modelo
-                    // Si todas se cumplen, llamar al modelo para que ejecute el cambio, enviando la info en un arreglo
+                    // El modelo espera todas las propiedades, por lo que se envian las actuales
                     $data = [
-                        "Id"=>$id,
-                        "DocumentType"=>$typeDocument,
-                        "Dni"=>$Dni,
-                        "FirstName"=>$firstName,
-                        "LastName"=>$lastName,
-                        "Address"=>$address,
-                        "Phone"=>$phone,
-                        "Genre"=>$genre
+                        "Id" => $user['idAccount'],
+                        "DocumentType" => $user['accountDocumentType'],
+                        "Dni" => $user['accountDni'],
+                        "FirstName" => $user['accountFirstName'],
+                        "LastName" =>  $user['accountLastName'],
+                        "Address" => $user['accountAddress'],
+                        "Phone" => $user['accountPhone'],
+                        "Genre" => $user['accountGenre'],
+                        "Email" => $user['accountEmail'],
+                        "Role" => $role,
+                        "State" => $state
                     ];
 
                     // LLamar al modelo
                     $saveAdmin = modelAdmin::update_admin_model($data);
 
                     // Verificar respuesta del modelo y construir la respuesta para la vista
-                    if($saveAdmin->rowCount() >= 1){
+                    if($saveAdmin->rowCount() == 1){
                         $alert=[
                             "alert"=>"limpiar",
-                            "title"=>"Actualizar perfil",
-                            "text"=>"El perfil se ha actualizado exitósamente.",
+                            "title"=>"Actualizar usuario",
+                            "text"=>"El usuario se ha actualizado exitósamente.",
                             "type"=>"success"
                         ];
-                    }else {
+                    } else {
                         $alert=[
                             "alert"=>"simple",
-                            "title"=>"Actualizar perfil",
-                            "text"=>"No se pudo actualizar el perfil, verifique los campos e intente de nuevo.",
+                            "title"=>"Actualizar usuario",
+                            "text"=>"No se pudo actualizar el usuario, verifique los campos e intente de nuevo.",
                             "type"=>"error"
                         ];
                     }
+                } else {
+                    $alert=[
+                        "alert"=>"simple",
+                        "title"=>"Actualizar usuario",
+                        "text"=>"No se pudo actualizar el usuario, verifique los campos e intente de nuevo.",
+                        "type"=>"error"
+                    ];
+                }
+
+                return mainModel::sweet_alert($alert);
+            }
+        }            
+
+        public function list_typeDocument_controller($userCurrentDocType){
+            $documentTypes = modelAdmin::list_typeDocuments_model();
+
+            $select = '<select class="input-field-profile" name="typeDocument-profile" required="">';
+            
+            foreach($documentTypes as $documentType){
+                if ($documentType['idDocumentType'] == $userCurrentDocType) {
+                    $select.='
+                        <option value="'.$documentType['idDocumentType'].'" selected="">'
+                        .$documentType['nameDocumentType'].
+                        '</option>
+                    ';
+                } else {
+                    $select.='
+                        <option value="'.$documentType['idDocumentType'].'">'
+                        .$documentType['nameDocumentType'].
+                        '</option>
+                    ';
                 }
             }
 
-            return mainModel::sweet_alert($alert);
-        }
+            $select.='</select>';
 
+            return $select;
+        }
+        //funciòn que llama la lista de generos de model
+        public function list_genres_controller($userCurrentGenre) {
+            $genres = modelAdmin::list_genres_model();
+
+            $select = '<select class="input-field-profile" name="genre-profile" required="">';
+            
+            foreach($genres as $genre){
+                if ($genre['idGenre'] == $userCurrentGenre) {
+                    $select.='
+                        <option value="'.$genre['idGenre'].'" selected="">'
+                        .$genre['nameGenre'].
+                        '</option>
+                    ';
+                } else {
+                    $select.='
+                        <option value="'.$genre['idGenre'].'">'
+                        .$genre['nameGenre'].
+                        '</option>
+                    ';
+                }
+            }
+
+            $select.='</select>';
+
+            return $select;
+        }
+        
 }

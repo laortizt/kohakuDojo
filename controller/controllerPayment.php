@@ -9,12 +9,6 @@
 
     class controllerPayment extends modelPayment{
 
-        public function find_dni($dni) {
-            //Obtiene los perfiles que coincidan con el dni enviado
-            $datos = mainModel::connect()->query("SELECT idAccount, accountDni, accountCode
-                FROM accounts WHERE accountDni ='$dni'");
-            return $datos->fetchAll();
-        }
 
         public function list_procedure_controller(){
             $Procedures = modelPayment::list_procedure_model();
@@ -89,6 +83,40 @@
             return mainModel::sweet_alert($alert);   
         }
 
+        public function update_payment_controller(){
+            $date= mainModel::clean_string($_POST['date-newpay']);
+            $dni= mainModel::clean_string($_POST['dni-newpay']);
+            $procedure= mainModel::clean_string($_POST['procedure-newpay']); 
+            $price= mainModel::clean_string($_POST['price-newpay']);
+            $observation= mainModel::clean_string($_POST['observation-newpay']);
+            $idPayments= mainModel::clean_string($_POST['observation-newpay']);
+            if (!isset($_SESSION) || !isset($_SESSION['role_sk']) || $_SESSION['role_sk'] != "Administrador") {
+                // Si no, informar del error
+                $alert=[ 
+                    "alert"=>"simple",
+                    "title"=>"No autorizado",
+                    "text"=>"No tiene permisos para editar pagos.",
+                    "type"=>"error"
+                ];
+            } else {    
+                $paymentById=modelPayment::find_idPay($idPayments);
+
+                if(count($paymentById) != 1 || $paymentById[0]['$idPayments'] != $_SESSION['code_sk']) {
+                    // Si no coincide, error
+                    $alert=[
+                        "alert"=>"simple",
+                        "title"=>"Ocurrio un error inesperado",
+                        "text"=>"Pa no encontrado",
+                        "type"=>"error"
+                    ];  
+                }else{
+                    $a = 2;
+                }
+            }
+
+            return mainModel::sweet_alert($alert);
+        }
+        
         public function pages_payment_controller($pages, $register, $role, $code){
             //Aqui que va?
             $pages=mainModel::clean_string($pages);
@@ -139,9 +167,10 @@
                         <td>'.$rows['paymentPrice'].'</td>
                         <td>'.$rows['paymentObservation'].'</td>
                         <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
-                        <td>'.'<button class="btn btn__update"><a href=""><i class="fas fa-edit"></i></a></button>&nbsp;'.
-                        '<button class="btn btn__delete"><a href="#"><i class="far fa-times-circle"></i></a></button>'.'</td>
-                    </tr>
+
+                        <td>
+                            <button href="'.SERVERURL.'payEdit/'.$rows['idPayments'].'"class="btn-general"><i class="fas fa-edit"></i></button>
+                        </td>
                     ';
                     $count++;
                 }
@@ -154,5 +183,5 @@
             $table.='</tbody> </table> </div>';
 
             return $table;
+        }
     }
-}

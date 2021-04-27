@@ -17,13 +17,7 @@
             return $datos->fetchAll();
         }
 
-        //Traer la lista de detalles
-        public function list_details_model() {
-            //Obtiene los trámites registrados
-            $datos = mainModel::connect()->query("SELECT * FROM details");
-            return $datos->fetchAll();
-        }
-
+    
          // Listar  Pagos
          public function get_payment_model($code) {
             $sql= mainModel::connect()->prepare("SELECT p.*, a.accountCode
@@ -78,6 +72,11 @@
         public function find_dni($dni) {
             $datos = mainModel::connect()->query("SELECT idAccount, accountDni, accountCode
                 FROM accounts WHERE accountDni ='$dni'");
+            return $datos->fetchAll();
+        }
+        public function find_idPay($idPayments) {
+            $datos = mainModel::connect()->query("SELECT idPayments
+                FROM payments WHERE paymentAccount ='$idPayments'");
             return $datos->fetchAll();
         }
     }

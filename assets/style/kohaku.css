@@ -106,36 +106,103 @@ body{
 	font-size: 1.5rem;
 	outline: none;
 	border: none;
-	
-	color:white;
 	padding: 0.5rem 1rem;
 	text-decoration: none;
 	margin: 5px 10px;
     display: inline-block;
 }
-  
-  .btn-normal:hover{
-	background-color: rgb(38, 38, 39);
-    color:#fa3636;
 
+  .btn-normal:hover{
+	background-color:#fa3636; 
+    color: white;
   }
   
   .btn-normal:focus {
 	box-shadow: none;
   }
+/* ---DIV ESTADISTICAS --- */
+
+.btn-data{
+	background-color:rgb(36, 255, 47); 
+	border-radius: 14px;
+	font-size: 1.5rem;
+	outline: none;
+	border: none;
+	align-items: center;
+	padding: 5px;
+	text-decoration: none;
+	margin: 15px 10px;
+    display: inline-block;
+   
+}
+.btn-data .title-card{
+    color: black;
+    
+}
+.btn-data .value{
+    color: black;
+    text-align: center;
+    font-size: 2rem;
+}
+.btn-data .fas{
+    color: black;
+    text-align: center;
+    font-size: 2rem;
+}
+.btn-data blue{
+    background-color: blue;
+}
+
+  .btn-normal:hover{
+	background-color:#fa3636; 
+    color:rgb(38, 38, 39);
+    
+  }
+  
+  .btn-normal:focus {
+	box-shadow: none;
+  }
+  .title-card {
+    font-size: 2.2rem;
+    color: rgb(255, 16, 16);
+    margin-bottom: 24px;
+    font-family: 'Anton', sans-serif;
+    align-self: flex-start;
+}
+.btn-normal2{
+    background-color:rgb(232, 255, 28);
+}
 
 /* ---botones  acción --- */
-.btn__update{
+/* .btn__update{
     background-color: #46aafc;
     color: white;
     border: none;
-  }
-  .btn__delete{
-    background-color: #fa3636;
-    color: white;
+  } */
+  /* .btn__edit{
+    height: 40px;
+    width: 40px;
+    background-color: rgb(210, 210, 219);
+    font-size: 1.5rem;
+    border-radius: 9px;
     border: none;
   }
-
+.btn__edit:hover{
+    background-color: #fa3636;
+    color:white;
+}
+  .btn__delete{
+    height: 40px;
+    width: 40px;
+    background-color: rgb(210, 210, 219);
+    font-size: 1.5rem;
+    border-radius: 9px;
+    border: none;
+  }
+.btn__delete:hover{
+    background-color: #fa3636;
+    color:white;
+} */
 /* Lista usuarios */
 .privileges h2{
     display: block;
@@ -152,13 +219,24 @@ body{
     text-align: center;
     height: 40px;
     width: 250px;
-    
 }
-.btn-search{
+
+.btn-general{
     height: 40px;
     width: 40px;
-    background-color: rgb(38, 38, 39);
+    background-color: rgb(210, 210, 219);
     font-size: 1.5rem;
+    border-radius: 9px;
+    color: black;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.btn-general:hover{
+    background-color: #fa3636;
+    color:white;
 }
 .barra__buscador{
     width: 100%;
@@ -166,6 +244,7 @@ body{
     margin-bottom: 10px;
   
 }
+
 .text-fecha{
     border-radius: 14px;
     text-align: center;

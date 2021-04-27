@@ -76,7 +76,7 @@ form.sign-in-form {
 .input-field {
   max-width: 380px;
   width: 60%;
-  background-color: #383838;
+  background-color: #040404;
   margin: 10px 0;
   height: 55px;
   border-radius: 55px;
@@ -87,7 +87,7 @@ form.sign-in-form {
   display: grid;
   grid-template-columns: 15% 85%;
   margin-left: 90px;
-  
+  border: white solid;
 }
 
 /* .input-field {
@@ -121,7 +121,7 @@ form.sign-in-form {
 }
 .label-login {
   margin-left: 90px;
-  
+  color: white;
 }
 
 .input-field input {
@@ -195,6 +195,7 @@ form.sign-in-form {
   left: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  background-color: black;
 }
 
 .container:before {
@@ -205,8 +206,9 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #131212 0%, #353535 100%);
-  /* background-image: linear-gradient(-45deg, #e20404 0%, #f83434 100%); */
+  background-image: linear-gradient(-45deg, #fcfbfb 0%, #fcfbfb 100%);
+  /* background-image: linear-gradient(-45deg, #131212 0%, #353535 100%); */
+  
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -220,6 +222,10 @@ form.sign-in-form {
   transition: transform 1.1s ease-in-out;
   transition-delay: 0.4s;
   
+}
+.title-login{
+  color:black;
+  font-size: 1.2rem;
 }
 
 /* .btn-kohaku-login {

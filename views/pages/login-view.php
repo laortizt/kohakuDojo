@@ -14,7 +14,7 @@
       <div class="forms-container">
         <div class="signin-signup">
           <form action="" method="post" autocomplete="off" class="sign-in-form">
-            <h2 class="title">Iniciar sesión</h2>
+            <!-- <h2 class="title">Iniciar sesión</h2> -->
 
             <p class="label-login">Usuario</p>
             <div class="input-field">
@@ -28,12 +28,12 @@
               <input type="password" name="passwordSignIn" required=""/>
             </div>
 
-            <input type="submit" value="Ingresar" class="btn-kohaku-login"/>
+            <input type="submit" value="Iniciar sesión" class="btn-kohaku-login"/>
           </form>
 
           <!-- se crea la ruta que conecta con el ajax,  -->
           <form action="" method="post" autocomplete="off" class="sign-up-form">
-          <h2 class="title">Crear cuenta</h2>
+          <!-- <h2 class="title">Crear cuenta</h2> -->
             
             <p class="label-login">Nombres</p>
             <div class="input-field">
@@ -59,7 +59,7 @@
               <input type="password" required="" name="passwordSignUp"/>
             </div>
 
-            <input type="submit" class="btn-kohaku-login" value="Guardar" />
+            <input type="submit" class="btn-kohaku-login" value="Crear cuenta" />
             <p class="social-text"></p>
 
             <div class="social-media"></div>
@@ -72,7 +72,7 @@
           <div class="content">
             <img src="<?php echo SERVERURL; ?>assets/img/logo.png" class="image" alt="" />
 
-            <h3>¿Nuevo por aquí?</h3>
+            <p class="title-login">¿Nuevo por aquí?</p>
 
             <button class="btn-kohaku-record" id="sign-up-btn">
               Regístrate
@@ -116,7 +116,7 @@
               echo $insUser->add_controller_User();
       } else {
         
-        // echo $insUser->add_User_incomplete_data();  ERROR EN ESTÁ LINEA OOOOOJOOOOOOOO
+        
       }
     }
   ?>

@@ -14,6 +14,7 @@ $insAdmin = new controllerAdmin();
                 <div class="card-content">
                     <div class="header-class">
                         <h1 class="title">Listado Ascensos</h1>
+                            <?php include "./views/modules/menuProgress.php"; ?>
                          <div>
 						<!-- <a href="<?php echo SERVERURL; ?>newProgress" class="btn-kohaku">
 							<i class="fas fa-plus-circle"></i> Nuevo -->

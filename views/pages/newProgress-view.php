@@ -1,61 +1,205 @@
 <?php
-	require_once"./controller/controllerProgress.php";
-	$insProgress = new controllerProgress();
+// 	require_once"./controller/controllerProgress.php";
+// 	$insProgress = new controllerProgress();
+// 
 ?>
 
 <div class="row">
     <div class="col-12 col-m-12 col-sm-12">
         <div class="card">
-			<div class="card-content">
+            <div class="card-content">
                 <div class="header-class">
-                    <h1>Registar Progreso</h1>
-                    <div>
-                        <!-- <a href="<?php echo SERVERURL; ?>calendar" class="btn-kohaku">
-                            <i class="fas fa-trash-alt"></i> Eliminar
-                        </a> -->
-
-                        <a href="<?php echo SERVERURL; ?>progress" class="btn-kohaku">
-                            <i class="far fa-file"></i> Registros
-                        </a>
-                    </div>
+                    <h1 class="title">Registar Progreso</h1>
+                    <!-- <?php include "./views/modules/menuProgress.php"; ?> -->
                 </div>
 
-                <!-- se crea la ruta que conecta con el ajax,  -->
-                <form action="ajax/newPayAjax.php" method="post" autocomplete="off" class="payment-form formulario-ajax">
-                    <div class="payment">
-                        <div class="input-container">
-                            <label class="label">Fecha</label>
-                            <div class="input-field">
-                                <input type="date" name="date-newprogress" required="" />
+                
+                    <div class="col_third">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>10 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <input type="checkbox"><p>a</p>
+                                    <input type="checkbox"> <p>b</p>
+                                    <input type="checkbox"> <p>c</p>
+                                    <input type="checkbox"> <p>d</p>
+                                    <button>Aprobado</button>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="input-container">
-                            <label class="label">Documento</label>
-                            <div class="input-field">
-                                <input type="texbox" name="dni-newprogress" minlength="1" maxlength="100"/>
-                            </div>
-                        </div>
-
-                        <div class="input-container">
-                            <label class="label">Ascenso</label>
-                            <?php echo $insPayment->list_procedure_controller() ?> 
-                        </div>
-
-                        <div class="input-container">
-                            
-                            <label class="label">Observaciones</label>
-                            <div class="input-field">
-                                <input type="texbox" name="observation-newprogress" minlength="1" maxlength="100"/>
-                            </div>
-                        </div>
-
                     </div>
 
-                    <input type="submit" class="btn-kohaku-newprogress" value="Guardar" />
+                    <div class="col_third">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>9 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="RespuestaAjax"></div>
-                </form>          
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>8 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>7 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>6 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>7 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>6 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>5 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>4 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>3 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>2 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col_third end">
+                        <div class="hover panel">
+                            <div class="front">
+                                <div class="box1">
+                                    <p>1 kyu</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="box2">
+                                    <p>Back Side</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                
             </div>
         </div>
     </div>

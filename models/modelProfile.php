@@ -10,7 +10,7 @@
     //MODELO PARA CREAR USUARIO completar info usuario
     class modelProfile extends mainModel{
 
-        public function list_genres_model() {
+        protected function list_genres_model() {
             $conexion= mainModel::connect();
 
             //Obtiene los géneros registrados
@@ -18,14 +18,14 @@
             return $datos->fetchAll();
         }
 
-        public function list_typeDocuments_model() {
+        protected function list_typeDocuments_model() {
             //Obtiene los géneros registrados
             $datos = mainModel::connect()->query("SELECT * FROM documenttype");
             return $datos->fetchAll();
         }
-
+        
         // Traer datos de un perfil usando el accountCode
-        public function get_profile_model($code) {
+        protected function get_profile_model($code) {
             $sql= mainModel::connect()->prepare("SELECT idAccount, accountCode, accountEmail, accountDocumentType,
                 accountDni, accountFirstName, accountLastName, accountAddress, accountPhone, accountGenre
                 FROM accounts WHERE accountCode=:code");
@@ -36,7 +36,7 @@
         }
 
         //Actualizar perfil
-        public function update_profile_model($data) {
+        protected function update_profile_model($data) {
             $sql=mainModel::connect()->prepare("UPDATE accounts 
                 SET accountDocumentType=:DocumentType, accountDni=:Dni, accountFirstName=:FirstName,
                     accountLastName=:LastName, accountAddress=:Address, accountPhone=:Phone,
@@ -56,14 +56,14 @@
             return $sql;
         }
 
-        public function find_dni($dni) {
+        protected function find_dni($dni) {
             //Obtiene los perfiles que coincidan con el dni enviado
             $datos = mainModel::connect()->query("SELECT idAccount, accountDni, accountCode
                 FROM accounts WHERE accountDni ='$dni'");
             return $datos->fetchAll();
         }
 
-        public function find_email($email) {
+        protected function find_email($email) {
             //Obtiene los correos que coincidan con el dni enviado
             $datos=mainModel::connect()->query("SELECT idAccount, accountDni, accountCode
             FROM accounts WHERE accountEmail = '$email'");

@@ -2,17 +2,17 @@
 	<?php
 		if($_SESSION['role_sk'] == "Administrador" || $_SESSION['role_sk'] == "Instructor"):
 	?>
-		<a href="<?php echo SERVERURL; ?>progress" class="btn-normal">
-			<i></i> Seguimiento
+		<a href="<?php echo SERVERURL; ?>progress" class="btn-general">
+		<i class="fas fa-tasks"></i>
 		</a>
 
-		<a href="<?php echo SERVERURL; ?>#" class="btn-normal">
-			<i></i> holi1
-		</a>
+		<a href="<?php echo SERVERURL; ?>newProgress" class="btn-general">
+		<i class="fas fa-edit"></i>
+		</autocomplete>
 	<?php
 		elseif($_SESSION['role_sk'] == "Usuario"):
 	?>
-		<a href="<?php echo SERVERURL; ?>schedule" class="btn-normal">
+		<a href="<?php echo SERVERURL; ?>newProgress" class="btn-general">
 			<i></i> holi2
 		</a>
 	<?php

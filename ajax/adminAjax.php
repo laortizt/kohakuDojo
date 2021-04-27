@@ -26,7 +26,14 @@ if(isset($_POST['Dni']) || isset($_POST['idAccount'])){
     $insAdmin= new controllerAdmin();
 
     echo $insAdmin->delete_user_controller();
-} else {
+    
+} else if (isset($_POST['userToEdit'])){
+    session_start(['name'=>'SK']);
+    require_once"../controller/controllerAdmin.php";
+    $insAdmin= new controllerAdmin();
+
+    echo $insAdmin->update_admin_controller();
+} else{
 //poner seguridad a la página
     session_start();
     session_destroy();

@@ -102,8 +102,6 @@
            return mainModel::sweet_alert($alert);
         }
     
-        
-
         // Traer datos de un perfil usando el accountCode (LO TRAJE DE PROFILE)
         public function get_user_model($code) {
             $sql= mainModel::connect()->prepare("SELECT idAccount, accountCode, accountDocumentType,
