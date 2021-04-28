@@ -93,7 +93,7 @@ body{
 }
 .title {
     font-size: 2.2rem;
-    color: rgb(255, 16, 16);
+    color: #bd6b84;
     margin-bottom: 24px;
     font-family: 'Anton', sans-serif;
     align-self: flex-start;
@@ -236,7 +236,7 @@ body{
     cursor: pointer;
 }
 .btn-general:hover{
-    background-color: #fa3636;
+    background-color: #95637f;
     color:white;
 }
 .barra__buscador{

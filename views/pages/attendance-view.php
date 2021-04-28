@@ -16,7 +16,7 @@ $insAdmin = new controllerAdmin();
 			<div class="card-content">
 				<div class="header-class">
 					<h1 class="title">Lista de Asistencia</h1>
-					<!-- <?php include "./views/modules/menuClass.php"; ?> -->
+					 <?php include "./views/modules/menuClass.php"; ?>
 				</div>
 
 				<form action="ajax/classAjax.php" class="form-class" method="post" autocomplete="off" class="formulario-ajax">

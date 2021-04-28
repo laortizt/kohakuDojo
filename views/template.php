@@ -88,7 +88,7 @@ session_start(['name' => 'SK']);
 			<!-- nav left -->
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<img src="<?php echo SERVERURL; ?>assets/img/isotipoWhite.png" class="image-logo" alt="">
+					
 					<!-- <img src="<?php echo SERVERURL; ?>assets/img/logokhk.png" class="image-logo" alt=""> -->
 				</li>
 
@@ -175,8 +175,8 @@ session_start(['name' => 'SK']);
 						
 				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador") : ?>
 					<li class="sidebar-nav-item logo-container">
-						<img src="<?php echo SERVERURL; ?>assets/img/isotipoWhite.png" class="image-logo" alt="">
-						<img src="<?php echo SERVERURL; ?>assets/img/logoWhite.png" class="image-logo" alt="">
+						<img src="<?php echo SERVERURL; ?>assets/img/isotipoWhite.png" class="image-logo1" alt="">
+						<img src="<?php echo SERVERURL; ?>assets/img/logoWhite.png" class="image-logo2" alt="">
 					</li>
 					
 					<li class="sidebar-nav-item">

@@ -1,4 +1,4 @@
-<div class="nav-class">
+<!-- <div class="nav-class">
 	<?php
 		if($_SESSION['role_sk'] == "Administrador" || $_SESSION['role_sk'] == "Instructor"):
 	?>
@@ -18,4 +18,4 @@
 	<?php
 		endif;
 	?>
-</div>
+</div> -->

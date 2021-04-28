@@ -70,8 +70,9 @@
       <div class="panels-container">
         <div class="panel left-panel">
           <div class="content">
-            <img src="<?php echo SERVERURL; ?>assets/img/logo.png" class="image" alt="" />
-
+            
+            <img src="<?php echo SERVERURL; ?>assets/img/logotipoWhite.png" class="image" alt="" />
+            <!-- <img src="<?php echo SERVERURL; ?>assets/img/logo.png" class="image" alt="" /> -->
             <p class="title-login">¿Nuevo por aquí?</p>
 
             <button class="btn-kohaku-record" id="sign-up-btn">
@@ -82,7 +83,7 @@
 
         <div class="panel right-panel">
           <div class="content">
-            <img src="<?php echo SERVERURL; ?>assets/img/logo.png" class="image" alt=""/>
+          <img src="<?php echo SERVERURL; ?>assets/img/logotipoWhite.png" class="image" alt="" />
             
             <div class="texto-login">
               <h3>¿Ya eres miembro?</h3>
