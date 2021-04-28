@@ -48,14 +48,23 @@
                 // Identificador único de la sesión, se usa al cerrar la sesión
                 $_SESSION['token_sk']=md5(uniqid(mt_rand(),true));    
 
-                //Se agrega este código para acceder a las vistasdependiendo el tipo de usuario
-                if($_SESSION['role_sk']==="Administrador"){
-                    $url=SERVERURL."admin";
-                }else if($_SESSION['role_sk']==="Instructor") {
-                    $url=SERVERURL."calendar";
-                } else{
-                    $url=SERVERURL."schedule";
+
+                $hasfilledProfile = true; 
+                // Se valida si ya tiene info de perfil, si no enviarlo a perfil
+                if (!$hasfilledProfile) {
+                    $url=SERVERURL."profile";
+                } else {
+                    // Si ya lo tiene, dirigir de acuerdo al tipo de usuario
+                    if($_SESSION['role_sk']==="Administrador"){
+                        $url=SERVERURL."admin";
+                    }else if($_SESSION['role_sk']==="Instructor") {
+                        $url=SERVERURL."calendar";
+                    } else{
+                        $url=SERVERURL."schedule";
+                    }
                 }
+
+
 
                 return '<script> window.location= " '.$url.'" </script>';
             } else{

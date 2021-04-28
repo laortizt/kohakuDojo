@@ -388,15 +388,15 @@
                     if($saveAdmin->rowCount() == 1){
                         $alert=[
                             "alert"=>"limpiar",
-                            "title"=>"Actualizar usuario",
-                            "text"=>"El usuario se ha actualizado exitósamente.",
+                            "title"=>"Actualizar Permsisos",
+                            "text"=>"Se ha cambiado el rol exitósamente.",
                             "type"=>"success"
                         ];
                     } else {
                         $alert=[
                             "alert"=>"simple",
                             "title"=>"Actualizar usuario",
-                            "text"=>"No se pudo actualizar el usuario, verifique los campos e intente de nuevo.",
+                            "text"=>"No se pudo actualizar el rol, verifique los campos estén diligenciados.",
                             "type"=>"error"
                         ];
                     }
@@ -404,7 +404,7 @@
                     $alert=[
                         "alert"=>"simple",
                         "title"=>"Actualizar usuario",
-                        "text"=>"No se pudo actualizar el usuario, verifique los campos e intente de nuevo.",
+                        "text"=>"No se pudo actualizar el rol, verifique los campos estén diligenciados.",
                         "type"=>"error"
                     ];
                 }

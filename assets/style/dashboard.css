@@ -67,7 +67,7 @@ body {
 .navbar {
 	display: flex;
 	flex-direction: row;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	/* background-color: black; */
 	color: var(--main-color);
 	position: fixed;
@@ -76,6 +76,9 @@ body {
 	left: 0;
 	z-index: 101;
 	box-shadow: rgba(0,0,0,0.12) 0px 1px 4px 1px;
+	background: #355C7D;  /* fallback for old browsers */
+	background: linear-gradient(to right, #355C7D, #6C5B7B, #C06C84); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .navbar-nav {
@@ -90,9 +93,8 @@ body {
 
 
 .image-logo {
-	margin-left: 15px;
-	max-width: 130px;
-
+	margin-left: 16px;
+	max-width: 50px;
 	/* transition: transform 1.1s ease-in-out;
 	transition-delay: 0.4s; */
 }
@@ -319,11 +321,11 @@ body {
 	width: 82px;
 	height: 100vh;
 	position: fixed;
-	margin-top: 65px;
+	
 	background: var(--main-bg-color);
 	box-shadow: rgba(0,0,0,0.12) 0px 1px 4px 1px;
 	overflow: hidden;
-	z-index: 100;
+	z-index: 102;
 	transition: width .5s;
 }
 /* ancho menu lateral */
@@ -339,13 +341,23 @@ body {
 	flex-direction: column;
 	align-items: center;
 	height: 100vh;
-	background-color: #f71414;
+	/* background-color: #f71414; */
+	background-color: #365c7d;
 	/* background-color: #262525;  */
-	width: 192px;
+	width: 196px;
+	position: absolute;
+	top: 0px;
+	z-index: 101;
 }
 
 .sidebar-nav-item {
 	width: 100%;
+}
+
+.sidebar-nav-item.logo-container {
+	height: 65px;
+	display: flex;
+	align-items: center;
 }
 
 .sidebar-nav-link {
@@ -355,7 +367,6 @@ body {
 	text-decoration: none;
 	color: white;
 }
-
 
 .sidebar-nav-link i {
 	font-size: 1.5rem;
@@ -380,7 +391,7 @@ body {
   /* background-image: url(./../img/Rojo.png); */
   	background-size: 100% 100%;
   	background-repeat: no-repeat;
-  	background-color: #fb8686;
+  	background-color: #9c6580;
   	border-radius: 0 20px 20px 0;
 }
 
@@ -517,7 +528,7 @@ body {
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.couner i {
+.counter i {
 	font-size: 50px;
 }
 

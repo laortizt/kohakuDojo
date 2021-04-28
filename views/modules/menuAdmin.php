@@ -3,9 +3,9 @@
 	
 		if($_SESSION['role_sk'] == "Administrador"):
 	?>
-		<a href="<?php echo SERVERURL; ?>#" class="btn-general">
+		<!-- <a href="<?php echo SERVERURL; ?>#" class="btn-general">
 			<i class="fas fa-user-plus"></i>
-		</a>
+		</a> -->
 
 		<a href="<?php echo SERVERURL; ?>newPay" class="btn-general">
 			<i class="fas fa-dollar-sign"></i>

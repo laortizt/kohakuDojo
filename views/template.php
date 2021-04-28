@@ -12,6 +12,7 @@ session_start(['name' => 'SK']);
 	<title>Kohaku</title>
 
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta charset="utf-8">
 	<link rel="icon" type="image/png" href="<?php echo SERVERURL; ?>assets/img/favicon/favicon.ico" />
 	<title><?php echo COMPANY; ?></title>
 	<script src="https://kit.fontawesome.com/a7ccf0be94.js" crossorigin="anonymous"></script>
@@ -41,6 +42,7 @@ session_start(['name' => 'SK']);
 	<link href="<?php echo SERVERURL; ?>assets/style/payments.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/newPay.css" rel="stylesheet">
 	<link href="<?php echo SERVERURL; ?>assets/style/kohaku.css" rel="stylesheet">
+	<link href="<?php echo SERVERURL; ?>assets/style/newProgress.css" rel="stylesheet">
 
 	<link href="<?php echo SERVERURL; ?>assets/sweet-alert/sweetalert2.css" rel="stylesheet">
 
@@ -86,13 +88,15 @@ session_start(['name' => 'SK']);
 			<!-- nav left -->
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<img src="<?php echo SERVERURL; ?>assets/img/logokhk.png" class="image-logo" alt="">
+					<img src="<?php echo SERVERURL; ?>assets/img/isotipoWhite.png" class="image-logo" alt="">
+					<!-- <img src="<?php echo SERVERURL; ?>assets/img/logokhk.png" class="image-logo" alt=""> -->
 				</li>
-				<li class="nav-item">
+
+				<!-- <li class="nav-item">
 					<a class="nav-link">
 						<i class="fas fa-bars" onclick="collapseSidebar()"></i>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 			<!-- end nav left -->
 
@@ -163,9 +167,18 @@ session_start(['name' => 'SK']);
 		<!-- end navbar -->
 
 		<!-- sidebar -->
+						
+
 		<div class="sidebar">
 			<ul class="sidebar-nav">
+
+						
 				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador") : ?>
+					<li class="sidebar-nav-item logo-container">
+						<img src="<?php echo SERVERURL; ?>assets/img/isotipoWhite.png" class="image-logo" alt="">
+						<img src="<?php echo SERVERURL; ?>assets/img/logoWhite.png" class="image-logo" alt="">
+					</li>
+					
 					<li class="sidebar-nav-item">
 						<a href="<?php echo SERVERURL; ?>admin" class="sidebar-nav-link active">
 							<div>

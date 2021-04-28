@@ -4,7 +4,7 @@
     const DB="dbkohaku";
     //Adriana
     const USER="root";
-    const PASS="50430";
+    const PASS="";
 
     const SGBD= "mysql:host=".SERVER.";dbname=".DB;
     //LLAVES SECRETASV NO SEPUEDEN CONFIGUAL AL GUARDAR EN LA DB

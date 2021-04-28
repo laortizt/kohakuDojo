@@ -226,7 +226,8 @@ body{
     width: 40px;
     background-color: rgb(210, 210, 219);
     font-size: 1.5rem;
-    border-radius: 9px;
+    border-radius: 30px; 
+    /* border-radius: 9px; */
     color: black;
     border: none;
     display: inline-flex;

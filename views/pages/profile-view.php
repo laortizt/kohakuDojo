@@ -7,6 +7,11 @@
     <div class="col-12 col-m-12 col-sm-12">
         <div class="card">
 			<div class="card-content">
+                 <div class="header-class">
+					<h1 class="title">Mi perfil</h1>
+					<?php include "./views/modules/menuProfile.php"; ?>
+					
+				</div>
             
                 <?php
                     $profile=$insProfile->get_profile_controller();
@@ -14,7 +19,7 @@
 
                 <!-- se crea la ruta que conecta con el ajax,  -->
                 <form action="ajax/profileAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
-                    <h2 class="title">Mi Perfil</h2>
+                    
 
                     <div class="profile">
                         <div class="input-container-profile">
