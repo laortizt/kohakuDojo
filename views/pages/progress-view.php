@@ -1,104 +1,81 @@
 <?php
-require_once "./controller/controllerAdmin.php";
-$insAdmin = new controllerAdmin();
+require_once "./controller/controllerProgress.php";
+$insProgress = new controllerProgress();
 ?>
 
 
+<!-- <?php include "./views/modules/menuProgress.php"; ?> -->
 
+<div class="container-report">
+	<div class="row-gutters">
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon">
+					<i class="fas fa-user-friends"></i>
+				</div>
+				<div class="sale-num">
+					<h3><?php echo $insProgress->count_students()?></h3>
+					<p></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon">
+					<i class="fas fa-user-tie"></i>
+				</div>
+				<div class="sale-num">
+					<h3>2500</h3>
+					<p>Instructores</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon">
+					<i class="fas fa-user-cog"></i>
+				</div>
+				<div class="sale-num">
+					<h3>7500</h3>
+					<p>Administradores</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon">
+					<i class="fas fa-equals"></i>
+				</div>
+				<div class="sale-num">
+					<h3>3500</h3>
+					<p>Total Usuarios</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <!-- <?php include "./views/modules/menuProgress.php"; ?> -->
+</div>
 
-    <div class="row">
-        <div class="col-12 col-m-12 col-sm-12">
-            <div class="card">
-                <div class="card-content">
-                    <div class="header-class">
-                        <h1 class="title">Listado Ascensos</h1>
-                            <?php include "./views/modules/menuProgress.php"; ?>
-                         <div>
-						<!-- <a href="<?php echo SERVERURL; ?>newProgress" class="btn-kohaku">
-							<i class="fas fa-plus-circle"></i> Nuevo -->
-						</a> 
-					    </div> 
-                    </div>
+<div class="row privileges">
+    <div class="col-12 col-m-12 col-sm-12">
+        <div class="card">
+            <div class="card-content">
+                <div class="header-class">
+                    <h1 class="title">Listado Ascensos</h1>
+                    <?php include "./views/modules/menuProgress.php"; ?>
+                </div>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Exámen</th>
-                                <th>Fecha</th>
-                                <th>Observaciones</th>
-                                <td colspan="1">Estado</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="examen">10 kyu </td>
-                                <td data-label="Fecha">02/01/2015</td>
-                                <td data-label="Observacion">Muy buen Exámen</td>
-                                <td data-label="Estado">Aprobado</td>
-                            </tr>
-                            <tr>
-                                <td data-label="examen">9 kyu </td>
-                                <td data-label="Fecha">02/01/2015</td>
-                                <td data-label="Observacion">Muy buen Exámen</td>
-                                <td data-label="Estado">Aprobado</td>
-                            </tr>
-                            <td data-label="examen">8 kyu </td>
-                            <td data-label="Fecha">-</td>
-                            <td data-label="Observacion">-</td>
-                            <td data-label="Estado">-</td>
-                            </tr>
-                            <td data-label="examen">7 kyu </td>
-                            <td data-label="Fecha">-</td>
-                            <td data-label="Observacion">-</td>
-                            <td data-label="Estado">-</td>
-                            </tr>
-                            <td data-label="examen">6 kyu </td>
-                            <td data-label="Fecha">-</td>
-                            <td data-label="Observacion">-</td>
-                            <td data-label="Estado">-</td>
-                            </tr>
-                            <td data-label="examen">5 kyu </td>
-                            <td data-label="Fecha">-</td>
-                            <td data-label="Observacion">-</td>
-                            <td data-label="Estado">-</td>
-                            </tr>
-                            <td data-label="examen">4 kyu </td>
-                            <td data-label="Fecha">-</td>
-                            <td data-label="Observacion">-</td>
-                            <td data-label="Estado">-</td>
-                            </tr>
-                            <td data-label="examen">3 kyu </td>
-                            <td data-label="Fecha">-</td>
-                            <td data-label="Observacion">-</td>
-                            <td data-label="Estado">-</td>
-                            </tr>
-                            <td data-label="examen">2 kyu </td>
-                            <td data-label="Fecha">-</td>
-                            <td data-label="Observacion">-</td>
-                            <td data-label="Estado">-</td>
-                            </tr>
-                            <td data-label="examen">1 kyu </td>
-                            <td data-label="Fecha">-</td>
-                            <td data-label="Observacion">-</td>
-                            <td data-label="Estado">-</td>
-                            </tr>
-                            <td data-label="examen">Shodan</td>
-                            <td data-label="Fecha">-</td>
-                            <td data-label="Observacion">-</td>
-                            <td data-label="Estado">-</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div>
 
+                
+                    <?php
+                    $pages = explode("/", $_GET['page']);
 
+                    echo $insProgress->pages_progress_controller(0, 10, $_SESSION['role_sk'], 'code');
+                    ?>
                 </div>
             </div>
         </div>
+
     </div>
-
-    <div class="RespuestaAjax"></div>
-
-
-<script src="<?php echo SERVERURL; ?>assets/script/progress.js"></script>
+</div>

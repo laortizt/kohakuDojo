@@ -60,7 +60,7 @@
                     }else if($_SESSION['role_sk']==="Instructor") {
                         $url=SERVERURL."calendar";
                     } else{
-                        $url=SERVERURL."schedule";
+                        $url=SERVERURL."profile";
                     }
                 }
 

@@ -21,7 +21,11 @@ session_start(['name' => 'SK']);
 	<!-- <link rel="stylesheet" type="text/css" href="<?php echo SERVERURL; ?>assets/fontawesome-free/css/all.min.css"> -->
 
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	
+	<!-- nuevo -->
+	
 
+	
 	<!-- LINKS datatable -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">

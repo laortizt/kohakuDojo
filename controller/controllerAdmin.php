@@ -162,7 +162,46 @@
 
             return $select;
         }
-        
+        public function count_students() {
+            //Obtiene la cantidad de roles estudiantes
+            $datos = mainModel::connect()->query("SELECT count(*) as nEstudiantes
+                FROM accounts WHERE accountRole =3");
+
+            $row = $datos->fetch();
+
+            return $row['nEstudiantes'];
+        }
+
+        public function count_admin() {
+            //Obtiene la cantidad de roles administrador
+            $datos = mainModel::connect()->query("SELECT count(*) as nAdmin
+                FROM accounts WHERE accountRole =1");
+
+            $row = $datos->fetch();
+
+            return $row['nAdmin'];
+        }
+
+        public function count_allRegisters() {
+            //Obtiene la cantidad total usuarios registrados
+            $datos = mainModel::connect()->query("SELECT count(*) as nAll
+                FROM accounts WHERE accountRole ");
+
+            $row = $datos->fetch();
+
+            return $row['nAll'];
+        }
+
+        public function count_instructors() {
+            //Obtiene la cantidad de roles administrador
+            $datos = mainModel::connect()->query("SELECT count(*) as nInstructors
+                FROM accounts WHERE accountRole =2");
+
+            $row = $datos->fetch();
+
+            return $row['nInstructors'];
+        }
+
         public function list_state_controller($userCurrentState) {
             $states = modelAdmin::list_state_model();
 
@@ -179,6 +218,57 @@
                     $select.='
                         <option value="'.$state['idState'].'">'
                         .$state['stateName'].
+                        '</option>
+                    ';
+                }
+            }
+
+            $select.='</select>';
+
+            return $select;
+        }
+        public function list_typeDocument_controller($userCurrentDocType){
+            $documentTypes = modelAdmin::list_typeDocuments_model();
+
+            $select = '<select class="input-field-profile" name="typeDocument-profile" required="">';
+            
+            foreach($documentTypes as $documentType){
+                if ($documentType['idDocumentType'] == $userCurrentDocType) {
+                    $select.='
+                        <option value="'.$documentType['idDocumentType'].'" selected="">'
+                        .$documentType['nameDocumentType'].
+                        '</option>
+                    ';
+                } else {
+                    $select.='
+                        <option value="'.$documentType['idDocumentType'].'">'
+                        .$documentType['nameDocumentType'].
+                        '</option>
+                    ';
+                }
+            }
+
+            $select.='</select>';
+
+            return $select;
+        }
+        //funciòn que llama la lista de generos de model
+        public function list_genres_controller($userCurrentGenre) {
+            $genres = modelAdmin::list_genres_model();
+
+            $select = '<select class="input-field-profile" name="genre-profile" required="">';
+            
+            foreach($genres as $genre){
+                if ($genre['idGenre'] == $userCurrentGenre) {
+                    $select.='
+                        <option value="'.$genre['idGenre'].'" selected="">'
+                        .$genre['nameGenre'].
+                        '</option>
+                    ';
+                } else {
+                    $select.='
+                        <option value="'.$genre['idGenre'].'">'
+                        .$genre['nameGenre'].
                         '</option>
                     ';
                 }
@@ -216,7 +306,7 @@
             //calcular el otal de páginas
             $Npages= ceil($total/$register);
             $table.='<div>
-            <table>
+            <table  class="custom-table"> 
                 <thead> 
                     <td>Documento</td>
                     <td>Número</td>
@@ -413,56 +503,6 @@
             }
         }            
 
-        public function list_typeDocument_controller($userCurrentDocType){
-            $documentTypes = modelAdmin::list_typeDocuments_model();
-
-            $select = '<select class="input-field-profile" name="typeDocument-profile" required="">';
-            
-            foreach($documentTypes as $documentType){
-                if ($documentType['idDocumentType'] == $userCurrentDocType) {
-                    $select.='
-                        <option value="'.$documentType['idDocumentType'].'" selected="">'
-                        .$documentType['nameDocumentType'].
-                        '</option>
-                    ';
-                } else {
-                    $select.='
-                        <option value="'.$documentType['idDocumentType'].'">'
-                        .$documentType['nameDocumentType'].
-                        '</option>
-                    ';
-                }
-            }
-
-            $select.='</select>';
-
-            return $select;
-        }
-        //funciòn que llama la lista de generos de model
-        public function list_genres_controller($userCurrentGenre) {
-            $genres = modelAdmin::list_genres_model();
-
-            $select = '<select class="input-field-profile" name="genre-profile" required="">';
-            
-            foreach($genres as $genre){
-                if ($genre['idGenre'] == $userCurrentGenre) {
-                    $select.='
-                        <option value="'.$genre['idGenre'].'" selected="">'
-                        .$genre['nameGenre'].
-                        '</option>
-                    ';
-                } else {
-                    $select.='
-                        <option value="'.$genre['idGenre'].'">'
-                        .$genre['nameGenre'].
-                        '</option>
-                    ';
-                }
-            }
-
-            $select.='</select>';
-
-            return $select;
-        }
+       
         
 }

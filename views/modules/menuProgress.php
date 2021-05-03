@@ -8,7 +8,7 @@
 
 		<a href="<?php echo SERVERURL; ?>newProgress" class="btn-general">
 		<i class="fas fa-edit"></i>
-		</autocomplete>
+		</a>
 	<?php
 		elseif($_SESSION['role_sk'] == "Usuario"):
 	?>

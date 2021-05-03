@@ -38,7 +38,9 @@ body.swal2-iosfix {
   overflow-x: hidden;
   overflow-y: auto;
   display: none;
-  position: relative; }
+  position: relative; 
+  border-radius: 22px;    
+ }
   .swal2-modal:focus {
     outline: none; }
   .swal2-modal.swal2-loading {
@@ -67,7 +69,9 @@ body.swal2-iosfix {
     font-size: 17px;
     font-weight: 500;
     margin: 0 5px;
-    padding: 10px 32px; }
+    padding: 10px 32px; 
+    border-radius:22px
+  }
     .swal2-modal .swal2-styled:not(.swal2-loading)[disabled] {
       opacity: .4;
       cursor: no-drop; }
@@ -487,7 +491,8 @@ body.swal2-iosfix {
           animation: showSweetAlert 0.3s; }
   .swal2-show.swal2-noanimation {
     -webkit-animation: none;
-            animation: none; }
+            animation: none; 
+          border-radius:22px;}
 
 .swal2-hide {
   -webkit-animation: hideSweetAlert 0.15s forwards;

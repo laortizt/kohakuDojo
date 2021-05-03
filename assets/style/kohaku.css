@@ -22,7 +22,7 @@ time, mark, audio, video {
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
+    font: 12px;
     vertical-align: baseline;
     
 }
@@ -223,7 +223,7 @@ body{
 
 .btn-general{
     height: 40px;
-    width: 40px;
+    width: auto;
     background-color: rgb(210, 210, 219);
     font-size: 1.5rem;
     border-radius: 30px; 
@@ -234,11 +234,19 @@ body{
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 15px;
 }
+
+
 .btn-general:hover{
     background-color: #95637f;
     color:white;
 }
+/* .btn-general i{
+    display: inline-block;
+    margin-right: 10px;
+} */
+
 .barra__buscador{
     width: 100%;
     margin-top: 50px;
@@ -351,4 +359,49 @@ form .form-group .input__text{
     color: #555;
 }
 
+/* divs diseño */
+.container-report{
+    /* padding: 0 1.5rem 1.5rem 1.5rem; */
+}
 
+.info-stats4 {
+    background: #ffffff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border-bottom: 1px solid #e0e3e8;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 1rem;
+}
+.info-stats4 .info-icon {
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    text-align: center;
+    background: #615b7b;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px #e5e9ec;
+    border-bottom: 1px solid #eeeeee;
+    color: white;
+}
+.col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.row-gutters {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -8px;
+} 

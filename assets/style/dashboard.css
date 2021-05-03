@@ -75,10 +75,10 @@ body {
 	right: 0;
 	left: 0;
 	z-index: 101;
-	box-shadow: rgba(0,0,0,0.12) 0px 1px 4px 1px;
+	/* box-shadow: rgba(0,0,0,0.12) 0px 1px 4px 1px;
 	background: #355C7D;  /* fallback for old browsers */
-	background: linear-gradient(to right, #355C7D, #6C5B7B, #C06C84); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+	background: linear-gradient(to right, #355C7D, #6C5B7B, #C06C84); 
+	/* background: linear-gradient(to right, #355C7D, #8F6CAE, #C06C84); */
 }
 
 .navbar-nav {
@@ -328,7 +328,7 @@ body {
 	width: 82px;
 	height: 100vh;
 	position: fixed;
-	
+
 	background: var(--main-bg-color);
 	box-shadow: rgba(0,0,0,0.12) 0px 1px 4px 1px;
 	overflow: hidden;
@@ -350,6 +350,7 @@ body {
 	height: 100vh;
 	/* background-color: #f71414; */
 	background-color: #365c7d;
+
 	/* background-color: #262525;  */
 	width: 196px;
 	position: absolute;
@@ -547,7 +548,20 @@ body {
 	margin-bottom: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-
+.card-items{
+	/* background: var(--main-bg-color);
+	color: var(--main-color);
+	border-radius: 10px;
+	margin-bottom: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+	margin-left: 100px;
+    font-size: 12px;
+    font-family: Verdana;
+    border: 2px solid #ccc;
+    width: 75%;
+    height: 25%;
+    background-color: #fafafa;
+}
 .card-header {
 	padding: 15px 30px;
 	border-bottom: 1px solid var(--second-bg-color);
@@ -625,3 +639,19 @@ table th {
 	margin-top:10px ;
 	margin-bottom: 10px;
 }
+
+.custom-table {
+	border: 1px solid #eef0f5; }
+	.custom-table thead {
+	  background: #eef0f5; }
+	  .custom-table thead th {
+		border: 0; }
+	.custom-table > tbody tr:hover {
+	  background: #eff3f6; }
+	.custom-table > tbody tr:nth-of-type(even) {
+	  background-color: #f6f8fa; }
+	.custom-table > tbody td {
+	  border: 1px solid #d9dee4; }
+
+
+  

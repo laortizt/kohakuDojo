@@ -20,8 +20,8 @@ $insAdmin = new controllerAdmin();
 			<div class="card">
 				<div class="card-content">
 					<div class="header-class">
-						<h1 class="title">Editar Planes</h1>
-						<?php include "./views/modules/menuPayments.php"; ?>
+						<h1 class="title">Planes</h1>
+						
 					</div>
 
 					<div class="Plans text-center">

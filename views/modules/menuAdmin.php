@@ -3,17 +3,19 @@
 	
 		if($_SESSION['role_sk'] == "Administrador"):
 	?>
-		<!-- <a href="<?php echo SERVERURL; ?>#" class="btn-general">
+		<a href="<?php echo SERVERURL; ?>prueba" class="btn-general">
 			<i class="fas fa-user-plus"></i>
-		</a> -->
+		</a>
 
-		<a href="<?php echo SERVERURL; ?>newPay" class="btn-general">
-			<i class="fas fa-dollar-sign"></i>
+		<!-- <a href="<?php echo SERVERURL; ?>newPay" class="btn-general">
+			<i class="fas fa-dollar-sign"></i>	
+			Pagos
 		</a>
-		
-		<a href="<?php echo SERVERURL; ?>admin" class="btn-general">
-			<i class="fas fa-list-ul"></i>
-		</a>
+		 -->
+		<!-- <a href="<?php echo SERVERURL; ?>admin" class="btn-general">
+			 <i class="fas fa-list-ul"></i> 
+			Usuarios
+		</a> -->
 
 	<?php
 		elseif($_SESSION['role_sk'] == "Usuario"):

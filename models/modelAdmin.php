@@ -29,13 +29,14 @@ class modelAdmin extends mainModel
         $datos = mainModel::connect()->query("SELECT * FROM role");
         return $datos->fetchAll();
     }
+
     protected function list_state_model() {
         //Obtiene los roles registrados
         $datos = mainModel::connect()->query("SELECT * FROM state");
         return $datos->fetchAll();
     }
-    protected function add_admin_account($data)
-    {
+
+    protected function add_admin_account($data){
         $sql = mainModel::connect()->prepare("UPDATE accounts 
                 SET accountDocumentType=:DocumentType, accountDni=:Dni, accountFirstName=:FirstName,
                     accountLastName=:LastName,  accountAddress=:Address, accountPhone=:Phone,
@@ -58,17 +59,14 @@ class modelAdmin extends mainModel
         return $sql;
     }
 
-    protected function delete_admin_model($id)
-    {
+    protected function delete_admin_model($id){
         $query = mainModel::connect()->prepare("DELETE FROM accounts WHERE IdAccount=:Id");
         $query->bindParam(":Id", $id);
         $query->execute();
         return $query;
     }
-
     //Actualizar perfil
-    public function update_admin_model($data)
-    {
+    public function update_admin_model($data){
         $sql = mainModel::connect()->prepare("UPDATE accounts 
             SET accountDocumentType=:DocumentType, accountDni=:Dni, accountFirstName=:FirstName,
                 accountLastName=:LastName,  accountAddress=:Address, accountPhone=:Phone,
@@ -91,8 +89,7 @@ class modelAdmin extends mainModel
         return $sql;
     }
 
-    public function find_dni($dni)
-    {
+    public function find_dni($dni){
         //Obtiene los perfiles que coincidan con el dni enviado
         $sql = mainModel::connect()->prepare("SELECT idAccount, accountDni, accountCode
             FROM accounts WHERE accountDni ='$dni'");
@@ -102,8 +99,7 @@ class modelAdmin extends mainModel
         return $sql->fetchAll();
     }
 
-    public function find_email($email)
-    {
+    public function find_email($email){
         //Obtiene los correos que coincidan con el dni enviado
         $sql = mainModel::connect()->prepare("SELECT idAccount, accountDni, accountCode
             FROM accounts WHERE accountEmail = '$email'");
@@ -113,8 +109,7 @@ class modelAdmin extends mainModel
         return $sql->fetch();
     }
 
-    public function find_code($code)
-    {
+    public function find_code($code){
         //Obtiene el código único del usuario
         $sql = mainModel::connect()->prepare("SELECT idAccount, accountDni, accountCode
             FROM accounts WHERE accountCode=:Code");

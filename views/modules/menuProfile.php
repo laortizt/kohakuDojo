@@ -11,9 +11,9 @@
 	<?php
 		elseif($_SESSION['role_sk'] == "Usuario"):
 	?>
-		<a href="<?php echo SERVERURL; ?>schedule" class="btn-general">
+		<!-- <a href="<?php echo SERVERURL; ?>schedule" class="btn-general">
         <i class="fas fa-times-circle"></i> Mis Pagos
-		</a>
+		</a> -->
 	<?php
 		endif;
 	?>

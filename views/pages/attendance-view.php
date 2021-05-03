@@ -20,10 +20,10 @@ $insAdmin = new controllerAdmin();
 				</div>
 
 				<form action="ajax/classAjax.php" class="form-class" method="post" autocomplete="off" class="formulario-ajax">
-					<div class="barra__buscador">
+					<!-- <div class="barra__buscador">
 						<p>Seleciona una fecha: <input class="text-fecha" type="date" name="fechaesperada"></p>
 						<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fas fa-search"></i></button>
-					</div>
+					</div> -->
 
 					<?php
 					$pages = explode("/", $_GET['page']);
