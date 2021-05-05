@@ -9,7 +9,7 @@ if (isset($_POST['dni-newpay'])) {
     require_once "../controller/controllerPayment.php";
     $insPayment = new controllerPayment();
 
-    print_r($_POST);
+    // print_r($_POST);
 
     if (
         isset($_POST['date-newpay']) &&
