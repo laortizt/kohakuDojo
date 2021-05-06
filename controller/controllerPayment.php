@@ -143,7 +143,7 @@
             //calcular el otal de páginas
             $Npages= ceil($total/$register);
             $table.='<div>
-            <table>
+            <table class="table table-hover thead-primary">
                 <thead> 
                     <td>Fecha de pago</td>
                     <td>Documento</td>
@@ -151,7 +151,7 @@
                     <td>Valor</td>
                     <td>Observaciones</td>
                     <td>Nombre</td>
-                    <td colspan="1">Acciones</td>
+                   
                 </thead>
                 <tbody>
             ';
@@ -168,9 +168,7 @@
                         <td>'.$rows['paymentObservation'].'</td>
                         <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
 
-                        <td>
-                            <button href="'.SERVERURL.'payEdit/'.$rows['idPayments'].'"class="btn-general"><i class="fas fa-edit"></i></button>
-                        </td>
+                       
                     ';
                     $count++;
                 }
@@ -185,3 +183,4 @@
             return $table;
         }
     }
+   

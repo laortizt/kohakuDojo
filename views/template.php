@@ -15,6 +15,9 @@ session_start(['name' => 'SK']);
 	<meta charset="utf-8">
 	<link rel="icon" type="image/png" href="<?php echo SERVERURL; ?>assets/img/favicon/favicon.ico" />
 	<title><?php echo COMPANY; ?></title>
+	<!-- CSS only -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
 	<script src="https://kit.fontawesome.com/a7ccf0be94.js" crossorigin="anonymous"></script>
 	<!-- Import lib -->
 	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"> -->
@@ -96,11 +99,11 @@ session_start(['name' => 'SK']);
 					<!-- <img src="<?php echo SERVERURL; ?>assets/img/logokhk.png" class="image-logo" alt=""> -->
 				</li>
 
-				<!-- <li class="nav-item">
+				<li class="nav-item">
 					<a class="nav-link">
 						<i class="fas fa-bars" onclick="collapseSidebar()"></i>
 					</a>
-				</li> -->
+				</li>
 			</ul>
 			<!-- end nav left -->
 
@@ -202,7 +205,7 @@ session_start(['name' => 'SK']);
 
 					</a>
 				</li>
-				<li class="sidebar-nav-item">
+				<!-- <li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>attendance" class="sidebar-nav-link">
 						<div>
 							<i class="fas fa-clipboard-list"></i>
@@ -244,7 +247,7 @@ session_start(['name' => 'SK']);
 						</div>
 						<span>Trámites</span>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 		<!-- end sidebar -->

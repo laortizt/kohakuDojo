@@ -73,21 +73,20 @@ form.sign-in-form {
   margin-bottom: 20px;
 }
 
-.input-field {
+.input-field-login {
   max-width: 380px;
-  width: 60%;
-
+  width: 50%;
   margin: 10px 0;
-  height: 55px;
+  height: 45px;
   border-radius: 55px;
   display: grid;
   grid-template-columns: 15% 85%;
-  padding: 1.3rem 1rem;
+  padding: 7px 1px;
   margin: 10px 0;
   display: grid;
   grid-template-columns: 15% 85%;
   margin-left: 90px;
-  border: solid #6C5B7B;
+  border: solid #2a4f5f;
 }
 
 /* .input-field {
@@ -111,26 +110,26 @@ form.sign-in-form {
  
 } */
 
-.input-field i {
+.input-field-login i {
   text-align: center;
   line-height: 24px;
-  color: #6C5B7B;
+  color: #2a4f5f;
   transition: 0.5s;
   font-size: 1.5rem;
 }
 .label-login {
   margin-left: 90px;
-  color: #6C5B7B;
+  color: #2a4f5f;
 }
 
-.input-field input {
+.input-field-login input {
   background: none;
   outline: none;
   border: none;
   line-height: 1;
   font-weight: 600;
   font-size: 1.5rem;
-  color: #6C5B7B;
+  color: #2a4f5f;
 }
 
 .input-field input::placeholder {
@@ -211,9 +210,18 @@ form.sign-in-form {
   /* opcion antigua rojo -negro */
   /* background-image: linear-gradient(-45deg, #fcfbfb 0%, #fcfbfb 100%); */
   /* background-image: linear-gradient(-45deg, #131212 0%, #353535 100%); */
-  background: #355C7D;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #C06C84, #6C5B7B, #355C7D);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #C06C84, #6C5B7B, #355C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* background: #355C7D;  /* fallback for old browsers */
+  /* background: -webkit-linear-gradient(to right, #C06C84, #6C5B7B, #355C7D);  Chrome 10-25, Safari 5.1-6
+  background: linear-gradient(to right, #C06C84, #6C5B7B, #355C7D); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+  */
+ 
+  /* background: #0F2027;   */
+  /* background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027); 
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027);  */
+
+  background: #000000;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 
   transition: 1.8s ease-in-out;
   border-radius: 50%;
@@ -229,12 +237,16 @@ form.sign-in-form {
   transition-delay: 0.4s;
   
 }
-.title-login{
-  color:#c06c84;
-  font-size: 1.5rem;
+.text-login{
+  width: 80%;
+  color: #2a4f5f;
+  font-size: 1.8rem;
+  margin-bottom: 35px;
+  margin-top: 2px;
+  text-align: center;
 }
 
-/* .btn-kohaku-login {
+.btn-kohaku-login {
   margin-top: 10px;
   background-color: transparent;
   background-image: url(./../img/btnGris.png);
@@ -247,29 +259,33 @@ form.sign-in-form {
   border-radius: 0;
   color:black;
   padding: 0.5rem 1rem;
-} */
+} 
 
 .btn-kohaku-login {
-  width: 60%;
+  width: 50%;
   padding: 1.3rem 1rem;
   margin-top: 10px;
-  background-color: #355C7D;
-  /* background-image: url(./../img/btnGris.png); */
+  background-image: url(./../img/btnGris.png);
   background-size: 100% 100%;
-  /* background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   color: var(--black);
   font-size: 2rem;
   outline: none;
   border: none;
-  border-radius: 22px;
   color: white;
   margin-left: 90px;
+  height: 44px;
+}
+.btn-kohaku-login:hover{
+  background-image: url(./../img/btnRojo.png);
+  
+  color: white;
 }
 .btn-kohaku-signIn{
   width: 100%;
-  padding: 1.3rem 1rem;
+  padding: 9px 8px;
   margin-top: 10px;
-  background-color: #355C7D;
+  background-color: red;
   /* background-image: url(./../img/btnGris.png); */
   background-size: 100% 100%;
   /* background-repeat: no-repeat; */
@@ -281,14 +297,19 @@ form.sign-in-form {
   /* color:black;
   color: white; */
 }
+
+.btn-kohaku-signIn:hover{
+  
+  background-color: #827f80;
+  color: white
+}
+
 .btn-kohaku-record{
   width: 100%;
-  padding: 1.3rem 1rem;
+  padding: 9px 8px;
   margin-top: 10px;
-  background-color: #C06C84;
-  /* background-image: url(./../img/btnGris.png); */
+  background-color: red;
   background-size: 100% 100%;
-  /* background-repeat: no-repeat; */
   color: white;
   font-size: 2rem;
   outline: none;
@@ -296,21 +317,9 @@ form.sign-in-form {
   border-radius: 22px;
 }
 
-.btn-kohaku-login:hover{
-  /* background-image: url(./../img/btnRojo.png); */
-  background-color: #C06C84;
-  color: white;
-}
-
-.btn-kohaku-signIn:hover{
-  /* background-image: url(./../img/btnRojo.png); */
-  background-color: #6C5B7B;
-  color: white
-}
-
 .btn-kohaku-record:hover{
   /* background-image: url(./../img/btnRojo.png); */
-  background-color: #6C5B7B;
+  background-color: #827f80;
   color: white;
 }
 .btn-kohaku-login:focus {

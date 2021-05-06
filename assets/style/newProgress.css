@@ -135,7 +135,7 @@
       margin-top: 3%;
       width: 46%;
     }
-    .card {
+    .cards {
       height: 285px;
     }
     .cardBox:last-child {
@@ -147,7 +147,7 @@
     .cardBox {
       width: 94.5%;
     }
-    .card {
+    .cards {
       height: 260px;
     }
   }

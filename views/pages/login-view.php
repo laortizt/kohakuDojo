@@ -14,52 +14,52 @@
       <div class="forms-container">
         <div class="signin-signup">
           <form action="" method="post" autocomplete="off" class="sign-in-form">
-            <!-- <h2 class="title">Iniciar sesión</h2> -->
+            <h2 class="text-login">Iniciar sesión</h2>
 
             <p class="label-login">Usuario</p>
-            <div class="input-field">
+            <div class="input-field-login">
               <i class="fas fa-user"></i>
               <input type="text" name="emailSignIn" required=""/>
             </div>
 
             <p class="label-login">Contraseña</p>
-            <div class="input-field">
+            <div class="input-field-login">
               <i class="fas fa-lock"></i>
               <input type="password" name="passwordSignIn" required=""/>
             </div>
 
-            <input type="submit" value="Iniciar sesión" class="btn-kohaku-login"/>
+            <input type="submit" value="Ingresar" class="btn-kohaku-login"/>
           </form>
 
           <!-- se crea la ruta que conecta con el ajax,  -->
           <form action="" method="post" autocomplete="off" class="sign-up-form">
-          <!-- <h2 class="title">Crear cuenta</h2> -->
+          <h2 class="text-login">Crear cuenta</h2>
             
             <p class="label-login">Nombres</p>
-            <div class="input-field">
+            <div class="input-field-login">
               <i class="fas fa-user"></i>
               <input type="text" name="firstname" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}"/>
             </div>
 
             <p class="label-login">Apellidos</p>
-            <div class="input-field">
+            <div class="input-field-login">
               <i class="fas fa-user"></i>
               <input type="text" name="lastname" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}"/>
             </div>
 
             <p class="label-login">Correo</p>
-            <div class="input-field">
+            <div class="input-field-login">
               <i class="fas fa-envelope"></i>
               <input type="email" required="" name="emailSignUp"/>
             </div>
 
             <p class="label-login">Contraseña</p>
-            <div class="input-field">
+            <div class="input-field-login">
               <i class="fas fa-lock"></i>
               <input type="password" required="" name="passwordSignUp"/>
             </div>
 
-            <input type="submit" class="btn-kohaku-login" value="Crear cuenta" />
+            <input type="submit" class="btn-kohaku-login" value="Guardar" />
             <p class="social-text"></p>
 
             <div class="social-media"></div>

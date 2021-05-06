@@ -3,21 +3,23 @@
 	
 		if($_SESSION['role_sk'] == "Administrador" || $_SESSION['role_sk'] == "Instructor"):
 	?>
-		<a href="<?php echo SERVERURL; ?>payments" class="btn-general">
-			<!-- <i class="fas fa-list-ul" ></i>  -->
-			Lista
+		<a href="<?php echo SERVERURL; ?>newPay" class="btn-menu">
+		<i class="fas fa-plus-circle"></i>
+			<span>Nuevo Pago</span>
+
 		</a>
 
-		<a href="<?php echo SERVERURL; ?>newPay" class="btn-general">
-			<!-- <i class="fas fa-plus"></i> -->
-			 Nuevo
+		<a href="<?php echo SERVERURL; ?>admin" class="btn-menu">
+			<i class="fas fa-undo-alt"></i>
+			<span>Volver</span>
 		</a>
 		 
 
 	<?php
 		elseif($_SESSION['role_sk'] == "Usuario"):
 	?>
-		<a href="<?php echo SERVERURL; ?>payments" class="btn-general">
+		<a href="<?php echo SERVERURL; ?>payments" class="btn-menu">
+
 			<i></i> Mis Pagos
 		</a>
 	<?php

@@ -61,12 +61,12 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
     color: var(--black);
-    font-size: 2rem;
+    font-size: 1.5rem;
     outline: none;
     border: none;
-    border-radius: 19px;
-    color:black;
-    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    color:white;
+    padding: 9px;
     align-self: flex-end;
     
   }

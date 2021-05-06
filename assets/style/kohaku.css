@@ -21,7 +21,7 @@ time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    font-size: 99%;
     font: 12px;
     vertical-align: baseline;
     
@@ -88,15 +88,19 @@ body{
   color: black;
   font-size: 2rem;
   padding: 0 15px;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
   justify-content: space-between;    
 }
 .title {
     font-size: 2.2rem;
-    color: #bd6b84;
-    margin-bottom: 24px;
+    color: #625e5f;
+    /* margin-bottom: 24px; */
     font-family: 'Anton', sans-serif;
     align-self: flex-start;
+
+    position: relative;
+    padding: 1.5rem;    
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 /* ---botones  plantillas --- */
 
@@ -215,18 +219,19 @@ body{
     color: #555;
 }
 .text-search{
-    border-radius: 14px;
+    border-radius: 13px;
     text-align: center;
-    height: 40px;
+    height: 30px;
     width: 250px;
+    margin-bottom: 10px
 }
 
 .btn-general{
-    height: 40px;
-    width: auto;
+    height: 33px;
+    width: 33px;
     background-color: rgb(210, 210, 219);
     font-size: 1.5rem;
-    border-radius: 30px; 
+    border-radius: 8px; 
     /* border-radius: 9px; */
     color: black;
     border: none;
@@ -239,19 +244,60 @@ body{
 
 
 .btn-general:hover{
-    background-color: #95637f;
+    background-color:  #f74747;
     color:white;
 }
 /* .btn-general i{
     display: inline-block;
     margin-right: 10px;
 } */
+.btn-edit{
+    height: 33px;
+    width: 33px;
+    font-size: 1.2rem;
+    border-radius: 8px; 
+    color: black;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px;
+    background-color: rgb(210, 210, 219);
+}
+.btn-edit:hover{
+    background-color:  #03a9f4;
+    color: white;
+}
 
-.barra__buscador{
-    width: 100%;
-    margin-top: 50px;
-    margin-bottom: 10px;
-  
+.btn-menu{
+    height: 33px;
+    width: auto;
+    background-color: rgb(210, 210, 219);
+    font-size: 1.2rem;
+    border-radius: 10px; 
+    /* border-radius: 9px; */
+    color: black;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.btn-menu:hover{
+    background-color:#f99c52;
+    color:white;
+}
+.btn-menu span{
+    margin-left: 5px;
+}
+
+.barra__buscador .text-search{
+    margin: 0;
+    text-align: left;
+    padding: 0 10px;
 }
 
 .text-fecha{
@@ -299,65 +345,6 @@ form .form-group .input__text{
 
 
 
-.privileges .btn {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    color: #fff;
-    /* display: block; */
-    font-size: 14px;
-    background: rgb(3, 113, 163);
-    margin-bottom: 15px;
-    padding: 10px 20px;
-    margin-right: 10px;
-    outline: medium none;
-    cursor: pointer;
-}
-
-.privileges .btn__nuevo{
-    float: right;
-    background: #1b743c !important;
-}
-
-.privileges .btn__group{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-.privileges .btn__primary{
-    background: rgb(3, 113, 163);
-}
-
-.privileges .btn__danger{
-    background: #8a0505 !important;
-}
-
-
-/* table */
-.privileges table{
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.privileges table .head{
-    background: rgb(3, 113, 163);
-}
-.privileges table thead td{
-    color: #fff;
-    font-family: 'Arial',sans-serif;
-    font-weight: bold;
-    font-size: 12px;
-    text-align: center;
-}
-
-.privileges table tr td{
-    border:1px solid #ccc;
-    padding: 7px;
-    font-size: 10px;
-    color: #555;
-}
 
 /* divs diseño */
 .container-report{
@@ -376,7 +363,8 @@ form .form-group .input__text{
     flex-direction: row;
     padding: 1rem;
 }
-.info-stats4 .info-icon {
+
+.info-stats4 .info-icon{
     height: 60px;
     width: 60px;
     display: flex;
@@ -384,14 +372,35 @@ form .form-group .input__text{
     justify-content: center;
     margin-right: 15px;
     text-align: center;
-    background: #615b7b;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
     box-shadow: 0 0 2px #e5e9ec;
     border-bottom: 1px solid #eeeeee;
     color: white;
+    font-size: 30px;
 }
+
+.info-stats4 .info-icon {
+    background: #9f57f2;
+}
+
+.info-stats4 .info-icon-color1 {
+    background: #19e906;
+}
+
+.info-stats4 .info-icon-color2 {
+    background: #29f5eb;    
+}
+
+.info-stats4 .info-icon-color3 {
+    background: #f77f1ec4;
+}
+
+.info-stats4 .info-icon-color4{
+    background: #9f57f2;    
+}
+
 .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
     position: relative;
     width: 100%;
@@ -405,3 +414,93 @@ form .form-group .input__text{
     margin-right: -8px;
     margin-left: -8px;
 } 
+/* data-table */
+.payment-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .payment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  table {
+    width: 100%;
+    margin:0;
+    padding:0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 25px;
+  }
+  .thead-primary thead {
+    background-color: #f99c52;
+    color: white;
+    
+  }#ff0018
+  
+  table tr {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+  
+  table td {
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 1.5rem;
+    vertical-align: top;
+    border-top: 1px solid #f99c52;
+  }
+  
+  table th {
+    text-transform: uppercase;
+    font-size:  1.5rem;;
+    letter-spacing: 1px;
+  }
+  
+  @media screen and (max-width: 600px) {
+  
+    table {
+      border: 0;
+    }
+  
+    table thead {
+      display: none;
+    }
+  
+    table tr {
+      margin-bottom: 10px;
+      display: block;
+      border-bottom: 2px solid #ddd;
+    }
+  
+    table td {
+      display: block;
+      text-align: right;
+      font-size: 13px;
+      border-bottom: 1px dotted #ccc;
+  
+    }
+  
+    table td:last-child {
+      border-bottom: 0;
+    }
+  
+    table td:before {
+      content: attr(data-label);
+      float: left;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    
+
+  }
+  
+  

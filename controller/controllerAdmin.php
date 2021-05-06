@@ -137,6 +137,7 @@
             $profile = modelAdmin::get_profile_model($code);
             return $profile;
         }
+
         public function list_role_controller($userCurrentRole) {
             $roles = modelAdmin::list_role_model();
 
@@ -306,7 +307,7 @@
             //calcular el otal de páginas
             $Npages= ceil($total/$register);
             $table.='<div>
-            <table  class="custom-table"> 
+            <table  class="table table-hover thead-primary"> 
                 <thead> 
                     <td>Documento</td>
                     <td>Número</td>
@@ -341,10 +342,16 @@
                         <td>'.($rows['accountState'] == 1 ? "Activo" : "Inactivo").'</td>
                         
                         <td>
+                            <a href="'.SERVERURL.'editAdmin?c='.mainModel::encryption($rows['accountCode']).'" type="submit" class="btn-edit">
+                            <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+
+                        <td>
                             <form action="'.SERVERURL.'ajax/adminAjax.php" method="POST" class="formulario-ajax" data-form="delete" enctype="multipart/form-data">
                                 <input type="hidden" name="userToDelete" value="'.mainModel::encryption($rows['accountCode']).'">
                                 <button type="submit" class="btn-general">
-                                    <i class="fas fa-trash-alt"></i>
+                                <i class="bi bi-trash"></i>
                                 </button>
 
                                 <div class="RespuestaAjax"></div>
@@ -352,11 +359,7 @@
 
                         </td>
 
-                        <td>
-                            <a href="'.SERVERURL.'editAdmin?c='.mainModel::encryption($rows['accountCode']).'" type="submit" class="btn-general">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </td>
+                        
                         
                         <div class="RespuestaAjax"></div>
                         

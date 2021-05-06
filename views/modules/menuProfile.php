@@ -3,7 +3,7 @@
 	
 		if($_SESSION['role_sk'] == "Administrador" || $_SESSION['role_sk'] == "Instructor"):
 	?>
-		<a href="<?php echo SERVERURL; ?>admin" class="btn-general">
+		<a href="<?php echo SERVERURL; ?>admin" class="btn-menu">
         <i class="fas fa-times-circle"></i>
 		</a>
 
@@ -11,7 +11,7 @@
 	<?php
 		elseif($_SESSION['role_sk'] == "Usuario"):
 	?>
-		<!-- <a href="<?php echo SERVERURL; ?>schedule" class="btn-general">
+		<!-- <a href="<?php echo SERVERURL; ?>schedule" class="btn-menu">
         <i class="fas fa-times-circle"></i> Mis Pagos
 		</a> -->
 	<?php

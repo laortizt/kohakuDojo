@@ -5,53 +5,77 @@ $insPayment = new controllerPayment();
 
 <!-- CMABIAR POR EL CONTROLADOR DE ASISTENCIA -->
 
+<div class="container-report">
+	<div class="row-gutters">
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon">
+					<i class="fas fa-check-circle"></i>
+				</div>
+				<div class="sale-num">
+				<h3>2</h3>
+				<p> Registrados</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon">
+				<i class="fas fa-times-circle"></i>
+				</div>
+				<div class="sale-num">
+					<h3>0</h3>
+					<p>Pendientes</p>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon">
+					<i class="fas fa-user-cog"></i>
+				</div>
+				<div class="sale-num">
+				
+					<p>Administradores</p>
+				</div>
+			</div>
+		</div> -->
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon">
+					<i class="fas fa-equals"></i>
+				</div>
+				<div class="sale-num">
+				<h3>2</h3>	
+					<p>Total Pagos</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
+
 <div class="row">
 	<div class="col-12 col-m-12 col-sm-12">
 		<div class="card attendance">
 			<div class="card-content">
 				<div class="header-class">
-					<h1 class="title">Lista de Pagos</h1>
+					<h1 class="title">Pagos</h1>
 					<?php include "./views/modules/menuPayments.php"; ?>
 					
 				</div>
 						
-				<!-- <form action="ajax/newPayAjax.php" class="payment-form" method="post" autocomplete="off" class="formulario-ajax">
-					<table>
-						<thead>
-							<tr>
-								<th>Fecha de Pago</th>
-								<th>Documento</th>
-								<th>Monto</th>
-								<th>Trámite</th>
-								<th>Valor</th>
-								<th>Observaciones</th>
-								<td colspan="2">Acciones</td>
-								
-							</tr>
-						</thead>
-
-						<tbody>
-							<tr>
-								<td data-label="Pagos">Pago #1</td>
-								<td data-label="Fecha de Pago">02/01/2015</td>
-								<td data-label="Concepto">Membresía</td>
-								<td data-label="Monto">$2,311</td>
-								<td data-label="Estado">Pagado</td>
-
-							</tr>
-
-							<tr>
-								<td data-label="Pagos">Pago #2</td>
-								<td data-label="Fecha de Pago">02/01/2015</td>
-								<td data-label="Concepto">Clases Enero</td>
-								<td data-label="Monto">$2,311</td>
-								<td data-label="Estado">Pendiente</td>
-							</tr>
-						</tbody>
-					</table>
-
-					<div class="RespuestaAjax"></div>
-				</form> -->
+				<div class="barra__buscador">
+					<form action="" class="formulario" method="post" form-data="default" form-data="default">
+						<div>
+							<input type="text" name="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
+							<button href="#" type="submit" value="Buscar" name="button-search" class="btn-general"><i class="fas fa-search"></i></button>
+						</div>
+					</form>
+				</div>
+				
 				<?php
 					$pages = explode("/", $_GET['page']);
 					

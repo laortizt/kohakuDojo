@@ -23,11 +23,11 @@
             return $datos->fetchAll();
         }
         //registrar progreso a usuario
-        public function add_progress_model($datos) {
+        public function create_progress_model($datos) {
             $sql=mainModel::connect()->prepare("INSERT INTO progress 
                 (progressDate, progressDni, progressMenkyo,   
                 progressObservation, progressState, progressAccount)
-                VALUES (:Date,:Dni, :Menkyo, :Observation, :state, :IdAccount)");
+                VALUES (:Date,:Dni, :Menkyo, :Observation, :State, :IdAccount)");
             $sql->bindParam(":Date",$datos['Date']);
             $sql->bindParam(":Dni",$datos['Dni']);
             $sql->bindParam(":Menkyo",$datos['Menkyo']);
@@ -40,12 +40,17 @@
             return $sql;
         }
         
-        // Listar  progresos
-        public function get_progress_model($code) {
-            $sql= mainModel::connect()->prepare("SELECT p.*, a.accountCode
-                FROM progress p INNER JOIN accounts a ON (p.progressAccount = a.idAccount) WHERE a.accountDni=:dni");
-            $sql->bindParam(':code', $code);
-            $sql->execute(); 
+        // leer progresos de usuario
+        public function get_progress_model($idProgress) {
+            $sql= mainModel::connect()->prepare("SELECT p.idProgress, p.progressDate, p.progressDni,
+                p.progressMenkyo, p.progressObservation, p.progressState, p.progressAccount
+                FROM progress p
+                JOIN menkyo mk ON (p.progressMenkyo = mk.idMenkyo)
+                JOIN state st ON (p.progressState = st.idState)
+                WHERE p.idProgress=:IdProgress");
+            $sql->bindParam(':IdProgress', $idProgress);
+
+            $sql->execute();
 
             return $sql->fetch();
         }
