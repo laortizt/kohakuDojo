@@ -126,7 +126,7 @@ body{
   }
 /* ---DIV ESTADISTICAS --- */
 
-.btn-data{
+/* .btn-data{
 	background-color:rgb(36, 255, 47); 
 	border-radius: 14px;
 	font-size: 1.5rem;
@@ -175,7 +175,7 @@ body{
 }
 .btn-normal2{
     background-color:rgb(232, 255, 28);
-}
+} */
 
 /* ---botones  acción --- */
 /* .btn__update{
@@ -204,7 +204,7 @@ body{
     border: none;
   }
 .btn__delete:hover{
-    background-color: #fa3636;
+    background-color: #fa3636;  
     color:white;
 } */
 /* Lista usuarios */
@@ -227,6 +227,25 @@ body{
 }
 
 .btn-general{
+    background-color: #a36681;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: var(--black);
+    font-size: 1.5rem;
+    outline: none;
+    border: none;
+    border-radius: 19px;
+    color:white;
+    padding: 0.5rem 3rem;
+    align-self: flex-end;
+    margin-top:5px;
+
+}
+.btn-general:hover{
+    background-color:  #f99c52;
+    color:white;
+}
+.btn-search{
     height: 33px;
     width: 33px;
     background-color: rgb(210, 210, 219);
@@ -242,8 +261,47 @@ body{
     padding: 15px;
 }
 
+.btn-search:hover{
+    background-color:  #f99c52;
+    color:white;
+}
+.btn-delete{
+    height: 33px;
+    width: 33px;
+    background-color: rgb(210, 210, 219);
+    font-size: 1.5rem;
+    border-radius: 8px; 
+    /* border-radius: 9px; */
+    color: black;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px;
+}
 
-.btn-general:hover{
+.btn-delete:hover{
+    background-color:  #f74747;
+    color:white;
+}
+.btn-delete{
+    height: 33px;
+    width: 33px;
+    background-color: rgb(210, 210, 219);
+    font-size: 1.5rem;
+    border-radius: 8px; 
+    /* border-radius: 9px; */
+    color: black;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.btn-delete:hover{
     background-color:  #f74747;
     color:white;
 }
@@ -287,7 +345,7 @@ body{
 }
 
 .btn-menu:hover{
-    background-color:#f99c52;
+    background-color:#838383;
     color:white;
 }
 .btn-menu span{
@@ -499,8 +557,130 @@ form .form-group .input__text{
       text-transform: uppercase;
       font-weight: bold;
     }
-    
+   
+} 
 
-  }
-  
-  
+    /* FORMULARIO  */
+    .container.profile-container {
+        padding: 0;
+        max-width: 100%;
+      }
+    
+      .profile-form{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      .profile {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 40px;
+      }
+    
+      .input-container-profile {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        padding: 0 3px;
+      }
+    
+      .input-field-profile {
+        max-width: 380px;
+        width: 100%;
+        background-color: #f0f0f0;
+        margin: 10px 0;
+        border-radius: 5px;
+        padding: 9px 9px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      
+      .input-field-profile i {
+        text-align: center;
+        line-height: 24px;
+        color: #bd6b84;
+        transition: 0.5s;
+        font-size: 1.1rem;
+        padding: 0 4px;
+      }
+      
+      .input-field-profile input {
+        width: 50%;
+        background: none;
+        outline: none;
+        border: none;
+        line-height: 1;
+        font-weight: 600;
+        font-size: 12px;
+        color: #333;
+        flex: 1;
+      }
+    
+      .btn-kohaku-profile {
+        background-color: #a36681;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        color: var(--black);
+        font-size: 1.5rem;
+        outline: none;
+        border: none;
+        border-radius: 19px;
+        color:white;
+        padding: 0.5rem 3rem;
+        align-self: flex-end;
+        margin-top:5px;
+        margin-bottom: 10px;
+      }
+      
+      .btn-kohaku-profile:hover{
+        background-color: #365c7d;
+        color: white
+      }
+      
+      .btn-kohaku-profile:focus {
+        box-shadow: none;
+      }
+    
+      .title {
+        font-size: 2.2rem;
+        color: rgb(255, 16, 16);
+        margin-bottom: 24px;
+        font-family: 'Anton', sans-serif;
+        align-self: flex-start;    
+      }
+      .title-form {
+        font-size: 2.2rem;
+        color: black;
+        margin-bottom: 24px;
+        font-family: 'Anton', sans-serif;
+        align-self: flex-start;    
+      }
+      
+    .container-form {
+        display: flex;
+        align-items: center;
+    }
+    .form-left {
+        width: 35%;
+    }
+    .form-right {
+        flex: 1;
+        padding: 0 10%;
+    }
+    .label-form{
+        font-size: 12px;
+    }
+
+    .img-form{
+        width: 100%;
+    }

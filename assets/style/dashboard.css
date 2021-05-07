@@ -658,5 +658,15 @@ table th {
 	.custom-table > tbody td {
 	  border: 1px solid #d9dee4; }
 
-
+.container-form {
+        display: flex;
+        align-items: center;
+    }
+    .form-left {
+        width: 40%;
+    }
+    .form-right {
+        flex: 1;
+        padding: 0 10%;
+    }
   

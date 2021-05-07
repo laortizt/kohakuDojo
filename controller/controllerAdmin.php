@@ -350,7 +350,7 @@
                         <td>
                             <form action="'.SERVERURL.'ajax/adminAjax.php" method="POST" class="formulario-ajax" data-form="delete" enctype="multipart/form-data">
                                 <input type="hidden" name="userToDelete" value="'.mainModel::encryption($rows['accountCode']).'">
-                                <button type="submit" class="btn-general">
+                                <button type="submit" class="btn-delete">
                                 <i class="bi bi-trash"></i>
                                 </button>
 
