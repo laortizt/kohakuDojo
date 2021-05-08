@@ -17,6 +17,15 @@
             $datos = $conexion->query("SELECT * FROM genre");
             return $datos->fetchAll();
         }
+        public function find_menkyo($menkyo){
+            //Obtiene el menkyo que coincidan con el dni enviado
+            $sql = mainModel::connect()->prepare("SELECT idAccount, accountDni, accountCode
+                FROM accounts WHERE accountMenkyo = '$menkyo'");
+            $sql->bindParam(':Menkyo', $email);
+            $sql->execute();
+    
+            return $sql->fetch();
+        }
 
         protected function list_typeDocuments_model() {
             //Obtiene los géneros registrados

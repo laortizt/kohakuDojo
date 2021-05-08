@@ -226,6 +226,7 @@ body{
     margin-bottom: 10px
 }
 
+
 .btn-general{
     background-color: #a36681;
     background-size: 100% 100%;
@@ -345,7 +346,7 @@ body{
 }
 
 .btn-menu:hover{
-    background-color:#838383;
+    background-color:#f77f1ec4;
     color:white;
 }
 .btn-menu span{
@@ -448,7 +449,7 @@ form .form-group .input__text{
 }
 
 .info-stats4 .info-icon-color2 {
-    background: #29f5eb;    
+    background: #03a9f4;    
 }
 
 .info-stats4 .info-icon-color3 {
@@ -589,7 +590,7 @@ form .form-group .input__text{
         display: flex;
         flex-direction: column;
         justify-content: start;
-        padding: 0 3px;
+        padding: 0 10px;
       }
     
       .input-field-profile {
@@ -614,7 +615,7 @@ form .form-group .input__text{
         padding: 0 4px;
       }
       
-      .input-field-profile input {
+    .input-field-profile input {
         width: 50%;
         background: none;
         outline: none;
@@ -625,7 +626,49 @@ form .form-group .input__text{
         color: #333;
         flex: 1;
       }
-    
+      
+      .btn-action-save {
+        background-color: #a4a4ab;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        color: var(--black);
+        font-size: 1.5rem;
+        outline: none;
+        border: none;
+        border-radius: 19px;
+        color:white;
+        padding: 0.5rem 3rem;
+        align-self: flex-end;
+        margin-top:5px;
+        margin-bottom: 10px;
+      }
+
+      .btn-action-save:hover{
+        background-color: #03a9f4;
+        color: white
+      }
+
+      .btn-action-delete {
+        background-color: #a4a4ab;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        color: var(--black);
+        font-size: 1.5rem;
+        outline: none;
+        border: none;
+        border-radius: 19px;
+        color:white;
+        padding: 0.5rem 3rem;
+        align-self: flex-end;
+        margin-top:5px;
+        margin-bottom: 10px;
+      }
+
+      .btn-action-delete:hover{
+        background-color: #f74747;
+        color: white
+      }
+
       .btn-kohaku-profile {
         background-color: #a36681;
         background-size: 100% 100%;
@@ -653,14 +696,14 @@ form .form-group .input__text{
     
       .title {
         font-size: 2.2rem;
-        color: rgb(255, 16, 16);
+        color: #514f4f;
         margin-bottom: 24px;
         font-family: 'Anton', sans-serif;
         align-self: flex-start;    
       }
       .title-form {
         font-size: 2.2rem;
-        color: black;
+        color: #514f4f;
         margin-bottom: 24px;
         font-family: 'Anton', sans-serif;
         align-self: flex-start;    
@@ -683,4 +726,8 @@ form .form-group .input__text{
 
     .img-form{
         width: 100%;
+    }
+
+    .btn-action{
+
     }

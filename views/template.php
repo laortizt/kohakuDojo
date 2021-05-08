@@ -205,7 +205,7 @@ session_start(['name' => 'SK']);
 
 					</a>
 				</li>
-				<!-- <li class="sidebar-nav-item">
+				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>attendance" class="sidebar-nav-link">
 						<div>
 							<i class="fas fa-clipboard-list"></i>
@@ -247,7 +247,7 @@ session_start(['name' => 'SK']);
 						</div>
 						<span>Trámites</span>
 					</a>
-				</li> -->
+				</li>
 			</ul>
 		</div>
 		<!-- end sidebar -->

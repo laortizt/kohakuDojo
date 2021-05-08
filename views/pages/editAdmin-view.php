@@ -7,16 +7,16 @@ $insProfile = new controllerAdmin();
 
 <div class="container-report">
     <div class="row-gutters">
-        <div class="col-6 col-sm-12">
+        <div class="col-5 col-sm-12">
             <div class="info-stats4">
 
                 <?php
                 $profile = $insProfile->get_user_admin_controller();
                 ?>
-                 <h1 class="title-form">Editar usuario</h1>
+                <h1 class="title-form">Editar usuario</h1>
                 <img src="<?php echo SERVERURL; ?>assets/img/undraw_personal_info_0okl.png" class="img-form" alt="" />
 
-                
+
 
             </div>
 
@@ -25,7 +25,7 @@ $insProfile = new controllerAdmin();
                     <div class="col-6 col-sm-12">
                         <div class="info-stats4">
                             <div class="info-icon info-icon-color1">
-                            <i class="bi bi-clock-history"></i>
+                                <i class="bi bi-clock-history"></i>
                             </div>
                             <div class="sale-num">
                                 <h3>6</h3>
@@ -36,7 +36,7 @@ $insProfile = new controllerAdmin();
                     <div class="col-6 col-sm-12">
                         <div class="info-stats4">
                             <div class="info-icon info-icon-color2">
-                            <i class="fa bi bi-calendar-check"></i>
+                                <i class="fa bi bi-calendar-check"></i>
                             </div>
                             <div class="sale-num">
                                 <h3>40</h3>
@@ -47,10 +47,11 @@ $insProfile = new controllerAdmin();
                     <div class="col-6 col-sm-12">
                         <div class="info-stats4">
                             <div class="info-icon info-icon-color3">
-                            <i class="fa bi bi-clipboard-data"></i>
+                                <i class="fa bi bi-clipboard-data"></i>
                             </div>
                             <div class="sale-num">
-                                <h3> 5 Kyu</h3>
+                                <!-- <h3><?php echo $Admin['nameMenkyo'] ?></h3> -->
+                                <h3>Mukyu</h3>
                                 <p>Grado</p>
                             </div>
                         </div>
@@ -66,20 +67,21 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
 
             </div>
-            
+
 
         </div>
 
-        
-        <div class="col-6 col-sm-12">
-            
+
+        <div class="col-7 col-sm-12">
+                
             <div class="info-stats4">
-            
+                
                 <form action="ajax/adminAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
+                
                     <div class="profile">
                         <input type="hidden" value="<?php echo $insProfile->encryption($profile['accountCode']) ?>" name="userToEdit">
 
@@ -157,10 +159,24 @@ $insProfile = new controllerAdmin();
                             <?php echo $insProfile->list_state_controller($profile['accountState'] ? $profile['accountState'] : null) ?>
                         </div>
 
+                    </div> 
+
+                    <div class="btn-action">
+                        <div>
+                            <input type="submit" class="btn-action-save" value="Guardar" />
+                            <a href="<?php echo SERVERURL; ?>admin" class="btn-action-delete">
+			                    <span>Cancelar</span>
+		                    </a>
+                        </div>
+                        
+                        <div>
+                            
+                        </div>
+                        
+
                     </div>
 
-                    <input type="submit" class="btn-kohaku-profile" value="Guardar" />
-
+                    
                     <div class="RespuestaAjax"></div>
                 </form>
 
@@ -173,5 +189,3 @@ $insProfile = new controllerAdmin();
 
 
 </div>
-
-

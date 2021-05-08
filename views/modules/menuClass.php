@@ -1,21 +1,20 @@
-<!-- <div class="nav-class">
+<div class="nav-class">
 	<?php
+	
 		if($_SESSION['role_sk'] == "Administrador" || $_SESSION['role_sk'] == "Instructor"):
 	?>
-		<a href="<?php echo SERVERURL; ?>calendar" class="btn-menu">
-			<i></i> Agendar
+		<a href="<?php echo SERVERURL; ?>admin" class="btn-menu">
+        <i class="fas fa-times-circle"></i>
 		</a>
 
-		<a href="<?php echo SERVERURL; ?>attendance" class="btn-menu">
-			<i></i> Asistencia
-		</a>
+
 	<?php
 		elseif($_SESSION['role_sk'] == "Usuario"):
 	?>
-		<a href="<?php echo SERVERURL; ?>schedule" class="btn-menu">
-			<i></i> Inscribir Clase
-		</a>
+		<!-- <a href="<?php echo SERVERURL; ?>schedule" class="btn-menu">
+        <i class="fas fa-times-circle"></i> Mis Pagos
+		</a> -->
 	<?php
 		endif;
 	?>
-</div> -->
+</div>

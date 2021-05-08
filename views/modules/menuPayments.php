@@ -9,10 +9,7 @@
 
 		</a>
 
-		<a href="<?php echo SERVERURL; ?>admin" class="btn-menu">
-			<i class="fas fa-undo-alt"></i>
-			<span>Volver</span>
-		</a>
+		
 		 
 
 	<?php

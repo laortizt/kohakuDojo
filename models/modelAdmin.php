@@ -109,6 +109,16 @@ class modelAdmin extends mainModel
         return $sql->fetch();
     }
 
+    public function find_menkyo($menkyo){
+        //Obtiene el menkyo que coincidan con el dni enviado
+        $sql = mainModel::connect()->prepare("SELECT idAccount, accountDni, accountCode
+            FROM accounts WHERE accountMenkyo = '$menkyo'");
+        $sql->bindParam(':Menkyo', $email);
+        $sql->execute();
+
+        return $sql->fetch();
+    }
+
     public function find_code($code){
         //Obtiene el código único del usuario
         $sql = mainModel::connect()->prepare("SELECT idAccount, accountDni, accountCode

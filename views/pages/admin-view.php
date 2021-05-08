@@ -66,7 +66,7 @@ $insAdmin = new controllerAdmin();
 						<form action="" class="formulario" method="post" form-data="default" form-data="default">
 							<div>
 								<input type="text" name="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
-								<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fas fa-search"></i></button>
+								<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fa bi bi-search"></i></button>
 							</div>
 						</form>
 					</div>
