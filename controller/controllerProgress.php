@@ -165,7 +165,7 @@ class controllerProgress extends modelProgress
         //calcular el total de páginas
         $Npages = ceil($total / $register);
         $table .= '<div>
-            <table>
+            <table class="table table-hover thead-primary">
                 <thead> 
                     <td>Fecha de pago</td>
                     <td>Documento</td>
@@ -173,7 +173,8 @@ class controllerProgress extends modelProgress
                     <td>Grado</td>
                     <td>Observaciones</td>
                     <td>Estado</td>
-                    <td colspan="1">Acciones</td>
+                    <td colspan="1">Eliminar</td>
+                    <td colspan="1">Editar</td>
                 </thead>
                 <tbody>
             ';
@@ -191,9 +192,15 @@ class controllerProgress extends modelProgress
                         <td>' . $rows['stateName'] . '</td>
                         
                         <td>
+                        <a href="' . SERVERURL . 'editProgress?id=' . mainModel::encryption($rows['idProgress']) . '" type="submit" class="btn-edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        </td>
+
+                        <td>
                         <form action="' . SERVERURL . 'ajax/progressAjax.php" method="POST" class="formulario-ajax" data-form="delete" enctype="multipart/form-data">
                             <input type="hidden" name="userToDelete" value="' . mainModel::encryption($rows['idProgress']) . '">
-                            <button type="submit" class="btn-general">
+                            <button type="submit" class="btn-delete">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
 
@@ -202,11 +209,7 @@ class controllerProgress extends modelProgress
 
                     </td>
 
-                    <td>
-                        <a href="' . SERVERURL . 'editProgress?id=' . mainModel::encryption($rows['idProgress']) . '" type="submit" class="btn-general">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
+                    
                     
                     <div class="RespuestaAjax"></div>
                     

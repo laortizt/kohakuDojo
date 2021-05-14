@@ -15,6 +15,7 @@
 
                 <!-- se crea la ruta que conecta con el ajax,  -->
                 <form action="ajax/newPayAjax.php" method="post" autocomplete="off" class="payment-form formulario-ajax">
+                
                     <div class="payment">
                         <div class="input-container">
                             <label class="label">Fecha</label>

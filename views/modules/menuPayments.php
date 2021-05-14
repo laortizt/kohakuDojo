@@ -8,7 +8,7 @@
 			<span>Nuevo Pago</span>
 
 		</a>
-
+		
 		
 		 
 

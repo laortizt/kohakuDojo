@@ -31,4 +31,6 @@
 <script defer src="<?php echo SERVERURL; ?>assets/script/attendance.js"></script>
 <script defer src="<?php echo SERVERURL; ?>assets/script/payments.js"></script>
 <script defer src="<?php echo SERVERURL; ?>assets/script/newProgress.js"></script>
+<script defer src="<?php echo SERVERURL; ?>assets/script/admin.js"></script>
+
 

@@ -4,10 +4,16 @@ require_once "./controller/controllerAdmin.php";
 $insProfile = new controllerAdmin();
 ?>
 
+<div class="container-fluid">
+    <div>
 
-<div class="container-report">
+    </div>
+</div>
+
+
+<div class="container-fluid">
     <div class="row-gutters">
-        <div class="col-5 col-sm-12">
+        <div class="col-6 col-sm-12">
             <div class="info-stats4">
 
                 <?php
@@ -20,9 +26,9 @@ $insProfile = new controllerAdmin();
 
             </div>
 
-            <div class="container-report">
+            <div class="container-fluid ">
                 <div class="row-gutters">
-                    <div class="col-6 col-sm-12">
+                    <div class="col-6">
                         <div class="info-stats4">
                             <div class="info-icon info-icon-color1">
                                 <i class="bi bi-clock-history"></i>
@@ -33,7 +39,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-sm-12">
+                    <div class="col-6">
                         <div class="info-stats4">
                             <div class="info-icon info-icon-color2">
                                 <i class="fa bi bi-calendar-check"></i>
@@ -44,7 +50,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-sm-12">
+                    <div class="col-6">
                         <div class="info-stats4">
                             <div class="info-icon info-icon-color3">
                                 <i class="fa bi bi-clipboard-data"></i>
@@ -56,7 +62,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-sm-12">
+                    <div class="col-6">
                         <div class="info-stats4">
                             <div class="info-icon info-icon-color4">
                                 <i class="fas  fa-tasks"></i>
@@ -76,16 +82,16 @@ $insProfile = new controllerAdmin();
         </div>
 
 
-        <div class="col-7 col-sm-12">
-                
+        <div class="col-6 col-sm-12">
+
             <div class="info-stats4">
-                
+
                 <form action="ajax/adminAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
-                
-                    <div class="profile">
+
+                    <div class="row g-3">
                         <input type="hidden" value="<?php echo $insProfile->encryption($profile['accountCode']) ?>" name="userToEdit">
 
-                        <div class="input-container-profile">
+                        <div class="col-6">
                             <label class="label-form">Tipo Documento</label>
                             <div class="input-field-profile">
                                 <i class="far fa-address-card"></i>
@@ -93,7 +99,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
 
-                        <div class="input-container-profile">
+                        <div class="col-6">
                             <label class="label-form">Número Documento</label>
                             <div class="input-field-profile">
                                 <i class="far fa-address-card"></i>
@@ -101,7 +107,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
 
-                        <div class="input-container-profile">
+                        <div class="col-6">
                             <label class="label-form">Nombres</label>
                             <div class="input-field-profile">
                                 <i class="fas fa-user"></i>
@@ -109,7 +115,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
 
-                        <div class="input-container-profile">
+                        <div class="col-6">
                             <label class="label-form">Apellidos</label>
                             <div class="input-field-profile">
                                 <i class="fas fa-user"></i>
@@ -117,7 +123,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
 
-                        <div class="input-container-profile">
+                        <div class="col-6">
                             <label class="label-form">Dirección</label>
                             <div class="input-field-profile">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -125,7 +131,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
 
-                        <div class="input-container-profile">
+                        <div class="col-6">
                             <label class="label-form">Telefono</label>
                             <div class="input-field-profile">
                                 <i class="fas fa-phone-alt"></i>
@@ -133,7 +139,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
 
-                        <div class="input-container-profile">
+                        <div class="col-6">
                             <label class="label-form">Correo</label>
                             <div class="input-field-profile">
                                 <i class="fas fa-envelope"></i>
@@ -141,7 +147,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
 
-                        <div class="input-container-profile">
+                        <div class="col-6">
                             <label class="label-form">Género</label>
                             <div class="input-field-profile">
                                 <i class="far fa-address-card"></i>
@@ -149,35 +155,31 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
 
-                        <div class="input-container-profile">
+                       
+                        <div class="col-6">
                             <label class="label-form">Rol</label>
                             <?php echo $insProfile->list_role_controller($profile['accountRole'] ? $profile['accountRole'] : null) ?>
                         </div>
 
-                        <div class="input-container-profile">
+                        <div class="col-6">
                             <label class="label-form">Estado</label>
                             <?php echo $insProfile->list_state_controller($profile['accountState'] ? $profile['accountState'] : null) ?>
                         </div>
+                       
+                    </div>
 
-                    </div> 
 
                     <div class="btn-action">
-                        <div>
-                            <input type="submit" class="btn-action-save" value="Guardar" />
-                            <a href="<?php echo SERVERURL; ?>admin" class="btn-action-delete">
-			                    <span>Cancelar</span>
-		                    </a>
-                        </div>
                         
-                        <div>
-                            
-                        </div>
-                        
+                            <input type="submit" class="btn-action-save " value="Guardar" />
+                            <a href="<?php echo SERVERURL; ?>admin" class="btn-action-delete  ">
+                                <span>Cancelar</span>
+                            </a>
+    
 
                     </div>
 
                     
-                    <div class="RespuestaAjax"></div>
                 </form>
 
             </div>

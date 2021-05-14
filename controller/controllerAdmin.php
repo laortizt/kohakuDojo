@@ -307,8 +307,8 @@
 
             //calcular el otal de páginas
             $Npages= ceil($total/$register);
-            $table.='<div>
-            <table  class="table table-hover thead-primary"> 
+            $table.='<div >
+            <table  class="table table-hover thead-primary  table-responsive"> 
                 <thead> 
                     <td>Documento</td>
                     <td>Número</td>
@@ -319,7 +319,6 @@
                     <td>Género</td>
                     <td>Correo</td>
                     <td>Rol</td>
-                    <td>Grado</td>
                     <td>Estado</td>
                     <td colspan="1">Eliminar</td>
                     <td colspan="1">Editar</td>
@@ -341,7 +340,7 @@
                         <td>'.(isset($rows['nameGenre']) ? $rows['nameGenre'] : "Pendiente").'</td>
                         <td>'.$rows['accountEmail'].'</td>
                         <td>'.$rows['roleName'].'</td>
-                        <td>'.(isset($rows['nameMenkyo']) ? $rows['nameMenkyo'] : "Mukyu").'</td>
+                       
                         <td>'.($rows['accountState'] == 1 ? "Activo" : "Inactivo").'</td>
                         
                         <td>

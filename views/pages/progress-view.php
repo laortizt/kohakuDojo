@@ -60,8 +60,18 @@ $insProgress = new controllerProgress();
     <div class="col-12 col-m-12 col-sm-12">
         <div class="card">
             <div class="card-content">
+			<h1 class="title">Listado Ascensos</h1>
                 <div class="header-class">
-                    <h1 class="title">Listado Ascensos</h1>
+				<div class="barra__buscador">
+
+					<form action="" class="formulario" method="post" form-data="default" form-data="default">
+						<div>
+							<input type="text" name="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
+							<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fa bi bi-search"></i></button>
+						</div>
+					</form>
+					</div>
+
                     <?php include "./views/modules/menuProgress.php"; ?>
                 </div>
 

@@ -57,6 +57,7 @@ $insPayment = new controllerPayment();
 
 </div>
 
+
 <div class="row privileges">
 	<div class="col-12 col-m-12 col-sm-12">
 		<div class="card">
@@ -64,7 +65,7 @@ $insPayment = new controllerPayment();
 				<h1 class="title">Gestión de Pagos</h1>
 				<div class="header-class">
 
-
+					
 					<div class="barra__buscador">
 
 						<form action="" class="formulario" method="post" form-data="default" form-data="default">
