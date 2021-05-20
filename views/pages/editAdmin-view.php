@@ -4,28 +4,23 @@ require_once "./controller/controllerAdmin.php";
 $insProfile = new controllerAdmin();
 ?>
 
-<div class="container-fluid">
-    <div>
-
-    </div>
-</div>
-
 
 <div class="container-fluid">
     <div class="row-gutters">
         <div class="col-6 col-sm-12">
+            
             <div class="info-stats4">
-
+            <div class="header-class">
+                <h1 class="title">Información General</h1>
+            </div>
                 <?php
                 $profile = $insProfile->get_user_admin_controller();
                 ?>
-                <h1 class="title-form">Editar usuario</h1>
-                <img src="<?php echo SERVERURL; ?>assets/img/undraw_personal_info_0okl.png" class="img-form" alt="" />
 
-
+                <!-- <img src="<?php echo SERVERURL; ?>assets/img/img2.png" class="img-form" alt="" /> -->
 
             </div>
-
+            <!-- divs -->
             <div class="container-fluid ">
                 <div class="row-gutters">
                     <div class="col-6">
@@ -78,15 +73,19 @@ $insProfile = new controllerAdmin();
 
             </div>
 
-
         </div>
 
-
+        <!-- formulario -->
         <div class="col-6 col-sm-12">
 
             <div class="info-stats4">
-
+                
+            
                 <form action="ajax/adminAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
+                <div class="header-class">
+                <h1 class="title">Información General</h1>
+                </div>
+
 
                     <div class="row g-3">
                         <input type="hidden" value="<?php echo $insProfile->encryption($profile['accountCode']) ?>" name="userToEdit">
@@ -155,7 +154,7 @@ $insProfile = new controllerAdmin();
                             </div>
                         </div>
 
-                       
+
                         <div class="col-6">
                             <label class="label-form">Rol</label>
                             <?php echo $insProfile->list_role_controller($profile['accountRole'] ? $profile['accountRole'] : null) ?>
@@ -165,29 +164,26 @@ $insProfile = new controllerAdmin();
                             <label class="label-form">Estado</label>
                             <?php echo $insProfile->list_state_controller($profile['accountState'] ? $profile['accountState'] : null) ?>
                         </div>
-                       
-                    </div>
-
-
-                    <div class="btn-action">
-                        
-                            <input type="submit" class="btn-action-save " value="Guardar" />
-                            <a href="<?php echo SERVERURL; ?>admin" class="btn-action-delete  ">
-                                <span>Cancelar</span>
-                            </a>
-    
 
                     </div>
 
-                    
+
+                    <div class="btn-action" style="align-self: end;">
+
+                        <input type="submit" class="btn-action-save" value="Guardar" />
+                        <!-- <a href="<?php echo SERVERURL; ?>admin" class="btn-action-delete  ">
+                            <span>Cancelar</span>
+                        </a> -->
+
+
+                    </div>
+
+
                 </form>
 
             </div>
         </div>
 
-
     </div>
-
-
 
 </div>

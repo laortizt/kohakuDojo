@@ -19,9 +19,10 @@ if(isset($_POST['class-date'])){
                 title: "Crear Clase",
                 text: "No están todos los campos diligenciados.",
                 type: "Alert",
-                showCancelButton: true,     
+                showCancelButton: true,  
+                cancelButtonText: "Cancelar",   
                 confirmButtonText: "Aceptar",
-                cancelButtonText: "Cancelar"
+                
             }).then(function(){
                 window.location.href="'.SERVERURL.'class"
             });

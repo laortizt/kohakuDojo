@@ -3,12 +3,13 @@ require_once "./controller/controllerAdmin.php";
 $insAdmin = new controllerAdmin();
 ?>
 
+<!-- Bienvenida -->
 <div class="welcome-area">
 	<div class="row m-0 align-items-center welcome-container">
 		<div class="col-lg-5 col-md-12 p-0">
 			<div class="welcome-content">
-				<h1 class="mb-2">Hola, Nombre</h1>
-				<p class="mb-0">Just Do Somethings Better</p>
+				<h1 class="mb-2">Hola, <?php echo $_SESSION['userfirstname_sk'] ?></h1>
+				<p class="mb-0">¡Un gusto tenerte de vuelta!</p>
 			</div>
 		</div>
 
@@ -20,123 +21,7 @@ $insAdmin = new controllerAdmin();
 	</div>
 </div>
 
-<div class="container-report">
-	<div class="row-gutters">
-		<div class="col-12 col-m-12 col-sm-12">
-		<div class="info-stats4">
-			
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Ene</p>
-				</div>
-			</div>
-			</div>
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Feb</p>
-				</div>
-			</div>
-			</div>
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Mar</p>
-				</div>
-			</div>
-			</div>
-
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Abr</p>
-				</div>
-			</div>
-			</div>
-
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>May</p>
-				</div>
-			</div>
-			</div>
-
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Jun</p>
-				</div>
-			</div>
-			</div>
-
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Jul</p>
-				</div>
-			</div>
-			</div>
-
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Ago</p>
-				</div>
-			</div>
-			</div>
-
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Sep</p>
-				</div>
-			</div>
-			</div>
-
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Oct</p>
-				</div>
-			</div>
-			</div>
-
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Nov</p>
-				</div>
-			</div>
-			</div>
-
-			<div class="col-2">
-			<div class="info-icon info-icon-color">
-				<div class="sale-num">
-					<h3><?php echo $insAdmin->count_instructors() ?></h3>
-					<p>Dic</p>
-				</div>
-			</div>
-			</div>
-		</div>
-		
-	</div>
-	
-</div>
-
-
+<!-- divs informaciòn -->
 <div class="container-report">
 	<div class="row-gutters">
 		<div class="col-3 col-sm-6">
@@ -187,9 +72,22 @@ $insAdmin = new controllerAdmin();
 
 </div>
 
+<!--Grafica-->
+<div class="col-lg-6 col-md-12">
+	<div class="card mb-30">
+		<div class="card-header">
+			<h3>Reporte Mensual</h3>
+		</div>
 
+		<div class="card-body">
+			<div id="client-recollection-chart" class="extra-margin"></div>
 
+			<?php echo $insAdmin->get_users_by_month_chart() ?>
+		</div>
+	</div>
+</div>
 
+<!--tabla-->
 <div class="row privileges">
 
 	<div class="col-12 col-m-12 col-sm-12">

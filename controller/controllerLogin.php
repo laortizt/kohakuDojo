@@ -33,9 +33,10 @@
                 $userrow=$accountdata->fetch();
 
                 session_start(['name'=>'SK']);
-                
+
                 $_SESSION['email_sk']=$userrow['accountEmail'];
                 $_SESSION['code_sk']=$userrow['accountCode'];
+                $_SESSION['userfirstname_sk']=$userrow['accountFirstName'];
                 
                 if ($userrow['accountRole'] == 1) {
                     $_SESSION['role_sk']="Administrador";
@@ -58,9 +59,9 @@
                     if($_SESSION['role_sk']==="Administrador"){
                         $url=SERVERURL."admin";
                     }else if($_SESSION['role_sk']==="Instructor") {
-                        $url=SERVERURL."calendar";
+                        $url=SERVERURL."instructor";
                     } else{
-                        $url=SERVERURL."profile";
+                        $url=SERVERURL."user";
                     }
                 }
 

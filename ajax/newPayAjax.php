@@ -28,9 +28,9 @@ if (isset($_POST['dni-newpay'])) {
                 title: "Guardar pago",
                 text: "No están todos los datos necesarios.",
                 type: "Alert",
-                showCancelButton: true,     
-                confirmButtonText: "Aceptar",
-                cancelButtonText: "Cancelar"
+                showCancelButton: true,   
+                cancelButtonText: "Cancelar",  
+                confirmButtonText: "Aceptar"
             }).then(function(){
                 window.location.href="' . SERVERURL . 'newPay"
             });

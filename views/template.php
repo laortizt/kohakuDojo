@@ -17,6 +17,13 @@ session_start(['name' => 'SK']);
 	<title><?php echo COMPANY; ?></title>
 	<!-- CSS only -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+	<!-- CSS only -->
+		<!-- DateRange css -->
+		<link rel="stylesheet" href="vendor/daterange/daterange.css" />
+
+		<!-- Datepicker css -->
+		<link rel="stylesheet" href="vendor/datepicker/css/classic.css" />
+		<link rel="stylesheet" href="vendor/datepicker/css/classic.date.css" />	
 
 	<script src="https://kit.fontawesome.com/a7ccf0be94.js" crossorigin="anonymous"></script>
 	<!-- Import lib -->
@@ -177,15 +184,16 @@ session_start(['name' => 'SK']);
 						
 
 		<div class="sidebar">
-			<ul class="sidebar-nav">
+			<ul class="sidebar-nav">						
+				<li class="sidebar-nav-item logo-container">
+					<img src="<?php echo SERVERURL; ?>assets/img/isotipoWhite.png" class="image-logo1" alt="">
+					<img src="<?php echo SERVERURL; ?>assets/img/logoWhite.png" class="image-logo2" alt="">
+					<a class="nav-link nav-item">
+						<i class="fas fa-bars" onclick="collapseSidebar()"></i>
+					</a>
+				</li>
 
-						
-				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador") : ?>
-					<li class="sidebar-nav-item logo-container">
-						<img src="<?php echo SERVERURL; ?>assets/img/isotipoWhite.png" class="image-logo1" alt="">
-						<img src="<?php echo SERVERURL; ?>assets/img/logoWhite.png" class="image-logo2" alt="">
-					</li>
-					
+				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador") : ?>					
 					<li class="sidebar-nav-item">
 						<a href="<?php echo SERVERURL; ?>admin" class="sidebar-nav-link active">
 							<div>
@@ -197,9 +205,18 @@ session_start(['name' => 'SK']);
 				<?php endif; ?>
 
 				<li class="sidebar-nav-item">
+					<a href="<?php echo SERVERURL; ?>home" class="sidebar-nav-link">
+						<div>
+						<i class="fas fa-home"></i>
+						</div>
+						<span>Inicio</span>
+
+					</a>
+				</li>
+				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>calendar" class="sidebar-nav-link">
 						<div>
-							<i class="far fa-calendar-alt"></i>
+						<i class="far fa-calendar"></i>
 						</div>
 						<span>Clases</span>
 
@@ -208,24 +225,24 @@ session_start(['name' => 'SK']);
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>attendance" class="sidebar-nav-link">
 						<div>
-							<i class="fas fa-clipboard-list"></i>
+						<i class="far fa-calendar-check"></i>
 						</div>
 						<span>Asistencia</span>
 
 					</a>
 				</li>
-				<li class="sidebar-nav-item">
+				<!-- <li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>plans" class="sidebar-nav-link">
 						<div>
-							<i class="fas fa-money-check-alt"></i>
+						<i class="fas fa-gem"></i>
 						</div>
 						<span>Planes</span>
 					</a>
-				</li>
+				</li> -->
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>payments" class="sidebar-nav-link">
 						<div>
-							<i class="fas fa-cash-register"></i>
+						<i class="fas fa-hand-holding-usd"></i>
 						</div>
 						<span>Pagos</span>
 					</a>
@@ -234,7 +251,7 @@ session_start(['name' => 'SK']);
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>progress" class="sidebar-nav-link">
 						<div>
-							<i class="fas fa-check-circle"></i>
+						<i class="far fa-chart-bar"></i>
 						</div>
 						<span>Progreso</span>
 					</a>
@@ -243,7 +260,7 @@ session_start(['name' => 'SK']);
 				<li class="sidebar-nav-item">
 					<a href="#" class="sidebar-nav-link">
 						<div>
-							<i class="far fa-file-alt"></i>
+						<i class="far fa-file"></i>
 						</div>
 						<span>Trámites</span>
 					</a>

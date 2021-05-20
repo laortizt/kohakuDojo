@@ -10,12 +10,12 @@
       swal({
         title: "¿Estás seguro?",   
         text: "La sesión actual se cerrará y tendrás que iniciar sesión nuevamente",
-        type: "warning",   
-        showCancelButton: true, 
+        type: "warning",
+        showCancelButton: true,
         confirmButtonColor: '#03A9F4',
-        cancelButtonColor: '#F44336',  
+        cancelButtonColor: '#F44336',
         confirmButtonText:'<i class="fas fa-check-circle"></i> Aceptar',
-        cancelButtonText: '<i class="far fa-times-circle"></i> Cancelar',
+        cancelButtonText: '<i class="far fa-times-circle"></i> Cancelar'
       }).then(function() {
         $.ajax({
           url:'<?php echo SERVERURL; ?>ajax/loginAjax.php?token=' + token,

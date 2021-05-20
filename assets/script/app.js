@@ -17,10 +17,10 @@ $('.btn-logout').on('click', function (e){
   swal({
     title: "¿Estás seguro de salir?",   
     text: "La sesión se cerrará",   
-    type: "Alert",   
-    showCancelButton: true,     
+    type: "Alert",
+    showCancelButton: true,
+    cancelButtonText: "Cancelar",  
     confirmButtonText: "Aceptar",
-    cancelButtonText: "Cancelar"
   }).then(function(){
     window.location.href="index.php"
   });

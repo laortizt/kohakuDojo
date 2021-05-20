@@ -28,8 +28,9 @@ if(isset($_POST['dni-profile'])){
                 text: "No están todos los datos necesarios.",
                 type: "Alert",
                 showCancelButton: true,     
+                cancelButtonText: "Cancelar",
                 confirmButtonText: "Aceptar",
-                cancelButtonText: "Cancelar"
+                
             }).then(function(){
                 window.location.href="'.SERVERURL.'payEdit"
             });

@@ -229,6 +229,7 @@
 
             return $select;
         }
+
         public function list_typeDocument_controller($userCurrentDocType){
             $documentTypes = modelAdmin::list_typeDocuments_model();
 
@@ -254,6 +255,7 @@
 
             return $select;
         }
+
         //funciòn que llama la lista de generos de model
         public function list_genres_controller($userCurrentGenre) {
             $genres = modelAdmin::list_genres_model();
@@ -322,6 +324,7 @@
                     <td>Estado</td>
                     <td colspan="1">Eliminar</td>
                     <td colspan="1">Editar</td>
+                   
                 </thead>
                 <tbody>
             ';
@@ -342,13 +345,7 @@
                         <td>'.$rows['roleName'].'</td>
                        
                         <td>'.($rows['accountState'] == 1 ? "Activo" : "Inactivo").'</td>
-                        
-                        <td>
-                            <a href="'.SERVERURL.'editAdmin?c='.mainModel::encryption($rows['accountCode']).'" type="submit" class="btn-edit">
-                            <i class="bi bi-pencil-square"></i>
-                            </a>
-                        </td>
-
+                    
                         <td>
                             <form action="'.SERVERURL.'ajax/adminAjax.php" method="POST" class="formulario-ajax" data-form="delete" enctype="multipart/form-data">
                                 <input type="hidden" name="userToDelete" value="'.mainModel::encryption($rows['accountCode']).'">
@@ -361,8 +358,13 @@
 
                         </td>
 
-                        
-                        
+                        <td>
+                        <a href="'.SERVERURL.'editAdmin?c='.mainModel::encryption($rows['accountCode']).'" type="submit" class="btn-edit">
+                        <i class="bi bi-pencil-square"></i>
+                        </a>
+                        </td>
+
+                    
                         <div class="RespuestaAjax"></div>
                         
                     ';
@@ -506,8 +508,70 @@
 
                 return mainModel::sweet_alert($alert);
             }
-        }            
+        }
 
-       
+        public function get_users_by_month_chart() {
+            // Traer la data que se quiere mostrar
+
+            // Trnasformar esa data en el areglo que requiere la interfaz
+
+            // Reemplazar en la cadena del resultado
+
+            return "
+                <script>
+                $(document).ready(function() {
+                    // Client Recollection Chart JS
+                    if(document.getElementById('client-recollection-chart')){
+                        var options = {
+                            chart: {
+                                height: 332,
+                                type: 'bar',
+                            },
+                            plotOptions: {
+                                bar: {
+                                    horizontal: false,
+                                    columnWidth: '30%',
+                                    endingShape: 'rounded'	
+                                },
+                            },
+                            dataLabels: {
+                                enabled: false
+                            },
+                            colors: ['#343434', '#ff0000'],
+                            stroke: {
+                                show: true,
+                                width: 3,
+                                colors: ['transparent']
+                            },
+                            series: [{
+                                name: 'Clientes',
+                                data: [44, 55, 57, 56, 65, 65, 70, 65, 60, 70, 75]
+                            }, {
+                                name: 'Pagos',
+                                data: [35, 41, 36, 26, 70, 68, 70, 60, 55, 65, 70]
+                            }],
+                            xaxis: {
+                                categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                            },
+                            fill: {
+                                opacity: 1
+                            },
+                            tooltip: {
+                                y: {
+                                    formatter: function (val) {
+                                        return + val + ' thousands'
+                                    }
+                                }
+                            },
+                        }
+                        var chart = new ApexCharts(
+                            document.querySelector('#client-recollection-chart'),
+                            options
+                        );
+                        chart.render();
+                    }
+                });
+                </script>";
+        }
         
 }

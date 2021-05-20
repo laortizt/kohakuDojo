@@ -27,9 +27,10 @@ if(isset($_POST['dni-progress'])){
                 title: "Actualizar Registro",
                 text: "No están todos los datos necesarios.",
                 type: "Alert",
-                showCancelButton: true,     
+                showCancelButton: true, 
+                cancelButtonText: "Cancelar",    
                 confirmButtonText: "Aceptar",
-                cancelButtonText: "Cancelar"
+                
             }).then(function(){
                 window.location.href="'.SERVERURL.'editProgress"
             });

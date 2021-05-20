@@ -12,7 +12,8 @@
         public function get_profile_controller(){
             $profile = modelProfile::get_profile_model($_SESSION['code_sk']);
             return $profile;
-        }  
+        }
+ 
         //funciòn que llama la lista de tipos de documento de model
         public function list_typeDocument_controller($userCurrentDocType){
             $documentTypes = modelProfile::list_typeDocuments_model();

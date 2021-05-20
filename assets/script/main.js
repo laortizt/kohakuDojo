@@ -28,9 +28,9 @@ $(document).ready(function() {
             title: "¿Estás seguro?",   
             text: textoAlerta,   
             type: "question",   
-            showCancelButton: true,     
+            showCancelButton: true,   
+            cancelButtonText: "Cancelar",
             confirmButtonText: "Aceptar",
-            cancelButtonText: "Cancelar"
         }).then(function () {
             $.ajax({
                 type: metodo,

@@ -21,6 +21,8 @@
 <script defer src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
 <!-- <script defer src="https://uicdn.toast.com/tui.dom/v3.0.0/tui-dom.js"></script> -->
 <script defer src="<?php echo SERVERURL; ?>assets/tui-calendar/tui-calendar.min.js"></script>
+<script defer src="<?php echo SERVERURL; ?>assets/apexcharts/apexcharts.min.js"></script>
+
 
 
 <!-- Page level custom scripts -->
@@ -31,6 +33,6 @@
 <script defer src="<?php echo SERVERURL; ?>assets/script/attendance.js"></script>
 <script defer src="<?php echo SERVERURL; ?>assets/script/payments.js"></script>
 <script defer src="<?php echo SERVERURL; ?>assets/script/newProgress.js"></script>
-<script defer src="<?php echo SERVERURL; ?>assets/script/admin.js"></script>
+<!-- <script defer src="<?php echo SERVERURL; ?>assets/script/admin.js"></script> -->
 
 
