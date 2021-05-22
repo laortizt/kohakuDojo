@@ -173,7 +173,6 @@
             return $row['nEstudiantes'];
         }
 
-
         public function count_admin() {
             //Obtiene la cantidad de roles administrador
             $datos = mainModel::connect()->query("SELECT count(*) as nAdmin
@@ -203,6 +202,8 @@
 
             return $row['nInstructors'];
         }
+
+        
 
         public function list_state_controller($userCurrentState) {
             $states = modelAdmin::list_state_model();
@@ -292,7 +293,7 @@
 
             $table="";
 
-            $page=(isset($page)&& $page>0) ? (int) $page : 1;
+            $page=(isset($page)&& $page>0) ? (int) $page :1;
             $start=($pages>0)? (($pages*$register)-$register) : 0;
             $conexion= mainModel::connect();
 
@@ -312,6 +313,7 @@
             $table.='<div >
             <table  class="table table-hover thead-primary  table-responsive"> 
                 <thead> 
+                    <td>#</td>
                     <td>Documento</td>
                     <td>Número</td>
                     <td>Nombres</td>
@@ -322,7 +324,7 @@
                     <td>Correo</td>
                     <td>Rol</td>
                     <td>Estado</td>
-                    <td colspan="1">Eliminar</td>
+                    
                     <td colspan="1">Editar</td>
                    
                 </thead>
@@ -334,6 +336,7 @@
                 foreach($datos as $rows){
                     $table.='
                     <tr>
+                        <td>'.$count.'</td>
                         <td>'.$rows['nameDocumentType'].'</td>
                         <td>'.$rows['accountDni'].'</td>
                         <td>'.$rows['accountFirstName'].'</td>
@@ -346,18 +349,6 @@
                        
                         <td>'.($rows['accountState'] == 1 ? "Activo" : "Inactivo").'</td>
                     
-                        <td>
-                            <form action="'.SERVERURL.'ajax/adminAjax.php" method="POST" class="formulario-ajax" data-form="delete" enctype="multipart/form-data">
-                                <input type="hidden" name="userToDelete" value="'.mainModel::encryption($rows['accountCode']).'">
-                                <button type="submit" class="btn-delete">
-                                <i class="bi bi-trash"></i>
-                                </button>
-
-                                <div class="RespuestaAjax"></div>
-                            </form>
-
-                        </td>
-
                         <td>
                         <a href="'.SERVERURL.'editAdmin?c='.mainModel::encryption($rows['accountCode']).'" type="submit" class="btn-edit">
                         <i class="bi bi-pencil-square"></i>
@@ -377,6 +368,7 @@
                     </tr>';
             }
             $table.='</tbody> </table> </div>';
+            
 
             return $table;
         }

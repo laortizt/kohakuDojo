@@ -73,7 +73,7 @@ $insAdmin = new controllerAdmin();
 </div>
 
 <!--Grafica-->
-<div class="col-lg-6 col-md-12">
+<!-- <div class="col-lg-6 col-md-12">
 	<div class="card mb-30">
 		<div class="card-header">
 			<h3>Reporte Mensual</h3>
@@ -85,7 +85,7 @@ $insAdmin = new controllerAdmin();
 			<?php echo $insAdmin->get_users_by_month_chart() ?>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <!--tabla-->
 <div class="row privileges">
@@ -98,6 +98,10 @@ $insAdmin = new controllerAdmin();
 					<h1 class="title">Administar usuarios</h1>
 
 					<div class="barra__buscador">
+						<?php
+						require_once "./controller/controllerAdmin.php";
+						$insAdmin = new controllerAdmin();
+						?>
 
 						<form action="" class="formulario" method="post" form-data="default" form-data="default">
 							<div>
@@ -112,12 +116,33 @@ $insAdmin = new controllerAdmin();
 				<!-- DESDE AQUI -->
 
 
-
 				<?php
-				$pages = explode("/", $_GET['page']);
+					$pageNumber = 1;
 
-				echo $insAdmin->pages_admin_controller(0, 10, $_SESSION['role_sk'], 'code');
+					if (isset($_GET)) {
+						$pages = explode("/", $_GET['page']);
+						if (count($pages) >= 3) {
+							$p = intval($pages[2]);
+							if ($p > 1) {
+								$pageNumber = $p;
+							}
+						}
+					}
+
+					echo $insAdmin->pages_admin_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk']);
 				?>
+
+				<nav class="text-center">
+					<ul class="pagination pagination-sm">
+						<li class="disabled"><a href="javascript:void(0)">«</a></li>
+						<li class="active"><a href="<?php echo SERVERURL; ?>admin/page/1">1</a></li>
+						<li><a href="<?php echo SERVERURL; ?>admin/page/2">2</a></li>
+						<li><a href="<?php echo SERVERURL; ?>admin/page/3">3</a></li>
+						<li><a href="<?php echo SERVERURL; ?>admin/page/4">4</a></li>
+						<li><a href="<?php echo SERVERURL; ?>admin/page/5">5</a></li>
+						<li><a href="javascript:void(0)">»</a></li>
+					</ul>
+				</nav>
 			</div>
 			<!-- DIVS  -->
 

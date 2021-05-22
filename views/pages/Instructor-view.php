@@ -144,7 +144,7 @@ $insAdmin = new controllerAdmin();
 
             <div class="info-stats4">
 
-                <form action="ajax/profileAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
+                <form action="ajax/classAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
 
 
                     <div class="row g-3">
