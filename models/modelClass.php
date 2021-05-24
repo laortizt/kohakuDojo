@@ -18,19 +18,48 @@
             return $datos->fetchAll();
         }
 
-        //crear clase
-        public function craete_class_model($datos) {
-            $sql=mainModel::connect()->prepare("INSERT INTO class 
-                (classDate, classTeacher, classTopic)
-                VALUES (:Date, :Teacher, :Topic)");
-            $sql->bindParam(":Date",$datos['Date']);
+        public function list_events_model() {
+            //Obtiene los trámites registrados
+            $datos = mainModel::connect()->query("SELECT * FROM events");
+            return $datos->fetchAll();
+        }
+
+        public function update_class_model($datos) {
+            $sql=mainModel::connect()->prepare("UPDATE class  
+                SET classTeacher:Teacher, classTopic:Topic, classEvents:Events, classPrice:Price, classDate:Date, classTimeInit:TimeInit, classTimeEnd:TimeEnd,
+                WHERE idClass=:IdClass");
             $sql->bindParam(":Teacher",$datos['Teacher']);
             $sql->bindParam(":Topic",$datos['Topic']);
+            $sql->bindParam(":Events",$datos['Events']);
+            $sql->bindParam(":Price",$datos['Price']);
+            $sql->bindParam(":Date",$datos['Date']);
+            $sql->bindParam(":TimeInit",$datos['TimeInit']);
+            $sql->bindParam(":TimeEnd",$datos['TimeEnd']);
+            $sql->bindParam(":IdAccount",$datos['IdAccount']);
+
+            $sql->execute();
+
+            return $sql;
+        }
+
+        //crear clase
+        public function create_class_model($datos) {
+            $sql=mainModel::connect()->prepare("INSERT INTO class 
+                (classTeacher, classTopic, classEvents, classPrice, classDate, classTimeInit, classTimeEnd)
+                VALUES (:Teacher, :Topic, :Events, :Price, :dates, :TimeInit, :TimeEnd)");
+            $sql->bindParam(":Teacher",$datos['Teacher']);
+            $sql->bindParam(":Topic",$datos['Topic']);
+            $sql->bindParam(":Events",$datos['Events']);
+            $sql->bindParam(":Price",$datos['Price']);
+            $sql->bindParam(":dates",$datos['Date']);
+            $sql->bindParam(":TimeInit",$datos['TimeInit']);
+            $sql->bindParam(":TimeEnd",$datos['TimeEnd']);
             
             $sql->execute();
 
             return $sql;
         }
+
         //Eliminar clase
         protected function delete_class($idClass){
             $sql=mainModel::connect()->prepare("DELETE FROM class WHERE idClass=:idClass");
@@ -41,11 +70,26 @@
         }
 
         //buscar clase 
-        public function find_class($id) {
-            //Obtiene los perfiles que coincidan con el dni enviado
-            // $datos = mainModel::connect()->query("SELECT idClass, classTime, classTeacher, classTopic
-            //     FROM class WHERE classTopic ='$Topic'");
-            // return $datos->fetchAll();
+        public function find_class($idClass) {
+            
+            $datos = mainModel::connect()->query("SELECT idClass, classTeacher, classTopic, classEvents, classPrice, classDate, classTimeInit, classTimeEnd 
+                FROM class WHERE idClass ='$idClass'");
+            return $datos->fetchAll();
+        }
+
+        public function get_class_model($code) {
+            $sql= mainModel::connect()->prepare("SELECT a.idAccount, a.accountCode, a.accountEmail, 
+                a.accountDocumentType, a.accountDni, a.accountFirstName, a.accountLastName,
+                a.accountAddress, a.accountPhone, a.accountGenre, a.accountRole, a.accountState, 
+                dt.nameDocumentType, g.nameGenre
+                FROM accounts a
+                JOIN documenttype dt ON (a.accountDocumentType = dt.idDocumentType)
+                JOIN genre g ON (a.accountGenre = g.idGenre)
+                WHERE a.accountCode=:code");
+            $sql->bindParam(':code', $code);
+            $sql->execute();
+    
+            return $sql->fetch();
         }
         
     }

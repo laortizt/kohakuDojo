@@ -16,8 +16,6 @@
             $datos = mainModel::connect()->query("SELECT * FROM procedures");
             return $datos->fetchAll();
         }
-
-    
          // Listar  Pagos
          public function get_payment_model($code) {
             $sql= mainModel::connect()->prepare("SELECT p.*, a.accountCode
@@ -32,28 +30,27 @@
          public function update_payment_model($data) {
             $sql=mainModel::connect()->prepare("UPDATE payments  
                 SET paymentDate=:Date, paymentAccount=:IdAccount, paymentProcedure=:Procedure, 
-                paymentPrice=:Price, paymentObservation=:Observation,
+                paymentPrice=:Price
                 WHERE idPayments=:IdPayments");
             $sql->bindParam(":Date",$data['Date']);
             $sql->bindParam(":Procedure",$data['Procedure']);
             $sql->bindParam(":Price",$data['Price']);
-            $sql->bindParam(":Observation",$data['Observation']);
+            
             $sql->bindParam(":IdAccount",$data['IdAccount']);
 
             $sql->execute();
 
             return $sql;
         }
+
          //Crear Pagos
          public function create_payment_model($datos) {
             $sql=mainModel::connect()->prepare("INSERT INTO payments 
-                (paymentDate, paymentProcedure,  paymentPrice,
-                paymentObservation, paymentAccount)
-                VALUES (:Date, :Procedure, :Price, :Observation, :IdAccount)");
+                (paymentDate, paymentProcedure, paymentPrice, paymentAccount)
+                VALUES (:Date, :Procedure, :Price, :IdAccount)");
             $sql->bindParam(":Date",$datos['Date']);
             $sql->bindParam(":Procedure",$datos['Procedure']);
             $sql->bindParam(":Price",$datos['Price']);
-            $sql->bindParam(":Observation",$datos['Observation']);
             $sql->bindParam(":IdAccount",$datos['IdAccount']);
             
             $sql->execute();

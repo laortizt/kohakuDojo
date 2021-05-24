@@ -1,7 +1,6 @@
 <?php
 
 //buscador admin 
-    session_start();
     $petitionAjax=true;
 
     require_once "../config/ConfigGeneral.php";
@@ -13,9 +12,9 @@
             $_SESSION['searchUser']=$_POST['search_user'];
         }
         //Eliminar búsqueda
-        if(isset($url)){
-            echo '<script> location.reload(); </script>';
-        }
+        // if(isset($url)){
+        //     echo '<script> location.reload(); </script>';
+        // }
 
     }else{
         session_destroy();

@@ -310,7 +310,7 @@ body{
     display: inline-block;
     margin-right: 10px;
 } */
-.btn-edit{
+.btn-edit {
     height: 33px;
     width: 33px;
     font-size: 1.2rem;
@@ -324,9 +324,29 @@ body{
     padding: 15px;
     background-color: rgb(210, 210, 219);
 }
+
 .btn-edit:hover{
     background-color:  #03a9f4;
     color: white;
+}
+
+.btn-eye {
+  height: 33px;
+  width: 33px;
+  font-size: 1.2rem;
+  border-radius: 8px; 
+  color: black;
+  border: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 15px;
+  background-color: rgb(210, 210, 219);
+}
+.btn-eye:hover{
+  background-color:  red;
+  color: white;
 }
 
 .btn-menu{
@@ -1201,4 +1221,12 @@ form .form-group .input__text{
 .pagination-sm>li:last-child>span {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px
+}
+
+.attendance-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
 }

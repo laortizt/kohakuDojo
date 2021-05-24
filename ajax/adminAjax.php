@@ -13,9 +13,10 @@ if(isset($_POST['Dni']) || isset($_POST['idAccount'])){
         isset($_POST['FirstName'])&&
         isset($_POST['LastName'])&&
         isset($_POST['User'])){
-        echo $insAdmin->add_controller_Admin();
+        
     }
-    
+        echo $insAdmin->add_controller_Admin();
+        
     if (isset($_POST['idAccount'])){
         echo$insAdmin->add_controller_Admin();
     }

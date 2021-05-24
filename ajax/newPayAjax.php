@@ -15,13 +15,13 @@ if (isset($_POST['dni-newpay'])) {
         isset($_POST['date-newpay']) &&
         isset($_POST['dni-newpay']) &&
         isset($_POST['procedure-newpay']) &&
-        isset($_POST['price-newpay']) &&
-        isset($_POST['observation-newpay'])
+        isset($_POST['price-newpay'])
+       
     ) {
         // session_start(['name' => 'SK']);
 
         echo $insPayment->create_payment_controller();
-        echo '<script>window.location.href="' . SERVERURL . 'newPay"</script>';
+        echo '<script>window.location.href="' . SERVERURL . 'payments"</script>';
     } else {
         echo '<script>
             swal({
@@ -32,7 +32,7 @@ if (isset($_POST['dni-newpay'])) {
                 cancelButtonText: "Cancelar",  
                 confirmButtonText: "Aceptar"
             }).then(function(){
-                window.location.href="' . SERVERURL . 'newPay"
+                window.location.href="' . SERVERURL . 'payments"
             });
         </script>';
     }

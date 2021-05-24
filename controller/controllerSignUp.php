@@ -16,7 +16,11 @@
             $lastName= mainModel::clean_string($_POST['lastname']);
             $email= mainModel::clean_string($_POST['emailSignUp']);
             $password= mainModel::clean_string($_POST['passwordSignUp']);
-           
+            
+            $firstName= ucwords($firstName);
+            $lastName= ucwords($lastName);
+            $email= strtolower($email);
+            
             //validación contraseñas
             if($password!=$password){
                 $alert=[

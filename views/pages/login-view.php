@@ -19,7 +19,7 @@
             <p class="label-login">Usuario</p>
             <div class="input-field-login">
               <i class="fas fa-user"></i>
-              <input type="text" name="emailSignIn" required=""/>
+              <input type="text" name="emailSignIn" required="" style="text-transform:lowercase"style="text-transform:lowercase"/>
             </div>
 
             <p class="label-login">Contraseña</p>
@@ -38,19 +38,19 @@
             <p class="label-login">Nombres</p>
             <div class="input-field-login">
               <i class="fas fa-user"></i>
-              <input type="text" name="firstname" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}"/>
+              <input type="text" name="firstname" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}" style="text-transform:capitalize"/>
             </div>
 
             <p class="label-login">Apellidos</p>
             <div class="input-field-login">
               <i class="fas fa-user"></i>
-              <input type="text" name="lastname" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}"/>
+              <input type="text" name="lastname" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}" style="text-transform:capitalize"/>
             </div>
 
             <p class="label-login">Correo</p>
             <div class="input-field-login">
               <i class="fas fa-envelope"></i>
-              <input type="email" required="" name="emailSignUp"/>
+              <input type="email" required="" name="emailSignUp" style="text-transform:lowercase"/>
             </div>
 
             <p class="label-login">Contraseña</p>

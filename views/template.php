@@ -223,16 +223,46 @@ session_start(['name' => 'SK']);
 						</a>
 					</li>
 				<?php endif; ?>
+				
+				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador"): ?>					
+					<li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>adminClass" class="sidebar-nav-link active">
+							<div>
+							<i class="far fa-calendar"></i>
+							</div>
+							<span>Clases</span>
+						</a>
+					</li>
+				<?php elseif (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Instructor") : ?>
+					<li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>instructor" class="sidebar-nav-link">
+							<div>
+							<i class="far fa-calendar"></i>
+							</div>
+							<span>Clases</span>
 
-				<li class="sidebar-nav-item">
+						</a>
+					</li>
+				<?php elseif ($_SESSION['role_sk'] == "Usuario"): ?>
+					<li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>user" class="sidebar-nav-link">
+							<div>
+							<i class="far fa-calendar"></i>
+							</div>
+							<span>Clases</span>
+						</a>
+					</li>
+				<?php endif; ?>
+
+				<!-- <li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>calendar" class="sidebar-nav-link">
 						<div>
 						<i class="far fa-calendar"></i>
 						</div>
 						<span>Clases</span>
 					</a>
-				</li>
-
+				</li> -->
+				
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>attendance" class="sidebar-nav-link">
 						<div>
@@ -273,7 +303,7 @@ session_start(['name' => 'SK']);
 				<?php endif; ?>
 
 				<li class="sidebar-nav-item">
-					<a href="#" class="sidebar-nav-link">
+					<a href="<?php echo SERVERURL; ?>schedule" class="sidebar-nav-link">
 						<div>
 						<i class="far fa-file"></i>
 						</div>

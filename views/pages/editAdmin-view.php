@@ -1,90 +1,66 @@
 <?php
 require_once "./controller/controllerAdmin.php";
-
 $insProfile = new controllerAdmin();
-?>
 
+?>
 
 <div class="container-fluid">
     <div class="row-gutters">
+        <?php
+        $profile = $insProfile->get_user_admin_controller();
+        ?>
+<!-- 
         <div class="col-6 col-sm-12">
-            
-            <div class="info-stats4">
-            <div class="header-class">
-                <h1 class="title">Información General</h1>
-            </div>
-                <?php
-                $profile = $insProfile->get_user_admin_controller();
-                ?>
+            <?php if ($profile['accountRole'] == 2) : ?>
+                <div class="info-stats4 attendance-list">
+                    <div class="header-class">
+                        <h1 class="title">Clases Impartidas</h1>
 
-                <!-- <img src="<?php echo SERVERURL; ?>assets/img/img2.png" class="img-form" alt="" /> -->
-
-            </div>
-            <!-- divs -->
-            <div class="container-fluid ">
-                <div class="row-gutters">
-                    <div class="col-6">
-                        <div class="info-stats4">
-                            <div class="info-icon info-icon-color1">
-                                <i class="bi bi-clock-history"></i>
-                            </div>
-                            <div class="sale-num">
-                                <h3>6</h3>
-                                <p>Clases Restantes</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="info-stats4">
-                            <div class="info-icon info-icon-color2">
-                                <i class="fa bi bi-calendar-check"></i>
-                            </div>
-                            <div class="sale-num">
-                                <h3>40</h3>
-                                <p>Clases Asistidas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="info-stats4">
-                            <div class="info-icon info-icon-color3">
-                                <i class="fa bi bi-clipboard-data"></i>
-                            </div>
-                            <div class="sale-num">
-                                <!-- <h3><?php echo $Admin['nameMenkyo'] ?></h3> -->
-                                <h3>Mukyu</h3>
-                                <p>Grado</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="info-stats4">
-                            <div class="info-icon info-icon-color4">
-                                <i class="fas  fa-tasks"></i>
-                            </div>
-                            <div class="sale-num">
-                                <h3>Premium</h3>
-                                <p>Plan</p>
-                            </div>
+                        <div class="barra__buscador">
+                            <?php
+                            require_once "./controller/controllerClass.php";
+                            $insClass = new controllerClass();
+                            ?>
                         </div>
                     </div>
 
+                    <div class="row">
+                        <?php
+                        echo $insClass->pages_attendance_controller(0, 10, $_SESSION['role_sk'], $_SESSION['code_sk']);
+                        ?>
+                    </div>
+                </div>
+            <?php elseif ($profile['accountRole'] == 3) : ?>
+                <div class="info-stats4 attendance-list">
+                    <div class="header-class">
+                        <h1 class="title">Asistencia de Clases</h1>
+
+                        <div class="barra__buscador">
+                            <?php
+                            require_once "./controller/controllerClass.php";
+                            $insClass = new controllerClass();
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <?php
+                        echo $insClass->pages_attendance_controller(0, 10, $_SESSION['role_sk'], $_SESSION['code_sk']);
+                        ?>
+                    </div>
                 </div>
 
-            </div>
+            <?php endif; ?>
+        </div> -->
 
-        </div>
 
         <!-- formulario -->
-        <div class="col-6 col-sm-12">
-
+        <div class="col-12 col-sm-12">
             <div class="info-stats4">
-                
-            
                 <form action="ajax/adminAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
-                <div class="header-class">
-                <h1 class="title">Información General</h1>
-                </div>
+                    <div class="header-class">
+                        <h1 class="title">Información General</h1>
+                    </div>
 
 
                     <div class="row g-3">

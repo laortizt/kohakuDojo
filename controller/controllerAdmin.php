@@ -203,8 +203,10 @@
             return $row['nInstructors'];
         }
 
+        public function search_users_controller(){
+           
+        }
         
-
         public function list_state_controller($userCurrentState) {
             $states = modelAdmin::list_state_model();
 
@@ -364,7 +366,7 @@
             }else{
                 $table.='
                     <tr>
-                        <td colspan="15"> No hay registros en el sistema</td>
+                        <td colspan="15"> No hay registros en esta página</td>
                     </tr>';
             }
             $table.='</tbody> </table> </div>';
@@ -536,10 +538,10 @@
                                 colors: ['transparent']
                             },
                             series: [{
-                                name: 'Clientes',
+                                name: 'Pagos',
                                 data: [44, 55, 57, 56, 65, 65, 70, 65, 60, 70, 75]
                             }, {
-                                name: 'Pagos',
+                                name: 'Clases',
                                 data: [35, 41, 36, 26, 70, 68, 70, 60, 55, 65, 70]
                             }],
                             xaxis: {
@@ -551,7 +553,7 @@
                             tooltip: {
                                 y: {
                                     formatter: function (val) {
-                                        return + val + ' thousands'
+                                        return + val 
                                     }
                                 }
                             },

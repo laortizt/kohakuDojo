@@ -23,7 +23,7 @@ class modelAdmin extends mainModel
         $datos = mainModel::connect()->query("SELECT * FROM documenttype");
         return $datos->fetchAll();
     }
-
+    
     protected function list_role_model() {
         //Obtiene los roles registrados
         $datos = mainModel::connect()->query("SELECT * FROM role");
@@ -142,5 +142,13 @@ class modelAdmin extends mainModel
         $sql->execute();
 
         return $sql->fetch();
+    }
+
+    protected function search_user_model() {
+        $conexion= mainModel::connect();
+
+        //Obtiene los géneros registrados
+        $datos = $conexion->query("SELECT * FROM accountDni, accountFirstName,accountLastName WHERE accounts like");
+        return $datos->fetchAll();
     }
 }   

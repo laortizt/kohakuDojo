@@ -3,8 +3,6 @@ require_once "./controller/controllerClass.php";
 $insAdmin = new controllerClass();
 ?>
 
-
-
     <div class="row">
         <div class="col-12 col-m-12 col-sm-12">
             <div class="card">

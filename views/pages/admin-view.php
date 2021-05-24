@@ -102,13 +102,16 @@ $insAdmin = new controllerAdmin();
 						require_once "./controller/controllerAdmin.php";
 						$insAdmin = new controllerAdmin();
 						?>
-
-						<form action="" class="formulario" method="post" form-data="default" form-data="default">
+						
+						
+						<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
 							<div>
-								<input type="text" name="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
+								<input type="text" name="search_user" id="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
 								<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fa bi bi-search"></i></button>
 							</div>
+							<div class="RespuestaAjax"></div>
 						</form>
+						
 					</div>
 
 
@@ -154,5 +157,6 @@ $insAdmin = new controllerAdmin();
 
 
 </div>
+
 
 <script defer src="<?php echo SERVERURL; ?>assets/script/admin.js"></script>

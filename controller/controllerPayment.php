@@ -13,7 +13,7 @@
         public function list_procedure_controller(){
             $Procedures = modelPayment::list_procedure_model();
 
-            $select = '<select id="procedure-newpay" class="input-field" name="procedure-newpay" required="">';
+            $select = '<select id="procedure-newpay" class="input-field-profile" name="procedure-newpay" required="">';
             
             foreach($Procedures as $procedure){
                 $select.='<option value="'.$procedure['idProcedures'].'" data-cost="'.$procedure['procedurePrice'].'">'
@@ -31,7 +31,7 @@
             $dni= mainModel::clean_string($_POST['dni-newpay']);
             $procedure= mainModel::clean_string($_POST['procedure-newpay']); 
             $price= mainModel::clean_string($_POST['price-newpay']);
-            $observation= mainModel::clean_string($_POST['observation-newpay']);
+          
             
             //reemplaza el $
             $price = str_replace('$', '', $price);
@@ -56,7 +56,6 @@
                     "Date"=>$date,
                     "Procedure"=>$procedure,
                     "Price"=>$price,
-                    "Observation"=>$observation,
                     "IdAccount"=>$idAccount
                 ];
 
@@ -67,7 +66,7 @@
                     $alert=[
                         "alert"=>"limpiar",
                         "title"=>"Guardar Pago",
-                        "text"=>"El pago se haguardado exitósamente.",
+                        "text"=>"El pago se ha guardado exitósamente.",
                         "type"=>"success"
                     ];
                 } else {
@@ -88,8 +87,8 @@
             $dni= mainModel::clean_string($_POST['dni-newpay']);
             $procedure= mainModel::clean_string($_POST['procedure-newpay']); 
             $price= mainModel::clean_string($_POST['price-newpay']);
-            $observation= mainModel::clean_string($_POST['observation-newpay']);
-            $idPayments= mainModel::clean_string($_POST['observation-newpay']);
+            
+            $idPayments= mainModel::clean_string($_POST['']);
             if (!isset($_SESSION) || !isset($_SESSION['role_sk']) || $_SESSION['role_sk'] != "Administrador") {
                 // Si no, informar del error
                 $alert=[ 
@@ -149,7 +148,7 @@
                     <td>Documento</td>
                     <td>Trámite</td>
                     <td>Valor</td>
-                    <td>Observaciones</td>
+                    
                     <td>Nombre</td>
                    
                 </thead>
@@ -165,7 +164,7 @@
                         <td>'.$rows['accountDni'].'</td>
                         <td>'.$rows['procedureName'].'</td>
                         <td>'.$rows['paymentPrice'].'</td>
-                        <td>'.$rows['paymentObservation'].'</td>
+                       
                         <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
 
                        
@@ -181,6 +180,69 @@
             $table.='</tbody> </table> </div>';
 
             return $table;
+        }
+        public function get_users_by_month_chart() {
+            // Traer la data que se quiere mostrar
+
+            // Trnasformar esa data en el areglo que requiere la interfaz
+
+            // Reemplazar en la cadena del resultado
+
+            return "
+                <script>
+                $(document).ready(function() {
+                    // Client Recollection Chart JS
+                    if(document.getElementById('client-recollection-chart')){
+                        var options = {
+                            chart: {
+                                height: 332,
+                                type: 'bar',
+                            },
+                            plotOptions: {
+                                bar: {
+                                    horizontal: false,
+                                    columnWidth: '30%',
+                                    endingShape: 'rounded'	
+                                },
+                            },
+                            dataLabels: {
+                                enabled: false
+                            },
+                            colors: ['#343434', '#ff0000'],
+                            stroke: {
+                                show: true,
+                                width: 3,
+                                colors: ['transparent']
+                            },
+                            series: [{
+                                name: 'Pagos',
+                                data: [44, 55, 57, 56, 65, 65, 70, 65, 60, 70, 75]
+                            }, {
+                                name: 'Clases',
+                                data: [35, 41, 36, 26, 70, 68, 70, 60, 55, 65, 70]
+                            }],
+                            xaxis: {
+                                categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                            },
+                            fill: {
+                                opacity: 1
+                            },
+                            tooltip: {
+                                y: {
+                                    formatter: function (val) {
+                                        return + val 
+                                    }
+                                }
+                            },
+                        }
+                        var chart = new ApexCharts(
+                            document.querySelector('#client-recollection-chart'),
+                            options
+                        );
+                        chart.render();
+                    }
+                });
+                </script>";
         }
     }
    
