@@ -32,15 +32,41 @@
             return $select;
         }
 
-        public function list_events_controller(){
-            $Events = modelclass::list_events_model();
+        // public function list_events_controller(){
+        //     $Events = modelclass::list_events_model();
+
+        //     $select = '<select id="select-event" class="input-field-profile" name="select-event" required="">';
+            
+        //     foreach($Events as $events){
+        //         $select.='<option value="'.$events['idEvents'].'" data-cost="'.$events['eventsPrice'].'">'
+        //             .$events['eventsName'].
+        //             '</option>';
+        //     }
+
+        //     $select.='</select>';
+
+        //     return $select;
+        // }
+
+        public function list_events_controller($userCurrentEvent){
+            $events = modelClass::list_events_model();
 
             $select = '<select id="select-event" class="input-field-profile" name="select-event" required="">';
             
-            foreach($Events as $events){
-                $select.='<option value="'.$events['idEvents'].'" data-cost="'.$events['eventsPrice'].'">'
-                    .$events['eventsName'].
-                    '</option>';
+            foreach($events as $event){
+                if ($event['idEvents'] == $userCurrentEvent) {
+                    $select.='
+                        <option value="'.$event['idEvents'].'" selected="" data-cost="'.$event['eventsPrice'].'">'
+                        .$event['eventsName'].
+                        '</option>
+                    ';
+                } else {
+                    $select.='
+                        <option value="'.$event['idEvents'].'" data-cost="'.$event['eventsPrice'].'">'
+                        .$event['eventsName'].
+                        '</option>
+                    ';
+                }
             }
 
             $select.='</select>';
@@ -239,17 +265,13 @@
                         <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
                         <td>'.$rows['classTopic'].'</td>
                         <td>'.$rows['eventsName'].'</td>
-                        <td>'.$rows['classPrice'].'</td>
+                        <td>'.'$'.$rows['classPrice'].'</td>
                         <td>'.$rows['classDate'].'</td>
                         <td>'.$rows['classTimeInit'].'</td>
                         <td>'.$rows['classTimeEnd'].'</td>
-                        <td>
-                        <a href="'.SERVERURL.'editClass?c='.mainModel::encryption($rows['idClass']).'" type="submit" class="btn-edit">
-                        <i class="bi bi-pencil-square"></i>
-                        </a>
-                        </td>
+                       
                       
-                        <div class="RespuestaAjax"></div>
+                       
                       
                         <td>
                             <form action="'.SERVERURL.'ajax/classAjax.php" method="POST" class="formulario-ajax" data-form="delete" enctype="multipart/form-data">
@@ -260,6 +282,13 @@
                                 <div class="RespuestaAjax"></div>
                             </form>
                         </td>
+                        
+                        <td>
+                        <a href="'.SERVERURL.'editClass?c='.mainModel::encryption($rows['idClass']).'" type="submit" class="btn-edit">
+                        <i class="bi bi-pencil-square"></i>
+                        </a>
+                        </td>
+                        <div class="RespuestaAjax"></div>
                     ';
                     $count++;
                 }
@@ -339,42 +368,69 @@
                 </script>";
         }
 
-        public function update_class_controller(){
-            $teacher= mainModel::clean_string($_POST['select-instructor']); 
-            $topic= mainModel::clean_string($_POST['classTopic']);
-            $event= mainModel::clean_string($_POST['select-event']);
-            $price= mainModel::clean_string($_POST['eventsPrice']);
-            $date= mainModel::clean_string($_POST['classDate']);
-            $timeInit= mainModel::clean_string($_POST['classTimeInit']);
-            $timeEnd= mainModel::clean_string($_POST['classTimeEnd']);
+        public function update_class_controller() {
+            $idClass = mainModel::decryption($_POST['userToEdit']);
+            $idClass = mainModel::clean_string($idClass);  
+            
 
-
-            $idClass= mainModel::clean_string($_POST['']);
+            // Verificar si el usuario actual es Admin
             if (!isset($_SESSION) || !isset($_SESSION['role_sk']) || $_SESSION['role_sk'] != "Administrador") {
                 // Si no, informar del error
                 $alert=[ 
                     "alert"=>"simple",
                     "title"=>"No autorizado",
-                    "text"=>"No tiene permisos para editar pagos.",
+                    "text"=>"No tiene permisos para borrar Clases.",
                     "type"=>"error"
                 ];
-            } else {    
-                $classById=modelclass::find_Class($idClass);
+            } else {
+                // Buscar si existe
+                $class = modelClass::get_class_model($idClass);
 
-                if(count($classById) != 1 || $classById[0]['$idClass'] != $_SESSION['code_sk']) {
-                    // Si no coincide, error
+                // Si existe
+                if (isset($class['idClass'])) {        
+                    // Construir el objeto que se envía al modelo
+                    // El modelo espera todas las propiedades, por lo que se envian las actuales
+                    $data = [
+                        "Teacher" => $class['classTeacher'],
+                        "Topic" => $class['classTopic'],
+                        "Event" => $class['classEvents'],
+                        "Price" => $class['classPrice'],
+                        "Date" =>  $class['classDate'],
+                        "timeInit" => $class['classTimeInit'],
+                        "timeEnd" => $class['classTimeEnd'],
+                        
+                    ];
+
+                    // LLamar al modelo
+                    $saveClass = modelClass::update_class_model($data);
+
+                    // Verificar respuesta del modelo y construir la respuesta para la vista
+                    if($saveClass->rowCount() == 1){
+                        $alert=[
+                            "alert"=>"limpiar",
+                            "title"=>"Actualizar clase",
+                            "text"=>"Se ha actualizado la clase exitósamente.",
+                            "type"=>"success"
+                        ];
+                    } else {
+                        $alert=[
+                            "alert"=>"simple",
+                            "title"=>"Actualizar clase",
+                            "text"=>"No se pudo actualizar la clase, verifique los campos estén diligenciados.",
+                            "type"=>"error"
+                        ];
+                    }
+                } else {
                     $alert=[
                         "alert"=>"simple",
-                        "title"=>"Ocurrio un error inesperado",
-                        "text"=>"Pa no encontrado",
+                        "title"=>"Actualizar clase",
+                        "text"=>"No se pudo actualizar la clase, verifique los campos estén diligenciados.",
                         "type"=>"error"
-                    ];  
-                }else{
-                    $a = 2;
+                    ];
                 }
-            }
 
-            return mainModel::sweet_alert($alert);
+                return mainModel::sweet_alert($alert);
+            }
         }
 
         public function delete_class_controller() {
@@ -436,5 +492,32 @@
             }
 
             return mainModel::sweet_alert($alert);
+        }
+        public function get_class_controller(){
+            $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $parts = parse_url($url);
+            parse_str($parts['query'], $query);
+            $idClass = $query['c'];
+            
+            // Desencriptar y Limpiar el código
+            $idClass=mainModel::decryption($idClass);
+            $idClass=mainModel::clean_string($idClass);
+
+            $class = modelClass::get_class_model($idClass);
+            return $class;
+        }
+
+        public function class_teacher_controller(){
+            $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $parts = parse_url($url);
+            parse_str($parts['query'], $query);
+            $idClass = $query['c'];
+            
+            // Desencriptar y Limpiar el código
+            $idClass=mainModel::decryption($idClass);
+            $idClass=mainModel::clean_string($idClass);
+
+            $class = modelClass::get_class_model($idClass);
+            return $class;
         }
     }

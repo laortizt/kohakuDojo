@@ -75,8 +75,6 @@ $insPayment = new controllerPayment();
 </div>
 
 
-
-
 <script defer src="<?php echo SERVERURL; ?>assets/script/adminClass.js"></script>
 
 
@@ -84,8 +82,9 @@ $insPayment = new controllerPayment();
 	<div class="col-12 col-m-12 col-sm-12">
 		<div class="card">
 			<div class="card-content">
-				<h1 class="title">Gestión de Pagos</h1>
+				
 				<div class="header-class">
+				<h1 class="title">Gestión de Pagos</h1>
 
 
 					<div class="barra__buscador">
@@ -98,25 +97,39 @@ $insPayment = new controllerPayment();
 						</form>
 					</div>
 
-					<?php include "./views/modules/menuPayments.php"; ?>
+					
 				</div>
 				<!-- DESDE AQUI -->
 
 
-
 				<?php
-				$pages = explode("/", $_GET['page']);
+				$pageNumber = 1;
+
+				if (isset($_GET)) {
+					$pages = explode("/", $_GET['page']);
+					if (count($pages) >= 3) {
+						$p = intval($pages[2]);
+						if ($p > 1) {
+							$pageNumber = $p;
+						}
+					}
+				}
 
 				echo $insPayment->pages_payment_controller(0, 10, $_SESSION['role_sk'], 'code');
 				?>
+				<nav class="text-center">
+					<ul class="pagination pagination-sm">
+						<li class="disabled"><a href="javascript:void(0)">«</a></li>
+						<li class="active"><a href="<?php echo SERVERURL; ?>payments/page/1">1</a></li>
+						<li><a href="<?php echo SERVERURL; ?>payments/page/2">2</a></li>
+						<li><a href="<?php echo SERVERURL; ?>payments/page/3">3</a></li>
+						<li><a href="<?php echo SERVERURL; ?>payments/page/4">4</a></li>
+						<li><a href="<?php echo SERVERURL; ?>payments/page/5">5</a></li>
+						<li><a href="javascript:void(0)">»</a></li>
+					</ul>
+				</nav>
 			</div>
 			<!-- DIVS  -->
-
-
-
 		</div>
-
 	</div>
-
-
 </div>

@@ -163,7 +163,7 @@
                         <td>'.$rows['paymentDate'].'</td>
                         <td>'.$rows['accountDni'].'</td>
                         <td>'.$rows['procedureName'].'</td>
-                        <td>'.$rows['paymentPrice'].'</td>
+                        <td>'.'$'.$rows['paymentPrice'].'</td>
                        
                         <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
 

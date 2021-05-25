@@ -1,6 +1,12 @@
 $(document).ready(function () {
     function updateCost() {
-        var cost = $('#select-event option:selected').data('cost');
+        var option = $('#select-event option:selected');
+
+        if (!option) {
+            option = $('#select-event option').first();
+        }
+
+        var cost = option.data('cost');
 
         if (cost || cost == 0) {
             $('#eventsPrice').val('$' + cost);
@@ -8,6 +14,7 @@ $(document).ready(function () {
     }
 
     $('#select-event').change(function(e) {
+        console.log('Reacting to change');
         updateCost();
     });
 

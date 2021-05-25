@@ -6,7 +6,7 @@ $insProgress = new controllerProgress();
 
 <!-- <?php include "./views/modules/menuProgress.php"; ?> -->
 
-<div class="container-report">
+<!-- <div class="container-report">
 	<div class="row-gutters">
 		<div class="col-3 col-sm-6">
 			<div class="info-stats4">
@@ -14,7 +14,7 @@ $insProgress = new controllerProgress();
 					<i class="fas fa-user-friends"></i>
 				</div>
 				<div class="sale-num">
-					<h3><?php echo $insProgress->count_students()?></h3>
+					<h3><?php echo $insProgress->count_students() ?></h3>
 					<p></p>
 				</div>
 			</div>
@@ -54,15 +54,91 @@ $insProgress = new controllerProgress();
 		</div>
 	</div>
 
-</div>
+</div> -->
 
+
+
+
+<?php
+require_once "./controller/controllerClass.php";
+$insClass = new controllerClass();
+?>
+
+
+
+
+<div class="container-fluid">
+	<div class="row-gutters">
+
+		
+
+		<!-- formulario -->
+		<div class="col-6 col-sm-12">
+
+			<div class="info-stats4">
+
+				<form action="ajax/classAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
+					<div class="header-class">
+						<h1 class="title">Registrar Progreso</h1>
+					</div>
+					
+					<div class="row g-3">
+						<div class="col-6">
+							<label class="label-form">Fecha</label>
+							<div class="input-field-profile">
+								<input type="date" name="classDate" required="">
+							</div>
+						</div>
+						<div class="col-6">
+							<label class="label-form">Documento</label>
+							<div class="input-field-profile">
+								<input type="text" name="classTopic" required="">
+							</div>
+						</div>
+
+						<div class="col-6">
+							<label class="label-form">Nombre</label>
+							<div class="input-field-profile">
+								<input type="text" name="classTopic" required="">
+							</div>
+						</div>
+						
+
+						<div class="col-6">
+							<label class="label-form">Grado</label>
+							<div class="input-field-profile">
+								<input type="text" readonly value="" id="eventsPrice" name="eventsPrice" required="">
+							</div>
+						</div>
+
+						<div class="col-6">
+							<label class="label-form">Estado</label>
+							<div class="input-field-profile">
+								<input type="text" readonly value="" id="eventsPrice" name="eventsPrice" required="">
+							</div>
+						</div>
+
+			
+					</div>
+
+					<input type="submit" class="btn-kohaku-profile" value="Guardar" />
+
+					<div class="RespuestaAjax"></div>
+				</form>
+			</div>
+		</div>
+
+
+	</div>
+</div>
 <div class="row privileges">
     <div class="col-12 col-m-12 col-sm-12">
         <div class="card">
             <div class="card-content">
-			<h1 class="title">Listado Ascensos</h1>
+			
                 <div class="header-class">
-				<div class="barra__buscador">
+					<h1 class="title">Listado Ascensos</h1>
+					<div class="barra__buscador">
 
 					<form action="" class="formulario" method="post" form-data="default" form-data="default">
 						<div>
@@ -72,20 +148,22 @@ $insProgress = new controllerProgress();
 					</form>
 					</div>
 
-                    <?php include "./views/modules/menuProgress.php"; ?>
+                 
                 </div>
 
                 <div>
 
-                
                     <?php
-                    $pages = explode("/", $_GET['page']);
+					$pages = explode("/", $_GET['page']);
 
-                    echo $insProgress->pages_progress_controller(0, 10, $_SESSION['role_sk'], 'code');
-                    ?>
+					echo $insProgress->pages_progress_controller(0, 10, $_SESSION['role_sk'], 'code');
+					?>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+
+
+<script defer src="<?php echo SERVERURL; ?>assets/script/adminClass.js"></script>

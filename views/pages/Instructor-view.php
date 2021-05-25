@@ -73,121 +73,71 @@ $insAdmin = new controllerAdmin();
 </div>
 
 <div class="container-fluid">
-    <div class="row-gutters">
-        <div class="col-6 col-sm-12">
-            <div class="info-stats4">
-				<table>
-					<thead>
+	<div class="row-gutters">
+		<div class="col-12 col-m-12 col-sm-12">
+			<div class="card">
+				<div class="card-content">
 
-					<th>tema de clase</th>
-					<th>Fecha Inicio</th>
-					<th>Fecha Fin</th>
-					<th>Instructor</th>
-					<th>Detalles</th>
-					</thead>
+					<div class="header-class">
+						<h1 class="title">Clases Programadas</h1>
 
-					<tbody>
-						<td>Taller de Armas</td>
-						<td>Armas</td>
-						<td>Armas</td>
-						<td>Alejandro</td>
-						<td>Nivel avanzado</td>
-						
-					</tbody>
-					<tbody>
-						<td>Taller de Armas</td>
-						<td>Armas</td>
-						<td>Armas</td>
-						<td>Alejandro</td>
-						<td>Nivel avanzado</td>
-						
-					</tbody>
-					<tbody>
-						<td>Taller de Armas</td>
-						<td>Armas</td>
-						<td>Armas</td>
-						<td>Alejandro</td>
-						<td>Nivel avanzado</td>
-						
-					</tbody>
-					<tbody>
-						<td>Taller de Armas</td>
-						<td>Armas</td>
-						<td>Armas</td>
-						<td>Alejandro</td>
-						<td>Nivel avanzado</td>
-						
-					</tbody>
-					<tbody>
-						<td>Taller de Armas</td>
-						<td>Armas</td>
-						<td>Armas</td>
-						<td>Alejandro</td>
-						<td>Nivel avanzado</td>
-						
-					</tbody>
-					<tbody>
-						<td>Taller de Armas</td>
-						<td>Armas</td>
-						<td>Armas</td>
-						<td>Alejandro</td>
-						<td>Nivel avanzado</td>
-						
-					</tbody>
-					
-				</table>
-            </div>
-        </div>
-
-        <!-- formulario -->
-        <div class="col-6 col-sm-12">
-
-            <div class="info-stats4">
-
-                <form action="ajax/classAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
+						<div class="barra__buscador">
+							<?php
+							require_once "./controller/controllerClass.php";
+							$insClass = new controllerClass();
+							?>
 
 
-                    <div class="row g-3">
-						<h1>Crear Clase</h1>
-                        <div class="col-12">
-							 <label class="label">Tema de clase</label>
-								<div class="input-field-profile">
-									<input type="text">
+							<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
+								<div>
+									<input type="text" name="search_user" id="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
+									<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fa bi bi-search"></i></button>
 								</div>
-                        </div>
+								<div class="RespuestaAjax"></div>
+							</form>
 
-                        <div class="col-6">
+						</div>
 
-                            <label class="label">Fecha inicio</label>
-							<div class="input-field-profile">
-								<input type="date">
-                            </div>
-                        </div>
 
-                        <div class="col-6">
-                            <label class="label">Feha Fin</label>
-                            <div class="input-field-profile">
-								<input type="date">
-                            </div>
-                        </div>
+					</div>
+					<!-- DESDE AQUI -->
 
-                        <div class="col-12">
-                            <label class="label">Detalles</label>
-                            <div class="input-field-profile">
-								<input type="text">
-                            </div>
-                        </div>
-                        
-                    </div>
 
-                    <input type="submit" class="btn-kohaku-profile" value="Guardar" />
+					<?php
+					$pageNumber = 1;
 
-                    <div class="RespuestaAjax"></div>
-                </form>
+					if (isset($_GET)) {
+						$pages = explode("/", $_GET['page']);
+						if (count($pages) >= 3) {
+							$p = intval($pages[2]);
+							if ($p > 1) {
+								$pageNumber = $p;
+							}
+						}
+					}
 
-            </div>
-        </div>
+					echo $insClass->pages_attendance_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk']);
+					?>
 
-    </div>
+					<nav class="text-center">
+						<ul class="pagination pagination-sm">
+							<li class="disabled"><a href="javascript:void(0)">«</a></li>
+							<li class="active"><a href="<?php echo SERVERURL; ?>class/page/1">1</a></li>
+							<li><a href="<?php echo SERVERURL; ?>class/page/2">2</a></li>
+							<li><a href="<?php echo SERVERURL; ?>class/page/3">3</a></li>
+							<li><a href="<?php echo SERVERURL; ?>class/page/4">4</a></li>
+							<li><a href="<?php echo SERVERURL; ?>class/page/5">5</a></li>
+							<li><a href="javascript:void(0)">»</a></li>
+						</ul>
+					</nav>
+				</div>
+				<!-- DIVS  -->
+			</div>
+		</div>
+
+		<!-- formulario -->
+		
+
+	</div>
 
 </div>

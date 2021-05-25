@@ -9,8 +9,8 @@ $insProfile = new controllerAdmin();
         <?php
         $profile = $insProfile->get_user_admin_controller();
         ?>
-<!-- 
-        <div class="col-6 col-sm-12">
+
+        <!-- <div class="col-6 col-sm-12">
             <?php if ($profile['accountRole'] == 2) : ?>
                 <div class="info-stats4 attendance-list">
                     <div class="header-class">
@@ -55,7 +55,7 @@ $insProfile = new controllerAdmin();
 
 
         <!-- formulario -->
-        <div class="col-12 col-sm-12">
+        <div class="col-6 col-sm-12">
             <div class="info-stats4">
                 <form action="ajax/adminAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
                     <div class="header-class">

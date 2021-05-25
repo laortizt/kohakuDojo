@@ -23,7 +23,7 @@
             $datos = mainModel::connect()->query("SELECT * FROM events");
             return $datos->fetchAll();
         }
-
+       
         public function update_class_model($datos) {
             $sql=mainModel::connect()->prepare("UPDATE class  
                 SET classTeacher:Teacher, classTopic:Topic, classEvents:Events, classPrice:Price, classDate:Date, classTimeInit:TimeInit, classTimeEnd:TimeEnd,
@@ -77,16 +77,23 @@
             return $datos->fetchAll();
         }
 
-        public function get_class_model($code) {
-            $sql= mainModel::connect()->prepare("SELECT a.idAccount, a.accountCode, a.accountEmail, 
-                a.accountDocumentType, a.accountDni, a.accountFirstName, a.accountLastName,
-                a.accountAddress, a.accountPhone, a.accountGenre, a.accountRole, a.accountState, 
-                dt.nameDocumentType, g.nameGenre
-                FROM accounts a
-                JOIN documenttype dt ON (a.accountDocumentType = dt.idDocumentType)
-                JOIN genre g ON (a.accountGenre = g.idGenre)
-                WHERE a.accountCode=:code");
-            $sql->bindParam(':code', $code);
+        public function get_class_model($idClass) {
+            $sql= mainModel::connect()->prepare("SELECT SQL_CALC_FOUND_ROWS c.*, e.*, a.accountFirstName, a.accountLastName FROM class c
+            LEFT JOIN events e ON (c.classEvents = e.idEvents)
+            LEFT JOIN accounts a ON (c.classTeacher = a.idAccount)
+               WHERE idClass=:idClass");
+            $sql->bindParam(':idClass', $idClass);
+            $sql->execute();
+    
+            return $sql->fetch();
+        }
+
+        public function class_teacher_model($idTeacherAccount) {
+            $sql= mainModel::connect()->prepare("SELECT SQL_CALC_FOUND_ROWS c.*, e.*, a.accountFirstName, a.accountLastName FROM class c
+            LEFT JOIN events e ON (c.classEvents = e.idEvents)
+            LEFT JOIN accounts a ON (c.classTeacher = a.idAccount)
+               WHERE c.classTeacher=:idTeacherAccount");
+            $sql->bindParam(':idTeacherAccount', $idTeacherAccount);
             $sql->execute();
     
             return $sql->fetch();
