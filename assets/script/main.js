@@ -31,6 +31,7 @@ $(document).ready(function() {
             showCancelButton: true,   
             cancelButtonText: "Cancelar",
             confirmButtonText: "Aceptar",
+            reverseButtons: true
         }).then(function () {
             $.ajax({
                 type: metodo,

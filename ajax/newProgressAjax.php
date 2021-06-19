@@ -30,7 +30,8 @@ if (isset($_POST['dni-progress'])) {
                 type: "Alert",
                 showCancelButton: true,     
                 confirmButtonText: "Aceptar",
-                cancelButtonText: "Cancelar"
+                cancelButtonText: "Cancelar",
+                reverseButtons: true
             }).then(function(){
                 window.location.href="' . SERVERURL . 'newProgress"
             });

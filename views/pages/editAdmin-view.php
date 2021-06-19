@@ -4,66 +4,114 @@ $insProfile = new controllerAdmin();
 
 ?>
 
+<?php
+$profile = $insProfile->get_user_admin_controller();
+?>
+<div class="welcome-area">
+    <div class="row m-0 align-items-center welcome-container">
+        <div class="col-lg-5 col-md-12 p-0">
+            <div class="welcome-content">
+                <div class="header-class">
+                    <h2 class="title-banner " >Editar usuario</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7 col-md-12 p-0">
+            <div class="welcome-img">
+                <img src="assets/img/bantemplo.png" alt="image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- divs -->
 <div class="container-fluid">
     <div class="row-gutters">
-        <?php
-        $profile = $insProfile->get_user_admin_controller();
-        ?>
+        <div class="col-6 col-sm-12 ">
+            <div class="container-fluid">
+                <div class="row-gutters">
 
-        <!-- <div class="col-6 col-sm-12">
-            <?php if ($profile['accountRole'] == 2) : ?>
-                <div class="info-stats4 attendance-list">
-                    <div class="header-class">
-                        <h1 class="title">Clases Impartidas</h1>
+                    <div class="col-6">
+                        <div class="info-stats4">
 
-                        <div class="barra__buscador">
-                            <?php
-                            require_once "./controller/controllerClass.php";
-                            $insClass = new controllerClass();
-                            ?>
+                            <div class="info-icon info-icon-color1">
+                                <i class="bi bi-clock-history"></i>
+                            </div>
+                            <div class="sale-num">
+                                <h3>6</h3>
+                                <p>Clases Restantes</p>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <?php
-                        echo $insClass->pages_attendance_controller(0, 10, $_SESSION['role_sk'], $_SESSION['code_sk']);
-                        ?>
-                    </div>
-                </div>
-            <?php elseif ($profile['accountRole'] == 3) : ?>
-                <div class="info-stats4 attendance-list">
-                    <div class="header-class">
-                        <h1 class="title">Asistencia de Clases</h1>
-
-                        <div class="barra__buscador">
-                            <?php
-                            require_once "./controller/controllerClass.php";
-                            $insClass = new controllerClass();
-                            ?>
+                    <div class="col-6">
+                        <div class="info-stats4">
+                            <div class="info-icon info-icon-color2">
+                                <i class="fa bi bi-calendar-check"></i>
+                            </div>
+                            <div class="sale-num">
+                                <h3>40</h3>
+                                <p>Clases Asistidas</p>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <?php
-                        echo $insClass->pages_attendance_controller(0, 10, $_SESSION['role_sk'], $_SESSION['code_sk']);
-                        ?>
+                    <div class="col-6">
+                        <div class="info-stats4">
+                            <div class="info-icon info-icon-color3">
+                                <i class="fa bi bi-clipboard-data"></i>
+                            </div>
+                            <div class="sale-num">
+                                <!-- <h3><?php echo $Admin['nameMenkyo'] ?></h3> -->
+                                <h3>Mukyu</h3>
+                                <p>Grado</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="info-stats4">
+                            <div class="info-icon info-icon-color4">
+                                <i class="fas  fa-tasks"></i>
+                            </div>
+                            <div class="sale-num">
+                                <h3>Premium</h3>
+                                <p>Plan</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="info-stats4">
+                            <div class="info-icon info-icon-color1">
+                                <i class="bi bi-clock-history"></i>
+                            </div>
+                            <div class="sale-num">
+                                <h3>6</h3>
+                                <p>Clases Restantes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="info-stats4">
+                            <div class="info-icon info-icon-color2">
+                                <i class="fa bi bi-calendar-check"></i>
+                            </div>
+                            <div class="sale-num">
+                                <h3>40</h3>
+                                <p>Clases Asistidas</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div> 
+        </div>
 
-            <?php endif; ?>
-        </div> -->
 
-
-        <!-- formulario -->
+<!-- formulario -->
         <div class="col-6 col-sm-12">
             <div class="info-stats4">
                 <form action="ajax/adminAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
-                    <div class="header-class">
-                        <h1 class="title">Información General</h1>
-                    </div>
 
 
-                    <div class="row g-3">
+                    <div class="row g-6">
                         <input type="hidden" value="<?php echo $insProfile->encryption($profile['accountCode']) ?>" name="userToEdit">
 
                         <div class="col-6">
@@ -148,8 +196,8 @@ $insProfile = new controllerAdmin();
 
                         <input type="submit" class="btn-action-save" value="Guardar" />
                         <!-- <a href="<?php echo SERVERURL; ?>admin" class="btn-action-delete  ">
-                            <span>Cancelar</span>
-                        </a> -->
+                                    <span>Cancelar</span>
+                                </a> -->
 
 
                     </div>
@@ -159,7 +207,5 @@ $insProfile = new controllerAdmin();
 
             </div>
         </div>
-
     </div>
-
 </div>

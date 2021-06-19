@@ -6,7 +6,7 @@ require_once "../config/ConfigGeneral.php";
 
 //Condicion para comprobar si se reciben los datos del formulario
 if(isset($_POST['Dni']) || isset($_POST['idAccount'])){
-    require_once"../controller/controllerAdmin.php";
+    require_once "../controller/controllerAdmin.php";
     $insAdmin= new controllerAdmin();
 
     if(isset($_POST['Dni'])&& 
@@ -23,14 +23,14 @@ if(isset($_POST['Dni']) || isset($_POST['idAccount'])){
 } else if (isset($_POST['userToDelete'])) {
     session_start(['name'=>'SK']);
 
-    require_once"../controller/controllerAdmin.php";
+    require_once "../controller/controllerAdmin.php";
     $insAdmin= new controllerAdmin();
 
     echo $insAdmin->delete_user_controller();
     
 } else if (isset($_POST['userToEdit'])){
     session_start(['name'=>'SK']);
-    require_once"../controller/controllerAdmin.php";
+    require_once "../controller/controllerAdmin.php";
     $insAdmin= new controllerAdmin();
 
     echo $insAdmin->update_admin_controller();

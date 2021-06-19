@@ -5,7 +5,7 @@ require_once "../config/ConfigGeneral.php";
 
 //Condicion para comprobar si se reciben los datos del formulario
 if(isset($_POST['dni-profile'])){
-    require_once"../controller/controllerProfile.php";
+    require_once "../controller/controllerProfile.php";
 	$insProfile= new controllerProfile();
 
     if(isset($_POST['dni-profile'])&& 
@@ -26,7 +26,7 @@ if(isset($_POST['dni-profile'])){
                 showCancelButton: true,   
                 cancelButtonText: "Cancelar",
                 confirmButtonText: "Aceptar",
-                
+                reverseButtons: true
             }).then(function(){
                 window.location.href="'.SERVERURL.'profile"
             });

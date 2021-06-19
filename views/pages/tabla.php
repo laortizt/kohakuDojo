@@ -1,5 +1,5 @@
 <?php
-	require_once"./controller/controllerAdmin.php";
+	require_once "./controller/controllerAdmin.php";
     
 	$insProfile = new controllerAdmin();
 ?>

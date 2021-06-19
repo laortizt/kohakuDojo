@@ -109,10 +109,14 @@ $insClass = new controllerClass();
 							</div>
 						</div>
 
+						<?php
+							$today = date_create('now');
+						?>
+
 						<div class="col-6">
 							<label class="label-form">Fecha</label>
 							<div class="input-field-profile">
-								<input type="date" name="classDate" required="">
+								<input type="date" name="classDate" required="" min="<?= date_format($today, 'Y-m-d') ?>">
 							</div>
 						</div>
 

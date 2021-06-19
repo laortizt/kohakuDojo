@@ -3,21 +3,31 @@ require_once "./controller/controllerProfile.php";
 $insProfile = new controllerProfile();
 ?>
 
+<div class="welcome-area">
+    <div class="row m-0 align-items-center welcome-container">
+        <div class="col-lg-5 col-md-12 p-0">
+            <div class="welcome-content">
+                <div class="header-class">
+                    <h2 class="title-banner">Mi perfil</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7 col-md-12 p-0">
+            <div class="welcome-img">
+                <img src="assets/img/banPerfil.png" alt="image">
+            </div>
+        </div>
+    </div>
+</div>
 <!-- -------------------------------------------------------------------- -->
 <div class="container-fluid">
     <div class="row-gutters">
-        <div class="col-6 col-sm-12">
-            <div class="info-stats4">
-                <!-- <div class="header-class">
-                    <h1 class="title">Información General</h1>
-                </div> -->
-                <?php
-                $profile = $insProfile->get_profile_controller();
-                ?>
+        <div class="col-5 col-sm-12">
+            <?php
+            $profile = $insProfile->get_profile_controller();
+            ?>
 
-                <img src="<?php echo SERVERURL; ?>assets/img/fondo7.png" class="img-form" alt="" />
-
-            </div>
             <!-- divs -->
             <div class="container-fluid ">
                 <div class="row-gutters">
@@ -98,7 +108,7 @@ $insProfile = new controllerProfile();
 
 
         <!-- formulario -->
-        <div class="col-6 col-sm-12">
+        <div class="col-7 col-sm-12">
 
             <!-- <div class="info-stats4">
             </div> -->
@@ -109,7 +119,7 @@ $insProfile = new controllerProfile();
                     <!-- <div class="header-class">
                         <h1 class="title">Mi perfil</h1>
                     </div> -->
-                    <img src="<?php echo SERVERURL; ?>assets/img/fondo6.png" class="img-form" alt="" />
+
                     <div class="row g-3">
 
                         <div class="col-6">

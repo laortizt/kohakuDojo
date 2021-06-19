@@ -5,7 +5,7 @@ require_once "../config/ConfigGeneral.php";
 
 //Condicion para comprobar si se reciben los datos del calendario
 if(isset($_POST['classDate'])){
-    require_once"../controller/controllerClass.php";
+    require_once "../controller/controllerClass.php";
 	$insClass= new controllerClass();
 
     if(isset($_POST['select-instructor'])&& 
@@ -22,14 +22,14 @@ if(isset($_POST['classDate'])){
 } else if (isset($_POST['classToDelete'])) {
     session_start(['name'=>'SK']);
 
-    require_once"../controller/controllerClass.php";
+    require_once "../controller/controllerClass.php";
     $insClass= new controllerClass();
 
     echo $insClass->delete_class_controller();
     
 } else if (isset($_POST['classToEdit'])){
     session_start(['name'=>'SK']);
-    require_once"../controller/controllerClass.php";
+    require_once "../controller/controllerClass.php";
     $insClass= new controllerClass();
 
     echo $insClass->update_class_controller();

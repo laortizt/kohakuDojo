@@ -30,7 +30,8 @@ if (isset($_POST['dni-newpay'])) {
                 type: "Alert",
                 showCancelButton: true,   
                 cancelButtonText: "Cancelar",  
-                confirmButtonText: "Aceptar"
+                confirmButtonText: "Aceptar",
+                reverseButtons: true
             }).then(function(){
                 window.location.href="' . SERVERURL . 'payments"
             });

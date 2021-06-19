@@ -15,7 +15,8 @@
         confirmButtonColor: '#03A9F4',
         cancelButtonColor: '#F44336',
         confirmButtonText:'<i class="fas fa-check-circle"></i> Aceptar',
-        cancelButtonText: '<i class="far fa-times-circle"></i> Cancelar'
+        cancelButtonText: '<i class="far fa-times-circle"></i> Cancelar',
+        reverseButtons: true
       }).then(function() {
         $.ajax({
           url:'<?php echo SERVERURL; ?>ajax/loginAjax.php?token=' + token,

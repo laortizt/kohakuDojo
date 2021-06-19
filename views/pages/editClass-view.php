@@ -10,14 +10,18 @@ $insClass = new controllerClass();
         $class = $insClass->get_class_controller();
         ?>
 
-        <div class="col-6 col-sm-12">
-            <div class="info-stats4" class="info-stats4">
+      
+<div class="container-fluid">
+	<div class="row-gutters">
 
+        <!-- formulario -->
+        <div class="col-5 col-sm-12 p-0">
+            <div class="info-stats4">
+                 <img src="assets/img/japon2.png" alt="image" style="width: 100%;">
             </div>
         </div>
 
-        <!-- formulario -->
-        <div class="col-6 col-sm-12">
+        <div class="col-7 col-sm-12">
             <div class="info-stats4">
 
                 <form action="ajax/ClassAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
@@ -47,7 +51,7 @@ $insClass = new controllerClass();
 
                         <div class="col-6">
                             <label class="label-form">Tipo de Evento</label>
-                            <i class="fas fa-user"></i>
+                           
                             <?php echo $insClass->list_events_controller($class['classEvents']) ?>
                         </div>
 
@@ -59,13 +63,23 @@ $insClass = new controllerClass();
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <?php
+							$today = date_create('now');
+						?>
+
+						<div class="col-6">
+							<label class="label-form">Fecha</label>
+							<div class="input-field-profile">
+								<input type="date" name="classDate" required="" min="<?= date_format($today, 'Y-m-d') ?>">
+							</div>
+						</div>
+                        <!-- <div class="col-6">
                             <label class="label-form">Fecha</label>
                             <div class="input-field-profile">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <input type="date" value="<?php echo $class['classDate'] ?>" name="classDate" required="" />
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="col-6">
                             <label class="label-form">Hora Inicio</label>
@@ -99,8 +113,7 @@ $insClass = new controllerClass();
 
             </div>
         </div>
-
         
-    </div>
 
+    </div>
 </div>

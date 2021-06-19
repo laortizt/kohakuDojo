@@ -121,7 +121,8 @@
                         title: '".$datos['title']."',
                         text: '".$datos['text']."',
                         type: '".$datos['type']."',
-                        confirmButtonText: 'Aceptar'
+                        confirmButtonText: 'Aceptar',
+                        reverseButtons: true
                     }).then(function(){
                         if ($('.formulario-ajax').length > 0)
                             $('.formulario-ajax')[0].reset();
@@ -135,7 +136,8 @@
                         title: '".$datos['title']."',
                         text: '".$datos['text']."',
                         type: '".$datos['type']."',
-                        confirmButtonText: 'Aceptar'
+                        confirmButtonText: 'Aceptar',
+                        reverseButtons: true
                     }).then(function(){
                         if ($('.formulario-ajax').length > 0)
                             $('.formulario-ajax')[0].reset();

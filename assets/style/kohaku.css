@@ -99,8 +99,19 @@ body{
     align-self: flex-start;
 
     position: relative;
-    padding: 1.5rem;    
+    padding: 0.5rem;    
     border-bottom: 2px solid red;
+}
+.title-banner {
+  font-size: 2.2rem;
+  color: #625e5f;
+  /* margin-bottom: 24px; */
+  font-family: 'Anton', sans-serif;
+  align-self: flex-start;
+
+  position: relative;
+  padding: 0.5rem;    
+  border-bottom: 2px solid red;
 }
 /* ---botones  plantillas --- */
 
@@ -646,7 +657,7 @@ form .form-group .input__text{
       }
       
       .btn-action-save {
-        background-color: #a4a4ab;
+        background-color: red;
         background-size: 100% 100%;
         background-repeat: no-repeat;
         color: var(--black);
@@ -654,7 +665,7 @@ form .form-group .input__text{
         outline: none;
         border: none;
         border-radius: 19px;
-        color:black;
+        color:white;
         padding: 0.5rem 3rem;
         align-self: flex-end;
         margin-top:5px;
@@ -662,12 +673,13 @@ form .form-group .input__text{
       }
 
       .btn-action-save:hover{
-        background-color: red;
-        color: white
+     
+        background-color: #a4a4ab;
+        color: black
       }
 
       .btn-action-delete {
-        background-color: #a4a4ab;
+        background-color: #f74747;
         background-size: 100% 100%;
         background-repeat: no-repeat;
         color: var(--black);
@@ -683,12 +695,13 @@ form .form-group .input__text{
       }
 
       .btn-action-delete:hover{
-        background-color: #f74747;
+        
+        background-color: #a4a4ab;
         color: white
       }
 
       .btn-kohaku-profile {
-        background-color: #d2d2db;
+        background-color: red;
         background-size: 100% 100%;
         background-repeat: no-repeat;
         color: var(--black);
@@ -696,7 +709,7 @@ form .form-group .input__text{
         outline: none;
         border: none;
         border-radius: 19px;
-        color:black;
+        color:white;
         padding: 0.5rem 3rem;
         align-self: flex-end;
         margin-top:5px;
@@ -704,8 +717,9 @@ form .form-group .input__text{
       }
       
       .btn-kohaku-profile:hover{
-        background-color: red;
-        color: white
+       
+        background-color: #a4a4ab;
+        color: black
       }
       
       .btn-kohaku-profile:focus {
@@ -763,12 +777,20 @@ form .form-group .input__text{
   text-align: center;
 }
 .welcome-content h1 {
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 700;
+  text-align: center;
+}
+.welcome-content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  padding-top: 10px;
 }
 .welcome-content p {
   color: #646262;
   font-size: 18px;
+  text-align: center;
 }
 .welcome-container {
   flex-wrap: nowrap;
@@ -1228,5 +1250,8 @@ form .form-group .input__text{
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
+}
+.paisaje{
   width: 100%;
 }

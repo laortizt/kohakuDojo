@@ -21,6 +21,7 @@ $('.btn-logout').on('click', function (e){
     showCancelButton: true,
     cancelButtonText: "Cancelar",  
     confirmButtonText: "Aceptar",
+    reverseButtons: true
   }).then(function(){
     window.location.href="index.php"
   });

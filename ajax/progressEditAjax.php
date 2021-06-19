@@ -5,7 +5,7 @@ require_once "../config/ConfigGeneral.php";
 
 //Condicion para comprobar si se reciben los datos del formulario
 if(isset($_POST['dni-progress'])){
-    require_once"../controller/controllerProgress.php";
+    require_once "../controller/controllerProgress.php";
 	$insProgress= new controllerProgress();
 
     if(
@@ -30,7 +30,7 @@ if(isset($_POST['dni-progress'])){
                 showCancelButton: true, 
                 cancelButtonText: "Cancelar",    
                 confirmButtonText: "Aceptar",
-                
+                reverseButtons: true
             }).then(function(){
                 window.location.href="'.SERVERURL.'editProgress"
             });

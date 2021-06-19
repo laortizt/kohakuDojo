@@ -35,12 +35,23 @@ $insPayment = new controllerPayment();
 					</div>
 
 					<div class="payment">
+						<?php
+							$today = date_create('now');
+						?>
+
 						<div class="col-6">
+							<label class="label-form">Fecha</label>
+							<div class="input-field-profile">
+								<input type="date" name="classDate" required="" min="<?= date_format($today, 'Y-m-d') ?>">
+							</div>
+						</div>
+
+						<!-- <div class="col-6">
 							<label class="label">Fecha</label>
 							<div class="input-field-profile">
 								<input type="date" name="date-newpay" required="" />
 							</div>
-						</div>
+						</div> -->
 
 						<div class="col-6">
 							<label class="label">Documento</label>

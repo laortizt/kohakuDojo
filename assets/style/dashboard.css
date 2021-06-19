@@ -444,7 +444,8 @@ body {
 }
 
 [class*="col-"] {
-	padding: 10px;
+	/* padding: 10px; */
+	padding: 7px;
 }
 
 

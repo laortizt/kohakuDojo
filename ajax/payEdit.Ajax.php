@@ -5,7 +5,7 @@ require_once "../config/ConfigGeneral.php";
 
 //Condicion para comprobar si se reciben los datos del formulario
 if(isset($_POST['dni-profile'])){
-    require_once"../controller/controllerPayment.php";
+    require_once "../controller/controllerPayment.php";
 	$insPayment= new controllerPayment();
 
     //aqui van los datos de los inputs
@@ -30,7 +30,7 @@ if(isset($_POST['dni-profile'])){
                 showCancelButton: true,     
                 cancelButtonText: "Cancelar",
                 confirmButtonText: "Aceptar",
-                
+                reverseButtons: true
             }).then(function(){
                 window.location.href="'.SERVERURL.'payEdit"
             });

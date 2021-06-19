@@ -1,5 +1,5 @@
 <?php
-	require_once"./controller/controllerPayment.php";
+	require_once "./controller/controllerPayment.php";
 	$insPayment = new controllerPayment();
 ?>
 

@@ -6,7 +6,7 @@ require_once "../config/ConfigGeneral.php";
 
 //Condicion para comprobar si se reciben los datos del formulario
 if(isset($_POST['Dni'])){
-    require_once"../controller/controllerUser.php";
+    require_once "../controller/controllerUser.php";
     $insUser= new controllerUser();
 
     if(isset($_POST['Dni'])&& 

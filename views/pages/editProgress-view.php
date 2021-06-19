@@ -1,6 +1,6 @@
 <?php
-	require_once"./controller/controllerProgress.php";
-    require_once"./controller/controllerProfile.php";
+	require_once "./controller/controllerProgress.php";
+    require_once "./controller/controllerProfile.php";
     
 	$insProgress = new controllerProgress();
     $insProfile = new controllerProfile();
