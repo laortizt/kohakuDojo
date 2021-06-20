@@ -18,7 +18,7 @@ if(isset($_POST['Dni']) || isset($_POST['idAccount'])){
         echo $insAdmin->add_controller_Admin();
         
     if (isset($_POST['idAccount'])){
-        echo$insAdmin->add_controller_Admin();
+        echo $insAdmin->add_controller_Admin();
     }
 } else if (isset($_POST['userToDelete'])) {
     session_start(['name'=>'SK']);

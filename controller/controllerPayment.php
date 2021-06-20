@@ -32,15 +32,14 @@
             $procedure= mainModel::clean_string($_POST['procedure-newpay']); 
             $price= mainModel::clean_string($_POST['price-newpay']);
           
-            
             //reemplaza el $
             $price = str_replace('$', '', $price);
 
-            //AQUI se incluye el campo dni para registrar el pago al usuario.
-            $accountsByDni=modelPayment::find_dni($dni);
+            //validar dni
+            $paymentByDni=modelPayment::find_dni($dni);
 
-            if (count($accountsByDni) < 1 || 
-                $accountsByDni[0]['accountDni'] != $dni)
+            if (count($paymentByDni) < 1 || 
+                (count($paymentByDni) == 1 && $paymentByDni[0]['dni-newpay'] != $dni))
             {
                 $alert=[
                     "alert"=>"simple",
@@ -49,14 +48,15 @@
                     "type"=>"error"
                 ];
             } else {
-                $idAccount = $accountsByDni[0]['idAccount'];
+                // $idAccount = $paymentByDni[0]['idAccount'];
     
                 // Si todas se cumplen, llamar al modelo para que ejecute el cambio, enviando la info en un arreglo
                 $dataPayment = [
                     "Date"=>$date,
+                    "dni"=>$dni,
                     "Procedure"=>$procedure,
                     "Price"=>$price,
-                    "IdAccount"=>$idAccount
+                    // "IdAccount"=>$idAccount
                 ];
 
                 $savePayment = modelPayment::create_payment_model($dataPayment);
@@ -115,72 +115,7 @@
 
             return mainModel::sweet_alert($alert);
         }
-        
-        public function pages_payment_controller($pages, $register, $role, $code){
-            //Aqui que va?
-            $pages=mainModel::clean_string($pages);
-            $register=mainModel::clean_string($register);
-            $role=mainModel::clean_string($role);
-            $code=mainModel::clean_string($code);
 
-            $table="";
-
-            $page=(isset($page)&& $page>0) ? (int) $page : 1;
-            $start=($pages>0)? (($pages*$register)-$register) : 0;
-            $conexion= mainModel::connect();
-
-            //Calcula cúantos registros hay en la consutla
-            //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
-            $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM payments p
-                LEFT JOIN accounts a ON (p.paymentAccount = a.idAccount)
-                LEFT JOIN procedures pr ON (p.paymentProcedure = pr.idProcedures)
-                WHERE a.idAccount!='1' ORDER BY paymentDate DESC LIMIT $start, $register");
-            $datos=$datos->fetchAll();
-            $total=$conexion->query("SELECT found_rows()");
-            $total=(int) $total->fetchColumn();
-
-            //calcular el otal de páginas
-            $Npages= ceil($total/$register);
-            $table.='<div>
-            <table class="table table-hover thead-primary">
-                <thead> 
-                    <td>Fecha de pago</td>
-                    <td>Documento</td>
-                    <td>Trámite</td>
-                    <td>Valor</td>
-                    
-                    <td>Nombre</td>
-                   
-                </thead>
-                <tbody>
-            ';
-            
-            if($total>=1 && $pages<=$Npages){
-                $count=$start+1;
-                foreach($datos as $rows){
-                    $table.='
-                    <tr>
-                        <td>'.$rows['paymentDate'].'</td>
-                        <td>'.$rows['accountDni'].'</td>
-                        <td>'.$rows['procedureName'].'</td>
-                        <td>'.'$'.$rows['paymentPrice'].'</td>
-                       
-                        <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
-
-                       
-                    ';
-                    $count++;
-                }
-            }else{
-                $table.='
-                    <tr>
-                        <td colspan="15"> No hay registros en el sistema</td>
-                    </tr>';
-            }
-            $table.='</tbody> </table> </div>';
-
-            return $table;
-        }
         public function get_users_by_month_chart() {
             // Traer la data que se quiere mostrar
 
@@ -244,5 +179,121 @@
                 });
                 </script>";
         }
+
+        public function pages_payment_controller($pages, $register, $role,  $code,$search){
+            //Aqui que va?
+            $pages=mainModel::clean_string($pages);
+            $register=mainModel::clean_string($register);
+            $role=mainModel::clean_string($role);
+            $code=mainModel::clean_string($code);
+            $search = mainModel::clean_string($search);
+
+            $table="";
+            
+            if ($_SESSION && isset($_SESSION['searchPay'])) {
+                $clear_search = ($search == "");
+                $search = mainModel::clean_string($_SESSION['searchPay']);
+    
+                if ($clear_search && $_SESSION['searchPay'] !== "" ) {
+                    $_SESSION['searchPay'] = "";
+                }
+            }
+
+            $page=(isset($page)&& $page>0) ? (int) $page : 1;
+            $start=($pages>0)? (($pages*$register)-$register) : 0;
+            $pageurl = "payments/page";
+
+            
+            //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
+            if (isset($search) && $search != "") {
+                $consulta = "SELECT SQL_CALC_FOUND_ROWS * FROM payments p
+                INNER JOIN accounts a ON (p.paymentAccount = a.idAccount)
+                INNER JOIN procedures pr ON (p.paymentProcedure = pr.idProcedures) WHERE ((a.idAccount!='1')AND (a.accountFirstName like '%$search%' OR a.accountLastName like '%$search%' OR pr.procedureName like '%$search%'OR a.accountDni like '%$search%')) ORDER BY p.paymentDate DESC LIMIT $start, $register";
+            } else {
+                $consulta = "SELECT SQL_CALC_FOUND_ROWS * FROM payments p
+                INNER JOIN accounts a ON (p.paymentAccount = a.idAccount)
+                INNER JOIN procedures pr ON (p.paymentProcedure = pr.idProcedures)
+                WHERE a.idAccount!='1' ORDER BY paymentDate DESC LIMIT $start, $register";
+            }
+            $conexion = mainModel::connect();
+            $datos = $conexion->query($consulta);
+            $datos = $datos->fetchAll();
+
+             //Calcula cúantos registros hay en el conjunto de resultados
+            $total = $conexion->query("SELECT found_rows()");
+            $total = (int) $total->fetchColumn();
+
+            //calcular el otal de páginas
+            $Npages= ceil($total/$register);
+            $table.='<div>
+            <table class="table table-hover thead-primary">
+                <thead> 
+                    <td>Nombre</td>
+                    <td>Documento</td>
+                    <td>Fecha de pago</td>
+                    <td>Trámite</td>
+                    <td>Valor</td>
+                   
+                   
+                </thead>
+                <tbody>
+            ';
+            
+            if($total>=1 && $pages<=$Npages){
+                $count=$start+1;
+                foreach($datos as $rows){
+                    $table.='
+                    <tr>
+                        <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
+                        <td>'.$rows['accountDni'].'</td>
+                        <td>'.$rows['paymentDate'].'</td>
+                        <td>'.$rows['procedureName'].'</td>
+                        <td>'.'$'.$rows['paymentPrice'].'</td>
+                    ';
+                    $count++;
+                }
+            }else{
+                $table.='
+                    <tr>
+                        <td colspan="15"> No hay registros en esta página</td>
+                    </tr>';
+            }
+            $table.='</tbody> </table> </div>';
+             if($total>=1 && $pages<=$Npages) {
+            $table.='<nav class="text-center"><ul class="pagination pagination-sm">';
+
+            if($page == 1) {
+                $table.='<li class="disabled"><a>«</a></li>';
+            } else {
+                $table.='<li>
+                    <a href="'.SERVERURL.$pageurl.'/'.($pages-1).'/">«</a>
+                </li>';
+            }
+
+            for($i=1; $i<=$Npages; $i++) {
+                if($pages == $i) {
+                    $table.='<li class="active">
+                        <a>'.$i.'</a>
+                    </li>';
+                } else {
+                    $table.='<li><a href="'.SERVERURL.$pageurl.'/'.$i.'/">'.$i.'</a></li>';
+                }
+            }
+
+            if($page == $Npages) {
+                $table.='<li class="disabled"><a>»</a></li>';
+            } else {
+                $table.='<li>
+                    <a href="'.SERVERURL.$pageurl.'/'.($pages+1).'/">»</a>
+                </li>';
+            }
+
+            $table.='</ul></nav>';
+        }
+
+    
+            return $table;
+        }
+
     }
    

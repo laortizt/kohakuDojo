@@ -1,40 +1,47 @@
 <?php
-$petitionAjax=true;
 
+$petitionAjax=true;
 require_once "../config/ConfigGeneral.php";
 
-//Condicion para comprobar si se reciben los datos del calendario
-if(isset($_POST['classDate'])){
-    require_once "../controller/controllerClass.php";
-	$insClass= new controllerClass();
+require_once "../controller/controllerClass.php";
+$insClass= new controllerClass();
 
-    if(isset($_POST['select-instructor'])&& 
+// Condicion para comprobar si se reciben los datos de la clase
+if (isset($_POST['classToDelete'])) {
+    session_start(['name'=>'SK']);
+    echo $insClass->delete_class_controller();
+} else if (isset($_POST['classDate'])) {
+    session_start(['name'=>'SK']);
+
+    if (isset($_POST['select-instructor'])&& 
         isset($_POST['classTopic'])&&
+        isset($_POST['select-event'])&&
+        isset($_POST['eventsPrice'])&&
         isset($_POST['classDate']) &&
         isset($_POST['classTimeInit']) &&
         isset($_POST['classTimeEnd'])
     ){
-        echo $insClass->save_class();
-        //echo '<script>window.location.href="'.SERVERURL.'class"</script>';
-    } if (isset($_POST['idAccount'])){
-        echo$insAdmin->add_controller_Admin();
+        if (isset($_POST['classToEdit'])) {
+            echo $insClass->update_class_controller();
+        } else {
+            echo $insClass->save_class();
+        }
+    } else {
+        echo '<script>
+            swal({
+                title: "Guardar clase",
+                text: "No están todos los datos necesarios.",
+                type: "Alert",
+                showCancelButton: true,     
+                cancelButtonText: "Cancelar",
+                confirmButtonText: "Aceptar",
+                reverseButtons: true
+            }).then(function(){
+                window.location.reload()"
+            });
+        </script>';
     }
-} else if (isset($_POST['classToDelete'])) {
-    session_start(['name'=>'SK']);
-
-    require_once "../controller/controllerClass.php";
-    $insClass= new controllerClass();
-
-    echo $insClass->delete_class_controller();
-    
-} else if (isset($_POST['classToEdit'])){
-    session_start(['name'=>'SK']);
-    require_once "../controller/controllerClass.php";
-    $insClass= new controllerClass();
-
-    echo $insClass->update_class_controller();
-    
-}else{
+} else {
     //poner seguridad a la página
     session_start();
     session_destroy();

@@ -104,17 +104,33 @@
 
         //función para mostrar alertas
         protected function sweet_alert($datos){
-            if ($datos['alert']=="simple"){
+            if ($datos['alert']=="simple") {
                 $alert="
                 <script>
-                swal( 
-                    '".$datos['title']."',
-                    '".$datos['text']."',
-                    '".$datos['type']."',
-                    ); 
+                    swal({
+                        title: '".$datos['title']."',
+                        text: '".$datos['text']."',
+                        type: '".$datos['type']."',
+                        confirmButtonText: 'Aceptar',
+                        reverseButtons: true
+                    });
                 </script>
                 ";
-            }elseif($datos['alert']=="recargar"){
+            } elseif ($datos['alert']=="recargar") {
+                $alert="
+                <script>
+                    swal({
+                        title: '".$datos['title']."',
+                        text: '".$datos['text']."',
+                        type: '".$datos['type']."',
+                        confirmButtonText: 'Aceptar',
+                        reverseButtons: true
+                    }).then(function(){
+                        location.reload();
+                    });
+                </script>
+                ";
+            } elseif ($datos['alert']=="redireccion") {
                 $alert="
                 <script>
                     swal({ 
@@ -123,13 +139,14 @@
                         type: '".$datos['type']."',
                         confirmButtonText: 'Aceptar',
                         reverseButtons: true
-                    }).then(function(){
-                        if ($('.formulario-ajax').length > 0)
-                            $('.formulario-ajax')[0].reset();
-                    }); 
+                    }).then(function(){".
+                        (isset($datos['path']) && $datos['path']) ?
+                        "location.href = ".SERVERURL.$datos['path'] :
+                        "location.reload();"
+                    ."}); 
                 </script>
                 ";
-            }elseif($datos['alert']=="limpiar"){
+            } elseif ($datos['alert']=="limpiar") {
                 $alert="
                 <script>
                     swal({ 

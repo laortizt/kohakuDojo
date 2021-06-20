@@ -205,7 +205,7 @@ $insClass = new controllerClass();
 						}
 					}
 
-					echo $insClass->pages_class_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk']);
+					echo $insClass->pages_class_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'], "");
 				?>
 
 				<nav class="text-center">

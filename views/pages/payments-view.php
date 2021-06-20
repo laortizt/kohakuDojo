@@ -6,13 +6,13 @@ $insPayment = new controllerPayment();
 <!--  -->
 <div class="container-fluid">
 	<div class="row-gutters">
-		<div class="col-6 col-sm-12">
+		<div class="col-8 col-sm-12">
 			<!--Grafica-->
 			<div class="col-lg-6 col-md-12">
 				<div class="card mb-30">
 					<div class="header-class">
 						<h1 class="title">Reporte mensual</h1>
-						
+
 					</div>
 
 					<div class="card-body">
@@ -25,21 +25,21 @@ $insPayment = new controllerPayment();
 		</div>
 
 		<!-- formulario -->
-		<div class="col-6 col-sm-12">
+		<div class="col-4 col-sm-12">
 			<div class="info-stats4">
 
-				<form action="ajax/newPayAjax.php" method="post" autocomplete="off" class="payment-form formulario-ajax">
-					
+				<form action="ajax/PaymentsAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
+
 					<div class="header-class">
 						<h1 class="title">Registar pagos</h1>
 					</div>
 
 					<div class="payment">
-					<?php
-							$today = date_create('now');
+						<?php
+						$today = date_create('now');
 						?>
 
-						<div class="col-6">
+						<div class="col-12 col-sm-12">
 							<label class="label-form">Fecha</label>
 							<div class="input-field-profile">
 								<input type="date" name="classDate" required="" min="<?= date_format($today, 'Y-m-d') ?>">
@@ -52,33 +52,33 @@ $insPayment = new controllerPayment();
 							</div>
 						</div> -->
 
-						<div class="col-6">
+						<div class="col-12">
 							<label class="label">Documento</label>
 							<div class="input-field-profile">
 								<input type="texbox" name="dni-newpay" minlength="1" maxlength="100" />
 							</div>
 						</div>
 
-						<div class="col-6">
+						<div class="col-12">
 							<label class="label">Trámite</label>
 							<?php echo $insPayment->list_procedure_controller() ?>
 						</div>
 
-						<div class="col-6">
+						<div class="col-12">
 							<label class="label">Valor</label>
 							<div class="input-field-profile">
 								<input type="text" readonly value="" id="price-newpay" name="price-newpay" required="" />
 							</div>
 						</div>
-						
+
 
 					</div>
 
 					<input type="submit" class="btn-action-save" value="Guardar" />
 
 					<div class="RespuestaAjax"></div>
-			</form>
-				
+				</form>
+
 			</div>
 		</div>
 	</div>
@@ -92,22 +92,25 @@ $insPayment = new controllerPayment();
 	<div class="col-12 col-m-12 col-sm-12">
 		<div class="card">
 			<div class="card-content">
-				
+
 				<div class="header-class">
-				<h1 class="title">Gestión de Pagos</h1>
-
-
+					<h1 class="title">Gestión de Pagos</h1>
+					<?php
+					require_once "./controller/controllerAdmin.php";
+					$insAdmin = new controllerAdmin();
+					?>
 					<div class="barra__buscador">
-
-						<form action="" class="formulario" method="post" form-data="default" form-data="default">
+						<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
 							<div>
-								<input type="text" name="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
-								<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fa bi bi-search"></i></button>
+								<input type="hidden" name="search_page" id="search_page" value="payments">
+								<input type="text" name="search_pay" id="search_pay" placeholder="Buscar nombre" value="<?= isset($_SESSION['searchPay']) ? $_SESSION['searchPay'] : '' ?>" class="text-search">
+								<button href="#" type="submit" value="Search" name="button-search" class="btn-search">
+									<i class="fa bi bi-search"></i>
+								</button>
 							</div>
+							<div class="RespuestaAjax"></div>
 						</form>
 					</div>
-
-					
 				</div>
 				<!-- DESDE AQUI -->
 
@@ -125,21 +128,11 @@ $insPayment = new controllerPayment();
 					}
 				}
 
-				echo $insPayment->pages_payment_controller(0, 10, $_SESSION['role_sk'], 'code');
+				echo $insPayment->pages_payment_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'], "");
 				?>
-				<nav class="text-center">
-					<ul class="pagination pagination-sm">
-						<li class="disabled"><a href="javascript:void(0)">«</a></li>
-						<li class="active"><a href="<?php echo SERVERURL; ?>payments/page/1">1</a></li>
-						<li><a href="<?php echo SERVERURL; ?>payments/page/2">2</a></li>
-						<li><a href="<?php echo SERVERURL; ?>payments/page/3">3</a></li>
-						<li><a href="<?php echo SERVERURL; ?>payments/page/4">4</a></li>
-						<li><a href="<?php echo SERVERURL; ?>payments/page/5">5</a></li>
-						<li><a href="javascript:void(0)">»</a></li>
-					</ul>
-				</nav>
+
 			</div>
-			<!-- DIVS  -->
+
 		</div>
 	</div>
 </div>

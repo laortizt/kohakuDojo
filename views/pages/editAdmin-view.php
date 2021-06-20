@@ -195,9 +195,7 @@ $profile = $insProfile->get_user_admin_controller();
                     <div class="btn-action" style="align-self: end;">
 
                         <input type="submit" class="btn-action-save" value="Guardar" />
-                        <!-- <a href="<?php echo SERVERURL; ?>admin" class="btn-action-delete  ">
-                                    <span>Cancelar</span>
-                                </a> -->
+                       
 
 
                     </div>

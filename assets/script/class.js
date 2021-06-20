@@ -14,7 +14,6 @@ $(document).ready(function () {
     }
 
     $('#select-event').change(function(e) {
-        console.log('Reacting to change');
         updateCost();
     });
 

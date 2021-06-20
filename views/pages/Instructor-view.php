@@ -1,6 +1,8 @@
 <?php
 require_once "./controller/controllerAdmin.php";
+require_once "./controller/controllerClass.php";
 $insAdmin = new controllerAdmin();
+$insClass = new controllerClass();
 ?>
 
 <!-- Bienvenida -->
@@ -30,7 +32,7 @@ $insAdmin = new controllerAdmin();
 					<i class="fa   fa-users"></i>
 				</div>
 				<div class="sale-num">
-					<!-- <h3><?php echo $insAdmin->count_students() ?></h3> -->
+					<h3><?php echo $insAdmin->count_students() ?></h3>
 					<p>Total Alumnos</p>
 				</div>
 			</div>
@@ -41,7 +43,7 @@ $insAdmin = new controllerAdmin();
 					<i class="fa fa-graduation-cap"></i>
 				</div>
 				<div class="sale-num">
-					<!-- <h3><?php echo $insAdmin->count_instructors() ?></h3> -->
+					<h3><?php echo $insAdmin->count_instructors() ?></h3>
 					<p>Clases Realizadas</p>
 				</div>
 			</div>
@@ -52,7 +54,7 @@ $insAdmin = new controllerAdmin();
 					<i class="fa fa-unlock-alt"></i>
 				</div>
 				<div class="sale-num">
-					<!-- <h3><?php echo $insAdmin->count_admin() ?></h3> -->
+					<h3><?php echo $insAdmin->count_admin() ?></h3>
 					<p>Pagos Realizados</p>
 				</div>
 			</div>
@@ -63,7 +65,7 @@ $insAdmin = new controllerAdmin();
 					<i class="fas  fa-tasks"></i>
 				</div>
 				<div class="sale-num">
-					<!-- <h3><?php echo $insAdmin->count_allRegisters() ?></h3> -->
+					<h3><?php echo $insAdmin->count_allRegisters() ?></h3>
 					<p>Tramites Realizados</p>
 				</div>
 			</div>
@@ -72,38 +74,38 @@ $insAdmin = new controllerAdmin();
 
 </div>
 
-<div class="container-fluid">
-	<div class="row-gutters">
-		<div class="col-12 col-m-12 col-sm-12">
-			<div class="card">
-				<div class="card-content">
+<!--tabla-->
 
-					<div class="header-class">
-						<h1 class="title">Clases Programadas</h1>
+<div class="row privileges">
+	<div class="col-12 col-m-12 col-sm-12">
+		<div class="card">
+			<div class="card-content">
 
-						<div class="barra__buscador">
-							<?php
-							require_once "./controller/controllerClass.php";
-							$insClass = new controllerClass();
-							?>
+				<div class="header-class">
+					<h1 class="title">Clases Programadas</h1>
 
+					<div class="barra__buscador">
+						<?php
+						require_once "./controller/controllerAdmin.php";
+						$insAdmin = new controllerAdmin();
+						?>
 
-							<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
-								<div>
-									<input type="text" name="search_user" id="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
-									<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fa bi bi-search"></i></button>
-								</div>
-								<div class="RespuestaAjax"></div>
-							</form>
-
-						</div>
-
-
+						<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
+							<div>
+								<input type="hidden" name="search_page" id="search_page" value="instructor">
+								<input type="text" name="search_class" id="search_class" placeholder="Buscar por nombre o tipo de clase" value="<?= isset($_SESSION['searchClass']) ? $_SESSION['searchClass'] : '' ?>" class="text-search">
+								<button href="#" type="submit" value="Search" name="button-search" class="btn-search">
+									<i class="fa bi bi-search"></i>
+								</button>
+							</div>
+							<div class="RespuestaAjax"></div>
+						</form>
 					</div>
-					<!-- DESDE AQUI -->
+				</div>
+				<!-- DESDE AQUI -->
 
 
-					<?php
+				<?php
 					$pageNumber = 1;
 
 					if (isset($_GET)) {
@@ -116,28 +118,13 @@ $insAdmin = new controllerAdmin();
 						}
 					}
 
-					echo $insClass->pages_attendance_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk']);
-					?>
+					echo $insClass->pages_attendance_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'],"");
+				?>
 
-					<nav class="text-center">
-						<ul class="pagination pagination-sm">
-							<li class="disabled"><a href="javascript:void(0)">«</a></li>
-							<li class="active"><a href="<?php echo SERVERURL; ?>class/page/1">1</a></li>
-							<li><a href="<?php echo SERVERURL; ?>class/page/2">2</a></li>
-							<li><a href="<?php echo SERVERURL; ?>class/page/3">3</a></li>
-							<li><a href="<?php echo SERVERURL; ?>class/page/4">4</a></li>
-							<li><a href="<?php echo SERVERURL; ?>class/page/5">5</a></li>
-							<li><a href="javascript:void(0)">»</a></li>
-						</ul>
-					</nav>
-				</div>
-				<!-- DIVS  -->
 			</div>
-		</div>
-
-		<!-- formulario -->
 		
-
+		</div>
 	</div>
 
 </div>
+

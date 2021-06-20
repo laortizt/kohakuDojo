@@ -178,8 +178,7 @@ class controllerAdmin extends modelAdmin
         return $row['nEstudiantes'];
     }
 
-    public function count_admin()
-    {
+    public function count_admin(){
         //Obtiene la cantidad de roles administrador
         $datos = mainModel::connect()->query("SELECT count(*) as nAdmin
                 FROM accounts WHERE accountRole =1");
@@ -209,10 +208,6 @@ class controllerAdmin extends modelAdmin
         $row = $datos->fetch();
 
         return $row['nInstructors'];
-    }
-
-    public function search_users_controller()
-    {
     }
 
     public function list_state_controller($userCurrentState)

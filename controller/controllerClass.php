@@ -8,23 +8,26 @@
     }
 
     class controllerClass extends modelClass{
-        //controlador para agregar clase
-        // public function get_class_controller(){
-        //     $class = modelClass::get_class_model($_SESSION['code_sk']);
-        //     return $class;
-        // }  
-       
-        public function list_teachers_controller(){
+
+        public function list_teachers_controller($classCurrentTeacherId) {
             $teachers = modelClass::list_teachers_model();
 
             $select = '<select class="select-instructor input-field-profile" name="select-instructor" required="">';
             
             foreach($teachers as $teacher){
-                $select.='
-                    <option value="'.$teacher['idAccount'].'">'
-                    .$teacher['accountFirstName'].' '.$teacher['accountLastName'].
-                    '</option>
-                ';
+                if ($teacher['idAccount'] == $classCurrentTeacherId){
+                    $select.='
+                        <option value="'.$teacher['idAccount'].'" selected="">'
+                        .$teacher['accountFirstName'].' '.$teacher['accountLastName'].
+                        '</option>
+                    ';
+                } else {
+                    $select.='
+                        <option value="'.$teacher['idAccount'].'">'
+                        .$teacher['accountFirstName'].' '.$teacher['accountLastName'].
+                        '</option>
+                    ';
+                }
             }
 
             $select.='</select>';
@@ -32,29 +35,13 @@
             return $select;
         }
 
-        // public function list_events_controller(){
-        //     $Events = modelclass::list_events_model();
-
-        //     $select = '<select id="select-event" class="input-field-profile" name="select-event" required="">';
-            
-        //     foreach($Events as $events){
-        //         $select.='<option value="'.$events['idEvents'].'" data-cost="'.$events['eventsPrice'].'">'
-        //             .$events['eventsName'].
-        //             '</option>';
-        //     }
-
-        //     $select.='</select>';
-
-        //     return $select;
-        // }
-
-        public function list_events_controller($userCurrentEvent){
+        public function list_events_controller($classCurrentEvent){
             $events = modelClass::list_events_model();
 
             $select = '<select id="select-event" class="input-field-profile" name="select-event" required="">';
             
             foreach($events as $event){
-                if ($event['idEvents'] == $userCurrentEvent) {
+                if ($event['idEvents'] == $classCurrentEvent) {
                     $select.='
                         <option value="'.$event['idEvents'].'" selected="" data-cost="'.$event['eventsPrice'].'">'
                         .$event['eventsName'].
@@ -76,7 +63,6 @@
 
         public function save_class(){
             // Limpiar la información diligenciada
-            
             $teacher= mainModel::clean_string($_POST['select-instructor']); 
             $topic= mainModel::clean_string($_POST['classTopic']);
             $event= mainModel::clean_string($_POST['select-event']);
@@ -85,7 +71,6 @@
             $timeInit= mainModel::clean_string($_POST['classTimeInit']);
             $timeEnd= mainModel::clean_string($_POST['classTimeEnd']);
             
-        
             $price = str_replace('$', '', $price);
             
             // Validar condiciones SI YA HAY UNA CLASEREGISTRADA EN EL MISMO HORARIO
@@ -117,7 +102,7 @@
                 // Verificar si el cambió se aplico e informar al usuario
                 if($saveClass->rowCount() >= 1){
                     $alert=[
-                        "alert"=>"limpiar",
+                        "alert"=>"recargar",
                         "title"=>"Registrar Clase",
                         "text"=>"La Clase se ha creado exitósamente.",
                         "type"=>"success"
@@ -130,131 +115,84 @@
                         "type"=>"error"
                     ];
                 }
-             }
+            }
 
             return mainModel::sweet_alert($alert);
         }
 
-        public function pages_attendance_controller($pages, $register, $role, $code){
+        public function pages_attendance_controller($pages, $register, $role, $code, $search){
             $pages=mainModel::clean_string($pages);
             $register=mainModel::clean_string($register);
             $role=mainModel::clean_string($role);
             $code=mainModel::clean_string($code);
+            $search = mainModel::clean_string($search);
 
             $table="";
 
-            $page=(isset($page)&& $page>0) ? (int) $page :1;
-            $start=($pages>0)? (($pages*$register)-$register) : 0;
-            $conexion= mainModel::connect();
-
-            //Calcula cúantos registros hay en la consutla
-            //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
-            $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS c.*, e.*, a.accountFirstName, a.accountLastName FROM class c
-                LEFT JOIN events e ON (c.classEvents = e.idEvents)
-                LEFT JOIN accounts a ON (c.classTeacher = a.idAccount)
-                ORDER BY c.classDate DESC LIMIT $start, $register");
-                
-            $datos=$datos->fetchAll();
-            $total=$conexion->query("SELECT found_rows()");
-            $total=(int) $total->fetchColumn();
-
-            //calcular el otal de páginas
-            $Npages= ceil($total/$register);
-            $table.='<div >
-            <table  class="table table-hover thead-primary  table-responsive"> 
-                <thead> 
-                    <td>#</td>
-                    <td>Instructor</td>
-                    <td>Tema</td>
-                    <td>Tipo de evento</td>
-                    <td>Precio</td>
-                    <td>Fecha</td>
-                    <td>Hora Inicio</td>
-                    <td>Hora Fin</td>
-                    <td>ver</td>
-
-                </thead>
-                <tbody>
-            ';
-            
-            if($total>=1 && $pages<=$Npages){
-                $count=$start+1;
-                foreach($datos as $rows){
-                    $table.='
-                    <tr>
-                        <td>'.$count.'</td>
-                        <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
-                        <td>'.$rows['classTopic'].'</td>
-                        <td>'.$rows['eventsName'].'</td>
-                        <td>'.$rows['classPrice'].'</td>
-                        <td>'.$rows['classDate'].'</td>
-                        <td>'.$rows['classTimeInit'].'</td>
-                        <td>'.$rows['classTimeEnd'].'</td>
-                        <td>
-                        <a href="" type="submit" class="btn-eye">
-                        <i class="bi bi-eye"></i>
-                        </a>
-                        </td>
-                      
-                        <div class="RespuestaAjax"></div>
-                      
-                    ';
-                    $count++;
+            if ($_SESSION && isset($_SESSION['searchClass'])) {
+                $clear_search = ($search == "");
+                $search = mainModel::clean_string($_SESSION['searchClass']);
+    
+                if ($clear_search && $_SESSION['searchClass'] !== "" ) {
+                    $_SESSION['searchClass'] = "";
                 }
-            }else{
-                $table.='
-                    <tr>
-                        <td colspan="15"> No hay registros en esta página</td>
-                    </tr>';
             }
-            $table.='</tbody> </table> </div>';
             
-
-            return $table;
-        }
-
-        public function pages_class_controller($pages, $register, $role, $code){
-            $pages=mainModel::clean_string($pages);
-            $register=mainModel::clean_string($register);
-            $role=mainModel::clean_string($role);
-            $code=mainModel::clean_string($code);
-
-            $table="";
-
             $page=(isset($page)&& $page>0) ? (int) $page :1;
             $start=($pages>0)? (($pages*$register)-$register) : 0;
-            $conexion= mainModel::connect();
+            
+            $pageurl = ($role == "Administrador" ? "adminClass/page" : "instructor");
+
+            // Aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
+            if (isset($search) && $search != "") {
+                $consulta = "SELECT SQL_CALC_FOUND_ROWS c.*, e.*,
+                    a.accountFirstName, a.accountLastName
+                    FROM class c
+                    INNER JOIN events e ON (c.classEvents = e.idEvents)
+                    INNER JOIN accounts a ON (c.classTeacher = a.idAccount)
+                    WHERE ((a.idAccount!='1')
+                        AND (a.accountFirstName like '%$search%' 
+                            OR a.accountLastName like '%$search%'
+                            OR e.eventsName like '%$search%'
+                            OR c.classTopic like '%$search%')".
+                        ($role == "Instructor" ? " AND a.accountCode = '".$code."' " : "").
+                    ") ORDER BY c.classDate DESC LIMIT $start, $register";
+            } else {
+                $consulta = "SELECT SQL_CALC_FOUND_ROWS c.*, e.*, 
+                    a.accountFirstName, a. accountLastName 
+                    FROM class c 
+                    INNER JOIN events e ON (c.classEvents = e.idEvents) 
+                    INNER JOIN accounts a ON (c.classTeacher = a.idAccount)".
+                    ($role == "Instructor" ? " WHERE a.accountCode = '".$code."' " : "").
+                    "ORDER BY c.classDate DESC LIMIT $start, $register"; 
+            }
+
+            $conexion = mainModel::connect();
+
+            $datos = $conexion->query($consulta);
+            $datos = $datos->fetchAll();
 
             //Calcula cúantos registros hay en la consutla
-            //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
-            $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS c.*, e.*, a.accountFirstName, a.accountLastName FROM class c
-                LEFT JOIN events e ON (c.classEvents = e.idEvents)
-                LEFT JOIN accounts a ON (c.classTeacher = a.idAccount)
-                ORDER BY c.classDate DESC LIMIT $start, $register");
-                
-            $datos=$datos->fetchAll();
             $total=$conexion->query("SELECT found_rows()");
             $total=(int) $total->fetchColumn();
 
-            //calcular el otal de páginas
+            //calcular el total de páginas
             $Npages= ceil($total/$register);
             $table.='<div >
-            <table  class="table table-hover thead-primary  table-responsive"> 
-                <thead> 
-                    <td>#</td>
-                    <td>Instructor</td>
-                    <td>Tema</td>
-                    <td>Tipo de evento</td>
-                    <td>Precio</td>
-                    <td>Fecha</td>
-                    <td>Hora Inicio</td>
-                    <td>Hora Fin</td>
-                    <td>Eliminar</td>
-                    <td>Editar</td>
-
-                </thead>
-                <tbody>
-            ';
+                <table  class="table table-hover thead-primary  table-responsive"> 
+                    <thead> 
+                        <td>#</td>
+                        <td>Instructor</td>
+                        <td>Tema</td>
+                        <td>Tipo de evento</td>
+                        <td>Precio</td>
+                        <td>Fecha</td>
+                        <td>Hora Inicio</td>
+                        <td>Hora Fin</td>
+                        <td>ver</td>
+                    </thead>
+                    <tbody>
+                ';
             
             if($total>=1 && $pages<=$Npages){
                 $count=$start+1;
@@ -269,10 +207,145 @@
                         <td>'.$rows['classDate'].'</td>
                         <td>'.$rows['classTimeInit'].'</td>
                         <td>'.$rows['classTimeEnd'].'</td>
+                        <td>
+                            <a href="" type="submit" class="btn-eye">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                        </td>
+                    ';
+                    $count++;
+                }
+            } else {
+                $table.='
+                    <tr>
+                        <td colspan="15"> No hay registros en esta página</td>
+                    </tr>';
+            }
+            $table.='</tbody> </table> </div>';
+
+            if($total>=1 && $pages<=$Npages) {
+                $table.='<nav class="text-center"><ul class="pagination pagination-sm">';
+
+                if($page == 1) {
+                    $table.='<li class="disabled"><a>«</a></li>';
+                } else {
+                    $table.='<li>
+                        <a href="'.SERVERURL.$pageurl.'/'.($pages-1).'/">«</a>
+                    </li>';
+                }
+
+                for($i=1; $i<=$Npages; $i++) {
+                    if($pages == $i) {
+                        $table.='<li class="active">
+                            <a>'.$i.'</a>
+                        </li>';
+                    } else {
+                        $table.='<li><a href="'.SERVERURL.$pageurl.'/'.$i.'/">'.$i.'</a></li>';
+                    }
+                }
+
+                if($page == $Npages) {
+                    $table.='<li class="disabled"><a>»</a></li>';
+                } else {
+                    $table.='<li>
+                        <a href="'.SERVERURL.$pageurl.'/'.($pages+1).'/">»</a>
+                    </li>';
+                }
+
+                $table.='</ul></nav>';
+            }
+
+            return $table;
+        }
+
+        public function pages_class_controller($pages, $register, $role, $code, $search){
+            $pages=mainModel::clean_string($pages);
+            $register=mainModel::clean_string($register);
+            $role=mainModel::clean_string($role);
+            $code=mainModel::clean_string($code);
+            $search = mainModel::clean_string($search);
+
+            $table="";
+
+            if ($_SESSION && isset($_SESSION['searchClass'])) {
+                $clear_search = ($search == "");
+                $search = mainModel::clean_string($_SESSION['searchClass']);
+    
+                if ($clear_search && $_SESSION['searchClass'] !== "" ) {
+                    $_SESSION['searchClass'] = "";
+                }
+            }
+            
+            $page=(isset($page)&& $page>0) ? (int) $page :1;
+            $start=($pages>0)? (($pages*$register)-$register) : 0;
+            
+            $pageurl = "adminClass/page";
+
+            // Aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
+            if (isset($search) && $search != "") {
+                $consulta = "SELECT SQL_CALC_FOUND_ROWS c.*, e.*,
+                a.accountFirstName, a.accountLastName
+                FROM class c
+                INNER JOIN events e ON (c.classEvents = e.idEvents)
+                INNER JOIN accounts a ON (c.classTeacher = a.idAccount)
+                WHERE ((a.idAccount!='1')
+                    AND (a.accountFirstName like '%$search%' 
+                        OR a.accountLastName like '%$search%'
+                        OR e.eventsName like '%$search%'
+                        OR c.classTopic like '%$search%'
+                ))
+                ORDER BY c.classDate DESC LIMIT $start, $register";
+            } else {
+                $consulta = "SELECT SQL_CALC_FOUND_ROWS c.*, e.*, 
+                a.accountFirstName, a. accountLastName 
+                FROM class c 
+                INNER JOIN events e ON (c.classEvents = e.idEvents) 
+                INNER JOIN accounts a ON (c.classTeacher = a.idAccount)
+                ORDER BY c.classDate DESC LIMIT $start, $register"; 
+            }
+
+            $conexion = mainModel::connect();
+
+            $datos = $conexion->query($consulta);
+            $datos = $datos->fetchAll();
+
+            //Calcula cúantos registros hay en la consutla
+            $total=$conexion->query("SELECT found_rows()");
+            $total=(int) $total->fetchColumn();
+
+            //calcular el otal de páginas
+            $Npages= ceil($total/$register);
+            $table.='<div >
+                <table  class="table table-hover thead-primary  table-responsive"> 
+                    <thead> 
+                        <td>#</td>
+                        <td>Instructor</td>
+                        <td>Tema</td>
+                        <td>Tipo de evento</td>
+                        <td>Precio</td>
+                        <td>Fecha</td>
+                        <td>Hora Inicio</td>
+                        <td>Hora Fin</td>
+                        <td>Eliminar</td>
+                        <td>Editar</td>
+                    </thead>
+                    <tbody>
+                ';
+            
+            if($total>=1 && $pages<=$Npages) {
+                $count=$start+1;
+                foreach($datos as $rows) {
+                    $table.='
+                    <tr>
+                        <td>'.$count.'</td>
+                        <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
+                        <td>'.$rows['classTopic'].'</td>
+                        <td>'.$rows['eventsName'].'</td>
+                        <td>'.'$'.$rows['classPrice'].'</td>
+                        <td>'.$rows['classDate'].'</td>
+                        <td>'.$rows['classTimeInit'].'</td>
+                        <td>'.$rows['classTimeEnd'].'</td>
                        
-                      
-                       
-                      
                         <td>
                             <form action="'.SERVERURL.'ajax/classAjax.php" method="POST" class="formulario-ajax" data-form="delete" enctype="multipart/form-data">
                                 <input type="hidden" name="classToDelete" value="'.mainModel::encryption($rows['idClass']).'">
@@ -292,14 +365,45 @@
                     ';
                     $count++;
                 }
-            }else{
+            } else {
                 $table.='
                     <tr>
                         <td colspan="15"> No hay registros en esta página</td>
                     </tr>';
             }
+
             $table.='</tbody> </table> </div>';
-            
+            if($total>=1 && $pages<=$Npages) {
+                $table.='<nav class="text-center"><ul class="pagination pagination-sm">';
+
+                if($page == 1) {
+                    $table.='<li class="disabled"><a>«</a></li>';
+                } else {
+                    $table.='<li>
+                        <a href="'.SERVERURL.$pageurl.'/'.($pages-1).'/">«</a>
+                    </li>';
+                }
+
+                for($i=1; $i<=$Npages; $i++) {
+                    if($pages == $i) {
+                        $table.='<li class="active">
+                            <a>'.$i.'</a>
+                        </li>';
+                    } else {
+                        $table.='<li><a href="'.SERVERURL.$pageurl.'/'.$i.'/">'.$i.'</a></li>';
+                    }
+                }
+
+                if($page == $Npages) {
+                    $table.='<li class="disabled"><a>»</a></li>';
+                } else {
+                    $table.='<li>
+                        <a href="'.SERVERURL.$pageurl.'/'.($pages+1).'/">»</a>
+                    </li>';
+                }
+
+                $table.='</ul></nav>';
+            }
 
             return $table;
         }
@@ -369,9 +473,19 @@
         }
 
         public function update_class_controller() {
-            $idClass = mainModel::decryption($_POST['userToEdit']);
-            $idClass = mainModel::clean_string($idClass);  
-            
+            $idClass = mainModel::decryption($_POST['classToEdit']);
+            $idClass = mainModel::clean_string($idClass);
+
+            // Limpiar info del formulario
+            $teacher= mainModel::clean_string($_POST['select-instructor']); 
+            $topic= mainModel::clean_string($_POST['classTopic']);
+            $event= mainModel::clean_string($_POST['select-event']);
+            $price= mainModel::clean_string($_POST['eventsPrice']);
+            $date= mainModel::clean_string($_POST['classDate']);
+            $timeInit= mainModel::clean_string($_POST['classTimeInit']);
+            $timeEnd= mainModel::clean_string($_POST['classTimeEnd']);
+
+            $price = str_replace('$', '', $price);
 
             // Verificar si el usuario actual es Admin
             if (!isset($_SESSION) || !isset($_SESSION['role_sk']) || $_SESSION['role_sk'] != "Administrador") {
@@ -391,14 +505,14 @@
                     // Construir el objeto que se envía al modelo
                     // El modelo espera todas las propiedades, por lo que se envian las actuales
                     $data = [
-                        "Teacher" => $class['classTeacher'],
-                        "Topic" => $class['classTopic'],
-                        "Event" => $class['classEvents'],
-                        "Price" => $class['classPrice'],
-                        "Date" =>  $class['classDate'],
-                        "timeInit" => $class['classTimeInit'],
-                        "timeEnd" => $class['classTimeEnd'],
-                        
+                        "Id" => $class['idClass'],
+                        "Teacher" => $teacher,
+                        "Topic" => $topic,
+                        "Event" => $event,
+                        "Price" => $price,
+                        "Date" =>  $date,
+                        "TimeInit" => $timeInit,
+                        "TimeEnd" => $timeEnd
                     ];
 
                     // LLamar al modelo
@@ -407,7 +521,7 @@
                     // Verificar respuesta del modelo y construir la respuesta para la vista
                     if($saveClass->rowCount() == 1){
                         $alert=[
-                            "alert"=>"limpiar",
+                            "alert"=>"recargar",
                             "title"=>"Actualizar clase",
                             "text"=>"Se ha actualizado la clase exitósamente.",
                             "type"=>"success"
@@ -428,9 +542,9 @@
                         "type"=>"error"
                     ];
                 }
-
-                return mainModel::sweet_alert($alert);
             }
+
+            return mainModel::sweet_alert($alert);
         }
 
         public function delete_class_controller() {
@@ -466,7 +580,7 @@
                     if ($result->rowCount() >= 1) {
                         // Si lo borró, informar que se pudo borrar
                         $alert=[ 
-                            "alert"=>"simple",
+                            "alert"=>"recargar",
                             "title"=>"Clase eliminada",
                             "text"=>"La clase se ha borrado exitósamente.",
                             "type"=>"success"
@@ -493,6 +607,7 @@
 
             return mainModel::sweet_alert($alert);
         }
+
         public function get_class_controller(){
             $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             $parts = parse_url($url);
@@ -502,7 +617,7 @@
             // Desencriptar y Limpiar el código
             $idClass=mainModel::decryption($idClass);
             $idClass=mainModel::clean_string($idClass);
-
+            
             $class = modelClass::get_class_model($idClass);
             return $class;
         }
@@ -520,4 +635,5 @@
             $class = modelClass::get_class_model($idClass);
             return $class;
         }
+
     }

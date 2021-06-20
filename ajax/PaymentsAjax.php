@@ -15,14 +15,14 @@ if (isset($_POST['dni-newpay'])) {
         isset($_POST['date-newpay']) &&
         isset($_POST['dni-newpay']) &&
         isset($_POST['procedure-newpay']) &&
-        isset($_POST['price-newpay'])
-       
-    ) {
-        // session_start(['name' => 'SK']);
+        isset($_POST['price-newpay'])) {
+    }
+       echo $insPayment->create_payment_controller();
 
-        echo $insPayment->create_payment_controller();
-        echo '<script>window.location.href="' . SERVERURL . 'payments"</script>';
-    } else {
+    if (isset($_POST['idPayment'])){
+        echo$insPayment->create_payment_controller();
+
+    }else{
         echo '<script>
             swal({
                 title: "Guardar pago",
@@ -36,7 +36,10 @@ if (isset($_POST['dni-newpay'])) {
                 window.location.href="' . SERVERURL . 'payments"
             });
         </script>';
+
     }
+
+    
 } else {
     //poner seguridad a la página
     session_start();
@@ -44,3 +47,4 @@ if (isset($_POST['dni-newpay'])) {
 
     echo '<script> window.location.href="' . SERVERURL . 'login" </script>';
 }
+

@@ -154,9 +154,9 @@ class controllerProgress extends modelProgress
         //Calcula cúantos registros hay en la consutla
         //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
         $datos = $conexion->query("SELECT SQL_CALC_FOUND_ROWS * FROM progress p
-                LEFT JOIN accounts a ON (p.progressAccount = a.idAccount)
-                LEFT JOIN state st ON (p.progressState = st.idState)
-                LEFT JOIN menkyo mk ON (p.progressMenkyo = mk.idMenkyo)
+                INNER JOIN accounts a ON (p.progressAccount = a.idAccount)
+                INNER JOIN state st ON (p.progressState = st.idState)
+                INNER JOIN menkyo mk ON (p.progressMenkyo = mk.idMenkyo)
                 WHERE a.idAccount!='1' ORDER BY progressDate DESC LIMIT $start, $register");
         $datos = $datos->fetchAll();
         $total = $conexion->query("SELECT found_rows()");

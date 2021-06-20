@@ -1,8 +1,7 @@
 <?php
-	require_once "./controller/controllerAdmin.php";
-	$insAdmin = new controllerAdmin();
+require_once "./controller/controllerAdmin.php";
+$insAdmin = new controllerAdmin();
 ?>
-
 <!-- Bienvenida -->
 <div class="welcome-area">
 	<div class="row m-0 align-items-center welcome-container">
@@ -15,13 +14,64 @@
 
 		<div class="col-lg-7 col-md-12 p-0">
 			<div class="welcome-img">
-				<!-- <img src="assets/img/welcome-img.png" alt="image"> -->
-				<!-- <img src="assets/img/banner2.png" alt="image"> -->
 				<img src="assets/img/banner4.png" alt="image">
 			</div>
 		</div>
 	</div>
 </div>
+
+
+<!-- divs informaciòn -->
+<div class="container-report">
+	<div class="row-gutters">
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon info-icon-color1">
+					<i class="fa   fa-users"></i>
+				</div>
+				<div class="sale-num">
+					<h3><?php echo $insAdmin->count_students() ?></h3>
+					<p>Alumnos</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon info-icon-color2">
+					<i class="fa fa-graduation-cap"></i>
+				</div>
+				<div class="sale-num">
+					<h3><?php echo $insAdmin->count_instructors() ?></h3>
+					<p>Instructores</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon info-icon-color3">
+					<i class="fa fa-unlock-alt"></i>
+				</div>
+				<div class="sale-num">
+					<h3><?php echo $insAdmin->count_admin() ?></h3>
+					<p>Administradores</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-3 col-sm-6">
+			<div class="info-stats4">
+				<div class="info-icon info-icon-color4">
+					<i class="fas  fa-tasks"></i>
+				</div>
+				<div class="sale-num">
+					<h3><?php echo $insAdmin->count_allRegisters() ?></h3>
+					<p>Total Usuarios</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
 
 
 <!--Grafica-->
@@ -49,8 +99,8 @@
 
 					<div class="barra__buscador">
 						<?php
-							require_once "./controller/controllerAdmin.php";
-							$insAdmin = new controllerAdmin();
+						require_once "./controller/controllerAdmin.php";
+						$insAdmin = new controllerAdmin();
 						?>
 
 						<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
@@ -68,19 +118,19 @@
 
 				<!-- DESDE AQUI -->
 				<?php
-					$pageNumber = 1;
+				$pageNumber = 1;
 
-					if (isset($_GET)) {
-						$pages = explode("/", $_GET['page']);
-						if (count($pages) >= 3) {
-							$p = intval($pages[1],10);
-							if ($p > 1) {
-								$pageNumber = $p;
-							}
+				if (isset($_GET)) {
+					$pages = explode("/", $_GET['page']);
+					if (count($pages) >= 3) {
+						$p = intval($pages[1], 10);
+						if ($p > 1) {
+							$pageNumber = $p;
 						}
 					}
+				}
 
-					echo $insAdmin->pages_admin_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'], "");
+				echo $insAdmin->pages_admin_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'], "");
 				?>
 			</div>
 			<!-- DIVS  -->

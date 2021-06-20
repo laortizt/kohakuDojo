@@ -21,8 +21,11 @@ $insClass = new controllerClass();
 						
 						<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
 							<div>
-								<input type="text" name="search_user" id="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
-								<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fa bi bi-search"></i></button>
+								<input type="hidden" name="search_page" id="search_page" value="attendance">
+								<input type="text" name="search_class" id="search_class" placeholder="Buscar nombre" value="<?= isset($_SESSION['searchClass']) ? $_SESSION['searchClass'] : '' ?>" class="text-search">
+								<button href="#" type="submit" value="Search" name="button-search" class="btn-search">
+									<i class="fa bi bi-search"></i>
+								</button>
 							</div>
 							<div class="RespuestaAjax"></div>
 						</form>
@@ -47,22 +50,11 @@ $insClass = new controllerClass();
 						}
 					}
 
-					echo $insClass->pages_attendance_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk']);
+					echo $insClass->pages_attendance_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'],"");
 				?>
 
-				<nav class="text-center">
-					<ul class="pagination pagination-sm">
-						<li class="disabled"><a href="javascript:void(0)">«</a></li>
-						<li class="active"><a href="<?php echo SERVERURL; ?>class/page/1">1</a></li>
-						<li><a href="<?php echo SERVERURL; ?>class/page/2">2</a></li>
-						<li><a href="<?php echo SERVERURL; ?>class/page/3">3</a></li>
-						<li><a href="<?php echo SERVERURL; ?>class/page/4">4</a></li>
-						<li><a href="<?php echo SERVERURL; ?>class/page/5">5</a></li>
-						<li><a href="javascript:void(0)">»</a></li>
-					</ul>
-				</nav>
 			</div>
-			<!-- DIVS  -->
+			
 		</div>
 	</div>
 </div>

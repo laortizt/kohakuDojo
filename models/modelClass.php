@@ -26,16 +26,16 @@
        
         public function update_class_model($datos) {
             $sql=mainModel::connect()->prepare("UPDATE class  
-                SET classTeacher:Teacher, classTopic:Topic, classEvents:Events, classPrice:Price, classDate:Date, classTimeInit:TimeInit, classTimeEnd:TimeEnd,
+                SET classTeacher=:Teacher, classTopic=:Topic, classEvents=:Events, classPrice=:Price, classDate=:Date, classTimeInit=:TimeInit, classTimeEnd=:TimeEnd
                 WHERE idClass=:IdClass");
             $sql->bindParam(":Teacher",$datos['Teacher']);
             $sql->bindParam(":Topic",$datos['Topic']);
-            $sql->bindParam(":Events",$datos['Events']);
+            $sql->bindParam(":Events",$datos['Event']);
             $sql->bindParam(":Price",$datos['Price']);
             $sql->bindParam(":Date",$datos['Date']);
             $sql->bindParam(":TimeInit",$datos['TimeInit']);
             $sql->bindParam(":TimeEnd",$datos['TimeEnd']);
-            $sql->bindParam(":IdAccount",$datos['IdAccount']);
+            $sql->bindParam(":IdClass",$datos['Id']);
 
             $sql->execute();
 
@@ -70,6 +70,14 @@
         }
 
         //buscar clase 
+        // public function find_class($idClass) {
+            
+        //     $sql = mainModel::connect()->query("SELECT idClass
+        //         FROM class WHERE idClass ='$idClass'");
+        //     $sql->bindParam(':id', $idClass);
+        //     $sql->execute();
+        //     return $sql->fetchAll();
+        // }
         public function find_class($idClass) {
             
             $datos = mainModel::connect()->query("SELECT idClass, classTeacher, classTopic, classEvents, classPrice, classDate, classTimeInit, classTimeEnd 
@@ -79,9 +87,8 @@
 
         public function get_class_model($idClass) {
             $sql= mainModel::connect()->prepare("SELECT SQL_CALC_FOUND_ROWS c.*, e.*, a.accountFirstName, a.accountLastName FROM class c
-            LEFT JOIN events e ON (c.classEvents = e.idEvents)
-            LEFT JOIN accounts a ON (c.classTeacher = a.idAccount)
-               WHERE idClass=:idClass");
+            INNER JOIN events e ON (c.classEvents = e.idEvents)
+            INNER JOIN accounts a ON (c.classTeacher = a.idAccount)WHERE idClass=:idClass");
             $sql->bindParam(':idClass', $idClass);
             $sql->execute();
     
@@ -90,13 +97,12 @@
 
         public function class_teacher_model($idTeacherAccount) {
             $sql= mainModel::connect()->prepare("SELECT SQL_CALC_FOUND_ROWS c.*, e.*, a.accountFirstName, a.accountLastName FROM class c
-            LEFT JOIN events e ON (c.classEvents = e.idEvents)
-            LEFT JOIN accounts a ON (c.classTeacher = a.idAccount)
+            INNER JOIN events e ON (c.classEvents = e.idEvents)
+            INNER JOIN accounts a ON (c.classTeacher = a.idAccount)
                WHERE c.classTeacher=:idTeacherAccount");
             $sql->bindParam(':idTeacherAccount', $idTeacherAccount);
             $sql->execute();
     
             return $sql->fetch();
         }
-        
     }

@@ -9,8 +9,6 @@ if (isset($_POST['dni-progress'])) {
     require_once "../controller/controllerProgress.php";
     $insProgress= new controllerProgress();
 
-    // print_r($_POST);
-
     if (
         isset($_POST['date-progress']) &&
         isset($_POST['dni-progress']) &&
