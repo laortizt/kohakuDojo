@@ -70,6 +70,7 @@
             $date= mainModel::clean_string($_POST['classDate']);
             $timeInit= mainModel::clean_string($_POST['classTimeInit']);
             $timeEnd= mainModel::clean_string($_POST['classTimeEnd']);
+            ;
             
             $price = str_replace('$', '', $price);
             
@@ -189,7 +190,7 @@
                         <td>Fecha</td>
                         <td>Hora Inicio</td>
                         <td>Hora Fin</td>
-                        <td>ver</td>
+                        <td>Asistencia</td>
                     </thead>
                     <tbody>
                 ';
@@ -408,6 +409,146 @@
             return $table;
         }
 
+        public function pages_classUser_controller($pages, $register, $role, $code, $search){
+            $pages=mainModel::clean_string($pages);
+            $register=mainModel::clean_string($register);
+            $role=mainModel::clean_string($role);
+            $code=mainModel::clean_string($code);
+            $search = mainModel::clean_string($search);
+
+            $table="";
+
+            if ($_SESSION && isset($_SESSION['searchClass'])) {
+                $clear_search = ($search == "");
+                $search = mainModel::clean_string($_SESSION['searchClass']);
+    
+                if ($clear_search && $_SESSION['searchClass'] !== "" ) {
+                    $_SESSION['searchClass'] = "";
+                }
+            }
+            
+            $page=(isset($page)&& $page>0) ? (int) $page :1;
+            $start=($pages>0)? (($pages*$register)-$register) : 0;
+            
+            $pageurl = "adminClass/page";
+
+            // Aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
+            if (isset($search) && $search != "") {
+                $consulta = "SELECT SQL_CALC_FOUND_ROWS c.*, e.*,
+                a.accountFirstName, a.accountLastName
+                FROM class c
+                INNER JOIN events e ON (c.classEvents = e.idEvents)
+                INNER JOIN accounts a ON (c.classTeacher = a.idAccount)
+                WHERE ((a.idAccount!='1')
+                    AND (a.accountFirstName like '%$search%' 
+                        OR a.accountLastName like '%$search%'
+                        OR e.eventsName like '%$search%'
+                        OR c.classTopic like '%$search%'
+                ))
+                ORDER BY c.classDate DESC LIMIT $start, $register";
+            } else {
+                $consulta = "SELECT SQL_CALC_FOUND_ROWS c.*, e.*, 
+                a.accountFirstName, a. accountLastName 
+                FROM class c 
+                INNER JOIN events e ON (c.classEvents = e.idEvents) 
+                INNER JOIN accounts a ON (c.classTeacher = a.idAccount)
+                ORDER BY c.classDate DESC LIMIT $start, $register"; 
+            }
+
+            $conexion = mainModel::connect();
+
+            $datos = $conexion->query($consulta);
+            $datos = $datos->fetchAll();
+
+            //Calcula cúantos registros hay en la consutla
+            $total=$conexion->query("SELECT found_rows()");
+            $total=(int) $total->fetchColumn();
+
+            //calcular el otal de páginas
+            $Npages= ceil($total/$register);
+            $table.='<div >
+                <table  class="table table-hover thead-primary  table-responsive"> 
+                    <thead> 
+                        <td>#</td>
+                        <td>Instructor</td>
+                        <td>Tema</td>
+                        <td>Tipo de evento</td>
+                        <td>Precio</td>
+                        <td>Fecha</td>
+                        <td>Hora Inicio</td>
+                        <td>Hora Fin</td>
+                        <td>Inscribirse</td>
+                        
+                    </thead>
+                    <tbody>
+                ';
+            
+            if($total>=1 && $pages<=$Npages) {
+                $count=$start+1;
+                foreach($datos as $rows) {
+                    $table.='
+                    <tr>
+                        <td>'.$count.'</td>
+                        <td>'.$rows['accountFirstName'].' '.$rows['accountLastName'].'</td>
+                        <td>'.$rows['classTopic'].'</td>
+                        <td>'.$rows['eventsName'].'</td>
+                        <td>'.'$'.$rows['classPrice'].'</td>
+                        <td>'.$rows['classDate'].'</td>
+                        <td>'.$rows['classTimeInit'].'</td>
+                        <td>'.$rows['classTimeEnd'].'</td>
+                       
+                        <td>
+                        <a href="'.SERVERURL.'registerClass?c='.mainModel::encryption($rows['idClass']).'" type="submit" class="btn-edit">
+                        <i class="bi bi-check-circle-fill"></i>
+                        </a>
+                        </td>
+                        <div class="RespuestaAjax"></div>
+                    ';
+                    $count++;
+                }
+            } else {
+                $table.='
+                    <tr>
+                        <td colspan="15"> No hay registros en esta página</td>
+                    </tr>';
+            }
+
+            $table.='</tbody> </table> </div>';
+            if($total>=1 && $pages<=$Npages) {
+                $table.='<nav class="text-center"><ul class="pagination pagination-sm">';
+
+                if($page == 1) {
+                    $table.='<li class="disabled"><a>«</a></li>';
+                } else {
+                    $table.='<li>
+                        <a href="'.SERVERURL.$pageurl.'/'.($pages-1).'/">«</a>
+                    </li>';
+                }
+
+                for($i=1; $i<=$Npages; $i++) {
+                    if($pages == $i) {
+                        $table.='<li class="active">
+                            <a>'.$i.'</a>
+                        </li>';
+                    } else {
+                        $table.='<li><a href="'.SERVERURL.$pageurl.'/'.$i.'/">'.$i.'</a></li>';
+                    }
+                }
+
+                if($page == $Npages) {
+                    $table.='<li class="disabled"><a>»</a></li>';
+                } else {
+                    $table.='<li>
+                        <a href="'.SERVERURL.$pageurl.'/'.($pages+1).'/">»</a>
+                    </li>';
+                }
+
+                $table.='</ul></nav>';
+            }
+
+            return $table;
+        }
+
         public function get_users_by_month_chart() {
             // Traer la data que se quiere mostrar
 
@@ -521,10 +662,11 @@
                     // Verificar respuesta del modelo y construir la respuesta para la vista
                     if($saveClass->rowCount() == 1){
                         $alert=[
-                            "alert"=>"recargar",
+                            "alert"=>"redireccion",
                             "title"=>"Actualizar clase",
                             "text"=>"Se ha actualizado la clase exitósamente.",
-                            "type"=>"success"
+                            "type"=>"success",
+                            "path"=>"adminClass"
                         ];
                     } else {
                         $alert=[

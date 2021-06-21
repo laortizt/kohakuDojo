@@ -5,55 +5,6 @@ $insClass = new controllerClass();
 
 
 
-<!--divs-->
-<!-- <div class="container-report">
-	<div class="row-gutters">
-		<div class="col-3 col-sm-6">
-			<div class="info-stats4">
-				<div class="info-icon info-icon-color1">
-					<i class="fa   fa-users"></i>
-				</div>
-				<div class="sale-num">
-
-					<p>Total</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-3 col-sm-6">
-			<div class="info-stats4">
-				<div class="info-icon info-icon-color2">
-					<i class="fa fa-graduation-cap"></i>
-				</div>
-				<div class="sale-num">
-
-					<p>Instructores</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-3 col-sm-6">
-			<div class="info-stats4">
-				<div class="info-icon info-icon-color3">
-					<i class="fa fa-unlock-alt"></i>
-				</div>
-				<div class="sale-num">
-
-					<p>Administradores</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-3 col-sm-6">
-			<div class="info-stats4">
-				<div class="info-icon info-icon-color4">
-					<i class="fas  fa-tasks"></i>
-				</div>
-				<div class="sale-num">
-
-					<p>Total Usuarios</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
 
 <!--tabla-->
 <div class="container-fluid">
@@ -89,7 +40,7 @@ $insClass = new controllerClass();
 					<div class="row g-3">
 						<div class="col-6">
 							<label class="label-form">Instructor</label>
-							<?php echo $insClass->list_teachers_controller() ?>
+							<?php echo $insClass->list_teachers_controller(0) ?>
 						</div>
 						<div class="col-6">
 							<label class="label-form">Tema</label>
@@ -109,10 +60,14 @@ $insClass = new controllerClass();
 							</div>
 						</div>
 
+						<?php
+							$today = date_create('now');
+						?>
+
 						<div class="col-6">
 							<label class="label-form">Fecha</label>
 							<div class="input-field-profile">
-								<input type="date" name="classDate" required="">
+								<input type="date" name="classDate" required="" min="<?= date_format($today, 'Y-m-d') ?>">
 							</div>
 						</div>
 
@@ -179,8 +134,11 @@ $insClass = new controllerClass();
 						
 						<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
 							<div>
-								<input type="text" name="search_user" id="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
-								<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fa bi bi-search"></i></button>
+								<input type="hidden" name="search_page" id="search_page" value="InstructorClass">
+								<input type="text" name="search_class" id="search_class" placeholder="Buscar nombre" value="<?= isset($_SESSION['searchClass']) ? $_SESSION['searchClass'] : '' ?>" class="text-search">
+								<button href="#" type="submit" value="Search" name="button-search" class="btn-search">
+									<i class="fa bi bi-search"></i>
+								</button>
 							</div>
 							<div class="RespuestaAjax"></div>
 						</form>
@@ -205,20 +163,9 @@ $insClass = new controllerClass();
 						}
 					}
 
-					echo $insClass->pages_class_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'], "");
+					echo $insClass->pages_class_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'],"");
 				?>
 
-				<nav class="text-center">
-					<ul class="pagination pagination-sm">
-						<li class="disabled"><a href="javascript:void(0)">«</a></li>
-						<li class="active"><a href="<?php echo SERVERURL; ?>class/page/1">1</a></li>
-						<li><a href="<?php echo SERVERURL; ?>class/page/2">2</a></li>
-						<li><a href="<?php echo SERVERURL; ?>class/page/3">3</a></li>
-						<li><a href="<?php echo SERVERURL; ?>class/page/4">4</a></li>
-						<li><a href="<?php echo SERVERURL; ?>class/page/5">5</a></li>
-						<li><a href="javascript:void(0)">»</a></li>
-					</ul>
-				</nav>
 			</div>
 			<!-- DIVS  -->
 		</div>

@@ -76,4 +76,9 @@
                 FROM payments WHERE paymentAccount ='$idPayments'");
             return $datos->fetchAll();
         }
+        protected function list_state_model() {
+            //Obtiene los roles registrados
+            $datos = mainModel::connect()->query("SELECT * FROM state");
+            return $datos->fetchAll();
+        }
     }

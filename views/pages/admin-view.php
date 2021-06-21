@@ -116,7 +116,7 @@ $insAdmin = new controllerAdmin();
 					</div>
 				</div>
 
-				<!-- DESDE AQUI -->
+				
 				<?php
 				$pageNumber = 1;
 
@@ -133,7 +133,7 @@ $insAdmin = new controllerAdmin();
 				echo $insAdmin->pages_admin_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'], "");
 				?>
 			</div>
-			<!-- DIVS  -->
+			
 		</div>
 	</div>
 </div>

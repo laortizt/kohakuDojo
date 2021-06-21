@@ -86,48 +86,55 @@ $insPayment = new controllerPayment();
 </div>
 
 
-
-
-<script defer src="<?php echo SERVERURL; ?>assets/script/adminClass.js"></script>
-
-
 <div class="row privileges">
 	<div class="col-12 col-m-12 col-sm-12">
 		<div class="card">
 			<div class="card-content">
-				<h1 class="title">Gestión de Trámites</h1>
+				
 				<div class="header-class">
-
+				<h1 class="title">Gestión de Trámites</h1>
 
 					<div class="barra__buscador">
+					<?php
+							require_once "./controller/controllerAdmin.php";
+							$insAdmin = new controllerAdmin();
+						?>
 
-						<form action="" class="formulario" method="post" form-data="default" form-data="default">
+						<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
 							<div>
-								<input type="text" name="search_user" placeholder="Buscar nombre o apellidos" value="" class="text-search">
-								<button href="#" type="submit" value="Buscar" name="button-search" class="btn-search"><i class="fa bi bi-search"></i></button>
+								<input type="hidden" name="search_page" id="search_page" value="adminSchedule">
+								<input type="text" name="search_class" id="search_class" placeholder="Buscar nombre" value="<?= isset($_SESSION['searchClass']) ? $_SESSION['searchClass'] : '' ?>" class="text-search">
+								<button href="#" type="submit" value="Search" name="button-search" class="btn-search">
+									<i class="fa bi bi-search"></i>
+								</button>
 							</div>
+							<div class="RespuestaAjax"></div>
 						</form>
+						
 					</div>
 
-					<?php include "./views/modules/menuPayments.php"; ?>
 				</div>
-				<!-- DESDE AQUI -->
-
-
 
 				<?php
-				$pages = explode("/", $_GET['page']);
+					$pageNumber = 1;
 
-				echo $insPayment->pages_payment_controller(0, 10, $_SESSION['role_sk'], 'code');
+					if (isset($_GET)) {
+						$pages = explode("/", $_GET['page']);
+						if (count($pages) >= 3) {
+							$p = intval($pages[2]);
+							if ($p > 1) {
+								$pageNumber = $p;
+							}
+						}
+					}
+
+					echo $insPayment->pages_payment_controller($pageNumber, 10, $_SESSION['role_sk'], $_SESSION['code_sk'], "");
 				?>
+
 			</div>
-			<!-- DIVS  -->
-
-
 
 		</div>
 
 	</div>
-
 
 </div>

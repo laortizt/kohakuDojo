@@ -27,10 +27,13 @@
         }
 
         public function create_payment_controller(){
+
             $date= mainModel::clean_string($_POST['date-newpay']);
             $dni= mainModel::clean_string($_POST['dni-newpay']);
             $procedure= mainModel::clean_string($_POST['procedure-newpay']); 
             $price= mainModel::clean_string($_POST['price-newpay']);
+            $price= mainModel::clean_string($_POST['price-newpay']);
+            
           
             //reemplaza el $
             $price = str_replace('$', '', $price);
@@ -38,8 +41,8 @@
             //validar dni
             $paymentByDni=modelPayment::find_dni($dni);
 
-            if (count($paymentByDni) < 1 || 
-                (count($paymentByDni) == 1 && $paymentByDni[0]['dni-newpay'] != $dni))
+            if (count( $paymentByDni) > 1 || 
+                (count( $paymentByDni) == 1 &&  $paymentByDni[0]['accountDni'] != $dni))
             {
                 $alert=[
                     "alert"=>"simple",
@@ -48,15 +51,16 @@
                     "type"=>"error"
                 ];
             } else {
-                // $idAccount = $paymentByDni[0]['idAccount'];
-    
+
+                 $id =$paymentByDni[0]['idAccount'];
                 // Si todas se cumplen, llamar al modelo para que ejecute el cambio, enviando la info en un arreglo
                 $dataPayment = [
+                    "Id"=>$id,
                     "Date"=>$date,
-                    "dni"=>$dni,
+                    "Dni"=>$dni,
                     "Procedure"=>$procedure,
                     "Price"=>$price,
-                    // "IdAccount"=>$idAccount
+                    
                 ];
 
                 $savePayment = modelPayment::create_payment_model($dataPayment);
@@ -64,7 +68,7 @@
                 // Verificar si el cambió se aplico e informar al usuario
                 if($savePayment->rowCount() >= 1){
                     $alert=[
-                        "alert"=>"limpiar",
+                        "alert"=>"recargar",
                         "title"=>"Guardar Pago",
                         "text"=>"El pago se ha guardado exitósamente.",
                         "type"=>"success"
@@ -179,8 +183,34 @@
                 });
                 </script>";
         }
+        public function list_state_controller($userCurrentState)
+        {
+            $states = modelPayment::list_state_model();
 
-        public function pages_payment_controller($pages, $register, $role,  $code,$search){
+            $select = '<select class="input-field-profile" name="state-payment" required="">';
+
+            foreach ($states as $state) {
+                if ($state['idState'] == $userCurrentState) {
+                    $select .= '
+                            <option value="' . $state['idState'] . '" selected="">'
+                        . $state['stateName'] .
+                        '</option>
+                        ';
+                } else {
+                    $select .= '
+                            <option value="' . $state['idState'] . '">'
+                        . $state['stateName'] .
+                        '</option>
+                        ';
+                }
+            }
+
+            $select .= '</select>';
+
+            return $select;
+        }
+
+        public function pages_payment_controller($pages, $register, $role,  $code, $search){
             //Aqui que va?
             $pages=mainModel::clean_string($pages);
             $register=mainModel::clean_string($register);
@@ -201,19 +231,28 @@
 
             $page=(isset($page)&& $page>0) ? (int) $page : 1;
             $start=($pages>0)? (($pages*$register)-$register) : 0;
-            $pageurl = "payments/page";
 
-            
+            $pageurl = ($role == "Administrador" ? "adminPayments/page" : ($role === "Instructor" ? "instructorPayment/page" : "userPayments/page"));
+
             //aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
             if (isset($search) && $search != "") {
                 $consulta = "SELECT SQL_CALC_FOUND_ROWS * FROM payments p
                 INNER JOIN accounts a ON (p.paymentAccount = a.idAccount)
-                INNER JOIN procedures pr ON (p.paymentProcedure = pr.idProcedures) WHERE ((a.idAccount!='1')AND (a.accountFirstName like '%$search%' OR a.accountLastName like '%$search%' OR pr.procedureName like '%$search%'OR a.accountDni like '%$search%')) ORDER BY p.paymentDate DESC LIMIT $start, $register";
+                INNER JOIN procedures pr ON (p.paymentProcedure = pr.idProcedures)
+                WHERE ((a.idAccount!='1')
+                    AND (a.accountFirstName like '%$search%'
+                        OR a.accountLastName like '%$search%'
+                        OR pr.procedureName like '%$search%'
+                        OR a.accountDni like '%$search%')".
+                        ($role !== "Administrator" ? " AND a.accountCode = '".$code."' " : "").
+                    ") ORDER BY p.paymentDate DESC LIMIT $start, $register";
             } else {
                 $consulta = "SELECT SQL_CALC_FOUND_ROWS * FROM payments p
-                INNER JOIN accounts a ON (p.paymentAccount = a.idAccount)
-                INNER JOIN procedures pr ON (p.paymentProcedure = pr.idProcedures)
-                WHERE a.idAccount!='1' ORDER BY paymentDate DESC LIMIT $start, $register";
+                    INNER JOIN accounts a ON (p.paymentAccount = a.idAccount)
+                    INNER JOIN procedures pr ON (p.paymentProcedure = pr.idProcedures)
+                    WHERE a.idAccount!='1' ".
+                    ($role !== "Administrator" ? " AND a.accountCode = '".$code."' " : "").
+                    "ORDER BY paymentDate DESC LIMIT $start, $register";
             }
             $conexion = mainModel::connect();
             $datos = $conexion->query($consulta);
@@ -233,8 +272,6 @@
                     <td>Fecha de pago</td>
                     <td>Trámite</td>
                     <td>Valor</td>
-                   
-                   
                 </thead>
                 <tbody>
             ';
@@ -259,40 +296,43 @@
                     </tr>';
             }
             $table.='</tbody> </table> </div>';
-             if($total>=1 && $pages<=$Npages) {
-            $table.='<nav class="text-center"><ul class="pagination pagination-sm">';
 
-            if($page == 1) {
-                $table.='<li class="disabled"><a>«</a></li>';
-            } else {
-                $table.='<li>
-                    <a href="'.SERVERURL.$pageurl.'/'.($pages-1).'/">«</a>
-                </li>';
-            }
+            if($total>=1 && $pages<=$Npages) {
+                $table.='<nav class="text-center"><ul class="pagination pagination-sm">';
 
-            for($i=1; $i<=$Npages; $i++) {
-                if($pages == $i) {
-                    $table.='<li class="active">
-                        <a>'.$i.'</a>
-                    </li>';
+                if($page == 1) {
+                    $table.='<li class="disabled"><a>«</a></li>';
                 } else {
-                    $table.='<li><a href="'.SERVERURL.$pageurl.'/'.$i.'/">'.$i.'</a></li>';
+                    $table.='<li>
+                        <a href="'.SERVERURL.$pageurl.'/'.($pages-1).'/">«</a>
+                    </li>';
                 }
-            }
 
-            if($page == $Npages) {
-                $table.='<li class="disabled"><a>»</a></li>';
-            } else {
-                $table.='<li>
-                    <a href="'.SERVERURL.$pageurl.'/'.($pages+1).'/">»</a>
-                </li>';
-            }
+                for($i=1; $i<=$Npages; $i++) {
+                    if($pages == $i) {
+                        $table.='<li class="active">
+                            <a>'.$i.'</a>
+                        </li>';
+                    } else {
+                        $table.='<li><a href="'.SERVERURL.$pageurl.'/'.$i.'/">'.$i.'</a></li>';
+                    }
+                }
 
-            $table.='</ul></nav>';
+                if($page == $Npages) {
+                    $table.='<li class="disabled"><a>»</a></li>';
+                } else {
+                    $table.='<li>
+                        <a href="'.SERVERURL.$pageurl.'/'.($pages+1).'/">»</a>
+                    </li>';
+                }
+
+                $table.='</ul></nav>';
+            }
+            return $table;
         }
 
-    
-            return $table;
+        public function payUser_controller (){
+
         }
 
     }

@@ -27,14 +27,17 @@ $insPayment = new controllerPayment();
 		<!-- formulario -->
 		<div class="col-4 col-sm-12">
 			<div class="info-stats4">
+				
 
 				<form action="ajax/PaymentsAjax.php" method="post" autocomplete="off" class="profile-form formulario-ajax">
-
+				
 					<div class="header-class">
 						<h1 class="title">Registar pagos</h1>
 					</div>
 
-					<div class="payment">
+					<div class="row g-3">
+					<!-- <input type="hidden" value="<?php echo $insPayment->encryption($payment['idAccount']) ?>" name="editPayment"> -->
+
 						<?php
 						$today = date_create('now');
 						?>
@@ -42,7 +45,7 @@ $insPayment = new controllerPayment();
 						<div class="col-12 col-sm-12">
 							<label class="label-form">Fecha</label>
 							<div class="input-field-profile">
-								<input type="date" name="classDate" required="" min="<?= date_format($today, 'Y-m-d') ?>">
+								<input type="date" name="classDate" required="" min="<?= date_format($today, 'Y-m-d') ?>" >
 							</div>
 						</div>
 						<!-- <div class="col-6">
@@ -55,7 +58,7 @@ $insPayment = new controllerPayment();
 						<div class="col-12">
 							<label class="label">Documento</label>
 							<div class="input-field-profile">
-								<input type="texbox" name="dni-newpay" minlength="1" maxlength="100" />
+							<input type="texbox"  name="dni-newpay" minlength="1" maxlength="100" required=""/>	
 							</div>
 						</div>
 
@@ -70,6 +73,8 @@ $insPayment = new controllerPayment();
 								<input type="text" readonly value="" id="price-newpay" name="price-newpay" required="" />
 							</div>
 						</div>
+
+						
 
 
 					</div>
@@ -102,7 +107,7 @@ $insPayment = new controllerPayment();
 					<div class="barra__buscador">
 						<form action="ajax/searchAjax.php" class="formulario" method="post" form-data="default" form-data="default" autocomplete="off" enctype="multipart/form-data">
 							<div>
-								<input type="hidden" name="search_page" id="search_page" value="payments">
+								<input type="hidden" name="search_page" id="search_page" value="adminPayments">
 								<input type="text" name="search_pay" id="search_pay" placeholder="Buscar nombre" value="<?= isset($_SESSION['searchPay']) ? $_SESSION['searchPay'] : '' ?>" class="text-search">
 								<button href="#" type="submit" value="Search" name="button-search" class="btn-search">
 									<i class="fa bi bi-search"></i>

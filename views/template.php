@@ -233,16 +233,7 @@ session_start(['name' => 'SK']);
 							<span>Clases</span>
 						</a>
 					</li>
-				<?php elseif (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Instructor") : ?>
-					<li class="sidebar-nav-item">
-						<a href="<?php echo SERVERURL; ?>instructorClass" class="sidebar-nav-link">
-							<div>
-							<i class="far fa-calendar"></i>
-							</div>
-							<span>Clases</span>
-
-						</a>
-					</li>
+				
 				<?php elseif ($_SESSION['role_sk'] == "Usuario"): ?>
 					<!-- <li class="sidebar-nav-item">
 						<a href="<?php echo SERVERURL; ?>user" class="sidebar-nav-link">
@@ -264,7 +255,7 @@ session_start(['name' => 'SK']);
 				</li> -->
 				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador"): ?>
 				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>attendance" class="sidebar-nav-link">
+					<a href="<?php echo SERVERURL; ?>adminAttendance" class="sidebar-nav-link">
 						<div>
 						<i class="far fa-calendar-check"></i>
 						</div>
@@ -272,7 +263,18 @@ session_start(['name' => 'SK']);
 
 					</a>
 				</li>
-				<?php endif; ?>	
+				<?php endif; ?>	 -->
+				<!-- <?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Instructor"): ?>
+				<li class="sidebar-nav-item">
+					<a href="<?php echo SERVERURL; ?>InstructorAttendance" class="sidebar-nav-link">
+						<div>
+						<i class="far fa-calendar-check"></i>
+						</div>
+						<span>Asistencia</span>
+
+					</a>
+				</li>
+				<?php endif; ?>	 -->
 
 				<!-- <li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>plans" class="sidebar-nav-link">
@@ -284,7 +286,7 @@ session_start(['name' => 'SK']);
 				</li> -->
 				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador"): ?>
 				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>payments" class="sidebar-nav-link">
+					<a href="<?php echo SERVERURL; ?>adminPayments" class="sidebar-nav-link">
 						<div>
 						<i class="fas fa-hand-holding-usd"></i>
 						</div>
@@ -313,7 +315,7 @@ session_start(['name' => 'SK']);
 
 				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador"): ?>
 				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>schedule" class="sidebar-nav-link">
+					<a href="<?php echo SERVERURL; ?>adminSchedule" class="sidebar-nav-link">
 						<div>
 						<i class="far fa-file"></i>
 						</div>
