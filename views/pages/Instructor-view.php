@@ -17,7 +17,7 @@ $insClass = new controllerClass();
 
 		<div class="col-lg-7 col-md-12 p-0">
 			<div class="welcome-img">
-				<img src="assets/img/welcome-img.png" alt="image">
+			<img src="assets/img/banner4.png" alt="image">
 			</div>
 		</div>
 	</div>

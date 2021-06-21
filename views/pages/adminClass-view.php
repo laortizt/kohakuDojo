@@ -105,6 +105,7 @@ $insClass = new controllerClass();
 						<div class="col-6">
 							<label class="label-form">Precio</label>
 							<div class="input-field-profile">
+								<i class="fas fa-money-check-alt"></i>
 								<input type="text" readonly value="" id="eventsPrice" name="eventsPrice" required="">
 							</div>
 						</div>
@@ -116,6 +117,7 @@ $insClass = new controllerClass();
 						<div class="col-6">
 							<label class="label-form">Fecha</label>
 							<div class="input-field-profile">
+								<i class="fas fa-calendar-alt"></i>
 								<input type="date" name="classDate" required="" min="<?= date_format($today, 'Y-m-d') ?>">
 							</div>
 						</div>

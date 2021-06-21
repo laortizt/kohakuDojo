@@ -103,7 +103,6 @@ session_start(['name' => 'SK']);
 			<!-- nav left -->
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					
 					<!-- <img src="<?php echo SERVERURL; ?>assets/img/logokhk.png" class="image-logo" alt=""> -->
 				</li>
 
@@ -207,10 +206,9 @@ session_start(['name' => 'SK']);
 					<li class="sidebar-nav-item">
 						<a href="<?php echo SERVERURL; ?>instructor" class="sidebar-nav-link">
 							<div>
-							<i class="fas fa-home"></i>
+								<i class="fas fa-home"></i>
 							</div>
 							<span>Inicio</span>
-
 						</a>
 					</li>
 				<?php elseif ($_SESSION['role_sk'] == "Usuario"): ?>
@@ -233,7 +231,6 @@ session_start(['name' => 'SK']);
 							<span>Clases</span>
 						</a>
 					</li>
-				
 				<?php elseif ($_SESSION['role_sk'] == "Usuario"): ?>
 					<!-- <li class="sidebar-nav-item">
 						<a href="<?php echo SERVERURL; ?>user" class="sidebar-nav-link">
@@ -253,18 +250,21 @@ session_start(['name' => 'SK']);
 						<span>Clases</span>
 					</a>
 				</li> -->
-				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador"): ?>
-				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>adminAttendance" class="sidebar-nav-link">
-						<div>
-						<i class="far fa-calendar-check"></i>
-						</div>
-						<span>Asistencia</span>
 
-					</a>
-				</li>
-				<?php endif; ?>	 -->
-				<!-- <?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Instructor"): ?>
+				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador"): ?>
+					<li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>adminAttendance" class="sidebar-nav-link">
+							<div>
+							<i class="far fa-calendar-check"></i>
+							</div>
+							<span>Asistencia</span>
+
+						</a>
+					</li>
+				<?php endif; ?>
+
+				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Instructor"): ?>
+				<!--
 				<li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>InstructorAttendance" class="sidebar-nav-link">
 						<div>
@@ -274,7 +274,8 @@ session_start(['name' => 'SK']);
 
 					</a>
 				</li>
-				<?php endif; ?>	 -->
+				-->
+				<?php endif; ?>
 
 				<!-- <li class="sidebar-nav-item">
 					<a href="<?php echo SERVERURL; ?>plans" class="sidebar-nav-link">
@@ -284,62 +285,63 @@ session_start(['name' => 'SK']);
 						<span>Planes</span>
 					</a>
 				</li> -->
+
 				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador"): ?>
-				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>adminPayments" class="sidebar-nav-link">
-						<div>
-						<i class="fas fa-hand-holding-usd"></i>
-						</div>
-						<span>Pagos</span>
-					</a>
-				</li>
+					<li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>adminPayments" class="sidebar-nav-link">
+							<div>
+							<i class="fas fa-hand-holding-usd"></i>
+							</div>
+							<span>Pagos</span>
+						</a>
+					</li>
 				<?php elseif (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Instructor") : ?>
-				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>instructorPayment" class="sidebar-nav-link">
-						<div>
-						<i class="fas fa-hand-holding-usd"></i>
-						</div>
-						<span>Pagos</span>
-					</a>
-				</li>
+					<li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>instructorPayment" class="sidebar-nav-link">
+							<div>
+								<i class="fas fa-hand-holding-usd"></i>
+							</div>
+							<span>Pagos</span>
+						</a>
+					</li>
 				<?php elseif ($_SESSION['role_sk'] == "Usuario"): ?>	
-				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>userPayments" class="sidebar-nav-link">
-						<div>
-						<i class="fas fa-hand-holding-usd"></i>
-						</div>
-						<span>Pagos</span>
-					</a>
-				</li>
+					<li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>userPayments" class="sidebar-nav-link">
+							<div>
+							<i class="fas fa-hand-holding-usd"></i>
+							</div>
+							<span>Pagos</span>
+						</a>
+					</li>
 				<?php endif; ?>
 
 				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Administrador"): ?>
-				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>adminSchedule" class="sidebar-nav-link">
-						<div>
-						<i class="far fa-file"></i>
-						</div>
-						<span>Trámites</span>
-					</a>
-				</li>
+					<li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>adminSchedule" class="sidebar-nav-link">
+							<div>
+							<i class="far fa-file"></i>
+							</div>
+							<span>Trámites</span>
+						</a>
+					</li>
 				<?php elseif (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Instructor") : ?>
-				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>instructorSchedule" class="sidebar-nav-link">
-						<div>
-						<i class="far fa-file"></i>
-						</div>
-						<span>Trámites</span>
-					</a>
-				</li>
+					<li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>instructorSchedule" class="sidebar-nav-link">
+							<div>
+							<i class="far fa-file"></i>
+							</div>
+							<span>Trámites</span>
+						</a>
+					</li>
 				<?php elseif ($_SESSION['role_sk'] == "Usuario"): ?>
-				<li class="sidebar-nav-item">
-					<a href="<?php echo SERVERURL; ?>userSchedule" class="sidebar-nav-link">
-						<div>
-						<i class="far fa-file"></i>
-						</div>
-						<span>Trámites</span>
-					</a>
-				</li>
+					<!-- <li class="sidebar-nav-item">
+						<a href="<?php echo SERVERURL; ?>userSchedule" class="sidebar-nav-link">
+							<div>
+							<i class="far fa-file"></i>
+							</div>
+							<span>Trámites</span>
+						</a>
+					</li> -->
 				<?php endif; ?>	
 
 				<?php if (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] === "Instructor") : ?>
@@ -351,7 +353,6 @@ session_start(['name' => 'SK']);
 							<span>Progreso</span>
 						</a>
 					</li>
-
 				<?php elseif (isset($_SESSION['role_sk']) && $_SESSION['role_sk'] == "Usuario"): ?>
 					<li class="sidebar-nav-item">
 						<a href="<?php echo SERVERURL; ?>userProgress" class="sidebar-nav-link">
@@ -362,9 +363,6 @@ session_start(['name' => 'SK']);
 						</a>
 					</li>
 				<?php endif; ?>
-
-				
-				
 			</ul>
 		</div>
 		<!-- end sidebar -->

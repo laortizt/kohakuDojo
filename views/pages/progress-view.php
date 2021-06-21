@@ -86,6 +86,7 @@ $insClass = new controllerClass();
 						<div class="col-6">
 							<label class="label-form">Fecha</label>
 							<div class="input-field-profile">
+								<i class="fas fa-calendar-alt"></i>
 								<input type="date" name="classDate" required="">
 							</div>
 						</div>
@@ -102,7 +103,6 @@ $insClass = new controllerClass();
 								<input type="text" name="classTopic" required="">
 							</div>
 						</div>
-						
 
 						<div class="col-6">
 							<label class="label-form">Grado</label>

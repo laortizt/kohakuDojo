@@ -39,7 +39,7 @@ $profile = $insProfile->get_user_admin_controller();
                                 <i class="bi bi-clock-history"></i>
                             </div>
                             <div class="sale-num">
-                                <h3>6</h3>
+                                <h3>0</h3>
                                 <p>Clases Restantes</p>
                             </div>
                         </div>
@@ -50,7 +50,7 @@ $profile = $insProfile->get_user_admin_controller();
                                 <i class="fa bi bi-calendar-check"></i>
                             </div>
                             <div class="sale-num">
-                                <h3>40</h3>
+                                <h3>0</h3>
                                 <p>Clases Asistidas</p>
                             </div>
                         </div>
@@ -84,7 +84,7 @@ $profile = $insProfile->get_user_admin_controller();
                                 <i class="bi bi-clock-history"></i>
                             </div>
                             <div class="sale-num">
-                                <h3>6</h3>
+                                <h3>0</h3>
                                 <p>Clases Restantes</p>
                             </div>
                         </div>
@@ -95,7 +95,7 @@ $profile = $insProfile->get_user_admin_controller();
                                 <i class="fa bi bi-calendar-check"></i>
                             </div>
                             <div class="sale-num">
-                                <h3>40</h3>
+                                <h3>0</h3>
                                 <p>Clases Asistidas</p>
                             </div>
                         </div>

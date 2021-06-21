@@ -45,6 +45,7 @@ $insPayment = new controllerPayment();
 						<div class="col-12 col-sm-12">
 							<label class="label-form">Fecha</label>
 							<div class="input-field-profile">
+								<i class="fas fa-calendar-alt"></i>
 								<input type="date" name="classDate" required="" min="<?= date_format($today, 'Y-m-d') ?>" >
 							</div>
 						</div>

@@ -6,7 +6,7 @@ class viewsModel{
     protected function get_views_model($views){
         //crear una lista de palabra permitidas ejm el nombre de los componentes
         //OJO AQUI...VERIFICAR LISTAS
-        $whitelist=["class","admin","user","instructor","adminSchedule","progress","profile","calendar","registerClass", "adminPayments","plans","newPay","newProgress","payEdit","editAdmin","progress","editProgress","adminClass","editClass","instructorClass","instructorPayment","instructorSchedule","userPayments","userSchedule","userProgress","adminAttendance"];
+        $whitelist=["class","admin","user","listAttendance","instructor","adminSchedule","progress","profile","calendar","registerClass", "adminPayments","plans","newPay","newProgress","payEdit","editAdmin","progress","editProgress","adminClass","editClass","instructorClass","instructorPayment","instructorSchedule","userPayments","userSchedule","userProgress","adminAttendance"];
         $noTemplateViews = ["forgot-password", "register"];
 
         if(in_array($views, $noTemplateViews)) {

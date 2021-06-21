@@ -142,7 +142,7 @@
             $page=(isset($page)&& $page>0) ? (int) $page :1;
             $start=($pages>0)? (($pages*$register)-$register) : 0;
             
-            $pageurl = ($role == "Administrador" ? "adminClass/page" : "instructor");
+            $pageurl = ($role == "Administrador" ? "adminClass/page" : "instructor/page");
 
             // Aqui en la consulta el admin 1 es el principal del sistema y  NO se va a seleccionar
             if (isset($search) && $search != "") {
@@ -209,10 +209,11 @@
                         <td>'.$rows['classTimeInit'].'</td>
                         <td>'.$rows['classTimeEnd'].'</td>
                         <td>
-                            <a href="" type="submit" class="btn-eye">
-                                <i class="bi bi-eye"></i>
-                            </a>
+                        <a href="'.SERVERURL.'listAttendance?c='.mainModel::encryption($rows['idClass']).'" type="submit" class="btn-edit">
+                        <i class="bi bi-check-circle-fill"></i>
+                        </a>
                         </td>
+                        <div class="RespuestaAjax"></div>
                     ';
                     $count++;
                 }
@@ -777,5 +778,4 @@
             $class = modelClass::get_class_model($idClass);
             return $class;
         }
-
     }

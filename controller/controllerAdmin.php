@@ -441,6 +441,8 @@ class controllerAdmin extends modelAdmin
         return $table;
     }
 
+    
+
     public function delete_user_controller()
     {
         // Desencriptar el code del usuario a borrar

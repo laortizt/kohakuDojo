@@ -51,6 +51,16 @@
             return $sql;
         }
 
+        protected function get_account($code) {
+            $sql= self::connect()->prepare("SELECT a.idAccount, a.accountCode, a.accountEmail, 
+                a.accountFirstName, a.accountLastName FROM accounts a
+                WHERE a.accountCode=:code");
+            $sql->bindParam(':code', $code);
+            $sql->execute();
+
+            return $sql->fetch();
+        }
+
         //encriptar strings
         public function encryption($string){
             $output=FALSE;
